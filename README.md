@@ -54,12 +54,14 @@ Then delete the project folder. Uninstalling `ruby`, `homebrew`, `postgres` etc.
 
 
 # Usage
-**QUICKSTART:** This should start capturing macOS system logs to the database.
+**QUICKSTART:** This should start streaming macOS system logs to the database.
 ```sh
 thor collect:syslog:stream
 ```
 
-The interface is built in Thor (which I mildly regret[^1], but not enough to change it. ), the same thing as Ruby on Rails's generators. Type `thor list` and you should see something like this:
+### Other Kinds Of Usage
+
+The Quickstart shows you how to capture logs in a stream going forward from now but the application can also capture logs from the past if OS X hasn't purged them yet. The interface is built in Thor (which I mildly regret[^1], but not enough to change it. ), the same thing as Ruby on Rails's generators. Type `thor list` and you should see something like this:
 
 [^1]: I've never seen a project used by so many people with such a combination of broken features and atrocious - nay, profane - documentation. It's like they want you to not use it.
 
@@ -78,26 +80,25 @@ db
 thor db:dump  # Write the database to a compressed archive via pg_dump.
 ```
 
-Thor will show you the command line options for each command via `thor help COMMAND`.  e.g.:
-```
-$ thor help collect:syslog:stream
-
+Thor will show you the command line options for each command via `thor help COMMAND`.  e.g. `thor help collect:file_monitor:stream` yields something like
+```sh
 Usage:
-  thor collect:syslog:stream
+  thor collect:file_monitor:stream
 
 Options:
-  [--level=LEVEL]                      # Level of logs to capture. debug is the most, info is the least.
-                                       # Default: info
-                                       # Possible values: default, info, debug
-  [--app-log-level=LEVEL]              # This application's logging verbosity
-                                       # Default: INFO
-                                       # Possible values: DEBUG, INFO, WARN, ERROR, FATAL, UNKNOWN
-  [--batch-size=N]                     # Rows to process between DB loads
-                                       # Default: 50000
-  [--avoid-dupes], [--no-avoid-dupes]  # Attempt to avoid dupes by going a lot slower
-  [--read-only], [--no-read-only]      # Just read and process the streams, don't save to the database.
+  [--file-monitor-path=FILE_MONITOR_PATH]    # Path to your FileMonitor executable
+                                             # Default: /Applications/FileMonitor.app/Contents/MacOS/FileMonitor
+  [--file-monitor-flags=FILE_MONITOR_FLAGS]  # Flags to pass to FileMonitor command line (-pretty is not allowed)
+                                             # Default: -skipApple
+  [--app-log-level=LEVEL]                    # This application's logging verbosity
+                                             # Default: INFO
+                                             # Possible values: DEBUG, INFO, WARN, ERROR, FATAL, UNKNOWN
+  [--batch-size=N]                           # Rows to process between DB loads
+                                             # Default: 10000
+  [--avoid-dupes], [--no-avoid-dupes]        # Attempt to avoid dupes by going a lot slower
+  [--read-only], [--no-read-only]            # Just read and process the streams, don't save to the database.
 
-Collect logs from the syslog stream from now until you tell it to stop
+Collect file events from Objective-See's File Monitor tool (requires sudo!)
 ```
 
 ### Configuration
@@ -111,6 +112,8 @@ You can use the `RAILS_LOG_TO_STDOUT` environment variable to have them printed 
 ```sh
 RAILS_LOG_TO_STDOUT thor collect:syslog:stream
 ```
+
+-------
 
 # Analyzing The Data
 **QUICKSTART:** There's some [useful queries](db/queries) in the repo you can look at.
@@ -157,47 +160,22 @@ Your data will be in a database called `macos_log_collector_development`, in a t
 
 -----
 
-#### Enums
+#### System Log Enums
 There are fundamentally two kinds of log messages - events and log messages (which are classified as a kind of event: a `logEvent`). There are two ENUMs to save space when storing the `event_type` and `message_type`. Here are the possible values:
 
-<table>
-  <tr>
-    <th>Events</th>
-    <th>Log Messages</th>
-  </tr>
 
-  <tr>
-    <td>
-| event_type |
-|------------|
-| activityCreateEvent |
-| activityTransitionEvent |
-| logEvent |
-| stateEvent |
-| signpostEvent |
-| timesyncEvent |
-| traceEvent |
-| userActionEvent |
-    </td>
-    <td>
-| message_type |
-|------------|
-|  Debug |
-|  Default |
-|  Error |
-|  Fault |
-| Info |
-    </td>
-  </tr>
-</table>
+| event_types | message_types |
+|------------|------------|
+| activityCreateEvent | Debug
+| activityTransitionEvent | Default |
+| logEvent | Info |
+| stateEvent | Warn |
+| signpostEvent | Error |
+| timesyncEvent | Fault |
+| traceEvent | |
+| userActionEvent | |
 
 
-
------
-
-
-
-----
 
 #### The Simplified View
 I have learned that a lot of the columns Apple provides are actually pretty useless and/or empty, so there is also a view of the table `simplifed_system_logs` you can query that does a few things:
