@@ -1,0 +1,11 @@
+CREATE OR REPLACE FUNCTION random_int_between(low INT ,high INT)
+RETURNS INT AS
+$$
+  SELECT floor(random()* (high-low + 1) + low);
+$$
+LANGUAGE SQL
+STRICT
+IMMUTABLE
+LEAKPROOF
+PARALLEL SAFE
+COST 25  --

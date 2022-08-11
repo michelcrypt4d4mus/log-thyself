@@ -1,0 +1,41 @@
+RSpec.describe LogEventFilter do
+  let(:tries) { 10_000 }
+
+  let(:filter_rule) { described_class::FILTER_DEFINITIONS.first }
+  let(:col_matchers) { filter_rule[:matchers]}
+  let(:filter) { described_class.new(filter_rule) }
+
+  let(:missing_col) { filter_rule[:matchers].except(:event_message) }
+  let(:mismatched_data) { missing_col.merge(event_message: 'ny state of mind') }
+
+  let(:match) do
+    missing_col.merge(event_message: col_matchers[:event_message].first )
+  end
+
+  it 'rejects mismatches' do
+    expect(filter.applicable?(missing_col)).to be_falsy
+    expect(filter.applicable?(mismatched_data)).to be_falsy
+  end
+
+  context 'applicable events' do
+    it 'identifies them' do
+      expect(filter.applicable?(match)).to be_truthy
+    end
+
+    it 'rejects the right pct of the time' do
+      acceptances = (0..tries).to_a.select { |_| filter.allow?(match) }
+      expect(acceptances.size > 90).to be_truthy
+      expect(acceptances.size < 110).to be_truthy
+    end
+  end
+
+  context 'with all the filters' do
+    before { described_class.build_filters! }
+
+    it 'rejects the right pct of the time' do
+      acceptances = (0..tries).to_a.select { |_| LogEventFilter.allow?(match) }
+      expect(acceptances.size > 90).to be_truthy
+      expect(acceptances.size < 110).to be_truthy
+    end
+  end
+end

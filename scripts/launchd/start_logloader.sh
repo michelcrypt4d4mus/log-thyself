@@ -1,0 +1,1 @@
+launchctl bootstrap system /Library/LaunchDaemons/cryptadamus.logloader.plist

@@ -1,0 +1,41 @@
+{
+  "event" : "ES_EVENT_TYPE_NOTIFY_WRITE",
+  "file" : {
+    "destination" : "/dev/ttys001",
+    "process" : {
+      "signing info (computed)" : {
+        "teamID" : "VBG97UB4TA",
+        "signatureID" : "com.objective-see.filemonitor",
+        "signatureStatus" : 0,
+        "signatureSigner" : "Developer ID",
+        "signatureAuthorities" : [
+          "Developer ID Application: Objective-See, LLC (VBG97UB4TA)",
+          "Developer ID Certification Authority",
+          "Apple Root CA"
+        ]
+      },
+      "uid" : 501,
+      "arguments" : [
+
+      ],
+      "ppid" : 1250,
+      "ancestors" : [
+        779,
+        1
+      ],
+      "rpid" : 779,
+      "architecture" : "Apple Silicon",
+      "path" : "/Applications/FileMonitor.app/Contents/MacOS/FileMonitor",
+      "signing info (reported)" : {
+        "teamID" : "VBG97UB4TA",
+        "csFlags" : 570507777,
+        "signingID" : "com.objective-see.filemonitor",
+        "platformBinary" : 0,
+        "cdHash" : "BD699EE7BCC5B36BB8F77978BE7E5758DD9E26B0"
+      },
+      "name" : "FileMonitor",
+      "pid" : 23875
+    }
+  },
+  "timestamp" : "2022-08-10 03:58:40 +0000"
+}

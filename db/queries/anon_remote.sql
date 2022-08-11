@@ -1,0 +1,1 @@
+select * FROM macos_system_logs where event_message ~* 'anon.*remote' order by log_timestamp desc;

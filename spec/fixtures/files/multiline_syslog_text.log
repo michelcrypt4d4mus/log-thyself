@@ -1,0 +1,70 @@
+2022-07-23 01:02:37.486198-0400 0x2277     Default     0x0                  802    7    akd: [com.apple.authkit:core] APNS reconnected
+2022-07-23 01:02:37.856023-0400 0x227f     Default     0x0                  783    3    iCloudNotificationAgent: (Accounts) [com.apple.accounts:core] "The connection to ACDAccountStore was invalidated."
+2022-07-23 01:02:37.858300-0400 0x227e     Default     0x0                  783    3    iCloudNotificationAgent: (Accounts) [com.apple.accounts:core] "The connection to ACDAccountStore was invalidated."
+2022-07-23 01:02:38.008244-0400 0x1fdd     Default     0x0                  738    7    CalNCService: (CalendarFoundation) [com.apple.calendar:calendar] [com.apple.eventkit.log] [Resetting cache due to found changes in calendar(updatedTimeIDs:{(
+)}
+updatedIDs:{(
+)}
+deletedIDs:{(
+    0x8bf6a1b21a0acc7a <x-coredata://FE3B9C61-2628-434B-9F13-12F00FB02B03/BirthdayCalendar/p4>
+)}
+insertedIDs:{(
+    0x8bf6a1b21a6acc7a <x-coredata://FE3B9C61-2628-434B-9F13-12F00FB02B03/BirthdayCalendar/p7>
+)}
+)
+ or account(updatedTimeIDs:{(
+)}
+updatedIDs:{(
+)}
+deletedIDs:{(
+)}
+insertedIDs:{(
+)}
+)]
+2022-07-23 01:02:38.040465-0400 0x1fdd     Default     0x0                  738    7    CalNCService: (CalendarFoundation) [com.apple.calendar:calendar] [com.apple.eventkit.log] [Resetting cache due to found changes in calendar(updatedTimeIDs:{(
+)}
+updatedIDs:{(
+)}
+deletedIDs:{(
+    0x8bf6a1b21a0acc7a <x-coredata://FE3B9C61-2628-434B-9F13-12F00FB02B03/BirthdayCalendar/p4>
+)}
+insertedIDs:{(
+    0x8bf6a1b21a6acc7a <x-coredata://FE3B9C61-2628-434B-9F13-12F00FB02B03/BirthdayCalendar/p7>
+)}
+)
+ or account(updatedTimeIDs:{(
+)}
+updatedIDs:{(
+)}
+deletedIDs:{(
+)}
+insertedIDs:{(
+)}
+)]
+2022-07-23 01:02:38.073331-0400 0x1fed     Default     0x0                  738    7    CalNCService: (CalendarFoundation) [com.apple.calendar:calendar] [com.apple.eventkit.log] [Resetting cache due to found changes in calendar(updatedTimeIDs:{(
+)}
+updatedIDs:{(
+)}
+deletedIDs:{(
+    0x8bf6a1b21a0acc7a <x-coredata://FE3B9C61-2628-434B-9F13-12F00FB02B03/BirthdayCalendar/p4>
+)}
+insertedIDs:{(
+    0x8bf6a1b21a6acc7a <x-coredata://FE3B9C61-2628-434B-9F13-12F00FB02B03/BirthdayCalendar/p7>
+)}
+)
+ or account(updatedTimeIDs:{(
+)}
+updatedIDs:{(
+)}
+deletedIDs:{(
+)}
+insertedIDs:{(
+)}
+)]
+2022-07-23 01:02:41.167308-0400 0x2061     Default     0x0                  748    2    Keychain Circle Notification: (LaunchServices) [com.apple.launchservices:default] LSExceptions shared instance invalidated for timeout.
+2022-07-23 01:02:44.629027-0400 0x1f9b     Default     0x8883               728    2    siriactionsd: (LaunchServices) [com.apple.launchservices:default] Database was seeding; client will retry and block. This is not an error.
+2022-07-23 01:02:44.720615-0400 0x22f3     Fault       0x8902               809    14   appinstalld: Daemon's home directory at <private> should have perms 0755, but found 0750
+2022-07-23 01:02:44.734144-0400 0x2235     Default     0x0                  795    7    installcoordinationd: [com.apple.installcoordination:daemon] -[IXSAppInstallObserverManager registerClientConnection:]_block_invoke: Adding client <IXSClientConnection<0x11111111> client:appstoreagent (pid 793)>
+2022-07-23 01:02:44.734989-0400 0x2235     Default     0x0                  795    7    installcoordinationd: [com.apple.installcoordination:daemon] -[IXSClientConnection _remote_fetchSeedsForCoordinatorsWithIntent:completion:]: Client appstoreagent (pid 793) fetched 0 coordinators for enumeration with intent IXCoordinatorIntentAny
+2022-07-23 01:02:44.770344-0400 0x2119     Default     0x0                  508    14   com.apple.AppStoreDaemon.StorePrivilegedTaskService: [com.apple.appstored:General] [StorePrivilegedTaskService]: Client connected
+2022-07-23 01:02:44.770645-0400 0x2119     Default     0x0                  508    14   com.apple.AppStoreDaemon.StorePrivilegedTaskService: [com.apple.appstored:PrivilegedTask] Ensured ODR directory exists at path: /System/Library/Caches/OnDemandResources/AssetPacks

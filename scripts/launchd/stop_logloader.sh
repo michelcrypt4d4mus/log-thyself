@@ -1,0 +1,1 @@
+launchctl bootout system/cryptadamus.logloader

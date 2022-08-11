@@ -1,0 +1,3949 @@
+[{
+  "traceID" : 4015281924787666948,
+  "eventMessage" : "Using Metal Path",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Using Metal Path",
+  "activityIdentifier" : 0,
+  "subsystem" : "",
+  "category" : "",
+  "threadID" : 50885,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 25620,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/System\/Applications\/Utilities\/Activity Monitor.app\/Contents\/MacOS\/Activity Monitor",
+  "timestamp" : "2022-08-06 18:41:36.635121-0400",
+  "senderImagePath" : "\/System\/Library\/PrivateFrameworks\/SafeEjectGPU.framework\/Versions\/A\/SafeEjectGPU",
+  "machTimestamp" : 656608130391,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 1256,
+  "senderProgramCounter" : 25620,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 981996469278212100,
+  "eventMessage" : "Created connection to com.apple.imagent.desktop.auth service: 0x600003f8e0",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Created connection to %s service: %p",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.IDS",
+  "category" : "XPC",
+  "threadID" : 180274,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 9164,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/Applications\/Safari.app\/Contents\/MacOS\/Safari",
+  "timestamp" : "2022-08-06 18:41:37.034409-0400",
+  "senderImagePath" : "\/System\/Library\/PrivateFrameworks\/IMFoundation.framework\/Versions\/A\/IMFoundation",
+  "machTimestamp" : 656617713288,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 742,
+  "senderProgramCounter" : 9164,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 0,
+  "eventMessage" : "failed lookup: name = com.apple.imagent.desktop.auth, requestor = Safari[742], error = 3: No such process",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "",
+  "activityIdentifier" : 0,
+  "subsystem" : "gui\/501 [100017]",
+  "category" : "",
+  "threadID" : 175429,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 194628,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/sbin\/launchd",
+  "timestamp" : "2022-08-06 18:41:37.034484-0400",
+  "senderImagePath" : "\/sbin\/launchd",
+  "machTimestamp" : 656617715100,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 1,
+  "senderProgramCounter" : 194628,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 0,
+  "eventMessage" : "Last log repeated 65488 times",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "",
+  "activityIdentifier" : 0,
+  "subsystem" : "",
+  "category" : "",
+  "threadID" : 175429,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228732,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/sbin\/launchd",
+  "timestamp" : "2022-08-06 18:41:37.034507-0400",
+  "senderImagePath" : "\/sbin\/launchd",
+  "machTimestamp" : 656617715644,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 1,
+  "senderProgramCounter" : 228732,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 0,
+  "eventMessage" : "failed lookup: name = com.apple.BTAudioHALPlugin.xpc, requestor = coreaudiod[13201], error = 3: No such process",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "",
+  "activityIdentifier" : 0,
+  "subsystem" : "system",
+  "category" : "",
+  "threadID" : 163689,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 194628,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/sbin\/launchd",
+  "timestamp" : "2022-08-06 18:41:37.034515-0400",
+  "senderImagePath" : "\/sbin\/launchd",
+  "machTimestamp" : 656617715834,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 1,
+  "senderProgramCounter" : 194628,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 981990009647398916,
+  "eventMessage" : "peer(0) received XPC_ERROR_CONNECTION_INVALID",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "peer(%d) received XPC_ERROR_CONNECTION_INVALID",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.IDS",
+  "category" : "IMLocalObject",
+  "threadID" : 180206,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 212468,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/Applications\/Safari.app\/Contents\/MacOS\/Safari",
+  "timestamp" : "2022-08-06 18:41:37.034569-0400",
+  "senderImagePath" : "\/System\/Library\/PrivateFrameworks\/IMFoundation.framework\/Versions\/A\/IMFoundation",
+  "machTimestamp" : 656617717141,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 742,
+  "senderProgramCounter" : 212468,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 10204571385955876868,
+  "eventMessage" : "[Warning] Failed IMDRequestPortConnection, no reply",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "%s",
+  "activityIdentifier" : 0,
+  "subsystem" : "",
+  "category" : "",
+  "threadID" : 180274,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 244636,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/Applications\/Safari.app\/Contents\/MacOS\/Safari",
+  "timestamp" : "2022-08-06 18:41:37.034752-0400",
+  "senderImagePath" : "\/System\/Library\/PrivateFrameworks\/IMFoundation.framework\/Versions\/A\/IMFoundation",
+  "machTimestamp" : 656617721525,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 742,
+  "senderProgramCounter" : 244636,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 10204571385955876868,
+  "eventMessage" : "[Warning] IMLocalObject: Could not create server for listener: <IMDaemonListener: 0x6000024d2180>",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "%s",
+  "activityIdentifier" : 0,
+  "subsystem" : "",
+  "category" : "",
+  "threadID" : 6178,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 244636,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/Applications\/Safari.app\/Contents\/MacOS\/Safari",
+  "timestamp" : "2022-08-06 18:41:37.034972-0400",
+  "senderImagePath" : "\/System\/Library\/PrivateFrameworks\/IMFoundation.framework\/Versions\/A\/IMFoundation",
+  "machTimestamp" : 656617726798,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 742,
+  "senderProgramCounter" : 244636,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1511433384886276,
+  "eventMessage" : "Battery percentage last 28 now 25",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Battery percentage last %d now %d",
+  "activityIdentifier" : 0,
+  "subsystem" : "powerd",
+  "category" : "BDC",
+  "threadID" : 178957,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 205452,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/System\/Library\/CoreServices\/powerd.bundle\/powerd",
+  "timestamp" : "2022-08-06 18:41:37.311052-0400",
+  "senderImagePath" : "\/System\/Library\/CoreServices\/powerd.bundle\/powerd",
+  "machTimestamp" : 656624352734,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 317,
+  "senderProgramCounter" : 205452,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 185989297471492,
+  "eventMessage" : "unregister token: 130000001a pid: 13732",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "unregister token: %llx pid: %d",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.distnoted",
+  "category" : "diagnostic",
+  "threadID" : 4061,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 24216,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/distnoted",
+  "timestamp" : "2022-08-06 18:41:37.328830-0400",
+  "senderImagePath" : "\/usr\/sbin\/distnoted",
+  "machTimestamp" : 656624779393,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 553,
+  "senderProgramCounter" : 24216,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 185989297471492,
+  "eventMessage" : "unregister token: 1400000019 pid: 13732",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "unregister token: %llx pid: %d",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.distnoted",
+  "category" : "diagnostic",
+  "threadID" : 4061,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 24216,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/distnoted",
+  "timestamp" : "2022-08-06 18:41:37.328889-0400",
+  "senderImagePath" : "\/usr\/sbin\/distnoted",
+  "machTimestamp" : 656624780806,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 553,
+  "senderProgramCounter" : 24216,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 185989297471492,
+  "eventMessage" : "unregister token: 1500000018 pid: 13732",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "unregister token: %llx pid: %d",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.distnoted",
+  "category" : "diagnostic",
+  "threadID" : 4061,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 24216,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/distnoted",
+  "timestamp" : "2022-08-06 18:41:37.328955-0400",
+  "senderImagePath" : "\/usr\/sbin\/distnoted",
+  "machTimestamp" : 656624782407,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 553,
+  "senderProgramCounter" : 24216,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 185989297471492,
+  "eventMessage" : "unregister token: 1700000016 pid: 13732",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "unregister token: %llx pid: %d",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.distnoted",
+  "category" : "diagnostic",
+  "threadID" : 4061,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 24216,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/distnoted",
+  "timestamp" : "2022-08-06 18:41:37.329013-0400",
+  "senderImagePath" : "\/usr\/sbin\/distnoted",
+  "machTimestamp" : 656624783794,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 553,
+  "senderProgramCounter" : 24216,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 185989297471492,
+  "eventMessage" : "unregister token: 1600000017 pid: 13732",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "unregister token: %llx pid: %d",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.distnoted",
+  "category" : "diagnostic",
+  "threadID" : 4061,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 24216,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/distnoted",
+  "timestamp" : "2022-08-06 18:41:37.329067-0400",
+  "senderImagePath" : "\/usr\/sbin\/distnoted",
+  "machTimestamp" : 656624785092,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 553,
+  "senderProgramCounter" : 24216,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 399022098489802756,
+  "eventMessage" : "[ ConnectionDebug ] Closing conn 0x5d0d7, PID 13732 in session 257 on console",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "[ ConnectionDebug ] Closing conn 0x%x, PID %d in session %d %s console",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.SkyLight",
+  "category" : "default",
+  "threadID" : 3037,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 1003808,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/System\/Library\/PrivateFrameworks\/SkyLight.framework\/Versions\/A\/Resources\/WindowServer",
+  "timestamp" : "2022-08-06 18:41:37.329397-0400",
+  "senderImagePath" : "\/System\/Library\/PrivateFrameworks\/SkyLight.framework\/Versions\/A\/SkyLight",
+  "machTimestamp" : 656624793004,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 367,
+  "senderProgramCounter" : 1003808,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 2548944647896694788,
+  "eventMessage" : "Untracking client process: <private>",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Untracking client process: %@",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.FuseBoard",
+  "category" : "SkyBridge",
+  "threadID" : 3037,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 27448,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/System\/Library\/PrivateFrameworks\/SkyLight.framework\/Versions\/A\/Resources\/WindowServer",
+  "timestamp" : "2022-08-06 18:41:37.329454-0400",
+  "senderImagePath" : "\/System\/Library\/PrivateFrameworks\/FuseBoardServices.framework\/Versions\/A\/FuseBoardServices",
+  "machTimestamp" : 656624794374,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 367,
+  "senderProgramCounter" : 27448,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 4545617326116868,
+  "eventMessage" : "[XPC Server] managed connection recieved connection invalidated: Connection invalid",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "[XPC Server] managed connection recieved connection invalidated: %s",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.analyticsd",
+  "category" : "xpc",
+  "threadID" : 180120,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 945104,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/System\/Library\/PrivateFrameworks\/CoreAnalytics.framework\/Support\/analyticsd",
+  "timestamp" : "2022-08-06 18:41:37.329701-0400",
+  "senderImagePath" : "\/System\/Library\/PrivateFrameworks\/CoreAnalytics.framework\/Support\/analyticsd",
+  "machTimestamp" : 656624800303,
+  "messageType" : "Error",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 437,
+  "senderProgramCounter" : 945104,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 571097506513154,
+  "eventType" : "activityCreateEvent",
+  "formatString" : "",
+  "activityIdentifier" : 245065,
+  "subsystem" : "",
+  "category" : "",
+  "threadID" : 180794,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 65736,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/System\/Library\/CoreServices\/appleeventsd",
+  "timestamp" : "2022-08-06 18:41:37.329898-0400",
+  "senderImagePath" : "\/System\/Library\/CoreServices\/appleeventsd",
+  "creatorActivityID" : 0,
+  "machTimestamp" : 656624805024,
+  "eventMessage" : "Handle XPC Event",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 493,
+  "senderProgramCounter" : 65736,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 0,
+  "eventMessage" : "Last log repeated 11366 times",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "",
+  "activityIdentifier" : 0,
+  "subsystem" : "",
+  "category" : "",
+  "threadID" : 175429,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228732,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/sbin\/launchd",
+  "timestamp" : "2022-08-06 18:41:37.331158-0400",
+  "senderImagePath" : "\/sbin\/launchd",
+  "machTimestamp" : 656624835270,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 1,
+  "senderProgramCounter" : 228732,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 0,
+  "eventMessage" : "failed lookup: name = com.apple.BTAudioHALPlugin.xpc, requestor = coreaudiod[13201], error = 3: No such process",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "",
+  "activityIdentifier" : 0,
+  "subsystem" : "system",
+  "category" : "",
+  "threadID" : 156938,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 194628,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/sbin\/launchd",
+  "timestamp" : "2022-08-06 18:41:37.331169-0400",
+  "senderImagePath" : "\/sbin\/launchd",
+  "machTimestamp" : 656624835525,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 1,
+  "senderProgramCounter" : 194628,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 0,
+  "eventMessage" : "internal event: PETRIFIED, code = 0",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "",
+  "activityIdentifier" : 0,
+  "subsystem" : "pid\/13732\/com.apple.WebKit.WebAuthn",
+  "category" : "",
+  "threadID" : 163689,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 100856,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/sbin\/launchd",
+  "timestamp" : "2022-08-06 18:41:37.331185-0400",
+  "senderImagePath" : "\/sbin\/launchd",
+  "machTimestamp" : 656624835916,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 1,
+  "senderProgramCounter" : 100856,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 0,
+  "eventMessage" : "internal event: PETRIFIED, code = 0",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "",
+  "activityIdentifier" : 0,
+  "subsystem" : "pid\/13732\/com.apple.WebKit.WebContent",
+  "category" : "",
+  "threadID" : 163689,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 100856,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/sbin\/launchd",
+  "timestamp" : "2022-08-06 18:41:37.331188-0400",
+  "senderImagePath" : "\/sbin\/launchd",
+  "machTimestamp" : 656624835986,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 1,
+  "senderProgramCounter" : 100856,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 0,
+  "eventMessage" : "internal event: PETRIFIED, code = 0",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "",
+  "activityIdentifier" : 0,
+  "subsystem" : "pid\/13732\/com.apple.MTLCompilerService",
+  "category" : "",
+  "threadID" : 163689,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 100856,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/sbin\/launchd",
+  "timestamp" : "2022-08-06 18:41:37.331189-0400",
+  "senderImagePath" : "\/sbin\/launchd",
+  "machTimestamp" : 656624836024,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 1,
+  "senderProgramCounter" : 100856,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 0,
+  "eventMessage" : "internal event: PETRIFIED, code = 0",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "",
+  "activityIdentifier" : 0,
+  "subsystem" : "pid\/13732\/com.apple.audio.AUHostingService.x86-64",
+  "category" : "",
+  "threadID" : 163689,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 100856,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/sbin\/launchd",
+  "timestamp" : "2022-08-06 18:41:37.331191-0400",
+  "senderImagePath" : "\/sbin\/launchd",
+  "machTimestamp" : 656624836067,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 1,
+  "senderProgramCounter" : 100856,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 0,
+  "eventMessage" : "internal event: PETRIFIED, code = 0",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "",
+  "activityIdentifier" : 0,
+  "subsystem" : "pid\/13732\/com.apple.WebKit.GPU",
+  "category" : "",
+  "threadID" : 163689,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 100856,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/sbin\/launchd",
+  "timestamp" : "2022-08-06 18:41:37.331193-0400",
+  "senderImagePath" : "\/sbin\/launchd",
+  "machTimestamp" : 656624836108,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 1,
+  "senderProgramCounter" : 100856,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 0,
+  "eventMessage" : "internal event: PETRIFIED, code = 0",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "",
+  "activityIdentifier" : 0,
+  "subsystem" : "pid\/13732\/com.apple.audio.AUHostingService.arm64e",
+  "category" : "",
+  "threadID" : 163689,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 100856,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/sbin\/launchd",
+  "timestamp" : "2022-08-06 18:41:37.331194-0400",
+  "senderImagePath" : "\/sbin\/launchd",
+  "machTimestamp" : 656624836142,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 1,
+  "senderProgramCounter" : 100856,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 0,
+  "eventMessage" : "internal event: PETRIFIED, code = 0",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "",
+  "activityIdentifier" : 0,
+  "subsystem" : "pid\/13732\/com.apple.WebKit.Networking",
+  "category" : "",
+  "threadID" : 163689,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 100856,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/sbin\/launchd",
+  "timestamp" : "2022-08-06 18:41:37.331196-0400",
+  "senderImagePath" : "\/sbin\/launchd",
+  "machTimestamp" : 656624836175,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 1,
+  "senderProgramCounter" : 100856,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 0,
+  "eventMessage" : "internal event: PETRIFIED, code = 0",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "",
+  "activityIdentifier" : 0,
+  "subsystem" : "pid\/13732\/com.apple.audio.Core-Audio-Driver-Service.helper",
+  "category" : "",
+  "threadID" : 163689,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 100856,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/sbin\/launchd",
+  "timestamp" : "2022-08-06 18:41:37.331197-0400",
+  "senderImagePath" : "\/sbin\/launchd",
+  "machTimestamp" : 656624836212,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 1,
+  "senderProgramCounter" : 100856,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 0,
+  "eventMessage" : "internal event: PETRIFIED, code = 0",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "",
+  "activityIdentifier" : 0,
+  "subsystem" : "pid\/13732\/com.apple.WebKit.WebContent.Development",
+  "category" : "",
+  "threadID" : 163689,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 100856,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/sbin\/launchd",
+  "timestamp" : "2022-08-06 18:41:37.331199-0400",
+  "senderImagePath" : "\/sbin\/launchd",
+  "machTimestamp" : 656624836250,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 1,
+  "senderProgramCounter" : 100856,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 0,
+  "eventMessage" : "internal event: PETRIFIED, code = 0",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "",
+  "activityIdentifier" : 0,
+  "subsystem" : "pid\/13732\/com.apple.audio.Core-Audio-Driver-Service",
+  "category" : "",
+  "threadID" : 163689,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 100856,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/sbin\/launchd",
+  "timestamp" : "2022-08-06 18:41:37.331201-0400",
+  "senderImagePath" : "\/sbin\/launchd",
+  "machTimestamp" : 656624836292,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 1,
+  "senderProgramCounter" : 100856,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 0,
+  "eventMessage" : "internal event: PETRIFIED, code = 0",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "",
+  "activityIdentifier" : 0,
+  "subsystem" : "pid\/13732\/com.apple.WebKit.WebContent.CaptivePortal",
+  "category" : "",
+  "threadID" : 163689,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 100856,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/sbin\/launchd",
+  "timestamp" : "2022-08-06 18:41:37.331202-0400",
+  "senderImagePath" : "\/sbin\/launchd",
+  "machTimestamp" : 656624836327,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 1,
+  "senderProgramCounter" : 100856,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 0,
+  "eventMessage" : "removing child: pid\/13732",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "",
+  "activityIdentifier" : 0,
+  "subsystem" : "system",
+  "category" : "",
+  "threadID" : 163689,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 187516,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/sbin\/launchd",
+  "timestamp" : "2022-08-06 18:41:37.331215-0400",
+  "senderImagePath" : "\/sbin\/launchd",
+  "machTimestamp" : 656624836625,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 1,
+  "senderProgramCounter" : 187516,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 0,
+  "eventMessage" : "failed lookup: name = com.apple.BTAudioHALPlugin.xpc, requestor = coreaudiod[13201], error = 3: No such process",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "",
+  "activityIdentifier" : 0,
+  "subsystem" : "system",
+  "category" : "",
+  "threadID" : 163689,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 194628,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/sbin\/launchd",
+  "timestamp" : "2022-08-06 18:41:37.331227-0400",
+  "senderImagePath" : "\/sbin\/launchd",
+  "machTimestamp" : 656624836919,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 1,
+  "senderProgramCounter" : 194628,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 867997643421515780,
+  "eventMessage" : "AAAAAAAA-BBBB-CCCC-B109-68828F058DD5 monitor: got an update with state 4",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "%{public}@ monitor: got an update with state %ld",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.libxpc.OSLaunchdJob",
+  "category" : "all",
+  "threadID" : 180704,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 19320,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/libexec\/runningboardd",
+  "timestamp" : "2022-08-06 18:41:37.331361-0400",
+  "senderImagePath" : "\/System\/Library\/PrivateFrameworks\/AppServerSupport.framework\/Versions\/A\/AppServerSupport",
+  "machTimestamp" : 656624840133,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 385,
+  "senderProgramCounter" : 19320,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 0,
+  "eventMessage" : "Last log repeated 18 times",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "",
+  "activityIdentifier" : 0,
+  "subsystem" : "",
+  "category" : "",
+  "threadID" : 175429,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228732,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/sbin\/launchd",
+  "timestamp" : "2022-08-06 18:41:37.332077-0400",
+  "senderImagePath" : "\/sbin\/launchd",
+  "machTimestamp" : 656624857328,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 1,
+  "senderProgramCounter" : 228732,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 867992785813504004,
+  "eventMessage" : "<OSLaunchdJob | handle=AAAAAAAA-BBBB-CCCC-B109-68828F058DD5>: remove succeeded",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "%{public}@: remove succeeded%s",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.libxpc.OSLaunchdJob",
+  "category" : "all",
+  "threadID" : 180704,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 12488,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/libexec\/runningboardd",
+  "timestamp" : "2022-08-06 18:41:37.332278-0400",
+  "senderImagePath" : "\/System\/Library\/PrivateFrameworks\/AppServerSupport.framework\/Versions\/A\/AppServerSupport",
+  "machTimestamp" : 656624862143,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 385,
+  "senderProgramCounter" : 12488,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 0,
+  "eventMessage" : "failed lookup: name = com.apple.BTAudioHALPlugin.xpc, requestor = coreaudiod[13201], error = 3: No such process",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "",
+  "activityIdentifier" : 0,
+  "subsystem" : "system",
+  "category" : "",
+  "threadID" : 163689,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 194628,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/sbin\/launchd",
+  "timestamp" : "2022-08-06 18:41:37.332338-0400",
+  "senderImagePath" : "\/sbin\/launchd",
+  "machTimestamp" : 656624863585,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 1,
+  "senderProgramCounter" : 194628,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 3251710385363091714,
+  "eventType" : "activityCreateEvent",
+  "formatString" : "",
+  "activityIdentifier" : 246963,
+  "subsystem" : "",
+  "category" : "",
+  "threadID" : 180704,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 86812,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/libexec\/runningboardd",
+  "timestamp" : "2022-08-06 18:41:37.332340-0400",
+  "senderImagePath" : "\/System\/Library\/PrivateFrameworks\/RunningBoard.framework\/Versions\/A\/RunningBoard",
+  "creatorActivityID" : 0,
+  "machTimestamp" : 656624863633,
+  "eventMessage" : "state update",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 385,
+  "senderProgramCounter" : 86812,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 3251709062513164546,
+  "eventType" : "activityCreateEvent",
+  "formatString" : "",
+  "activityIdentifier" : 246964,
+  "subsystem" : "",
+  "category" : "",
+  "threadID" : 180704,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 80004,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/libexec\/runningboardd",
+  "timestamp" : "2022-08-06 18:41:37.332470-0400",
+  "senderImagePath" : "\/System\/Library\/PrivateFrameworks\/RunningBoard.framework\/Versions\/A\/RunningBoard",
+  "creatorActivityID" : 0,
+  "machTimestamp" : 656624866761,
+  "eventMessage" : "state notification",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 385,
+  "senderProgramCounter" : 80004,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 484278436165320962,
+  "eventType" : "activityCreateEvent",
+  "formatString" : "",
+  "activityIdentifier" : 245358,
+  "subsystem" : "",
+  "category" : "",
+  "threadID" : 180804,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 22100,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/System\/Library\/CoreServices\/launchservicesd",
+  "timestamp" : "2022-08-06 18:41:37.332729-0400",
+  "senderImagePath" : "\/System\/Library\/PrivateFrameworks\/RunningBoardServices.framework\/Versions\/A\/RunningBoardServices",
+  "creatorActivityID" : 0,
+  "machTimestamp" : 656624872980,
+  "eventMessage" : "assertionsDidInvalidate",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 341,
+  "senderProgramCounter" : 22100,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 484278436165320962,
+  "eventType" : "activityCreateEvent",
+  "formatString" : "",
+  "activityIdentifier" : 245066,
+  "subsystem" : "",
+  "category" : "",
+  "threadID" : 180808,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 22100,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/System\/Library\/CoreServices\/appleeventsd",
+  "timestamp" : "2022-08-06 18:41:37.332848-0400",
+  "senderImagePath" : "\/System\/Library\/PrivateFrameworks\/RunningBoardServices.framework\/Versions\/A\/RunningBoardServices",
+  "creatorActivityID" : 0,
+  "machTimestamp" : 656624875821,
+  "eventMessage" : "assertionsDidInvalidate",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 493,
+  "senderProgramCounter" : 22100,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 484278672388522242,
+  "eventType" : "activityCreateEvent",
+  "formatString" : "",
+  "activityIdentifier" : 245359,
+  "subsystem" : "",
+  "category" : "",
+  "threadID" : 180624,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 22388,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/System\/Library\/CoreServices\/launchservicesd",
+  "timestamp" : "2022-08-06 18:41:37.333098-0400",
+  "senderImagePath" : "\/System\/Library\/PrivateFrameworks\/RunningBoardServices.framework\/Versions\/A\/RunningBoardServices",
+  "creatorActivityID" : 0,
+  "machTimestamp" : 656624881828,
+  "eventMessage" : "observedProcessExitEvents",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 341,
+  "senderProgramCounter" : 22388,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 3251757664397754626,
+  "eventType" : "activityCreateEvent",
+  "formatString" : "",
+  "activityIdentifier" : 246965,
+  "subsystem" : "",
+  "category" : "",
+  "threadID" : 180748,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 210572,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/libexec\/runningboardd",
+  "timestamp" : "2022-08-06 18:41:37.333186-0400",
+  "senderImagePath" : "\/System\/Library\/PrivateFrameworks\/RunningBoard.framework\/Versions\/A\/RunningBoard",
+  "creatorActivityID" : 9223372036855021167,
+  "machTimestamp" : 656624883934,
+  "eventMessage" : "lookupHandleForKey",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 385,
+  "senderProgramCounter" : 210572,
+  "parentActivityIdentifier" : 245359,
+  "timezoneName" : ""
+},{
+  "traceID" : 1395877289852932,
+  "eventMessage" : "QUITTING: pid=13732 asn=0x-0x169169 foreground=0 wasFront=0",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "QUITTING: pid=%d asn=0x-0x%llx foreground=%d wasFront=%d",
+  "activityIdentifier" : 245359,
+  "subsystem" : "com.apple.processmanager",
+  "category" : "front-35286506",
+  "threadID" : 180804,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 173852,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/System\/Library\/CoreServices\/launchservicesd",
+  "timestamp" : "2022-08-06 18:41:37.333435-0400",
+  "senderImagePath" : "\/System\/Library\/CoreServices\/launchservicesd",
+  "machTimestamp" : 656624889907,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 341,
+  "senderProgramCounter" : 173852,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 5103825318519767044,
+  "eventMessage" : "[HID] [MT] dispatchEvent Dispatching event with 2 children, _eventMask=0x20 _childEventMask=0x22 Cancel=0 Touching=1 inRange=1",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "[HID] [MT] %s%s%s Dispatching event with %ld children, _eventMask=0x%lx _childEventMask=0x%lx Cancel=%d Touching=%d inRange=%d",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.Multitouch",
+  "category" : "Plugin",
+  "threadID" : 180743,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 130264,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/System\/Library\/PrivateFrameworks\/SkyLight.framework\/Versions\/A\/Resources\/WindowServer",
+  "timestamp" : "2022-08-06 18:41:37.520287-0400",
+  "senderImagePath" : "\/System\/Library\/Extensions\/AppleMultitouchDriver.kext\/Contents\/PlugIns\/MultitouchHID.plugin\/Contents\/MacOS\/MultitouchHID",
+  "machTimestamp" : 656629374354,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 367,
+  "senderProgramCounter" : 130264,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1477378589196292,
+  "eventMessage" : "updateAppSleepStates: Setting app nap state to false for 539 because all assertions are released",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "updateAppSleepStates: Setting app nap state to false for %d because all assertions are released\n",
+  "activityIdentifier" : 0,
+  "subsystem" : "powerd",
+  "category" : "assertions",
+  "threadID" : 178957,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 120868,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/System\/Library\/CoreServices\/powerd.bundle\/powerd",
+  "timestamp" : "2022-08-06 18:41:37.788977-0400",
+  "senderImagePath" : "\/System\/Library\/CoreServices\/powerd.bundle\/powerd",
+  "machTimestamp" : 656635822935,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 317,
+  "senderProgramCounter" : 120868,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 3251758063795044610,
+  "eventType" : "activityCreateEvent",
+  "formatString" : "",
+  "activityIdentifier" : 246966,
+  "subsystem" : "",
+  "category" : "",
+  "threadID" : 180748,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 211292,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/libexec\/runningboardd",
+  "timestamp" : "2022-08-06 18:41:37.789258-0400",
+  "senderImagePath" : "\/System\/Library\/PrivateFrameworks\/RunningBoard.framework\/Versions\/A\/RunningBoard",
+  "creatorActivityID" : 0,
+  "machTimestamp" : 656635829667,
+  "eventMessage" : "invalidateAssertionWithIdentifier",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 385,
+  "senderProgramCounter" : 211292,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 3251715092680867844,
+  "eventMessage" : "Invalidating assertion 385-317-10589 (target:[daemon<com.apple.metadata.mds.index>:539]) from originator [daemon<com.apple.powerd>:317]",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Invalidating assertion %{public}@ from originator %{public}@",
+  "activityIdentifier" : 246966,
+  "subsystem" : "com.apple.runningboard",
+  "category" : "assertion",
+  "threadID" : 180748,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 103696,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/libexec\/runningboardd",
+  "timestamp" : "2022-08-06 18:41:37.789301-0400",
+  "senderImagePath" : "\/System\/Library\/PrivateFrameworks\/RunningBoard.framework\/Versions\/A\/RunningBoard",
+  "machTimestamp" : 656635830699,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 385,
+  "senderProgramCounter" : 103696,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 3251710385397760258,
+  "eventType" : "activityCreateEvent",
+  "formatString" : "",
+  "activityIdentifier" : 246967,
+  "subsystem" : "",
+  "category" : "",
+  "threadID" : 180747,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 86812,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/libexec\/runningboardd",
+  "timestamp" : "2022-08-06 18:41:37.989430-0400",
+  "senderImagePath" : "\/System\/Library\/PrivateFrameworks\/RunningBoard.framework\/Versions\/A\/RunningBoard",
+  "creatorActivityID" : 9223372036855022774,
+  "machTimestamp" : 656640633790,
+  "eventMessage" : "state update",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 385,
+  "senderProgramCounter" : 86812,
+  "parentActivityIdentifier" : 246966,
+  "timezoneName" : ""
+},{
+  "traceID" : 3251709062547833090,
+  "eventType" : "activityCreateEvent",
+  "formatString" : "",
+  "activityIdentifier" : 246968,
+  "subsystem" : "",
+  "category" : "",
+  "threadID" : 180747,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 80004,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/libexec\/runningboardd",
+  "timestamp" : "2022-08-06 18:41:37.989578-0400",
+  "senderImagePath" : "\/System\/Library\/PrivateFrameworks\/RunningBoard.framework\/Versions\/A\/RunningBoard",
+  "creatorActivityID" : 9223372036855022774,
+  "machTimestamp" : 656640637350,
+  "eventMessage" : "state notification",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 385,
+  "senderProgramCounter" : 80004,
+  "parentActivityIdentifier" : 246966,
+  "timezoneName" : ""
+},{
+  "traceID" : 3251746965633171460,
+  "eventMessage" : "[daemon<com.apple.metadata.mds.index>:539] Ignoring jetsam update because this process is not memory-managed",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "%{public}@ Ignoring jetsam update because this process is not memory-managed",
+  "activityIdentifier" : 246968,
+  "subsystem" : "com.apple.runningboard",
+  "category" : "process",
+  "threadID" : 180748,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 187292,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/libexec\/runningboardd",
+  "timestamp" : "2022-08-06 18:41:37.989716-0400",
+  "senderImagePath" : "\/System\/Library\/PrivateFrameworks\/RunningBoard.framework\/Versions\/A\/RunningBoard",
+  "machTimestamp" : 656640640665,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 385,
+  "senderProgramCounter" : 187292,
+  "parentActivityIdentifier" : 246966,
+  "timezoneName" : ""
+},{
+  "traceID" : 3251744663530700804,
+  "eventMessage" : "[daemon<com.apple.metadata.mds.index>:539] Ignoring suspend because this process is not lifecycle managed",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "%{public}@ Ignoring suspend because this process is not lifecycle managed",
+  "activityIdentifier" : 246968,
+  "subsystem" : "com.apple.runningboard",
+  "category" : "process",
+  "threadID" : 180748,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 187512,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/libexec\/runningboardd",
+  "timestamp" : "2022-08-06 18:41:37.989717-0400",
+  "senderImagePath" : "\/System\/Library\/PrivateFrameworks\/RunningBoard.framework\/Versions\/A\/RunningBoard",
+  "machTimestamp" : 656640640696,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 385,
+  "senderProgramCounter" : 187512,
+  "parentActivityIdentifier" : 246966,
+  "timezoneName" : ""
+},{
+  "traceID" : 3251744981358280708,
+  "eventMessage" : "[daemon<com.apple.metadata.mds.index>:539] Ignoring role changes because this process is not role managed",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "%{public}@ Ignoring role changes because this process is not role managed",
+  "activityIdentifier" : 246968,
+  "subsystem" : "com.apple.runningboard",
+  "category" : "process",
+  "threadID" : 180748,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 188332,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/libexec\/runningboardd",
+  "timestamp" : "2022-08-06 18:41:37.989719-0400",
+  "senderImagePath" : "\/System\/Library\/PrivateFrameworks\/RunningBoard.framework\/Versions\/A\/RunningBoard",
+  "machTimestamp" : 656640640728,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 385,
+  "senderProgramCounter" : 188332,
+  "parentActivityIdentifier" : 246966,
+  "timezoneName" : ""
+},{
+  "traceID" : 3251746308503175172,
+  "eventMessage" : "[daemon<com.apple.metadata.mds.index>:539] Ignoring GPU update because this process is not GPU managed",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "%{public}@ Ignoring GPU update because this process is not GPU managed",
+  "activityIdentifier" : 246968,
+  "subsystem" : "com.apple.runningboard",
+  "category" : "process",
+  "threadID" : 180748,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 188888,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/libexec\/runningboardd",
+  "timestamp" : "2022-08-06 18:41:37.989720-0400",
+  "senderImagePath" : "\/System\/Library\/PrivateFrameworks\/RunningBoard.framework\/Versions\/A\/RunningBoard",
+  "machTimestamp" : 656640640757,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 385,
+  "senderProgramCounter" : 188888,
+  "parentActivityIdentifier" : 246966,
+  "timezoneName" : ""
+},{
+  "traceID" : 3251747953475649540,
+  "eventMessage" : "[daemon<com.apple.metadata.mds.index>:539] Skipping AppNap state - not lifecycle managed",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "%{public}@ Skipping AppNap state - not lifecycle managed",
+  "activityIdentifier" : 246968,
+  "subsystem" : "com.apple.runningboard",
+  "category" : "process",
+  "threadID" : 180748,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 190076,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/libexec\/runningboardd",
+  "timestamp" : "2022-08-06 18:41:37.989726-0400",
+  "senderImagePath" : "\/System\/Library\/PrivateFrameworks\/RunningBoard.framework\/Versions\/A\/RunningBoard",
+  "machTimestamp" : 656640640889,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 385,
+  "senderProgramCounter" : 190076,
+  "parentActivityIdentifier" : 246966,
+  "timezoneName" : ""
+},{
+  "traceID" : 5103825318519767044,
+  "eventMessage" : "[HID] [MT] dispatchEvent Dispatching event with 2 children, _eventMask=0x42 _childEventMask=0x42 Cancel=0 Touching=0 inRange=1",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "[HID] [MT] %s%s%s Dispatching event with %ld children, _eventMask=0x%lx _childEventMask=0x%lx Cancel=%d Touching=%d inRange=%d",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.Multitouch",
+  "category" : "Plugin",
+  "threadID" : 180281,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 130264,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/System\/Library\/PrivateFrameworks\/SkyLight.framework\/Versions\/A\/Resources\/WindowServer",
+  "timestamp" : "2022-08-06 18:41:38.389410-0400",
+  "senderImagePath" : "\/System\/Library\/Extensions\/AppleMultitouchDriver.kext\/Contents\/PlugIns\/MultitouchHID.plugin\/Contents\/MacOS\/MultitouchHID",
+  "machTimestamp" : 656650233307,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 367,
+  "senderProgramCounter" : 130264,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 15523553701265666,
+  "eventType" : "activityCreateEvent",
+  "formatString" : "",
+  "activityIdentifier" : 246992,
+  "subsystem" : "",
+  "category" : "",
+  "threadID" : 180825,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 12996,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/bin\/log",
+  "timestamp" : "2022-08-06 18:41:38.503052-0400",
+  "senderImagePath" : "\/usr\/lib\/system\/libsystem_info.dylib",
+  "creatorActivityID" : 0,
+  "machTimestamp" : 656652960730,
+  "eventMessage" : "Retrieve User by ID",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13733,
+  "senderProgramCounter" : 12996,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 15529107093979394,
+  "eventType" : "activityCreateEvent",
+  "formatString" : "",
+  "activityIdentifier" : 246993,
+  "subsystem" : "",
+  "category" : "",
+  "threadID" : 180825,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 7808,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/bin\/log",
+  "timestamp" : "2022-08-06 18:41:38.506235-0400",
+  "senderImagePath" : "\/usr\/lib\/system\/libsystem_info.dylib",
+  "creatorActivityID" : 0,
+  "machTimestamp" : 656653037115,
+  "eventMessage" : "Membership API: translate identifier",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13733,
+  "senderProgramCounter" : 7808,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1986413818675204,
+  "eventMessage" : "Invalidating all (0) audio devices",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Invalidating all (%ld) audio devices",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 229964,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517365-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653304238,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 229964,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974572593840132,
+  "eventMessage" : "Starting BTAudioPlugin for <private>",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Starting BTAudioPlugin for %@",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228128,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517366-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653304271,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228128,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974701442859012,
+  "eventMessage" : "Register audio plugin connection with bluetoothd",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Register audio plugin connection with bluetoothd",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228304,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517391-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653304852,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228304,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974911896260612,
+  "eventMessage" : "XPC server error: Connection invalid",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "XPC server error: %{public}s\n",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 387668,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517393-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653304916,
+  "messageType" : "Error",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 387668,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1986413818675204,
+  "eventMessage" : "Invalidating all (0) audio devices",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Invalidating all (%ld) audio devices",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 229964,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517394-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653304923,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 229964,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974572593840132,
+  "eventMessage" : "Starting BTAudioPlugin for <private>",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Starting BTAudioPlugin for %@",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228128,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517394-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653304930,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228128,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974701442859012,
+  "eventMessage" : "Register audio plugin connection with bluetoothd",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Register audio plugin connection with bluetoothd",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228304,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517425-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653305671,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228304,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974911896260612,
+  "eventMessage" : "XPC server error: Connection invalid",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "XPC server error: %{public}s\n",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 387668,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517427-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653305730,
+  "messageType" : "Error",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 387668,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1986413818675204,
+  "eventMessage" : "Invalidating all (0) audio devices",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Invalidating all (%ld) audio devices",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 229964,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517428-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653305739,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 229964,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974572593840132,
+  "eventMessage" : "Starting BTAudioPlugin for <private>",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Starting BTAudioPlugin for %@",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228128,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517428-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653305747,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228128,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974701442859012,
+  "eventMessage" : "Register audio plugin connection with bluetoothd",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Register audio plugin connection with bluetoothd",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228304,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517452-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653306321,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228304,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974911896260612,
+  "eventMessage" : "XPC server error: Connection invalid",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "XPC server error: %{public}s\n",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 387668,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517454-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653306381,
+  "messageType" : "Error",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 387668,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1986413818675204,
+  "eventMessage" : "Invalidating all (0) audio devices",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Invalidating all (%ld) audio devices",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 229964,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517455-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653306390,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 229964,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974572593840132,
+  "eventMessage" : "Starting BTAudioPlugin for <private>",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Starting BTAudioPlugin for %@",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228128,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517455-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653306397,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228128,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974701442859012,
+  "eventMessage" : "Register audio plugin connection with bluetoothd",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Register audio plugin connection with bluetoothd",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228304,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517477-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653306914,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228304,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974911896260612,
+  "eventMessage" : "XPC server error: Connection invalid",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "XPC server error: %{public}s\n",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 387668,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517479-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653306984,
+  "messageType" : "Error",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 387668,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1986413818675204,
+  "eventMessage" : "Invalidating all (0) audio devices",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Invalidating all (%ld) audio devices",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 229964,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517480-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653306993,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 229964,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974572593840132,
+  "eventMessage" : "Starting BTAudioPlugin for <private>",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Starting BTAudioPlugin for %@",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228128,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517480-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653307007,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228128,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974701442859012,
+  "eventMessage" : "Register audio plugin connection with bluetoothd",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Register audio plugin connection with bluetoothd",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228304,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517507-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653307642,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228304,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974911896260612,
+  "eventMessage" : "XPC server error: Connection invalid",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "XPC server error: %{public}s\n",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 387668,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517509-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653307702,
+  "messageType" : "Error",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 387668,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1986413818675204,
+  "eventMessage" : "Invalidating all (0) audio devices",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Invalidating all (%ld) audio devices",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 229964,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517510-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653307709,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 229964,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974572593840132,
+  "eventMessage" : "Starting BTAudioPlugin for <private>",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Starting BTAudioPlugin for %@",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228128,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517518-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653307919,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228128,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974701442859012,
+  "eventMessage" : "Register audio plugin connection with bluetoothd",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Register audio plugin connection with bluetoothd",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228304,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517550-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653308669,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228304,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974911896260612,
+  "eventMessage" : "XPC server error: Connection invalid",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "XPC server error: %{public}s\n",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 387668,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517552-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653308734,
+  "messageType" : "Error",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 387668,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1986413818675204,
+  "eventMessage" : "Invalidating all (0) audio devices",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Invalidating all (%ld) audio devices",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 229964,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517553-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653308742,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 229964,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974572593840132,
+  "eventMessage" : "Starting BTAudioPlugin for <private>",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Starting BTAudioPlugin for %@",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228128,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517553-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653308754,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228128,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974701442859012,
+  "eventMessage" : "Register audio plugin connection with bluetoothd",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Register audio plugin connection with bluetoothd",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228304,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517593-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653309711,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228304,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974911896260612,
+  "eventMessage" : "XPC server error: Connection invalid",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "XPC server error: %{public}s\n",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 387668,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517596-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653309775,
+  "messageType" : "Error",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 387668,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1986413818675204,
+  "eventMessage" : "Invalidating all (0) audio devices",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Invalidating all (%ld) audio devices",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 229964,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517596-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653309784,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 229964,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974572593840132,
+  "eventMessage" : "Starting BTAudioPlugin for <private>",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Starting BTAudioPlugin for %@",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228128,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517596-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653309791,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228128,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974701442859012,
+  "eventMessage" : "Register audio plugin connection with bluetoothd",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Register audio plugin connection with bluetoothd",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228304,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517619-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653310332,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228304,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974911896260612,
+  "eventMessage" : "XPC server error: Connection invalid",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "XPC server error: %{public}s\n",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 387668,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517621-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653310388,
+  "messageType" : "Error",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 387668,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1986413818675204,
+  "eventMessage" : "Invalidating all (0) audio devices",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Invalidating all (%ld) audio devices",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 229964,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517622-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653310395,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 229964,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974572593840132,
+  "eventMessage" : "Starting BTAudioPlugin for <private>",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Starting BTAudioPlugin for %@",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228128,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517622-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653310403,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228128,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974701442859012,
+  "eventMessage" : "Register audio plugin connection with bluetoothd",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Register audio plugin connection with bluetoothd",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228304,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517644-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653310923,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228304,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974911896260612,
+  "eventMessage" : "XPC server error: Connection invalid",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "XPC server error: %{public}s\n",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 387668,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517646-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653310982,
+  "messageType" : "Error",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 387668,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1986413818675204,
+  "eventMessage" : "Invalidating all (0) audio devices",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Invalidating all (%ld) audio devices",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 229964,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517646-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653310990,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 229964,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974572593840132,
+  "eventMessage" : "Starting BTAudioPlugin for <private>",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Starting BTAudioPlugin for %@",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228128,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517648-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653311036,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228128,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974701442859012,
+  "eventMessage" : "Register audio plugin connection with bluetoothd",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Register audio plugin connection with bluetoothd",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228304,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517670-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653311551,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228304,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974911896260612,
+  "eventMessage" : "XPC server error: Connection invalid",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "XPC server error: %{public}s\n",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 387668,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517672-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653311606,
+  "messageType" : "Error",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 387668,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1986413818675204,
+  "eventMessage" : "Invalidating all (0) audio devices",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Invalidating all (%ld) audio devices",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 229964,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517672-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653311614,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 229964,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974572593840132,
+  "eventMessage" : "Starting BTAudioPlugin for <private>",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Starting BTAudioPlugin for %@",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228128,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517673-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653311621,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228128,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974701442859012,
+  "eventMessage" : "Register audio plugin connection with bluetoothd",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Register audio plugin connection with bluetoothd",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228304,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517694-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653312131,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228304,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974911896260612,
+  "eventMessage" : "XPC server error: Connection invalid",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "XPC server error: %{public}s\n",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 387668,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517696-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653312189,
+  "messageType" : "Error",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 387668,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1986413818675204,
+  "eventMessage" : "Invalidating all (0) audio devices",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Invalidating all (%ld) audio devices",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 229964,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517697-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653312197,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 229964,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974572593840132,
+  "eventMessage" : "Starting BTAudioPlugin for <private>",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Starting BTAudioPlugin for %@",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228128,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517697-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653312204,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228128,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974701442859012,
+  "eventMessage" : "Register audio plugin connection with bluetoothd",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Register audio plugin connection with bluetoothd",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228304,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517719-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653312722,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228304,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974911896260612,
+  "eventMessage" : "XPC server error: Connection invalid",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "XPC server error: %{public}s\n",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 387668,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517721-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653312783,
+  "messageType" : "Error",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 387668,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1986413818675204,
+  "eventMessage" : "Invalidating all (0) audio devices",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Invalidating all (%ld) audio devices",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 229964,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517721-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653312791,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 229964,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974572593840132,
+  "eventMessage" : "Starting BTAudioPlugin for <private>",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Starting BTAudioPlugin for %@",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228128,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517722-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653312798,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228128,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974701442859012,
+  "eventMessage" : "Register audio plugin connection with bluetoothd",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Register audio plugin connection with bluetoothd",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228304,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517743-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653313318,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228304,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974911896260612,
+  "eventMessage" : "XPC server error: Connection invalid",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "XPC server error: %{public}s\n",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 387668,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517746-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653313386,
+  "messageType" : "Error",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 387668,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1986413818675204,
+  "eventMessage" : "Invalidating all (0) audio devices",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Invalidating all (%ld) audio devices",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 229964,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517747-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653313396,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 229964,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974572593840132,
+  "eventMessage" : "Starting BTAudioPlugin for <private>",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Starting BTAudioPlugin for %@",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228128,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517747-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653313410,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228128,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974701442859012,
+  "eventMessage" : "Register audio plugin connection with bluetoothd",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Register audio plugin connection with bluetoothd",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228304,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517771-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653313991,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228304,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974911896260612,
+  "eventMessage" : "XPC server error: Connection invalid",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "XPC server error: %{public}s\n",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 387668,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517774-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653314052,
+  "messageType" : "Error",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 387668,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1986413818675204,
+  "eventMessage" : "Invalidating all (0) audio devices",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Invalidating all (%ld) audio devices",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 229964,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517774-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653314061,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 229964,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974572593840132,
+  "eventMessage" : "Starting BTAudioPlugin for <private>",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Starting BTAudioPlugin for %@",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228128,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517775-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653314068,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228128,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974701442859012,
+  "eventMessage" : "Register audio plugin connection with bluetoothd",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Register audio plugin connection with bluetoothd",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228304,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517806-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653314829,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228304,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974911896260612,
+  "eventMessage" : "XPC server error: Connection invalid",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "XPC server error: %{public}s\n",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 387668,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517809-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653314896,
+  "messageType" : "Error",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 387668,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1986413818675204,
+  "eventMessage" : "Invalidating all (0) audio devices",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Invalidating all (%ld) audio devices",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 229964,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517810-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653314906,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 229964,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974572593840132,
+  "eventMessage" : "Starting BTAudioPlugin for <private>",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Starting BTAudioPlugin for %@",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228128,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517810-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653314921,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228128,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974701442859012,
+  "eventMessage" : "Register audio plugin connection with bluetoothd",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Register audio plugin connection with bluetoothd",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228304,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517836-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653315529,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228304,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974911896260612,
+  "eventMessage" : "XPC server error: Connection invalid",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "XPC server error: %{public}s\n",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 387668,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517839-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653315614,
+  "messageType" : "Error",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 387668,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1986413818675204,
+  "eventMessage" : "Invalidating all (0) audio devices",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Invalidating all (%ld) audio devices",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 229964,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517839-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653315624,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 229964,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974572593840132,
+  "eventMessage" : "Starting BTAudioPlugin for <private>",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Starting BTAudioPlugin for %@",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228128,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517840-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653315642,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228128,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974701442859012,
+  "eventMessage" : "Register audio plugin connection with bluetoothd",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Register audio plugin connection with bluetoothd",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228304,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517871-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653316384,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228304,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974911896260612,
+  "eventMessage" : "XPC server error: Connection invalid",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "XPC server error: %{public}s\n",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 387668,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517874-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653316454,
+  "messageType" : "Error",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 387668,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1986413818675204,
+  "eventMessage" : "Invalidating all (0) audio devices",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Invalidating all (%ld) audio devices",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 229964,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517874-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653316463,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 229964,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974572593840132,
+  "eventMessage" : "Starting BTAudioPlugin for <private>",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Starting BTAudioPlugin for %@",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228128,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517875-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653316473,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228128,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974701442859012,
+  "eventMessage" : "Register audio plugin connection with bluetoothd",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Register audio plugin connection with bluetoothd",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228304,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517906-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653317223,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228304,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974911896260612,
+  "eventMessage" : "XPC server error: Connection invalid",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "XPC server error: %{public}s\n",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 387668,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517909-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653317289,
+  "messageType" : "Error",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 387668,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1986413818675204,
+  "eventMessage" : "Invalidating all (0) audio devices",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Invalidating all (%ld) audio devices",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 229964,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517909-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653317299,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 229964,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+},{
+  "traceID" : 1974572593840132,
+  "eventMessage" : "Starting BTAudioPlugin for <private>",
+  "eventType" : "logEvent",
+  "source" : null,
+  "formatString" : "Starting BTAudioPlugin for %@",
+  "activityIdentifier" : 0,
+  "subsystem" : "com.apple.bluetooth",
+  "category" : "BTAudio",
+  "threadID" : 173223,
+  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "backtrace" : {
+    "frames" : [
+      {
+        "imageOffset" : 228128,
+        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+      }
+    ]
+  },
+  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processImagePath" : "\/usr\/sbin\/coreaudiod",
+  "timestamp" : "2022-08-06 18:41:38.517910-0400",
+  "senderImagePath" : "\/System\/Library\/Audio\/Plug-Ins\/HAL\/BTAudioHALPlugin.driver\/Contents\/MacOS\/BTAudioHALPlugin",
+  "machTimestamp" : 656653317312,
+  "messageType" : "Default",
+  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "processID" : 13201,
+  "senderProgramCounter" : 228128,
+  "parentActivityIdentifier" : 0,
+  "timezoneName" : ""
+}]

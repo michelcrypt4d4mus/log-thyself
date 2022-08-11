@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ConsentText</key>
+	<dict>
+		<key>default</key>
+		<string>This will enable showing private strings and data in Unified Logs.</string>
+	</dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>PayloadDisplayName</key>
+			<string>ManagedClient logging</string>
+			<key>PayloadEnabled</key>
+			<true/>
+			<key>PayloadIdentifier</key>
+			<string>com.apple.system.logging.89AE58D8-0A4A-448B-8AE0-761DEE2D007F</string>
+			<key>PayloadType</key>
+			<string>com.apple.system.logging</string>
+			<key>PayloadUUID</key>
+			<string>89AE58D8-0A4A-448B-8AE0-761DEE2D007F</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+			<key>System</key>
+			<dict>
+				<key>Enable-Private-Data</key>
+				<true/>
+			</dict>
+		</dict>
+	</array>
+	<key>PayloadDescription</key>
+	<string>Allows showing private log messages.</string>
+	<key>PayloadDisplayName</key>
+	<string>Allow Private Logs</string>
+	<key>PayloadIdentifier</key>
+	<string>com.yourdomain.enable.private.logs</string>
+	<key>PayloadOrganization</key>
+	<string>Your Organization</string>
+	<key>PayloadRemovalDisallowed</key>
+	<false/>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>529DF49A-6CB3-4DE9-A29F-4C41EC88BFDD</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>

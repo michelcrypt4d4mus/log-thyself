@@ -1,0 +1,104 @@
+# Candidates for exclusion:
+
+# process_name/subsystem: powerd. There's a couple of them but e.g.
+# D | powerd                         |                                | systemLoad                | powerd                                                | Client 0x13f80e190(pid 627) activity level is already at 0x1                                                                                 |  71711
+
+# process_name: Electron, this one in particular
+# D | Electron                       | HIToolbox                      | MBarView                  | com.apple.HIToolbox                                   | <private>                                                                                                                                    | 403695
+
+# Multitouch (process_name WindowServer, sender MultitouchHID, event_message DHML: MTHandMotion::resetHandMotion(0)
+# Also sender ColourSensorFilterPlugin
+# D | WindowServer                   | MultitouchHID                  | Plugin                    | com.apple.Multitouch                                  | DHML: MTHandMotion::resetHandMotion(0)                                                                                                       | 378200
+
+# WHERE process_name = 'kernel'
+  # AND sender_process_name = 'AppleInputDeviceSupport'
+  #  D | kernel       | AppleInputDeviceSupport        |                      |           | [SPI][HIDSPI] TX: 80 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00RX: 20 02 00 00 00 00 74 00 10 02 00 AC 00 00 6A 00                         |  1963
+
+  # thermal stuff
+  #  _ | kernel       | ApplePassthroughPPM            |                      |           | ApplePPMPolicyCPMS::setDetailedThermalPowerBudget:setDetailedThermalPowerBudget: clientId 2, details 8317413421380756850, Thermal Budget 650 | 10059
+
+
+# Metadata server
+# process_name mds, subsystem com.apple.spotlightserver
+# event_message contains with "NEXTQUEUE", "REORDER CHANGE", "tryToPopQueue", "handleXPCMessage",
+
+# subsystem: com.apple.cache_delete
+
+# process_naem: corebrightnessd
+# D | corebrightnessd                | CoreBrightness                 | default                   | com.apple.CoreBrightness.CBHIDEventManager            | [Service:0x10000076B] sample not crossing absolute lux threshold                                                                             |  21318
+
+# Top events without message, after deleting a couple of huge offenders
+#  L |          process_name          |             sender             |         category          |                       subsystem                       |  count
+# ---+--------------------------------+--------------------------------+---------------------------+-------------------------------------------------------+---------
+#  D | powerd                         |                                | systemLoad                | powerd                                                | 2649627
+#  _ | launchd                        | launchd                        |                           | gui/501 [100017]                                      | 2595877
+#  D | WindowServer                   | NXEventTranslatorSessionFilter | activity                  | com.apple.iohid                                       | 2249902
+#  D | powerd                         | powerd                         | systemLoad                | powerd                                                | 2203419
+#  D | WindowServer                   | MultitouchHID                  | Plugin                    | com.apple.Multitouch                                  | 1901631
+#  _ | coreauthd                      | BiometricKit                   | Framework-Internal        | com.apple.BiometricKit                                | 1777519
+#  _ | launchd                        |                                |                           |                                                       | 1518079
+#  D | kernel                         | AppleInputDeviceSupport        |                           |                                                       | 1384132
+#  _ | launchd                        | launchd                        |                           | system                                                | 1098655
+#  _ | coreaudiod                     | BTAudioHALPlugin               | BTAudio                   | com.apple.bluetooth                                   | 1097730
+#  D | launchservicesd                | launchservicesd                | cas                       | com.apple.launchservices                              | 1093555
+#  D | mds                            |                                | ImportServer              | com.apple.spotlightserver                             |  899617
+#  E | coreauthd                      | BiometricKit                   | Framework-Internal        | com.apple.BiometricKit                                |  890638
+#  D | mds                            |                                | Server                    | com.apple.spotlightserver                             |  884495
+#  D | Little Snitch Agent            | CarbonCore                     | checkfix                  | com.apple.CarbonCore                                  |  847663
+#  D | corebrightnessd                | CoreBrightness                 | default                   | com.apple.CoreBrightness.CBHIDEventManager            |  679638
+#  D | runningboardd                  | RunningBoard                   | assertion                 | com.apple.runningboard                                |  653153
+#  D | WindowServer                   | ColourSensorFilterPlugin       | default                   | com.apple.CoreBrightness.ColourSensorFilterPlugin     |  642391
+#  I | Activity Monitor               | IconServices                   | default                   | com.apple.iconservices                                |  632085
+#  D | WindowServer                   | IOKit                          | service                   | com.apple.iohid                                       |  602243
+#  D | Activity Monitor               | IconServices                   | default                   | com.apple.iconservices                                |  590049
+#  D | kernel                         | AppleInputDeviceSupport        |                           |                                                       |  529769
+#  D | mds                            |                                | QOS                       | com.apple.spotlightserver                             |  483477
+#  E | com.apple.WebKit.WebContent    | LaunchServices                 | default                   | com.apple.launchservices                              |  453432
+#  D | backupd                        | CoreFoundation                 | User Defaults             | com.apple.defaults                                    |  447527
+#  D | rotonvpn.mac.OpenVPN-Extension | libnetworkextension.dylib      |                           | com.apple.networkextension                            |  425312
+#  D | Electron                       | HIToolbox                      | MBarView                  | com.apple.HIToolbox                                   |  403705
+#  D | Safari                         | CoreFoundation                 | User Defaults             | com.apple.defaults                                    |  380575
+#  D | WindowServer                   | UniversalControlServiceFilter  | HID                       | com.apple.universalcontrol                            |  362459
+#  D | PerfPowerServices              | PowerlogLiteOperators          |                           | com.apple.powerlog                                    |  361931
+#  D | Electron                       | CoreFoundation                 | User Defaults             | com.apple.defaults                                    |  336363
+#  D | Spotlight                      | LaunchServices                 | binding                   | com.apple.launchservices                              |  329645
+#  D | Terminal                       | CoreFoundation                 | User Defaults             | com.apple.defaults                                    |  306920
+#  D | Activity Monitor               | CoreFoundation                 | strings                   | com.apple.CFBundle                                    |  300083
+#  E | coreaudiod                     | BTAudioHALPlugin               | BTAudio                   | com.apple.bluetooth                                   |  287318
+#  D | mds                            |                                | Task                      | com.apple.spotlightserver                             |  283144
+#  E | com.apple.WebKit.WebContent    | LaunchServices                 | error                     | com.apple.launchservices                              |  262041
+#  E | com.apple.WebKit.WebContent    | LaunchServices                 | db                        | com.apple.launchservices                              |  262041
+#  D | cfprefsd                       | CoreFoundation                 | cfprefsd                  | com.apple.defaults                                    |  259502
+#  _ | runningboardd                  | RunningBoard                   | process                   | com.apple.runningboard                                |  254329
+#  D | Safari                         | CarbonCore                     | checkfix                  | com.apple.CarbonCore                                  |  236872
+#  D | Activity Monitor               | IconServices                   | trace                     | com.apple.iconservices                                |  216951
+#  _ | com.apple.WebKit.Networking    | WebKit                         | Network                   | com.apple.WebKit                                      |  215513
+#  _ | dasd                           | dasd                           | scoring                   | com.apple.duetactivityscheduler                       |  196718
+#  D | powerd                         |                                | assertions                | powerd                                                |  177963
+#  D | PerfPowerServices              | PowerlogLiteOperators          | display                   | com.apple.powerlog                                    |  166323
+#  D | mds_stores                     | SpotlightIndex                 | Query                     | com.apple.spotlightindex                              |  164660
+#  D | Little Snitch Agent            | CoreFoundation                 | User Defaults             | com.apple.defaults                                    |  163070
+#  _ | launchd                        | launchd                        |                           |                                                       |  162724
+#  D | kernel                         | AppleFirmwareKit               |                           |                                                       |  161021
+#  D | corebrightnessd                | CoreBrightness                 | default                   | com.apple.CoreBrightness.CBALSEvent                   |  160933
+#  D | com.apple.WebKit.WebContent    | CoreServicesStore              | default                   | com.apple.coreservicesstore                           |  156865
+#  a | runningboardd                  | RunningBoard                   |                           |                                                       |  151040
+#  D | runningboardd                  | RunningBoard                   | monitor                   | com.apple.runningboard                                |  148111
+#  D | it.xpc.openAndSavePanelService | LaunchServices                 | binding                   | com.apple.launchservices                              |  142104
+#  _ | launchd                        | launchd                        |                           | user/501                                              |  141881
+#  D | Safari                         | CoreFoundation                 | strings                   | com.apple.CFBundle                                    |  140918
+#  D | powerd                         | powerd                         | assertions                | powerd                                                |  140829
+#  D | corebrightnessd                | CoreBrightness                 | default                   | com.apple.CoreBrightness.CBDisplayModuleSKL.1         |  140284
+#  _ | runningboardd                  | RunningBoard                   | assertion                 | com.apple.runningboard                                |  137722
+#  I | runningboardd                  | RunningBoard                   | assertion                 | com.apple.runningboard                                |  133325
+#  _ | com.apple.WebKit.WebContent    | WebCore                        | ResourceLoading           | com.apple.WebKit                                      |  132549
+#  _ | mDNSResponder                  | mDNSResponder                  | Default                   | com.apple.mDNSResponder                               |  132543
+#  D | opendirectoryd                 |                                | object-lifetime           | com.apple.opendirectoryd                              |  125996
+#  E | WindowServer                   | SkyLight                       | default                   | com.apple.SkyLight                                    |  122388
+#  _ | com.apple.WebKit.WebContent    | WebKit                         | Network                   | com.apple.WebKit                                      |  116459
+#  _ | com.apple.WebKit.WebContent    | WebCore                        | Media                     | com.apple.WebKit                                      |  114082
+#  _ | WindowServer                   | FuseBoardServices              | SkyBridge                 | com.apple.FuseBoard                                   |  112406
+#  D | mdworker_shared                | CoreFoundation                 | User Defaults             | com.apple.defaults                                    |  111766
+#  I | opendirectoryd                 |                                | session                   | com.apple.opendirectoryd                              |  110646
+
+
