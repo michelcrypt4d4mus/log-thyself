@@ -5,6 +5,10 @@
 # the application logs at ERROR level. The assumption is you want to focus on STDOUT
 # and the only real reason to read STDERR is to prevent the buffer from filling up and
 # crashing the program.
+#
+# Test:
+# s = ShellCommandStreamer.new('tail -f log/development.log')
+# s.stream! { |line| puts line }
 
 require 'open3'
 
