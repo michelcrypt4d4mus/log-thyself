@@ -1,18 +1,18 @@
-# MacOS Log Collector
-Parses MacOS system logs and logs from Objective-See's new tools into a database where they can be analyzed far more easily. Useful if you think you're being monitored/hacked/etc. but probably has other uses.
+# Computer, Logy Thyself!
+Parses MacOS system logs and logs from Objective-See's new tools based on Apple's new security efforts into a postgres database where they can be analyzed far more easily. Useful if you think you're being monitored/hacked/etc. but probably has other uses.
 
 ### Why would I want to do this?
 I wrote this because I was suspicious that my macs were being hacked. MacOS only keeps ~5-60m of logs on hand depending on what you're doing, even less if you use the more verbose logging style. And they aren't in a particularly easy to analyze format either.
 
-For those of us who know how to interact with a sequel friendly database, this makes analysis much, much easier. Also if you hire a security professional to audit your system because you suspect you've been hacked, the people you hire will love you if you can give them this data.
+For those of us who know how to interact with an SQL database having the data available in this form makes analysis much, much easier. Also I suspect if you hire a security professional to audit your system because you fear you've been hacked, the people you hire will love you if you can give them this data.
 
 # Installation
 
-1. Checkout or download the code. (For the `git`-disabled, click the green "Code" button above, click "download zip" or similar, and unzip it. Advice you don't have to take: put the resulting folder somewhere sensible.)
-2. If you have `homebrew`, `ruby 3.1`, and `postgresql` setup already, skip to the next step. If you _don't_ have those things (of if you have no idea what those things are), do this:
+1. Checkout or download the code. For the less git enabled among us, click the green "Code" button above, click "download zip" or similar, and unzip it. (_Advice you don't have to take: put the resulting folder somewhere sensible._)
+2. If you have `homebrew`, `ruby 3.1`, and `postgresql` setup already, skip to the next step. If you _don't_ have those things (of if you have no idea what those things are), don't worry, we can still do this. There's a script that should set up everything for you but you have to get in Terminal and run it.
     1. Go to the `Applications/Utilities` folder on your Mac.
-    2. Click `Terminal`. (If you've never run terminal before, congratulations. You are now officially inside your computer.)
-    3. Change the current directory in Terminal typing `cd ` and then dragging the folder you downloaded this to onto the terminal. It should populate a bunch of text - the location of the folder you dragged in. Press enter.
+    2. Click `Terminal`. (If you've never run terminal before, congratulations: you are now officially inside your computer)
+    3. Change the current directory (AKA "folder") in Terminal by typing `cd ` and then dragging the folder you downloaded this to onto the terminal. It should populate a bunch of text - the location of the folder you dragged in. Press enter and your terminal window will be in a new directory.
 3. Run `scripts/initial_setup.sh` from the project directory. This will (hopefully) install the prerequisites and set up the database.
 
 ### Installation As Continually Running Process
@@ -28,7 +28,7 @@ sudo scripts/launchd/install_as_launch_daemon.sh
 **NOTE:** If you want options other than the defaults, you'll have to edit [the launch script](scripts/start_log_stream_loader.sh)).
 
 ### Uninstallation
-The first step stops the process. It will start up again next time you restart the computer unless you run the 2nd step. Copy paste this stuff into the terminal:
+Copy paste this stuff into the terminal:
 
 ```sh
 # Stop the launch daemon
@@ -42,18 +42,22 @@ sudo rm /Library/System/cryptadamus.logloader.plist
 
 # Drop the database
 psql << 'DROP DATABASE macos_log_collector_development'
+psql << 'DROP DATABASE macos_log_collector_test'
 ```
 
-Then delete the project folder. Uninstalling `ruby`, `brew`, and `postgres` is beyond the scope of this readme.
+Then delete the project folder. Uninstalling `ruby`, `homebrew`, `postgres` etc. is beyond the scope of this readme but you can figure it out.
 
 
 # Usage
-**QUICKSTART**
+**QUICKSTART:** This should start capturing macOS system logs to the database.
 ```sh
 thor collect:syslog:stream
 ```
 
-The interface is built in Thor (which I mildly regret, but not enough to change it because it does the job), the same thing as Ruby on Rails's generators. Type `thor list` and you should see something like this:
+The interface is built in Thor (which I mildly regret[^1], but not enough to change it. ), the same thing as Ruby on Rails's generators. Type `thor list` and you should see something like this:
+
+[^1]: I've never seen a project used by so many people with such a combination of broken features and atrocious - nay, profane - documentation. It's like they want you to not use it.
+
 ```sh
 collect
 -------
@@ -204,6 +208,3 @@ bundle exec rspec
 Eclectic Light
 Objective-See
 https://objective-see.org/products/utilities.html
-
-
-test
