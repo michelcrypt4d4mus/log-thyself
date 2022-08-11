@@ -1,3 +1,9 @@
+# Read logs written with the '--style default' flag, AKA "human readable."
+# Not the greatest code; was more of a proof of concept than a plan but it works..
+#
+# This style of log is noticeably less complete than the --style json output but it does have
+# all the most important columns.
+
 require 'open3'
 
 
@@ -18,7 +24,7 @@ class SyslogStreamParser
 
   # Up to :process_description are space delimited fields in Mac's log format. :process_description
   # requires further parsing. ORDER MATTERS! Must match order in log files.
-  FIELD_NAMES_IN_FILE = %i(
+  FIELDS_TO_SPLIT = %i(
     log_timestamp
     timestamp_without_date
     thread_id
@@ -29,9 +35,9 @@ class SyslogStreamParser
     process_description
   )
 
-  # Only meant to be
+  # Only meant to be used with files... otherwise you should be using --styls json
   def initialize(log_file)
-    @shell_command_streamer = ShellCommandStreamer.new("cat #{log_file}")
+    @file_streamer = FileStreamer.new(log_file)
   end
 
   # Calls yield() with MacOsSystemLog objects
@@ -40,7 +46,7 @@ class SyslogStreamParser
     lines_in_this_log_message_count = 0
     current_log_entry = ''
 
-    @shell_command_streamer.stream! do |log_line|
+    @file_streamer.stream! do |log_line|
       log_line = log_line.chomp.force_encoding(Encoding::UTF_8)
       # Skip lines until we find one that looks valid (there's often cruft at the start of the output)
       unless already_found_first_good_line_flag
@@ -75,10 +81,11 @@ class SyslogStreamParser
     end
   end
 
+  # Processes a log entry into a a hash containing the properties of a MacOsSystemLog.
   def process_log_entry(log_entry)
     Rails.logger.debug("process_log_entry: #{log_entry}\n")
-    row_values = log_entry.strip.split(' ', FIELD_NAMES_IN_FILE.size).map(&:strip)
-    row = Hash[FIELD_NAMES_IN_FILE.zip(row_values)]
+    values = log_entry.strip.split(' ', FIELDS_TO_SPLIT.size).map(&:strip)
+    row = Hash[FIELDS_TO_SPLIT.zip(values)]
 
     # message and event type are unified in syslog but different fields in the JSON (and our DB)
     row[:message_type] = row[:log_type] if MacOsSystemLog::LOGGING_LEVELS.include?(row[:log_type])
@@ -108,7 +115,7 @@ class SyslogStreamParser
     return row if process_description.blank?
 
     sender_subsystem_msg = case process_description
-      when /#{SENDER_PROCESS_REGEX}\s{1,5}#{SUBSYSTEM_REGEX}\s+(.*)/
+      when /#{SENDER_PROCESS_REGEX}\s{1,10}#{SUBSYSTEM_REGEX}\s+(.*)/
         [$1, $2, $3]
       when /^\s*#{SUBSYSTEM_REGEX}\s+(.*)/
         [nil, $1, $2]
