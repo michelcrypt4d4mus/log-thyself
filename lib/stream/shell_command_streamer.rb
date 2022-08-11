@@ -17,7 +17,8 @@ class ShellCommandStreamer
     @lines_yielded_count = @lines_read_count = 0
   end
 
-  def stream!
+  # Yields a 3-tuple: (line, lines_read_count, lines_yielded_count)
+  def stream!(&block)
     Open3.popen3(@shell_command) do |_stdin, stdout, stderr, thread|
       child_pid = thread.pid
       @child_process_string = "Child process '#{@shell_command}' (PID: #{child_pid})"
@@ -25,11 +26,11 @@ class ShellCommandStreamer
       start_stderr_reader_thread(stderr)
 
       # Start reading
-      while(stdout_line = stdout.gets) do
+      while(line = stdout.gets) do
         @lines_read_count += 1
-        next if stdout_line.blank?
-        yield(stdout_line)
-        @lines_yielded_count += 1
+        next if line.blank?
+
+        yield(line, @lines_read_count, @lines_yielded_count += 1)
       end
     end
   end
@@ -39,12 +40,12 @@ class ShellCommandStreamer
   def start_stderr_reader_thread(stderr)
     Thread.new do
       begin
-        while(stderr_line = stderr.gets) do
-          log_stderr_output(stderr_line)
+        while(line = stderr.gets) do
+          log_stderr_output(line)
         end
       ensure
         begin
-          log_stderr_output(stderr.read_non_block(10_000)) unless stderr_line.blank?
+          log_stderr_output(stderr.read_non_block(10_000)) unless line.blank?
         rescue IO::EAGAINWaitReadable
           Rails.logger.debug("#{child_process_string} STDERR buffer drained")
         end
@@ -52,7 +53,7 @@ class ShellCommandStreamer
     end
   end
 
-  def log_stderr_line(stderr_line)
+  def log_stderr_output(line)
     Rails.logger.error("#{child_process_string} STDERR: #{line}")
   end
 end

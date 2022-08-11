@@ -30,6 +30,9 @@ class SyslogStreamParser
     process_description
   )
 
+  def initialize(shell_command)
+  end
+
   def parse_shell_command_stream(shell_command, &block)
     already_found_first_good_line_flag = false
     lines_read = 0
