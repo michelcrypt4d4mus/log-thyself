@@ -123,19 +123,28 @@ RAILS_LOG_TO_STDOUT thor collect:syslog:stream
 # Analyzing The Data
 `**QUICKSTART (sort of)**`
 
-There's some [useful queries](db/queries) in the repo you can look at.
+Query the database with SQL. There's some [useful queries](db/queries) in the repo you can look at/imitate.
 
-If you don't know how to write SQL queries the best thing to do would be to point a tool like Chartio at the database, which will give you some kind of GUI / charting situation. There's probably other tools like Chartio though the one I am most comfortable/familiar with and think is the best product is not really for personal use (expensive + difficult setup). The landscape may have changed in the last few years, however, so maybe look around.
+If you don't know how to write SQL queries the best thing to do would be to point a tool like Chartio at the database, which will give you some kind of GUI / charting situation. You could also use `thor db:dump` to dump out the data to a CSV and load it in even something like Excel (on the small end) or AWS Athena (on the high end).
 
 If you know minimal SQL a tool like [pgAdmin](https://www.pgadmin.org) may or may not be helpful. There may be other, better tools out there as well. Feel free to suggest others. Beyond that analysis is kind of on you or whichever database wizards you can round up to look at your situation.
 
-As far as what to look for, I recommend the [Objective-See](https://objective-see.org) website/blog.  They have many great resources to read and tools to download.
+As far as what to look for... it's hard. There's a lot of stuff in there that looks scary but is totally benign. Developers tend to leave log messages in their code long past their usefulness and with extra scariness. Here's my personal favorite from Apple's syslogs:
 
-Run `man log` to read Apple's documentation of what is in the data ([here](https://www.dssw.co.uk/reference/log.html) is a link to the log manual that may or may not be current).
+```
+ERROR: bluetoothd (367) is not entitled for com.apple.wifi.events.private, will not register for event type 130
+```
+
+Totally benign, I swear.
+
+Personally I focus on querying the data for words like "camera" and "microphone" or stuff about new users, failed logins, open ports, etc. looking for I recommend the [Objective-See](https://objective-see.org) website/blog.  They have many great resources to read and tools to download.
 
 
 
 ### System Logs
+
+Run `man log` to read Apple's documentation of what is in the system logs ([here](https://www.dssw.co.uk/reference/log.html) is a link to the log manual that may or may not be current).
+
 Your data will be in a database called `macos_log_collector_development`, in a table called `macos_system_logs`. It has _everything_ apple provides (or claims to provide), which is these columns:
 
 | Name  | Data Type |
@@ -218,5 +227,4 @@ Test should pass before you open a pull request. New featuers should have tests.
 
 # Other Tools
 Eclectic Light
-Objective-See
-https://objective-see.org/products/utilities.html
+[postgres_dba](https://github.com/NikolayS/postgres_dba)
