@@ -20,9 +20,9 @@ For those of us who know how to interact with an SQL database having the data av
     3. Change the current directory (AKA "folder") in Terminal by typing `cd ` and then dragging the folder you downloaded this to onto the terminal. It should populate a bunch of text - the location of the folder you dragged in. Press enter and your terminal window will be in a new directory.
 3. Run `scripts/initial_setup.sh` from the project directory. This will (hopefully) install the prerequisites and set up the database.
 
-### Installation As Continually Running Process
+#### Installation As A Continually Running Process Managed By `launchd`
 
-It's not necessary but you can set things up so the MacOS log stream collection launches right when you power on your computer - before you even login - for maximum monitoring power. Apple's `launchctl` will also relaunch the log collector should it crash if you set this up.
+It's not necessary but you can set things up so the MacOS log stream collection launches right when you power on your computer - before you even login - for maximum monitoring power. Apple's `launchd` will also relaunch the log collector should it crash if you set this up.
 
 There's a script to setup the launch daemon for you. It needs to be run with `sudo` privileges to install the launch daemon, so you will be prompted for your password.
 
@@ -30,7 +30,7 @@ There's a script to setup the launch daemon for you. It needs to be run with `su
 sudo scripts/launchd/install_as_launch_daemon.sh
 ```
 
-**NOTE:** If you want options other than the defaults, you'll have to edit [the launch script](scripts/start_log_stream_loader.sh)).
+**NOTE:** If you want options other than the defaults, you'll have to edit [the launch script](scripts/start_log_stream_loader.sh).
 
 ### Uninstallation
 Copy paste this stuff into the terminal:
@@ -113,7 +113,7 @@ RAILS_LOG_TO_STDOUT thor collect:syslog:stream
 ```
 
 # Analyzing The Data
-**QUICKSTART:** There's some [useful queries](queries/useful_sql_queries.sql) in the repo you can look at.
+**QUICKSTART:** There's some [useful queries](db/queries) in the repo you can look at.
 
 If you don't know how to write SQL queries the best thing to do would be to point a tool like Chartio at the database, which will give you some kind of GUI / charting situation. There's probably other tools like Chartio though the one I am most comfortable/familiar with and think is the best product is not really for personal use (expensive + difficult setup). The landscape may have changed in the last few years, however, so maybe look around.
 
