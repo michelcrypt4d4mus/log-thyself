@@ -39,7 +39,7 @@ class SyslogStreamParser
 
     Open3.popen3(shell_command) do |_stdin, stdout, stderr, wait_thr|
       pid = wait_thr.pid
-      Rails.logger.warn("Child process ID is #{pid}. You may have to kill this manually.")
+      Rails.logger.warn("Child process '#{shell_command}' PID: #{pid}")
 
       while(log_line = stdout.gets&.chomp&.force_encoding(Encoding::UTF_8))
         lines_read += 1
