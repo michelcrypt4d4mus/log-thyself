@@ -168,25 +168,25 @@ There are fundamentally two kinds of log messages - events and log messages (whi
 
   <tr>
     <td>
-      | event_type |
-      |------------|
-      | activityCreateEvent |
-      | activityTransitionEvent |
-      | logEvent |
-      | stateEvent |
-      | signpostEvent |
-      | timesyncEvent |
-      | traceEvent |
-      | userActionEvent |
+| event_type |
+|------------|
+| activityCreateEvent |
+| activityTransitionEvent |
+| logEvent |
+| stateEvent |
+| signpostEvent |
+| timesyncEvent |
+| traceEvent |
+| userActionEvent |
     </td>
     <td>
-      | message_type |
-      |------------|
-      |  Debug |
-      |  Default |
-      |  Error |
-      |  Fault |
-      | Info |
+| message_type |
+|------------|
+|  Debug |
+|  Default |
+|  Error |
+|  Fault |
+| Info |
     </td>
   </tr>
 </table>
