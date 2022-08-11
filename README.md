@@ -1,4 +1,4 @@
-# Computer, Logy Thyself!
+# Computer, Log Thyself!
 Parses MacOS system logs and logs from Objective-See's new tools based on Apple's new security efforts into a postgres database where they can be analyzed far more easily. Useful if you think you're being monitored/hacked/etc. but probably has other uses.
 
 ### Why would I want to do this?
