@@ -27,7 +27,7 @@ RSpec.describe SyslogStreamParser do
     let(:syslog_file) { file_fixture('multiline_syslog_text.log') }
 
     it 'parses a stream' do
-      described_class.new(syslog_file).parse_shell_command_stream { |row| row.save! }
+      described_class.new(syslog_file).parse_stream! { |row| row.save! }
       expect(MacOsSystemLog.count).to eq(12)
     end
   end

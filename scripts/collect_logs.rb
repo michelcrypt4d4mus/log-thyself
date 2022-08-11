@@ -123,7 +123,7 @@ streamer = options[:syslog_format] ? SyslogStreamParser..new : JsonStreamParser
 puts "Summoning log stream vortex... (CTRL-C to stop)" if shell_command.include?(STREAM_FLAG)
 
 begin
-  streamer.parse_shell_command_stream(shell_command) do |record|
+  streamer.parse_stream!(shell_command) do |record|
     db_writer.write(record)
   end
 ensure

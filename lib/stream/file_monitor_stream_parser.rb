@@ -29,7 +29,7 @@ class FileMonitorStreamParser
   end
 
   # TODO: should be separated from parsing the FileMonitor call because it could be a file
-  def parse_shell_command_stream(&block)
+  def parse_stream!(&block)
     Open3.popen3(@shell_command) do |_stdin, stdout, stderr, wait_thr|
       pid = wait_thr.pid
       Rails.logger.info("'#{@shell_command}' child PID is #{pid}.")

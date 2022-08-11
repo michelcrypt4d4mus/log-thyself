@@ -41,7 +41,7 @@ class SyslogStreamParser
   end
 
   # Calls yield() with MacOsSystemLog objects
-  def parse_shell_command_stream(&block)
+  def parse_stream!(&block)
     already_found_first_good_line_flag = false
     lines_in_this_log_message_count = 0
     current_log_entry = ''
