@@ -200,9 +200,9 @@ BTW If you're thinking to yourself, "well I only know python, I can't contribute
 
 If you're familiar with computers but not familiar with Ruby or Rails: this is barely a Rails app. It doesn't use Rails in the way god and man intended. But it was generated from the Rails startup script so there's a bunch of cruft. Let me point you to the very few places that matter in this monstrous default directory structure. I left the cruft there for now, on the off chance that someone wants to make some kind of frontend for this or whatever... Rails is pretty good at facilitating database interactions, even when not used as intended.
 
-* `[app/models](app/models)`
-* `[lib/](lib)`
-* `[db/queries]` (where i've been putting queries i found useful)
+* [app/models](app/models) (JSON objects to database rows)
+* [lib/](lib) (stream parsers)
+* [db/queries] (where i've been putting queries i found useful)
 
 
 ### Running The Test Suite
