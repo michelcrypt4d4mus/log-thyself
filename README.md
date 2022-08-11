@@ -115,16 +115,17 @@ RAILS_LOG_TO_STDOUT thor collect:syslog:stream
 # Analyzing The Data
 **QUICKSTART:** There's some [useful queries](queries/useful_sql_queries.sql) in the repo you can look at.
 
-If you don't know how to write SQL queries a tool like [pgAdmin](https://www.pgadmin.org) may or may not be helpful. There may be other, better tools out there as well. Feel free to suggest others. Beyond that analysis is kind of on you or whichever database wizards you can round up to look at your situation.
+If you don't know how to write SQL queries the best thing to do would be to point a tool like Chartio at the database, which will give you some kind of GUI / charting situation. There's probably other tools like Chartio though the one I am most comfortable/familiar with and think is the best product is not really for personal use (expensive + difficult setup). The landscape may have changed in the last few years, however, so maybe look around.
+
+If you know minimal SQL a tool like [pgAdmin](https://www.pgadmin.org) may or may not be helpful. There may be other, better tools out there as well. Feel free to suggest others. Beyond that analysis is kind of on you or whichever database wizards you can round up to look at your situation.
 
 As far as what to look for, I recommend the [Objective-See](https://objective-see.org) website/blog.  They have many great resources to read and tools to download.
 
-### The Logs
 Run `man log` to read Apple's documentation of what is in the data ([here](https://www.dssw.co.uk/reference/log.html) is a link to the log manual that may or may not be current).
 
 
 
-### The Table
+## System Logs
 Your data will be in a database called `macos_log_collector_development`, in a table called `macos_system_logs`. It has _everything_ apple provides (or claims to provide), which is these columns:
 
 | Name  | Data Type |
@@ -155,8 +156,7 @@ Your data will be in a database called `macos_log_collector_development`, in a t
 | `creator_activity_id` | _decimal_ |, precision: 26, scale: 0
 
 
-
-### Columns
+#### Columns
 There are two ENUMs to save space when storing the `event_type` and `message_type`. Here are the possible values:
 
 -----
@@ -185,25 +185,31 @@ There are two ENUMs to save space when storing the `event_type` and `message_typ
 
 ----
 
-### The View
-A lot of these are actually pretty useless and/or empty, so there is also a view of the table you can query that does a few things:
+#### The Simplified View
+I have learned that a lot of the columns Apple provides are actually pretty useless and/or empty, so there is also a view of the table `simplifed_system_logs` you can query that does a few things:
 
 1. Shows only what I found to be the important columns.
 2. Collapses `message_type` and `event_type` into one column that explains the type, called just `T` so it takes up less space. [See here](db/functions/msg_type_char_v01.sql) for a guide to what each letter means.
 
 
+### Objective-See `FileMonitor` Data
+
+The table is called `file_events`.
+
+
 
 # Development/Contributions
-Contributions are welcome. Stuff I'm working on includes filtering
+Contributions are welcome. Stuff I'm working on includes filtering, pre-unified MacOS syslogging, and a couple other things.
 
-If you're thinking to yourself, "well I only know python," let me just say that having worked with both in a professional capacity that if you know one you basically know the other.  The differences are very small.
+BTW If you're thinking to yourself, "well I only know python, I can't contribute" - let me just say that having worked with Ruby, Python, and 10-20 other languages in a professional capacity: if you know one you basically know the other.  The differences are very small compared to the differences between other languages.
 
-If you're familiar with computers but not familiar with Ruby on Rails, let me point you to the very few places that matter in this monstrous default directory structure:
+If you're familiar with computers but not familiar with Ruby or Rails, let me point you to the very few places that matter in this monstrous default directory structure, because this is barely a Rails app in any conventional sense, but I started with a Rails app so there's a lot of extra stuff around.  I left it there for now, on the off chance that someone wants to make some kind of frontend for this.
 
 * `[app/models](app/models)`
 * `[lib/](lib)`
 * `[db/queries]` (where i've been putting queries i found useful)
 
+This is barely a Rails app.
 Feel free to open pull requests if tests are passing. To run the test suite:
 ```sh
 bundle exec rspec
