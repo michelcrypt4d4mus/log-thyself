@@ -128,7 +128,7 @@ Run `man log` to read Apple's documentation of what is in the data ([here](https
 
 
 
-## System Logs
+### System Logs
 Your data will be in a database called `macos_log_collector_development`, in a table called `macos_system_logs`. It has _everything_ apple provides (or claims to provide), which is these columns:
 
 | Name  | Data Type |
@@ -158,10 +158,17 @@ Your data will be in a database called `macos_log_collector_development`, in a t
 | `timezone_name` | _string_ |
 | `creator_activity_id` | _decimal_ |, precision: 26, scale: 0
 
------
+
 
 #### System Log Enums
 There are fundamentally two kinds of log messages - events and log messages (which are classified as a kind of event: a `logEvent`). There are two ENUMs to save space when storing the `event_type` and `message_type`. Here are the possible values:
+
+
+#### The Simplified View
+I have learned that a lot of the columns Apple provides are actually pretty useless and/or empty, so there is also a view of the table `simplifed_system_logs` you can query that does a few things:
+
+1. Shows only what I found to be the important columns.
+2. Collapses `message_type` and `event_type` into one column that explains the type, called just `T` so it takes up less space. [See here](db/functions/msg_type_char_v01.sql) for a guide to what each letter means.
 
 
 | event_types | message_types |
@@ -176,17 +183,9 @@ There are fundamentally two kinds of log messages - events and log messages (whi
 | userActionEvent | |
 
 
-
-#### The Simplified View
-I have learned that a lot of the columns Apple provides are actually pretty useless and/or empty, so there is also a view of the table `simplifed_system_logs` you can query that does a few things:
-
-1. Shows only what I found to be the important columns.
-2. Collapses `message_type` and `event_type` into one column that explains the type, called just `T` so it takes up less space. [See here](db/functions/msg_type_char_v01.sql) for a guide to what each letter means.
-
-
 ### Objective-See `FileMonitor` Data
 
-The table is called `file_events`.
+The table is called `file_events`. Everything is not extracted but the original JSON data structure is stored in the database where [you can directly query it](https://www.postgresql.org/docs/12/functions-json.html) if you are familiar with the dark art of querying JSON paths via SQL queries.  See [Apple's Endpoint Security Framework documentation](https://developer.apple.com/documentation/endpointsecurity) for more info on what the data is.
 
 
 
@@ -195,17 +194,19 @@ Contributions are welcome. Stuff I'm working on includes filtering, pre-unified 
 
 BTW If you're thinking to yourself, "well I only know python, I can't contribute" - let me just say that having worked with Ruby, Python, and 10-20 other languages in a professional capacity: if you know one you basically know the other.  The differences are very small compared to the differences between other languages.
 
-If you're familiar with computers but not familiar with Ruby or Rails, let me point you to the very few places that matter in this monstrous default directory structure, because this is barely a Rails app in any conventional sense, but I started with a Rails app so there's a lot of extra stuff around.  I left it there for now, on the off chance that someone wants to make some kind of frontend for this.
+If you're familiar with computers but not familiar with Ruby or Rails: this is barely a Rails app. It doesn't use Rails in the way god and man intended. But it was generated from the Rails startup script so there's a bunch of cruft. Let me point you to the very few places that matter in this monstrous default directory structure. I left the cruft there for now, on the off chance that someone wants to make some kind of frontend for this or whatever... Rails is pretty good at facilitating database interactions, even when not used as intended.
 
 * `[app/models](app/models)`
 * `[lib/](lib)`
 * `[db/queries]` (where i've been putting queries i found useful)
 
-This is barely a Rails app.
-Feel free to open pull requests if tests are passing. To run the test suite:
+
+### Running The Test Suite
 ```sh
 bundle exec rspec
 ```
+
+Test should pass before you open a pull request. New featuers should have tests... that pass.
 
 # Other Tools
 Eclectic Light
