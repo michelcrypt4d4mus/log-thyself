@@ -32,7 +32,7 @@ COPY (
     hex_to_int(activity) AS activity_identifier
   FROM macos_system_logs
 )
-TO '/Users/syblius/workspace/macos_log_collector/tmp/old_db.csv'
+TO '/Users/crypt4d4mus/workspace/macos_log_collector/tmp/old_db.csv'
 CSV
 DELIMITER ','
 QUOTE '"'

@@ -12,7 +12,7 @@ COPY macos_system_logs (
     activity_identifier
 )
 -- Messed up the mapping for 26 Timesync events; loaded them separately.
-FROM PROGRAM 'fgrep -v Timesync /Users/syblius/workspace/macos_log_collector/tmp/old_db.csv'
+FROM PROGRAM 'fgrep -v Timesync /Users/crypt4d4mus/workspace/macos_log_collector/tmp/old_db.csv'
 CSV
 DELIMITER ','
 QUOTE '"'
