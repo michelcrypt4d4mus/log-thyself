@@ -155,33 +155,47 @@ Your data will be in a database called `macos_log_collector_development`, in a t
 | `timezone_name` | _string_ |
 | `creator_activity_id` | _decimal_ |, precision: 26, scale: 0
 
+-----
 
-#### Columns
-There are two ENUMs to save space when storing the `event_type` and `message_type`. Here are the possible values:
+#### Enums
+There are fundamentally two kinds of log messages - events and log messages (which are classified as a kind of event: a `logEvent`). There are two ENUMs to save space when storing the `event_type` and `message_type`. Here are the possible values:
+
+<table>
+  <tr>
+    <th>Events</th>
+    <th>Log Messages</th>
+  </tr>
+
+  <tr>
+    <td>
+      | event_type |
+      |------------|
+      | activityCreateEvent |
+      | activityTransitionEvent |
+      | logEvent |
+      | stateEvent |
+      | signpostEvent |
+      | timesyncEvent |
+      | traceEvent |
+      | userActionEvent |
+    </td>
+    <td>
+      | message_type |
+      |------------|
+      |  Debug |
+      |  Default |
+      |  Error |
+      |  Fault |
+      | Info |
+    </td>
+  </tr>
+</table>
+
+
 
 -----
 
-#### Events
-| event_type |
-|------------|
-| activityCreateEvent |
-| activityTransitionEvent |
-| logEvent |
-| stateEvent |
-| signpostEvent |
-| timesyncEvent |
-| traceEvent |
-| userActionEvent |
------
 
-#### Log Messages
-| message_type |
-|------------|
-|  Debug |
-|  Default |
-|  Error |
-|  Fault |
-| Info |
 
 ----
 
