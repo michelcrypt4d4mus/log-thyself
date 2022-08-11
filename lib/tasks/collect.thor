@@ -41,14 +41,6 @@ module Collect
     def stream
       raise InvocationError.new('-pretty is verboten') if options[:file_monitor_flags].include?('-pretty')
       StreamCoordinator.collect!(FileMonitorStreamParser.new(options), options)
-
-      begin
-        .parse_stream! do |file_event|
-          writer.write(file_event)
-        end
-      ensure
-        db_writer.close
-      end
     end
   end
 
@@ -99,8 +91,8 @@ module Collect
 
     no_commands do
       def launch_macos_log_parser(options)
-        say "\n🌀 Summoning log stream vortex...🌀\n", :cyan
-        say "        (CTRL-C to stop)"
+        say "\n🌀 Summoning log vortex...🌀\n", :cyan
+        say "      (CTRL-C to stop)"
         StreamCoordinator.collect!(JsonStreamParser.new(@shell_command), options)
       end
     end
