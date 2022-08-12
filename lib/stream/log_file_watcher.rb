@@ -13,11 +13,6 @@ class LogFileWatcher
 
   # TODO: handle log rotation, .asl logs
   def read_log_streams(&block)
-    raise 'more closed logs!'
-    #aslmanager.20220811T021729-04
-    #2022.08.09.asl coming back open
-    # Analytics-90Day-2022-08-08-200000.0003.core_analytics (diagnostics folder)
-
     @streamer_threads = @open_logs.inject({}) do |memo, log_file|
       memo[log_file] = Thread.new do
         shell_command = "tail -f #{log_file}"

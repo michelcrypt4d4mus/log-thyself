@@ -37,9 +37,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_12_064730) do
   end
 
   create_table "logfile_lines", force: :cascade do |t|
-    t.integer "logfile_id"
-    t.integer "line_number"
-    t.string "line"
+    t.integer "logfile_id", null: false
+    t.integer "line_number", null: false
+    t.string "line", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["line"], name: "index_logfile_lines_on_line"
@@ -47,8 +47,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_12_064730) do
   end
 
   create_table "logfiles", force: :cascade do |t|
-    t.string "file_path"
-    t.datetime "file_created_at"
+    t.string "file_path", null: false
+    t.datetime "file_created_at", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["file_path", "file_created_at"], name: "index_logfiles_on_file_path_and_file_created_at", unique: true

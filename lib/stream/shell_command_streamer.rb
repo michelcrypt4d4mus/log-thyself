@@ -8,7 +8,7 @@
 #
 # Test:
 # s = ShellCommandStreamer.new('tail -f log/development.log')
-# s.stream! { |line| puts line }
+# s.stream! { |line, linenumber| puts "#{linenumber}: #{line}" }
 
 require 'open3'
 
@@ -31,12 +31,8 @@ class ShellCommandStreamer
         Rails.logger.info("#{@child_process_string} started...")
         start_stderr_reader_thread(stderr)
 
-        # Start reading
         while(line = stdout.gets) do
-          @lines_read_count += 1
-          next if line.blank?
-
-          yield(line, @lines_read_count, @lines_yielded_count += 1)
+          yield(line, (@lines_read_count = stdout.lineno), (@lines_yielded_count += 1))
         end
       end
     rescue Errno::EACCES => e

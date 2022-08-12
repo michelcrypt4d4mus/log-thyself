@@ -1,20 +1,23 @@
 # For old style log files, pre-unified logging
 
-# TODO: log.0, log.1 etc. closed files
-
 class Logfile < ApplicationRecord
   has_many :log_file_lines
 
-  LIBRARY_LOGS = '/Library/Logs'
-  VAR_LOG = '/private/var/log/'
+  after_initialize do |logfile|
+    logfile.file_created_at ||= File.ctime(logfile.file_path)
+  end
 
-  # TODO we could scan the disk?
+  # TODO we could scan the disk for logs?
+  LIBRARY_LOGS = '/Library/Logs'
+  VAR_LOG = '/private/var/log'
+
   LOG_DIRS = [
     VAR_LOG,
     LIBRARY_LOGS,
     File.join(Dir.home, LIBRARY_LOGS)
   ]
 
+  # Extensions
   ASL_EXTNAME = '.asl'  # Old logs format
   GZIP_EXTNAME = '.gz'
   BZIP2_EXTNAME = '.bz2'
@@ -22,28 +25,45 @@ class Logfile < ApplicationRecord
   ZIPPED_EXTNAMES = [GZIP_EXTNAME, BZIP2_EXTNAME]
   CLOSED_EXTNAMES = ZIPPED_EXTNAMES + DIAGNOSTIC_EXTNAMES
 
-  def self.logfiles_on_disk
-    logfile_paths_on_disk.map { |file| Logfile.new(file_path: file) }
-  end
-
   def self.logfile_paths_on_disk
     LOG_DIRS.flat_map { |dir| Dir[File.join(dir, '**/*')] }.select { |f| File.file?(f) }
   end
 
-  def self.closed_logfiles
-    logfiles_on_disk.select { |logfile| logfile.closed? }
+  def self.logfiles_on_disk
+    logfile_paths_on_disk.map do |file_path|
+      Logfile.where(file_path: file_path, file_created_at: File.ctime(file_path)).first_or_initialize
+    end
   end
 
   def self.open_logfiles
-    logfiles_on_disk.select { |logfile| logfile.open? }
+    logfiles_on_disk.select(&:open?)
   end
 
+  def self.closed_logfiles
+    logfiles_on_disk.select(&:closed?)
+  end
+
+  def self.write_closed_logfile_contents_to_db!
+    closed_logfiles.each { |logfile| puts logfile; logfile.write_contents_to_db! }
+  end
+
+  def stream_contents(&block)
+    ShellCommandStreamer.new(streaming_shell_command).stream! { |line, line_number| yield(line, line_number) }
+  end
+
+  # Debug/utility method
   def self.print_list_of_logfiles(logfiles)
     puts "\n" + logfiles.map(&:file_path).sort.join("\n")
   end
 
-  def self.create_from_file_path(file_path)
-    new(file_path: file_path, file_created_at: File.ctime(file_path) )
+  def write_contents_to_db!
+    Rails.logger.info("Writing #{file_path} to DB")
+    save!
+
+    stream_contents do |line, line_number|
+      puts "STREAMING"
+      LogfileLine.where(logfile_id: self.id, line_number: line_number, line: line).first_or_create!
+    end
   end
 
   # Store all at once
