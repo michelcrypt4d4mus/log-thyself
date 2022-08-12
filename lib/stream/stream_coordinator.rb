@@ -6,7 +6,8 @@ class StreamCoordinator
     Rails.logger.info("#{self.name} options: #{options}")
     LogEventFilter.build_filters!
 
-    db_writer = CsvDbWriter.new(MacOsSystemLog, options)
+    raise 'No :destination_klass provided' unless options[:destination_klass]
+    db_writer = CsvDbWriter.new(options[:destination_klass], options)
 
     begin
       stream_parser.parse_stream! do |record|

@@ -14,6 +14,8 @@ I wrote this because I was suspicious that my macs were being hacked. MacOS only
 
 For those of us who know how to interact with an SQL database having the data available in this form makes analysis much, much easier. Also I suspect if you hire a security professional to audit your system because you fear you've been hacked, the people you hire will love you if you can give them this data.
 
+I also suspect this could be pretty useful to people developing applications for MacOS.
+
 # Installation
 
 1. Checkout or download the code. For the less git enabled among us, click the green "Code" button above, click "download zip" or similar, and unzip it. (_Advice you don't have to take: put the resulting folder somewhere sensible._)
