@@ -55,7 +55,6 @@ RSpec.describe Logfile, type: :model do
     it 'determines open correctly' do
       open_logs.each do |log|
         status = described_class.new(file_path: log).open?
-        #puts log + ": #{status}"
         puts "\n#{log} is closed but should be open!" unless status
         expect(status).to be true
       end
@@ -64,7 +63,6 @@ RSpec.describe Logfile, type: :model do
     it 'determines closed correctly' do
       closed_logs.each do |log|
         status = described_class.new(file_path: log).closed?
-        #puts log + ": #{status}"
         puts "\n#{log} is open but should be closed!" unless status
         expect(status).to be true
       end

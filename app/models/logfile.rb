@@ -32,7 +32,7 @@ class Logfile < ApplicationRecord
   end
 
   def self.open_logfiles
-    logfiles_on_disk.select { |logfile| !logfile.closed? }
+    logfiles_on_disk.select { |logfile| logfile.open? }
   end
 
   def self.print_list_of_logfiles(logfiles)
@@ -67,14 +67,11 @@ class Logfile < ApplicationRecord
     return true if extname =~ /^\.\d$/ && basename =~ (/log\.\d$/)
     return true if basename.start_with?('aslmanager')
     return true if file_path =~ /Homebrew\/.*post_install/
-    return false unless extname == ASL_EXTNAME
 
     # ASL filenames look like '/private/var/log/asl/2022.08.09.G80.asl'
-    if basename =~ /(\d{4}[.-]\d{2}[.-]\d{2}).*#{ASL_EXTNAME}/
-      #puts "datematch #{basename}"
+    if basename =~ /(\d{4}[.-]\d{2}[.-]\d{2})/
       $1.tr('.', '-').to_date < Date.today
     else
-      #puts "NOT datematch #{basename}"
       false
     end
   end
