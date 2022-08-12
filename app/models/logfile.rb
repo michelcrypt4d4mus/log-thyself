@@ -5,11 +5,14 @@
 class Logfile < ApplicationRecord
   has_many :log_file_lines
 
+  LIBRARY_LOGS = '/Library/Logs'
+  VAR_LOG = '/private/var/log/'
+
   # TODO we could scan the disk?
   LOG_DIRS = [
-    '/private/var/log/',
-    '/Library/Logs',
-    File.join(Dir.home, 'Library/Logs')
+    VAR_LOG,
+    LIBRARY_LOGS,
+    File.join(Dir.home, LIBRARY_LOGS)
   ]
 
   ASL_EXTNAME = '.asl'  # Old logs format

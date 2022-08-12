@@ -4,6 +4,7 @@ RSpec.describe Logfile, type: :model do
   context 'extraction' do
     let(:gzip_file) { "/private/var/log/system.log.0.gz" }
     let(:bzip2_file) { "/private/var/log/wifi.log.0.bz2" }
+    let(:asl_file) { Dir[File.join(described_class::VAR_LOG, 'DiagnosticMessages/*.asl')].first }
 
     it "extracts bz2" do
       contents = described_class.new(file_path: bzip2_file).extract_contents
@@ -16,12 +17,14 @@ RSpec.describe Logfile, type: :model do
     end
 
     it 'extracts asl' do
-      pending 'TODO'
+      puts "ASL FILE: #{asl_file}"
+      contents = described_class.new(file_path: asl_file).extract_contents
+      expect(contents.length).to be > 100
     end
   end
 
   context 'closed?' do
-    let(:var_log) { described_class::LOG_DIRS.first }
+    let(:var_log) { described_class::VAR_LOG }
     let(:asl_dir) { File.join(var_log, 'asl') }
     let(:asl_open) { File.join(asl_dir, "#{Date.today.strftime('%Y.%m.%d')}.G80.asl") }
     let(:asl_closed) { File.join(asl_dir, '2022.08.09.G80.asl') }

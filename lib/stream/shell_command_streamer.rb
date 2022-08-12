@@ -62,7 +62,7 @@ class ShellCommandStreamer
         end
       ensure
         begin
-          log_stderr_output(stderr.read_non_block(10_000)) unless line.blank?
+          log_stderr_output(stderr.read_nonblock(10_000)) unless line.blank?
         rescue IO::EAGAINWaitReadable
           Rails.logger.debug("#{@child_process_string} STDERR buffer drained")
         end
