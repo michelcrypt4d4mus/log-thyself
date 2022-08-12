@@ -2,21 +2,12 @@
 require 'open3'
 
 
-# TODO we could scan the disk...
-LOG_DIRS = %w(
-  /private/var/log/
-  /Library/Logs
-)
 
 
 class LogFileWatcher
   attr_accessor :open_logs, :closed_logs, :streamer_threads
 
   def initialize
-    @logfiles = LOG_DIRS.flat_map { |dir| Dir[File.join(dir, '**/*')] }.select { |f| File.file?(f) }.map do |file|
-      Logfile.new(file_path: file)
-    end
-
     (@open_logs, @closed_logs) = @logfiles.partition { |logfile| !logfile.closed? }
   end
 

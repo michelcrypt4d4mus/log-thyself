@@ -6,5 +6,8 @@ class CreateLogfileLines < ActiveRecord::Migration[7.0]
       t.string :line
       t.timestamps
     end
+
+    add_index :logfile_lines, %i(logfile_id line_number), unique: true
+    add_index :logfile_lines, :line
   end
 end
