@@ -1,6 +1,7 @@
 # Watches logs from the old file system
 require 'open3'
 
+
 # TODO we could scan the disk...
 LOG_DIRS = %w(
   /private/var/log/
@@ -54,5 +55,16 @@ class LogFileWatcher
 
       memo
     end
+  end
+
+  private
+
+  # Zipped logs are considered closed; we don't need a thread to keep reading them
+  def collect_zipped_logs
+    @zipped_logs.each do |zipped_log|
+      if File.extname('.bz2')
+        shell_command = "tar -xOzf #{zipped_log}"
+      elsif File.extname('.gz')
+        shell_command
   end
 end

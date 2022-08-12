@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_10_211858) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_12_064730) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -34,6 +34,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_10_211858) do
     t.string "reported_signing_id", comment: "Only populated if it differs from the computed signature"
     t.json "raw_event"
     t.datetime "created_at", precision: nil, default: -> { "(now() AT TIME ZONE 'utc'::text)" }, null: false
+  end
+
+  create_table "logfile_lines", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "logfiles", force: :cascade do |t|
+    t.string "file_path"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "macos_system_logs", force: :cascade do |t|

@@ -19,24 +19,37 @@ class ShellCommandStreamer
   def initialize(shell_command)
     @shell_command = shell_command
     @lines_yielded_count = @lines_read_count = 0
+    Rails.logger.info(self.class.to_s + ": shell command is '#{@shell_command}'")
   end
 
   # Yields a 3-tuple: (line, lines_read_count, lines_yielded_count)
   def stream!(&block)
-    Open3.popen3(@shell_command) do |_stdin, stdout, stderr, thread|
-      child_pid = thread.pid
-      @child_process_string = "Child process '#{@shell_command}' (PID: #{child_pid})"
-      Rails.logger.info("#{@child_process_string} started...")
-      start_stderr_reader_thread(stderr)
+    begin
+      Open3.popen3(@shell_command) do |_stdin, stdout, stderr, thread|
+        child_pid = thread.pid
+        @child_process_string = "Child process '#{@shell_command}' (PID: #{child_pid})"
+        Rails.logger.info("#{@child_process_string} started...")
+        start_stderr_reader_thread(stderr)
 
-      # Start reading
-      while(line = stdout.gets) do
-        @lines_read_count += 1
-        next if line.blank?
+        # Start reading
+        while(line = stdout.gets) do
+          @lines_read_count += 1
+          next if line.blank?
 
-        yield(line, @lines_read_count, @lines_yielded_count += 1)
+          yield(line, @lines_read_count, @lines_yielded_count += 1)
+        end
       end
+    rescue Errno::EACCES => e
+      Rails.logger.error("You don't have permission to read '#{@shell_command}' (maybe try with sudo)\n")
+      raise
     end
+  end
+
+  # Slurps the whole stream
+  def read
+    contents = ''
+    stream! { |line| contents += line }
+    contents
   end
 
   private

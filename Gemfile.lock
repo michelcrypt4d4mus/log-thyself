@@ -308,6 +308,7 @@ DEPENDENCIES
   jbuilder
   jsonpath
   oj
+  pastel
   pg
   piperator
   puma (~> 5.0)

@@ -68,7 +68,7 @@ thor collect:syslog:stream
 
 ### Other Kinds Of Usage
 
-The Quickstart shows you how to capture `info` level logs in a stream going forward from "now" but the application can also capture logs from the past (if OS X hasn't purged them yet), read logs from files, and a bunch of other stuff. The interface is built in Thor (which I mildly regret[^1], but not enough to change it. ), the same thing as Ruby on Rails's generators. Type `thor list` and you should see something like this:
+The Quickstart shows you how to capture `info` level logs in a stream going forward from "now" but the application can also capture logs from the past (if OS X hasn't purged them yet), read logs from files, and a bunch of other stuff. The interface is built in Thor (which I mildly regret[^1], but not enough to change it), the same thing as Ruby on Rails's generators. Type `thor list` and you should see something like this:
 
 [^1]: I've never seen a project used by so many people with such a combination of broken features and atrocious - nay, profanely misleading - documentation. It's like they want you to not use it.
 

@@ -56,12 +56,8 @@ class CsvDbWriter
     row = record.attributes.except(*CsvDbWriter::EXCLUDED_COLS)
 
     # Preserve precision for timestamps, stringify json
-    begin
     @model_klass.columns_of_type(:datetime).each { |col| row[col] = row[col].iso8601(6) }
     @model_klass.columns_of_type(:json).each { |col| row[col] = row[col].to_json }
-    rescue => e
-      debugger
-    end
 
     row
   end
