@@ -8,33 +8,26 @@ LOG_DIRS = %w(
   /Library/Logs
 )
 
-ZIP_EXTENSIONS = %w(
-  gz
-  bz2
-)
-
-BINARY_EXTENSIONS = %w(
-  asl
-)
 
 class LogFileWatcher
-  attr_accessor(
-    :binary_logs,
-    :zipped_logs,
-    :text_logs,
-    :streamable_logs,
-    :reader_threads
-  )
+  attr_accessor :open_logs, :closed_logs, :streamer_threads
 
   def initialize
-    @log_files = LOG_DIRS.flat_map { |log_dir| Dir[File.join(log_dir, '**/*')] }.select { |f| File.file?(f) }
-    (@binary_logs, @text_logs) = @log_files.partition { |f| BINARY_EXTENSIONS.include?(File.extname(f)[1..-1] ) }
-    (@zipped_logs, @streamable_logs) = @text_logs.partition { |f| ZIP_EXTENSIONS.include?(File.extname(f)[1..-1]) }
+    @logfiles = LOG_DIRS.flat_map { |dir| Dir[File.join(dir, '**/*')] }.select { |f| File.file?(f) }.map do |file|
+      Logfile.new(file_path: file)
+    end
+
+    (@open_logs, @closed_logs) = @logfiles.partition { |logfile| !logfile.closed? }
   end
 
   # TODO: handle log rotation, .asl logs
   def read_log_streams(&block)
-    @reader_threads = @streamable_logs.inject({}) do |memo, log_file|
+    raise 'more closed logs!'
+    #aslmanager.20220811T021729-04
+    #2022.08.09.asl coming back open
+    # Analytics-90Day-2022-08-08-200000.0003.core_analytics (diagnostics folder)
+
+    @streamer_threads = @open_logs.inject({}) do |memo, log_file|
       memo[log_file] = Thread.new do
         shell_command = "tail -f #{log_file}"
         lines_read = 0
@@ -60,11 +53,7 @@ class LogFileWatcher
   private
 
   # Zipped logs are considered closed; we don't need a thread to keep reading them
-  def collect_zipped_logs
-    @zipped_logs.each do |zipped_log|
-      if File.extname('.bz2')
-        shell_command = "tar -xOzf #{zipped_log}"
-      elsif File.extname('.gz')
-        shell_command
+  def collect_closed_logs
+
   end
 end
