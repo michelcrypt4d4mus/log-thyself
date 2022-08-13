@@ -150,6 +150,9 @@ GEM
       tty-color (~> 0.3.0)
     pg (1.4.2)
     piperator (1.2.0)
+    postgres-copy (1.6.0)
+      activerecord (>= 5.1)
+      pg (>= 0.17)
     public_suffix (4.0.7)
     puma (5.6.4)
       nio4r (~> 2.0)
@@ -308,8 +311,10 @@ DEPENDENCIES
   jbuilder
   jsonpath
   oj
+  pastel
   pg
   piperator
+  postgres-copy
   puma (~> 5.0)
   rails (~> 7.0)
   rspec-rails (~> 5.0.0)
@@ -319,6 +324,7 @@ DEPENDENCIES
   stimulus-rails
   thor
   tty
+  tty-table
   turbo-rails
   tzinfo-data
   web-console

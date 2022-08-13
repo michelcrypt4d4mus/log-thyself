@@ -1,5 +1,4 @@
 # Use Oj gem to parse the log stream (just an array of hashes) in JSON format.
-# TODO: Move to lib/
 # TODO: Use separate thread to read STDERR
 # TODO: Rename to AppleJsonLogStreamParser
 
@@ -13,17 +12,21 @@ class JsonStreamParser < ::Oj::ScHandler
   LOG_SHOW = "log show --color none --style json"
   LOG_LEVELS = %w(default info debug)
 
+  def initialize(shell_command)
+    @shell_command = shell_command
+  end
+
   # Reads the stream output of shell_command and yields MacOsSystemLog objects to block
-  def self.parse_shell_command_stream(shell_command, &block)
+  def parse_stream!(&block)
     pid = nil
 
     begin
-      Open3.popen3(shell_command) do |_stdin, stdout, stderr, wait_thr|
+      Open3.popen3(@shell_command) do |_stdin, stdout, stderr, wait_thr|
         pid = wait_thr.pid
-        Rails.logger.info("Streaming process '#{shell_command}' running as child with process ID #{pid}.")
+        Rails.logger.info("Streaming process '#{@shell_command}' running as child with process ID #{pid}.")
 
         json_parse = Enumerator.new do |yielder|
-          new.process_stream(stdout) do |parsed_chunk|
+          process_stream(stdout) do |parsed_chunk|
             yielder << parsed_chunk
           end
         end
@@ -38,7 +41,7 @@ class JsonStreamParser < ::Oj::ScHandler
         end
       end
     ensure
-      msg = "Loading final batch of messages...\nYou may want to ensure child process with PID #{pid} isn't still running when this is over.\n"
+      msg = "Killing child process with PID #{pid} and loading final batch of messages..."
       Rails.logger.warn(msg)
       puts msg
     end
