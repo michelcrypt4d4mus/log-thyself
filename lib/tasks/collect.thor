@@ -40,15 +40,7 @@ module Collect
             default: '-skipApple'
     def stream
       raise InvocationError.new('-pretty is verboten') if options[:file_monitor_flags].include?('-pretty')
-      writer = CsvDbWriter.new(FileEvent, options)
-
-      begin
-        FileMonitorStreamParser.new.parse_shell_command_stream do |file_event|
-          writer.write(file_event)
-        end
-      ensure
-        db_writer.close
-      end
+      StreamCoordinator.collect!(FileMonitorStreamParser.new(options), options.merge(destination_klass: FileEvent))
     end
   end
 
@@ -87,10 +79,11 @@ module Collect
       raise InvocationError.new("File #{file} does not exist!") unless File.exist?(file)
       cmd = File.extname(file) == '.gz' ? 'gunzip -c' : 'cat'
       @shell_command = "#{cmd} \"#{file}\""
-      launch_macos_log_parser(options)
+      stream_parser_klass = options[:syslog] ? SyslogStreamParser : JsonStreamParser
+      StreamCoordinator.collect!(stream_parser_klass.new(@shell_command), options.merge(destination_klass: MacOsSystemLog))
     end
 
-    desc 'custom ARGUMENTS', "ARGUMENTS will be passed on to the 'log' command directly. with great power comes great responsibility 💪"
+    desc 'custom ARGUMENTS', "ARGUMENTS will be passed on to the 'log' command directly (with great power comes great responsibility) 💪"
     def custom(arguments)
       @shell_command = "log #{arguments}"
       launch_macos_log_parser(options)
@@ -98,9 +91,13 @@ module Collect
 
     no_commands do
       def launch_macos_log_parser(options)
-        say "\n🌀 Summoning log stream vortex...🌀\n", :cyan
-        say "        (CTRL-C to stop)"
-        StreamCoordinator.collect!(@shell_command, options)
+        say "\n🌀 Summoning log vortex...🌀\n", :cyan
+        say "      (CTRL-C to stop)"
+        begin
+          StreamCoordinator.collect!(JsonStreamParser.new(@shell_command), options.merge(destination_klass: MacOsSystemLog))
+        rescue Interrupt
+          say "Stopping..."
+        end
       end
     end
   end

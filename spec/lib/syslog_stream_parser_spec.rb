@@ -5,7 +5,7 @@ RSpec.describe SyslogStreamParser do
     end
 
     it 'parses a row' do
-      result_hash = described_class.new.process_log_entry(line)
+      result_hash = described_class.new(nil).process_log_entry(line)
 
       expect(result_hash).to eq({
         log_timestamp: '2022-07-23 05:36:41.952880+0000',
@@ -27,7 +27,7 @@ RSpec.describe SyslogStreamParser do
     let(:syslog_file) { file_fixture('multiline_syslog_text.log') }
 
     it 'parses a stream' do
-      described_class.new.parse_shell_command_stream("cat #{syslog_file}") { |row| row.save! }
+      described_class.new(syslog_file).parse_stream! { |row| row.save! }
       expect(MacOsSystemLog.count).to eq(12)
     end
   end

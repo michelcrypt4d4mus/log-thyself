@@ -10,11 +10,14 @@ gem 'fx'
 gem 'gli'
 gem 'jsonpath'
 gem 'oj'
+gem "pastel"  # Part of tty we actually use
 gem 'pg'
 gem 'piperator'
+gem 'postgres-copy'
 gem 'scenic'
 gem 'thor'
 gem 'tty'
+gem 'tty-table'
 
 
 # Rails
