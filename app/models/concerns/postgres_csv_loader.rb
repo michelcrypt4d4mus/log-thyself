@@ -40,9 +40,7 @@ module PostgresCsvLoader
     end
 
     def load_csv_data!(csv_data)
-      #tmp_csv_file = Tempfile.new
       tmp_table_name = "tmp_#{table_name}"
-      #write_csv_with_client_id_and_timestamps(csv_data, tmp_csv_file)
       copy_query = "COPY #{tmp_table_name} (#{csv_data.headers.join(',')}) FROM STDIN CSV"
 
       ActiveRecord::Base.connection.execute("
@@ -64,18 +62,6 @@ module PostgresCsvLoader
             (#{cols_to_update.join(',')}) =
             (#{cols_to_update.map { |c| "EXCLUDED.#{c}" }.join(',')});
       ")
-    end
-
-    def write_csv(csv_data, csv_filename)
-      CSV.open(csv_filename, 'w') do |csv|
-        csv_data.each do |row|
-          self::RAILS_TIMESTAMP_COLS.each { |col| row[col] = 'NOW()' if column_names.include?(col) }
-          row['client_id'] = client.id if column_names.include?('client_id')
-          cols_to_update.each { |col| row[col] ||= nil }
-
-          csv << row
-        end
-      end
     end
   end
 end

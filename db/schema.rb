@@ -42,7 +42,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_12_064730) do
     t.string "line", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["line"], name: "index_logfile_lines_on_line"
+    t.index ["line"], name: "index_line_with_gin", opclass: :gin_trgm_ops, using: :gin
     t.index ["logfile_id", "line_number"], name: "index_logfile_lines_on_logfile_id_and_line_number", unique: true
   end
 
