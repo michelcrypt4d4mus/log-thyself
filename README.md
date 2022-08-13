@@ -41,14 +41,7 @@ Install it with `sudo thor system:daemon:install`. (You will be prompted for you
 Copy paste this stuff into the terminal:
 
 ```sh
-# Stop the launch daemon
-sudo scripts/stop_logladers.sh
-
-# Disable the launch daemon permanently
-sudo launchctl disable system/cryptadamus.logloader
-
-# Delete the daemon's config file
-sudo rm /Library/System/cryptadamus.logloader.plist
+sudp system:daemon:uninstall
 
 # Drop the database
 psql << 'DROP DATABASE macos_log_collector_development'
@@ -70,7 +63,7 @@ thor collect:syslog:stream
 
 The Quickstart shows you how to capture `info` level logs in a stream going forward from "now" but the application can also capture logs from the past (if OS X hasn't purged them yet), read logs from files, and a bunch of other stuff. The interface is built in Thor (which I mildly regret[^1], but not enough to change it), the same thing as Ruby on Rails's generators. Type `thor list` and you should see something like this:
 
-[^1]: I've never seen a project used by so many people with such a combination of broken features and atrocious - nay, profanely misleading - documentation. It's like they want you to not use it.
+[^1]: I've never seen a project used by so many people with such a combination of broken features and atrocious - nay, profanely misleading - documentation. It's a good library but given the issues with figuring out how to use it it's like they want you to not use it.
 
 ```sh
 collect
@@ -101,6 +94,8 @@ thor system:daemon:status   # See what the launchd manager thinks abouut your da
 thor system:daemon:stop     # Stop the deamon. It may come back next time you reboot unless you :disable it
 ```
 
+------
+
 Thor will show you the command line options for each command via `thor help COMMAND`.  e.g. `thor help objectivesee:process_monitor:stream` yields something like
 ```sh
 $ thor help objectivesee:process_monitor:stream
@@ -125,10 +120,11 @@ Options:
 Collect process events from ProcessMonitor (requires sudo!)
 ```
 
+
 ### Configuration
 Mostly it's configured from the command line but you can set some custom configuration options if you make your own `.env` file.  Start by copying the examples: `cp .env.example .env`.
 
-### Application Logging
+#### Application Logging
 **This section is not about the system logs this app is capturing.** Those are written to the database. This is about the logs this application generates. _This application's_ logs are by default written to the `log/` directory in the project's root dir.  If things aren'y working, look there and maybe you'll be able to figure out what's wrong.
 
 You can use the `RAILS_LOG_TO_STDOUT` environment variable to have them printed to `STDOUT` (AKS "the terminal window you are looking at") in real time.  e.g. you would run the stream loader like this:
@@ -196,14 +192,8 @@ Your data will be in a database called `macos_log_collector_development`, in a t
 
 
 #### System Log Enums
-There are fundamentally two kinds of log messages - events and log messages (which are classified as a kind of event: a `logEvent`). There are two ENUMs to save space when storing the `event_type` and `message_type`. Here are the possible values:
+There are fundamentally two kinds of log messages - events and log messages (which are classified as a kind of event: a `logEvent`). There are two ENUMs to save space when storing the `event_type` and `message_type`. Apple has kind of gone their own way as far as logging levels (as they do with basically everything - though I'm still amazed they did it with _log levels_) so we're kind of on our own figuring out what's what.
 
-
-#### The Simplified View
-I have learned that a lot of the columns Apple provides are actually pretty useless and/or empty, so there is also a view of the table `simplifed_system_logs` you can query that does a few things:
-
-1. Shows only what I found to be the important columns.
-2. Collapses `message_type` and `event_type` into one column that explains the type, called just `T` so it takes up less space. [See here](db/functions/msg_type_char_v01.sql) for a guide to what each letter means.
 
 
 | event_types | message_types |
@@ -216,6 +206,22 @@ I have learned that a lot of the columns Apple provides are actually pretty usel
 | timesyncEvent | Fault |
 | traceEvent | |
 | userActionEvent | |
+
+-------
+
+### The Simplified View Of The System Logs
+I have learned that a lot of the columns Apple provides are actually pretty useless and/or empty, so there is also a view of the table `simplifed_system_logs` you can query that has only the most important columns.
+
+| Name  | Data Type | Comment |
+| ------------- | ------------- | --- |
+| `log_timestamp` | _datetime_ | |
+| `T` | _char_ | Collapses the two enums to one character. [See here for details](db/functions/msg_type_char_v02.sql) |
+| `process_name` | _string_ | Process that generated the event |
+| `sender_process_name` | _string_ | Process that reported the event, often a library used by the actual proces |
+| `category` | _string_ | e.g. `WindowServer` |
+| `subsystem` | _string_ | e.g. `com.apple.authkit` |
+| `event_message` | _string_ | |
+
 
 
 ### Objective-See `FileMonitor` Data
@@ -243,6 +249,8 @@ bundle exec rspec
 ```
 
 Test should pass before you open a pull request. New featuers should have tests... that pass.
+
+
 
 # Other Resources
 * Eclectic Light
