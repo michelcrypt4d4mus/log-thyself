@@ -7,17 +7,15 @@ ruby '3.1.2'
 gem 'dotenv-rails', groups: [:development, :test]
 
 gem 'fx'
-gem 'gli'
 gem 'jsonpath'
 gem 'oj'
 gem "pastel"  # Part of tty we actually use
 gem 'pg'
-gem 'piperator'
-gem 'postgres-copy'
+gem 'plist'
 gem 'scenic'
 gem 'thor'
 gem 'tty'
-gem 'tty-table'
+gem 'tty-table'  # Part of tty
 
 
 # Rails

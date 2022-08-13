@@ -81,7 +81,7 @@ collect
 -------
 thor collect:old_log_system:load      # Load all extant old logging system files
 thor collect:old_log_system:stream    # Stream logs from the new filesystem (mostly the ones seen in Console.app)
-thor collect:syslog:custom ARGUMENTS  # ARGUMENTS will be passed on to the 'log' command directly (with great 💪 comes great responsibility)
+thor collect:syslog:custom ARGUMENTS  # ARGUMENTS will be passed to the 'log' command directly (with great 💪 comes great responsibility)
 thor collect:syslog:from_file FILE    # Read logs from FILE
 thor collect:syslog:last INTERVAL     # Capture from INTERVAL before now using 'log show'. Example INTERVALs: 5d, 2m, 30s
 thor collect:syslog:start DATETIME    # Collect logs since a given DATETIME in the past using 'log show'
@@ -95,6 +95,14 @@ objectivesee
 ------------
 thor objectivesee:file_monitor:stream     # Collect file events from FileMonitor (requires sudo!)
 thor objectivesee:process_monitor:stream  # Collect process events from ProcessMonitor (requires sudo!)
+
+system
+------
+thor system:daemon:disable  # Disable the deamon permanently
+thor system:daemon:install  # Install as a launchd daemon (requires sudo)
+thor system:daemon:start    # Start the daemon
+thor system:daemon:status   # See what the launchd manager thinks abouut your daemon
+thor system:daemon:stop     # Stop the deamon. It may come back next time you reboot unless you :disable it
 ```
 
 Thor will show you the command line options for each command via `thor help COMMAND`.  e.g. `thor help collect:file_monitor:stream` yields something like

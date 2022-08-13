@@ -1,10 +1,15 @@
 load 'collector_command.thor'
 
+
 module Objectivesee
   class ObjectiveSeeCommand < CollectorCommand
     class_option :command_line_flags,
-                  desc: 'Command line flags to pass to executable command line (-pretty is not allowed)',
+                  desc: 'Flags to pass through to executable command line (-pretty is not allowed)',
                   default: '-skipApple'
+
+    class_option :read_from_file,
+                  type: :string,
+                  desc: 'Read from the specified file instead of streaming from the application'
 
     no_commands do
       def validate_and_announce(options)

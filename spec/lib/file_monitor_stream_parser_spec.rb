@@ -1,7 +1,7 @@
 RSpec.describe FileMonitorStreamParser do
   context 'stream' do
-    let(:shell_command) { "cat #{file_fixture('file_monitor_100_lines.txt')}" } # Only 7 rows...
-    let(:stream_parser) { described_class.new(shell_command: shell_command) }
+    let(:json_fixture) { file_fixture('file_monitor_100_lines.txt') }
+    let(:stream_parser) { described_class.new(read_from_file: json_fixture) }
 
     it 'processes correctly' do
       stream_parser.parse_stream! { |record| record.save! }

@@ -20,13 +20,13 @@ module Collect
 
     desc 'last INTERVAL', "Capture from INTERVAL before now using 'log show'. Example INTERVALs: 5d, 2m, 30s"
     def last(interval)
-      @shell_command = "#{JsonStreamParser::LOG_SHOW} --last #{interval}"
+      @shell_command = "#{JsonStreamParser::LOG_SHOW_SHELL_CMD} --last #{interval}"
       launch_macos_log_parser(options)
     end
 
     desc 'start DATETIME', "Collect logs since a given DATETIME in the past using 'log show'"
     def start(datetime)
-      @shell_command = "#{JsonStreamParser::LOG_SHOW} --start \"#{datetime}\""
+      @shell_command = "#{JsonStreamParser::LOG_SHOW_SHELL_CMD} --start \"#{datetime}\""
       launch_macos_log_parser(options)
     end
 
@@ -44,7 +44,7 @@ module Collect
       StreamCoordinator.collect!(stream_parser_klass.new(@shell_command), options.merge(destination_klass: MacOsSystemLog))
     end
 
-    desc 'custom ARGUMENTS', "ARGUMENTS will be passed on to the 'log' command directly (with great 💪 comes great responsibility)"
+    desc 'custom ARGUMENTS', "ARGUMENTS will be passed to the 'log' command directly (with great 💪 comes great responsibility)"
     def custom(arguments)
       @shell_command = "log #{arguments}"
       launch_macos_log_parser(options)
