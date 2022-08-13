@@ -43,7 +43,7 @@ module Collect
       StreamCoordinator.collect!(stream_parser_klass.new(@shell_command), options.merge(destination_klass: MacOsSystemLog))
     end
 
-    desc 'custom ARGUMENTS', "ARGUMENTS will be passed on to the 'log' command directly (with great power comes great responsibility) 💪"
+    desc 'custom ARGUMENTS', "ARGUMENTS will be passed on to the 'log' command directly (with great 💪 comes great responsibility)"
     def custom(arguments)
       @shell_command = "log #{arguments}"
       launch_macos_log_parser(options)

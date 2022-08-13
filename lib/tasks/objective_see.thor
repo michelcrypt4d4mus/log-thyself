@@ -1,14 +1,14 @@
 load 'collector_command.thor'
 
 module Objectivesee
-  class ObjectiveSeeCOmmand < CollectorCommand
+  class ObjectiveSeeCommand < CollectorCommand
     class_option :command_line_flags,
                   desc: 'Command line flags to pass to executable command line (-pretty is not allowed)',
                   default: '-skipApple'
   end
 
-  class FileMonitor < ObjectiveSeeCOmmand
-    desc 'stream', "Collect file events from Objective-See's FileMonitor (requires sudo!)"
+  class FileMonitor < ObjectiveSeeCommand
+    desc 'stream', "Collect file events from FileMonitor (requires sudo!)"
     option :executable_path,
             default: ProcessMonitorStreamParser::EXECUTABLE_PATH_DEFAULT,
             desc: 'Path to your FileMonitor executable'
@@ -18,8 +18,8 @@ module Objectivesee
     end
   end
 
-  class ProcessMonitor < ObjectiveSeeCOmmand
-    desc 'stream', "Collect process events from Objective-See's ProcessMonitor (requires sudo!)"
+  class ProcessMonitor < ObjectiveSeeCommand
+    desc 'stream', "Collect process events from ProcessMonitor (requires sudo!)"
     option :executable_path,
             default: ProcessMonitorStreamParser::EXECUTABLE_PATH_DEFAULT,
             desc: 'Path to your ProcessMonitor executable'
