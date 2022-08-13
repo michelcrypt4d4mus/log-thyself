@@ -1,7 +1,7 @@
 # For old style log files, pre-unified logging
 
 class Logfile < ApplicationRecord
-  has_many :log_file_lines
+  has_many :logfile_lines
 
   after_initialize do |logfile|
     logfile.file_created_at ||= File.ctime(logfile.file_path) unless Rails.env.test?
@@ -21,9 +21,15 @@ class Logfile < ApplicationRecord
   ASL_EXTNAME = '.asl'  # Old logs format
   GZIP_EXTNAME = '.gz'
   BZIP2_EXTNAME = '.bz2'
+  PKLG_EXTNAME = '.pklg'  # packet logger, readable by wireshark etc.
   DIAGNOSTIC_EXTNAMES = %w(.diag .ips .core_analytics .shutdownStall .hang)
   ZIPPED_EXTNAMES = [GZIP_EXTNAME, BZIP2_EXTNAME]
-  CLOSED_EXTNAMES = ZIPPED_EXTNAMES + DIAGNOSTIC_EXTNAMES
+  # pklg files aren't necessarily closed but it's annoying to parse them see https://superuser.com/questions/567831/follow-a-pcap-file-in-wireshark-like-tail-f
+  CLOSED_EXTNAMES = ZIPPED_EXTNAMES + DIAGNOSTIC_EXTNAMES + [PKLG_EXTNAME]
+
+  # Shell commands
+  TAIL_FROM_TOP = 'tail -c 0'
+  TAIL_FROM_TOP_STREAMING = TAIL_FROM_TOP + ' -F'
 
   def self.logfile_paths_on_disk
     LOG_DIRS.flat_map { |dir| Dir[File.join(dir, '**/*')] }.select { |f| File.file?(f) }
@@ -48,14 +54,14 @@ class Logfile < ApplicationRecord
     closed_logfiles.each { |logfile| logfile.write_contents_to_db! }
   end
 
-  # Stream a file line by line
-  def stream_contents(&block)
-    ShellCommandStreamer.new(streaming_shell_command).stream! { |line, line_number| yield(line, line_number) }
-  end
-
   # Debug/utility method
   def self.print_list_of_logfiles(logfiles)
     puts "\n" + logfiles.map(&:file_path).sort.join("\n")
+  end
+
+  # Stream a file line by line
+  def stream_contents(&block)
+    ShellCommandStreamer.new(shell_command_to_read).stream! { |line, line_number| yield(line, line_number) }
   end
 
   def write_contents_to_db!
@@ -84,7 +90,7 @@ class Logfile < ApplicationRecord
   end
 
   def extract_contents
-    ShellCommandStreamer.new(streaming_shell_command).read
+    ShellCommandStreamer.new(shell_command_to_read).read
   end
 
   def extname
@@ -115,7 +121,7 @@ class Logfile < ApplicationRecord
   end
 
   # Find the shell command that creates a stream
-  def streaming_shell_command
+  def shell_command_to_read(include_path: true)
     case File.extname(file_path)
     when BZIP2_EXTNAME
       'bzcat'
@@ -123,9 +129,30 @@ class Logfile < ApplicationRecord
       'gunzip -c'
     when ASL_EXTNAME
       'syslog -f'
+    when PKLG_EXTNAME
+      if system('which tshark')
+        'tshark -r'
+      else
+        msg = 'tshark could not be found to parse the file. install it if you want the bluetooth .pklg files parsed.'
+        Rails.logger.warn(msg)
+        "echo -e \"#{msg}\""
+      end
     else
       'cat'
-    end + " \"#{file_path}\""
+    end + (include_path ? " \"#{file_path}\"" : '')
+  end
+
+  def shell_command_to_stream
+    cmd = shell_command_to_read(include_path: false)
+
+    case shell_command_to_read(include_path: false)
+    when 'cat'
+      "#{TAIL_FROM_TOP_STREAMING} \"#{file_path}\""
+    when /tshark/
+      raise 'tail -f causes issues with tshark, sadly'
+    else
+      "#{TAIL_FROM_TOP_STREAMING} \"#{file_path}\" | #{cmd}"
+    end
   end
 
   def print_to_terminal

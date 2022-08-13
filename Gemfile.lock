@@ -324,6 +324,7 @@ DEPENDENCIES
   stimulus-rails
   thor
   tty
+  tty-table
   turbo-rails
   tzinfo-data
   web-console

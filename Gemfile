@@ -17,6 +17,7 @@ gem 'postgres-copy'
 gem 'scenic'
 gem 'thor'
 gem 'tty'
+gem 'tty-table'
 
 
 # Rails

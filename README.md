@@ -25,7 +25,9 @@ I also suspect this could be pretty useful to people developing applications for
     3. Change the current directory (AKA "folder") in Terminal by typing `cd ` and then dragging the folder you downloaded this to onto the terminal. It should populate a bunch of text - the location of the folder you dragged in. Press enter and your terminal window will be in a new directory.
 3. Run `scripts/initial_setup.sh` from the project directory. This will (hopefully) install the prerequisites and set up the database.
 
-If you want to collect the Apple Endpoint Security Framework data you will also need to install [Objective-See's tools](https://objective-see.org/products/utilities.html).
+Beyond that:
+* If you want to collect the Apple Endpoint Security Framework data you will also need to install [Objective-See's tools](https://objective-see.org/products/utilities.html).
+* If you want to read the bluetooth logs that are created as "old style" logs you will need to install Wireshark (`tshark`, specifically, which comes with it).  `brew install --cask wireshark` should do it.
 
 #### Installation As A Continually Running Process Managed By `launchd`
 

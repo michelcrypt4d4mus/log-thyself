@@ -23,7 +23,7 @@ RSpec.describe Logfile, type: :model do
     end
   end
 
-  context 'closed?' do
+  context 'file type handling' do
     let(:var_log) { described_class::VAR_LOG }
     let(:asl_dir) { File.join(var_log, 'asl') }
     let(:asl_open) { File.join(asl_dir, "#{Date.today.strftime('%Y.%m.%d')}.G80.asl") }
@@ -36,39 +36,58 @@ RSpec.describe Logfile, type: :model do
     let(:diagnostic) { File.join(var_log, 'DiagnosticReports/shutdown_stall_2022-08-11-051122_nf32piofn2p3ofn23.shutdownStall') }
     let(:homebrew_post_install) { '/Library/Logs/Homebrew/python@3.10/post_install.01.python3' }
 
-    let(:closed_logs) do
-      [
-        asl_closed,
-        asl_manager_closed,
-        diagnostic,
-        homebrew_post_install,
-        system_closed,
-        wifi_closed,
-      ]
-    end
+    context 'closed?' do
+      let(:closed_logs) do
+        [
+          asl_closed,
+          asl_manager_closed,
+          diagnostic,
+          homebrew_post_install,
+          system_closed,
+          wifi_closed,
+        ]
+      end
 
-    let(:open_logs) do
-      [
-        asl_open,
-        wifi_open,
-        system_open,
-      ]
-    end
+      let(:open_logs) do
+        [
+          asl_open,
+          wifi_open,
+          system_open,
+        ]
+      end
 
-    it 'determines open correctly' do
-      open_logs.each do |log|
-        status = described_class.new(file_path: log).open?
-        puts "\n#{log} is closed but should be open!" unless status
-        expect(status).to be true
+      it 'determines open correctly' do
+        open_logs.each do |log|
+          status = described_class.new(file_path: log).open?
+          puts "\n#{log} is closed but should be open!" unless status
+          expect(status).to be true
+        end
+      end
+
+      it 'determines closed correctly' do
+        closed_logs.each do |log|
+          status = described_class.new(file_path: log).closed?
+          puts "\n#{log} is open but should be closed!" unless status
+          expect(status).to be true
+        end
       end
     end
 
-    it 'determines closed correctly' do
-      closed_logs.each do |log|
-        status = described_class.new(file_path: log).closed?
-        puts "\n#{log} is open but should be closed!" unless status
-        expect(status).to be true
+    context 'shell commands' do
+      shared_examples 'command' do |file_path, expected_read_command, expected_stream_command|
+        let(:logfile) { Logfile.new(file_path: file_path) }
+
+        it 'gets the right read command' do
+          expect(logfile.shell_command_to_read).to eq(expected_read_command)
+        end
+
+        it 'gets the right stream command' do
+          expect(logfile.shell_command_to_stream).to eq(expected_stream_command)
+        end
       end
+
+      it_behaves_like 'command', 'db.asl', "syslog -f \"db.asl\"", "tail -c 0 -F \"db.asl\" | syslog -f"
+      it_behaves_like 'command', 'file.log', 'cat "file.log"', 'tail -c 0 -F "file.log"'
     end
   end
 end
