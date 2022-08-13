@@ -32,7 +32,7 @@ class ShellCommandStreamer
         start_stderr_reader_thread(stderr)
 
         while(line = stdout.gets) do
-          yield(line, (@lines_read_count = stdout.lineno), (@lines_yielded_count += 1))
+          yield(line.chomp, (@lines_read_count = stdout.lineno), (@lines_yielded_count += 1))
         end
       end
     rescue Errno::EACCES => e
@@ -58,7 +58,8 @@ class ShellCommandStreamer
         end
       ensure
         begin
-          log_stderr_output(stderr.read_nonblock(10_000)) unless line.blank?
+          true # TODO
+          # log_stderr_output(stderr.read_nonblock(10_000)) unless line.blank?
         rescue IO::EAGAINWaitReadable
           Rails.logger.debug("#{@child_process_string} STDERR buffer drained")
         end

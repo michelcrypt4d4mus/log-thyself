@@ -60,10 +60,19 @@ class Logfile < ApplicationRecord
     Rails.logger.info("Writing #{file_path} to DB")
     save!
 
-    stream_contents do |line, line_number|
-      puts "STREAMING"
-      LogfileLine.where(logfile_id: self.id, line_number: line_number, line: line).first_or_create!
+    csv_string = CSV.generate(headers: LogfileLine.column_names - %w(id), write_headers: true, quote_char: '"') do |csv|
+      stream_contents do |line, line_number|
+        csv << LogfileLine.new(logfile_id: self.id, line_number: line_number, line: line).to_csv_hash(true)
+      end
     end
+
+    puts "CSV STRING:\n#{csv_string}\n\n"
+    LogfileLine.load_from_csv_string(csv_string)
+    # CsvDbWriter.new(self.class, batch_size: 500_000).open do |csv_writer|
+    #   stream_contents do |line, line_number|
+    #     LogfileLine.where(logfile_id: self.id, line_number: line_number, line: line).first_or_create!
+    #   end
+    # end
   end
 
   # Store all at once

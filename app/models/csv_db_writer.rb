@@ -1,5 +1,7 @@
 # Writes ActiveRecord objects to the DB via CSV then COPY command (for speed)
 # TODO: Move to lib/
+# TODO: use postgres-copy gem with IO stream instead of writing to disk
+
 
 require 'csv'
 require 'fileutils'
@@ -25,6 +27,14 @@ class CsvDbWriter
     @rows_skipped = 0
   end
 
+  def open(&block)
+    begin
+      yield(self)
+    ensure
+      close
+    end
+  end
+
   def write(record)
     if @avoid_dupes && (@rows_skipped + @rows_written) % 1000 == 0
       Rails.logger.info("#{@rows_skipped} skipped, #{@rows_written} written...")
@@ -36,7 +46,7 @@ class CsvDbWriter
     end
 
     build_csv_writer if @csv_writer.nil?
-    @csv_writer << record_to_csv(record)
+    @csv_writer << record_to_csv(record.to_csv_hash)
     @rows_written += 1
 
     if @rows_written % @batch_size == 0
@@ -51,16 +61,6 @@ class CsvDbWriter
   end
 
   private
-
-  def record_to_csv(record)
-    row = record.attributes.except(*CsvDbWriter::EXCLUDED_COLS)
-
-    # Preserve precision for timestamps, stringify json
-    @model_klass.columns_of_type(:datetime).each { |col| row[col] = row[col].iso8601(6) }
-    @model_klass.columns_of_type(:json).each { |col| row[col] = row[col].to_json }
-
-    row
-  end
 
   def build_csv_writer
     FileUtils.mkdir_p(CSV_TMP_DIR) unless Dir.exist?(CSV_TMP_DIR)
