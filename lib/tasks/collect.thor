@@ -10,23 +10,23 @@ module Collect
     desc 'stream', 'Collect logs from the syslog stream from now until you tell it to stop'
     option :level,
             desc: 'Level of logs to capture. debug is the most, info is the least.',
-            enum: JsonStreamParser::LOG_LEVELS,
+            enum: AppleJsonLogStreamParser::LOG_LEVELS,
             default: 'info'
     def stream
-      @shell_command = JsonStreamParser::LOG_STREAM_SHELL_CMD
+      @shell_command = AppleJsonLogStreamParser::LOG_STREAM_SHELL_CMD
       @shell_command += " --level #{options[:level]}"
       launch_macos_log_parser(options)
     end
 
     desc 'last INTERVAL', "Capture from INTERVAL before now using 'log show'. Example INTERVALs: 5d, 2m, 30s"
     def last(interval)
-      @shell_command = "#{JsonStreamParser::LOG_SHOW_SHELL_CMD} --last #{interval}"
+      @shell_command = "#{AppleJsonLogStreamParser::LOG_SHOW_SHELL_CMD} --last #{interval}"
       launch_macos_log_parser(options)
     end
 
     desc 'start DATETIME', "Collect logs since a given DATETIME in the past using 'log show'"
     def start(datetime)
-      @shell_command = "#{JsonStreamParser::LOG_SHOW_SHELL_CMD} --start \"#{datetime}\""
+      @shell_command = "#{AppleJsonLogStreamParser::LOG_SHOW_SHELL_CMD} --start \"#{datetime}\""
       launch_macos_log_parser(options)
     end
 
@@ -40,7 +40,7 @@ module Collect
       raise InvocationError.new("File #{file} does not exist!") unless File.exist?(file)
       cmd = File.extname(file) == '.gz' ? 'gunzip -c' : 'cat'
       @shell_command = "#{cmd} \"#{file}\""
-      stream_parser_klass = options[:syslog] ? SyslogStreamParser : JsonStreamParser
+      stream_parser_klass = options[:syslog] ? SyslogStreamParser : AppleJsonLogStreamParser
       StreamCoordinator.collect!(stream_parser_klass.new(@shell_command), options.merge(destination_klass: MacOsSystemLog))
     end
 
@@ -55,7 +55,7 @@ module Collect
         make_announcement
 
         begin
-          StreamCoordinator.collect!(JsonStreamParser.new(@shell_command), options.merge(destination_klass: MacOsSystemLog))
+          StreamCoordinator.collect!(AppleJsonLogStreamParser.new(@shell_command), options.merge(destination_klass: MacOsSystemLog))
         rescue Interrupt
           say "Stopping..."
         end

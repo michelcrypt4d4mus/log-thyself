@@ -1,13 +1,12 @@
 # Use Oj gem to parse the log stream (just an array of hashes) in JSON format.
-# TODO: Use separate thread to read STDERR
-# TODO: Rename to AppleJsonLogStreamParser
+# TODO: Use separate thread to read STDERR?
 
 require 'io/wait'
 require 'oj'
 require 'open3'
 
 
-class JsonStreamParser < ::Oj::ScHandler
+class AppleJsonLogStreamParser < ::Oj::ScHandler
   LOG_LEVELS = %w(default info debug)
   LOG_OPTIONS = '--source --style json --color none'
   LOG_STREAM_SHELL_CMD = "log stream #{LOG_OPTIONS}"

@@ -35,6 +35,8 @@ module System
       say "\n#{config_message}\n#{'‾' * config_message.length}"
       say "#{plist.to_plist}\n", :green
 
+      say("Daemons begin as root. This one will sudo down a notch to your account to actually run the log collector.")
+      say("This is necessary because root doesn't have all the prerequisites set up but also good because it means the code is not executing with root privileges.\n")
       say_key_value("Destination", install_path)
       yes?('Install?') ? true : exit
       plist.save_plist(install_path)
