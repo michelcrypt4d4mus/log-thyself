@@ -1,4 +1,4 @@
-RSpec.describe JsonStreamParser do
+RSpec.describe AppleJsonLogStreamParser do
   let(:log_json) { file_fixture("log_show_output.json") }
 
   it 'parses a stream' do
