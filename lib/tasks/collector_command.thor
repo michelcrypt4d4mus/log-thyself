@@ -15,7 +15,7 @@ class CollectorCommand < Thor
                 default: CsvDbWriter::BATCH_SIZE_DEFAULT
 
   class_option :avoid_dupes,
-                desc: 'Attempt to avoid dupes by going a lot slower',
+                desc: '[WIP, not 100% functional] Attempt to avoid dupes by going a lot slower',
                 type: :boolean,
                 default: false
 

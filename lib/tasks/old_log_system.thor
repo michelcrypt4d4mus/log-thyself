@@ -2,7 +2,7 @@ module Collect
   class OldLogSystem < Thor
     desc 'load', "Load all extant old logging system files"
     option :continue_streaming,
-            desc: 'Continue loading new lines from active logs once extant logs are loaded',
+            desc: '[WIP: this option does not work yet] Continue loading new lines from active logs once extant logs are loaded',
             type: :boolean,
             default: false
     def load
