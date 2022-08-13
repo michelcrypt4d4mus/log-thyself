@@ -10,13 +10,16 @@ class Db < Thor
 
   desc 'dump', "Write the database to a compressed archive via pg_dump."
   option :database,
-    desc: 'Database to dump',
-    default: ActiveRecord::Base.connection.current_database
+          desc: 'Database to dump',
+          default: ActiveRecord::Base.connection.current_database
   option :dir_to_dump_to,
-    desc: 'Destination directory (default is configurable in .env)',
-    default: ENV['DEFAULT_DB_DUMP_DIR'] || Rails.root.join('db', 'backups').to_s
-  option :file_suffix, desc: 'Optional filename suffix for descriptive comments etc.'
-  option :pg_dump_flags, default: '-Fc -Z9', desc: 'Flags for pg_dump. Default is max compression.'
+          desc: 'Destination directory (default is configurable in .env)',
+          default: ENV['DEFAULT_DB_DUMP_DIR'] || Rails.root.join('db', 'backups').to_s
+  option :pg_dump_flags,
+          default: '-Fc -Z9',
+          desc: 'Flags for pg_dump. Default is max compression.'
+  option :file_suffix,
+          desc: 'Optional filename suffix for descriptive comments etc.'
   def dump
     dir_to_dump_to = options['dir_to_dump_to']
     database = options[:database]

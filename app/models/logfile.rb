@@ -43,10 +43,12 @@ class Logfile < ApplicationRecord
     logfiles_on_disk.select(&:closed?)
   end
 
+  # Collects all extant logfiles that we think will no longer be written to
   def self.write_closed_logfile_contents_to_db!
-    closed_logfiles.each { |logfile| puts logfile; logfile.write_contents_to_db! }
+    closed_logfiles.each { |logfile| logfile.write_contents_to_db! }
   end
 
+  # Stream a file line by line
   def stream_contents(&block)
     ShellCommandStreamer.new(streaming_shell_command).stream! { |line, line_number| yield(line, line_number) }
   end

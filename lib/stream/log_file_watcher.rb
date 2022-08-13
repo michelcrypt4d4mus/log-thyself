@@ -5,10 +5,6 @@ require 'open3'
 class LogFileWatcher
   attr_accessor :open_logs, :closed_logs, :streamer_threads
 
-  def initialize
-    (@open_logs, @closed_logs) = @logfiles.partition { |logfile| !logfile.closed? }
-  end
-
   # tail -F handles log rotations with grace
   def read_log_streams(&block)
     @streamer_threads = @open_logs.inject({}) do |memo, log_file|
