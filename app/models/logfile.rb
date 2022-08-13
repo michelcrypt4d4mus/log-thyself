@@ -4,7 +4,7 @@ class Logfile < ApplicationRecord
   has_many :log_file_lines
 
   after_initialize do |logfile|
-    logfile.file_created_at ||= File.ctime(logfile.file_path)
+    logfile.file_created_at ||= File.ctime(logfile.file_path) unless Rails.env.test?
   end
 
   # TODO we could scan the disk for logs?
