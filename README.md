@@ -79,8 +79,9 @@ The Quickstart shows you how to capture `info` level logs in a stream going forw
 ```sh
 collect
 -------
-thor collect:file_monitor:stream      # Collect file events from Objective-See's File Monitor tool (requires sudo!)
-thor collect:syslog:custom ARGUMENTS  # ARGUMENTS will be passed on to the 'log' command directly
+thor collect:old_log_system:load      # Load all extant old logging system files
+thor collect:old_log_system:stream    # Stream logs from the new filesystem (mostly the ones seen in Console.app)
+thor collect:syslog:custom ARGUMENTS  # ARGUMENTS will be passed on to the 'log' command directly (with great 💪 comes great responsibility)
 thor collect:syslog:from_file FILE    # Read logs from FILE
 thor collect:syslog:last INTERVAL     # Capture from INTERVAL before now using 'log show'. Example INTERVALs: 5d, 2m, 30s
 thor collect:syslog:start DATETIME    # Collect logs since a given DATETIME in the past using 'log show'
@@ -89,6 +90,11 @@ thor collect:syslog:stream            # Collect logs from the syslog stream from
 db
 --
 thor db:dump  # Write the database to a compressed archive via pg_dump.
+
+objectivesee
+------------
+thor objectivesee:file_monitor:stream     # Collect file events from FileMonitor (requires sudo!)
+thor objectivesee:process_monitor:stream  # Collect process events from ProcessMonitor (requires sudo!)
 ```
 
 Thor will show you the command line options for each command via `thor help COMMAND`.  e.g. `thor help collect:file_monitor:stream` yields something like

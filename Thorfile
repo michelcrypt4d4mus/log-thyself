@@ -1,7 +1,6 @@
 # /Thorfile
 
 require File.expand_path("../config/environment", __FILE__)
-
 require "thor"
 
 THOR_TASKS_PATH = File.join(Rails.root, 'lib', 'tasks')
