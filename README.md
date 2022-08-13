@@ -165,17 +165,17 @@ Your data will be in a database called `macos_log_collector_development`, in a t
 | Name  | Data Type | Comment |
 | ------------- | ------------- | --- |
 | `log_timestamp` | _datetime_ | |
-| `event_type` | _string_ | See Enums below |
-| `message_type` | _string_ |
+| `event_type` | _string_ | See Enums section below |
+| `message_type` | _string_ | See Enums section below |
 | `category` | _string_ | |
-| `event_message` | _string_ |
-| `process_name` | _string_ | Process that generated the event |
-| `sender_process_name` | _string_ | Process that reported the event, often a library used by the actual proces |
+| `event_message` | _string_ | **The actual log message text** |
+| `process_name` | _string_ | **Process that generated the event** |
+| `sender_process_name` | _string_ | **Process that reported the event, often a library used by the actual proces** |
 | `subsystem` | _string_ | e.g. `com.apple.authkit` |
 | `process_id` | _string_ | |
 | `thread_id` | _string_ | |
 | `trace_id` | _decimal_ | [Reverse engineering here, maybe](https://github.com/libyal/dtformats/blob/main/documentation/Apple%20Unified%20Logging%20and%20Activity%20Tracing%20formats.asciidoc#26-compressed-data) |
-| `source` | _string_ | Seems always empty |
+| `source` | _string_ | ??? Seems always empty ??? |
 | `activity_identifier` | _string_ | ??? |
 | `parent_activity_identifier` | _decimal_ | ??? |
 | `backtrace` | _json_ | ??? |
@@ -195,8 +195,7 @@ Your data will be in a database called `macos_log_collector_development`, in a t
 There are fundamentally two kinds of log messages - events and log messages (which are classified as a kind of event: a `logEvent`). There are two ENUMs to save space when storing the `event_type` and `message_type`. Apple has kind of gone their own way as far as logging levels (as they do with basically everything - though I'm still amazed they did it with _log levels_) so we're kind of on our own figuring out what's what.
 
 
-
-| event_types | message_types |
+| **event_types** | **message_types** |
 |------------|------------|
 | activityCreateEvent | Debug
 | activityTransitionEvent | Default |
@@ -220,7 +219,7 @@ I have learned that a lot of the columns Apple provides are actually pretty usel
 | `sender_process_name` | _string_ | Process that reported the event, often a library used by the actual proces |
 | `category` | _string_ | e.g. `WindowServer` |
 | `subsystem` | _string_ | e.g. `com.apple.authkit` |
-| `event_message` | _string_ | |
+| `event_message` | _string_ | **The actual log message text** |
 
 
 
