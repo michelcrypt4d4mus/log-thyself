@@ -28,7 +28,7 @@ module System
         args_list << arg
       end
 
-      config_message = 'Configuration that will be installed'
+      config_message = 'Configuration'
       say "\n#{config_message}\n#{'‾' * config_message.length}"
       say "#{plist.to_plist}\n", :green
 
@@ -62,6 +62,13 @@ module System
     desc 'status', "See what the launchd manager thinks abouut your daemon"
     def status
       execute_shell_command("launchctl print system/#{options[:daemon_name]}")
+    end
+
+    desc 'uninstall', "Uninstall the daemon (:enable will be run to purge it it even from the dissabled list)"
+    def uninstall
+      invoke :stop
+      invoke :enable
+      execute_shell_command("rm #{install_location(options[:daemon_name])}")
     end
 
     no_commands do
