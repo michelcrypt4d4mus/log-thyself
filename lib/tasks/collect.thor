@@ -93,7 +93,11 @@ module Collect
       def launch_macos_log_parser(options)
         say "\n🌀 Summoning log vortex...🌀\n", :cyan
         say "      (CTRL-C to stop)"
-        StreamCoordinator.collect!(JsonStreamParser.new(@shell_command), options.merge(destination_klass: MacOsSystemLog))
+        begin
+          StreamCoordinator.collect!(JsonStreamParser.new(@shell_command), options.merge(destination_klass: MacOsSystemLog))
+        rescue Interrupt
+          say "Stopping..."
+        end
       end
     end
   end

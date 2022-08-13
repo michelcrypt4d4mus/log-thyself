@@ -46,7 +46,7 @@ class CsvDbWriter
     end
 
     build_csv_writer if @csv_writer.nil?
-    @csv_writer << record_to_csv(record.to_csv_hash)
+    @csv_writer << record.to_csv_hash
     @rows_written += 1
 
     if @rows_written % @batch_size == 0

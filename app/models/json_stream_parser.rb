@@ -41,7 +41,7 @@ class JsonStreamParser < ::Oj::ScHandler
         end
       end
     ensure
-      msg = "Loading final batch of messages...\nYou may want to ensure child process with PID #{pid} isn't still running when this is over.\n"
+      msg = "Killing child process with PID #{pid} and loading final batch of messages..."
       Rails.logger.warn(msg)
       puts msg
     end
