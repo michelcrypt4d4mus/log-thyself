@@ -115,8 +115,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_13_083906) do
     t.string "computed_signing_id"
     t.string "reported_signing_id", comment: "Only populated if it differs from the computed signature"
     t.json "raw_event"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, default: -> { "(now() AT TIME ZONE 'utc'::text)" }, null: false
+    t.index ["event_timestamp"], name: "index_process_events_on_event_timestamp"
     t.index ["event_type"], name: "index_process_events_on_event_type"
     t.index ["process_name", "event_type"], name: "index_process_events_on_process_name_and_event_type"
     t.index ["signature_signer"], name: "index_process_events_on_signature_signer"

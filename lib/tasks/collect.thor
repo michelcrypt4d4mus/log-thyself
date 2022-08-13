@@ -44,6 +44,25 @@ module Collect
     end
   end
 
+  class ProcessMonitor < CollectorCommandBase
+    desc 'stream', "Collect file events from Objective-See's File Monitor tool (requires sudo!)"
+    option :executable_path,
+            default: ProcessMonitorStreamParser::EXECUTABLE_PATH_DEFAULT,
+            desc: 'Path to your FileMonitor executable'
+    option :command_line_flags,
+            desc: 'Command line flags to pass to executable command line (-pretty is not allowed)',
+            default: '-skipApple'
+    option :debug,
+            desc: 'Print all the events to logs',
+            type: boolean,
+            default: false
+    def stream
+      raise InvocationError.new('-pretty is verboten') if options[:command_line_flags].include?('-pretty')
+      StreamCoordinator.collect!(ProcessMonitorStreamParser.new(options), options.merge(destination_klass: ProcessEvent))
+    end
+  end
+
+
 
   class Syslog < CollectorCommandBase
     desc 'stream', 'Collect logs from the syslog stream from now until you tell it to stop'

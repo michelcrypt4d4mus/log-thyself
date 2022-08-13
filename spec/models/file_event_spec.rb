@@ -7,7 +7,7 @@ RSpec.describe FileEvent, type: :model do
     row = described_class.from_json(event)
 
     expect(row.attributes).to eq(
-      FileEvent.new({
+      described_class.new({
         event_timestamp: "2022-08-10 03:58:40 +0000",
         event_type: "NOTIFY_WRITE",
         file: "/dev/ttys001",

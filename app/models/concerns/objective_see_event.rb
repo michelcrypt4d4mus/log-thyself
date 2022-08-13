@@ -19,23 +19,58 @@ module ObjectiveSeeEvent
   extend ActiveSupport::Concern
 
   ES_EVENT_TYPE_PREFIX = 'ES_EVENT_TYPE_'
-  FILE_PATH = '$.file'
-  PROCESS_PATH = FILE_PATH + '.process'
-  COMPUTED_SIGNING_INFO_PATH = PROCESS_PATH + ".'signing info (computed)'"
 
-  # Keys are columns we want to extract, values are JSONPath locations of the data
-  SHARED_JSON_PATHS = {
-    event_type: '$.event',
-    event_timestamp: '$.timestamp',
-    process_name: PROCESS_PATH + '.name',
-    process_arguments: PROCESS_PATH + '.arguments',
-    reported_signing_id: PROCESS_PATH + ".'signing info (reported)'.signingID",
-    computed_signing_id: COMPUTED_SIGNING_INFO_PATH + '.signatureID',
-    signature_signer: COMPUTED_SIGNING_INFO_PATH + '.signatureSigner',
-    signature_authorities: COMPUTED_SIGNING_INFO_PATH + '.signatureAuthorities'
-  }
+  # Extract/process common fields
+  class_methods do
+    # The :process key lives in different places for different events
+    def build_json_paths(process_path)
+      computed_signing_info_path = process_path + ".'signing info (computed)'"
 
-  %w(uid pid ppid rpid).each do |process_col|
-    SHARED_JSON_PATHS.merge!(process_col.to_sym => PROCESS_PATH + '.' + process_col)
+      # Keys are columns we want to extract, values are JSONPath locations of the data
+      json_paths = {
+        event_type: '$.event',
+        event_timestamp: '$.timestamp',
+        process_name: process_path + '.name',
+        process_arguments: process_path + '.arguments',
+        reported_signing_id: process_path + ".'signing info (reported)'.signingID",
+        computed_signing_id: computed_signing_info_path + '.signatureID',
+        signature_signer: computed_signing_info_path + '.signatureSigner',
+        signature_authorities: computed_signing_info_path + '.signatureAuthorities'
+      }
+
+      %w(uid pid ppid rpid).each do |process_col|
+        json_paths.merge!(process_col.to_sym => process_path + '.' + process_col)
+      end
+
+      json_paths
+    end
+
+    def from_json(json)
+      row = json_paths.inject({ raw_event: JSON.parse(json) }) do |row, (col_name, jsonpath)|
+        # TODO: reparsing for every column is stupid; just use dig()
+        row[col_name] = JsonPath.on(json, jsonpath)[0]
+        row
+      end
+
+      row[:event_type].delete_prefix!(ES_EVENT_TYPE_PREFIX)
+      row[:is_process_signed_as_reported] = (row[:computed_signing_id] == row[:reported_signing_id])
+      row.delete(:reported_signing_id) if row[:is_process_signed_as_reported]
+
+      if row[:computed_signing_id].nil? || !row[:is_process_signed_as_reported]
+        pretty_json = JSON.pretty_generate(row[:raw_event])
+        Rails.logger.warn("No signature or mismatched signer for process:\n\nROW: #{row}\n\nJSON #{pretty_json}")
+      end
+
+      if row.has_key?(:arguments)
+        row[:arguments] = row[:arguments].blank? ? nil : row[:arguments].join(' ')
+      end
+
+      new(row)
+    end
+
+    # To be overloaded by subclasses - usually just SHARED_JSON_PATHS with a few other fields.
+    def json_paths
+      raise NotImplementedError
+    end
   end
 end

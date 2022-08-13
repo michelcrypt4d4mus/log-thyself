@@ -70,6 +70,7 @@ class CsvDbWriter
   end
 
   def close_csv_and_copy_to_db
+    return unless @csv_writer
     @csv_writer.close
     @csv_writer = nil
 
