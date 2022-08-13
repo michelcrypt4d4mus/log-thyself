@@ -6,19 +6,16 @@ class ObjectiveSeeJsonStreamParser
   STATS_PRINTOUT_INTERVAL_DEFAULT = 1000
 
   # Options:
-  #   command_line_args: Array or String. args you want to pass to the executable.
+  #   command_line_args: args you want to pass to the executable.
   #   model_klass: model you want to save to. Defaults to inference based on the executable_path
-  #   shell command: For a custom shell command
   #   stats_printout_interval: How many events will pass between stats printouts
   def initialize(executable_path, options = {})
-    if Process.uid != 0 && options[:shell_command].nil?
-      raise "You don't seem to have root privileges as required. Maybe try again with sudo."
-    end
+    raise "You don't have root privileges. Maybe try again with sudo." if Process.uid != 0
+    raise "You don't seem to have an executable at #{executable_path}" unless File.exist?(executable_path)
 
     @executable_path = executable_path
     command_line_args = options[:command_line_args]
-    command_line_args = command_line_args.join(' ') if command_line_args.is_a?(Array)
-    shell_command = options[:shell_command] || "#{@executable_path} #{command_line_args}"
+    shell_command = "#{@executable_path} #{command_line_args}"
 
     @shell_command_streamer = ShellCommandStreamer.new(shell_command)
     @executable_basename = File.basename(@executable_path)
