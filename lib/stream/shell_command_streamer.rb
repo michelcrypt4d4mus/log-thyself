@@ -43,7 +43,7 @@ class ShellCommandStreamer
     ensure
       if stderr_thread
         stderr_thread.kill
-        sleep 0.001 while stderr_thread.alive?
+        sleep 0.01 while stderr_thread.alive?
         Rails.logger.debug("STDERR thread for '#{@shell_command}' killed successfully")
       end
     end
@@ -64,13 +64,8 @@ class ShellCommandStreamer
         while(line = stderr.gets) do
           log_stderr_output(line)
         end
-      ensure
-        begin
-          true # TODO
-          # log_stderr_output(stderr.read_nonblock(10_000)) unless line.blank?
-        rescue IO::EAGAINWaitReadable
-          Rails.logger.debug("#{@child_process_string} STDERR buffer drained")
-        end
+      rescue IOError => e
+        raise e unless e.message == "stream closed in another thread"
       end
     end
   end

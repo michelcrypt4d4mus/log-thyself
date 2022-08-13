@@ -74,8 +74,8 @@ class Logfile < ApplicationRecord
       csv_string = CSV.generate(headers: LogfileLine.column_names - %w(id), write_headers: true, quote_char: '"') do |csv|
         stream_contents do |line, line_number|
           line = line.gsub("\u0000", '').force_encoding(Encoding::UTF_8)
-          lines_written = line_number
           csv << LogfileLine.new(logfile_id: self.id, line_number: line_number, line: line).to_csv_hash(true)
+          lines_written = line_number
         end
       end
 

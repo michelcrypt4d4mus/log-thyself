@@ -64,7 +64,11 @@ class LogFileWatcher
     initial_lines_in_db = @logfile.logfile_lines.count
 
     if @info[:csv_lines] != initial_lines_in_db
-      puts "WARNING [#{@logfile.id}] '#{@logfile.file_path}' claims #{@info[:csv_lines]} by us but only #{initial_lines_in_db} found in DB!"
+      if @info[:csv_lines] == 1 && initial_lines_in_db == 0
+        @info[:csv_lines] = 0
+      else
+        puts "WARNING [#{@logfile.id}] '#{@logfile.file_path}' claims #{@info[:csv_lines]} by us but only #{initial_lines_in_db} found in DB!"
+      end
     end
 
     Rails.logger.info("Read #{@info[:csv_lines]} lines of '#{@logfile.file_path}' via CSV, launching thread to stream...")
@@ -96,7 +100,7 @@ class LogFileWatcher
             raise e
           end
         end
-      rescue => e
+      rescue StandardError => e
         Rails.logger.error "#{e.class} in thread for '#{@logfile.file_path}': #{e.message}"
         raise e
       end
