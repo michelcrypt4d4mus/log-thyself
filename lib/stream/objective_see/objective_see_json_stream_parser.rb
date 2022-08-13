@@ -12,7 +12,7 @@ class ObjectiveSeeJsonStreamParser
   #   stats_printout_interval: How many events will pass between stats printouts
   def initialize(executable_path, options = {})
     if Process.uid != 0 && options[:shell_command].nil?
-      raise "You don't seem to be logged in as root, which is required to run File Monitor. Maybe try again with sudo."
+      raise "You don't seem to have root privileges as required. Maybe try again with sudo."
     end
 
     @executable_path = executable_path
