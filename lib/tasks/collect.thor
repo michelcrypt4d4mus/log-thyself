@@ -18,7 +18,7 @@ module Collect
       launch_macos_log_parser(options)
     end
 
-    desc 'last INTERVAL', "Capture from INTERVAL before now using 'log show'. Example INTERVALs: 5d, 2m, 30s"
+    desc 'last INTERVAL', "Capture from INTERVAL before now. Example INTERVALs: 5d (5 days), 2m (2 minutes), 30s (30 seconds)"
     def last(interval)
       @shell_command = "#{AppleJsonLogStreamParser::LOG_SHOW_SHELL_CMD} --last #{interval}"
       launch_macos_log_parser(options)
@@ -31,7 +31,7 @@ module Collect
     end
 
     # TODO: syslog format is also a way to reduce the log size...
-    desc 'from_file FILE', 'Read logs from FILE'
+    desc 'from_file FILE', 'Read logs from FILE. Can handle non JSON log formats, see the help.'
     option :syslog,
             desc: "FILE is syslog format instead of JSON",
             type: :boolean,
