@@ -2,50 +2,11 @@
 # subcommand documentation that is incredibly unhelpful: https://github.com/rails/thor/wiki/Subcommands
 # "Collectthor" lol
 
+load 'collector_command.thor'
+
+
 module Collect
-  class CollectorCommandBase < Thor
-    class_option :app_log_level,
-      desc: "This application's logging verbosity",
-      default: 'INFO',
-      enum: Logger::Severity.constants.map(&:to_s).sort_by { |l| "Logger::#{l}".constantize },
-      banner: 'LEVEL'
-
-    class_option :batch_size,
-      default: CsvDbWriter::BATCH_SIZE_DEFAULT,
-      type: :numeric,
-      desc: "Rows to process between DB loads"
-
-    class_option :avoid_dupes,
-      desc: 'Attempt to avoid dupes by going a lot slower',
-      type: :boolean,
-      default: false
-
-    class_option :read_only,
-      desc: "Just read and process the streams, don't save to the database.",
-      type: :boolean,
-      default: false
-
-    # Thor complains if this is not defined and there's an error
-    def self.exit_on_failure?; end
-  end
-
-
-  class FileMonitor < CollectorCommandBase
-    desc 'stream', "Collect file events from Objective-See's File Monitor tool (requires sudo!)"
-    option :file_monitor_path,
-            default: FileMonitorStreamParser::FILE_MONITOR_EXECUTABLE_DEFAULT_PATH,
-            desc: 'Path to your FileMonitor executable'
-    option :file_monitor_flags,
-            desc: 'Flags to pass to FileMonitor command line (-pretty is not allowed)',
-            default: '-skipApple'
-    def stream
-      raise InvocationError.new('-pretty is verboten') if options[:file_monitor_flags].include?('-pretty')
-      StreamCoordinator.collect!(FileMonitorStreamParser.new(options), options.merge(destination_klass: FileEvent))
-    end
-  end
-
-
-  class Syslog < CollectorCommandBase
+  class Syslog < CollectorCommand
     desc 'stream', 'Collect logs from the syslog stream from now until you tell it to stop'
     option :level,
             desc: 'Level of logs to capture. debug is the most, info is the least.',
@@ -83,7 +44,7 @@ module Collect
       StreamCoordinator.collect!(stream_parser_klass.new(@shell_command), options.merge(destination_klass: MacOsSystemLog))
     end
 
-    desc 'custom ARGUMENTS', "ARGUMENTS will be passed on to the 'log' command directly (with great power comes great responsibility) 💪"
+    desc 'custom ARGUMENTS', "ARGUMENTS will be passed on to the 'log' command directly (with great 💪 comes great responsibility)"
     def custom(arguments)
       @shell_command = "log #{arguments}"
       launch_macos_log_parser(options)
@@ -91,8 +52,8 @@ module Collect
 
     no_commands do
       def launch_macos_log_parser(options)
-        say "\n🌀 Summoning log vortex...🌀\n", :cyan
-        say "      (CTRL-C to stop)"
+        make_announcement
+
         begin
           StreamCoordinator.collect!(JsonStreamParser.new(@shell_command), options.merge(destination_klass: MacOsSystemLog))
         rescue Interrupt

@@ -2,7 +2,7 @@
 
 require 'optparse'
 
-require File.join(Rails.root, 'lib', 'syslog_stream_parser')
+require File.join(Rails.root, 'lib', 'stream', 'syslog_stream_parser')
 
 JSON_STYLE = '--style json'
 LOG_STREAM_SHELL_CMD = "log stream --source #{JSON_STYLE}"
