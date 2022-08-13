@@ -12,6 +12,9 @@ module MacosLogCollector
     # environments using the files in config/environments, which are processed later.
 
     # config.time_zone = "Central Time (US & Canada)"
-    config.eager_load_paths << Rails.root.join("lib").to_s  # without the to_s() irb crashes :(
+
+    Dir[File.join(Rails.root, 'lib', '**/')].each do |dir|
+      config.eager_load_paths << dir   # without the to_s() irb crashes :(
+    end
   end
 end

@@ -1,8 +1,13 @@
+# Read logs written with the '--style default' flag, AKA "human readable."
+# Not the greatest code; was more of a proof of concept than a plan but it works..
+#
+# This style of log is noticeably less complete than the --style json output but it does have
+# all the most important columns.
+
 require 'open3'
 
 
 class SyslogStreamParser
-  LOGGING_LEVELS = %w(Debug Default Error Fault Info).freeze
   SUBSYSTEM_REGEX = /\[(\w+[.:]\w[-().: \w]*?)\]/.freeze  # e.g. 'com.apple.foobar.fugazi'
   SENDER_PROCESS_REGEX = /\(([._0-9A-Za-z]+)\)/.freeze
   DB_DATE_FORMAT = /^\s*\d{4}-\d{2}-\d{2}\s/.freeze
@@ -19,7 +24,7 @@ class SyslogStreamParser
 
   # Up to :process_description are space delimited fields in Mac's log format. :process_description
   # requires further parsing. ORDER MATTERS! Must match order in log files.
-  FIELD_NAMES_IN_FILE = %i(
+  FIELDS_TO_SPLIT = %i(
     log_timestamp
     timestamp_without_date
     thread_id
@@ -30,63 +35,60 @@ class SyslogStreamParser
     process_description
   )
 
-  def parse_shell_command_stream(shell_command, &block)
+  # Only meant to be used with files... otherwise you should be using --styls json
+  def initialize(log_file)
+    @file_streamer = FileStreamer.new(log_file)
+  end
+
+  # Calls yield() with MacOsSystemLog objects
+  def parse_stream!(&block)
     already_found_first_good_line_flag = false
-    lines_read = 0
-    lines_yielded = 0
     lines_in_this_log_message_count = 0
     current_log_entry = ''
 
-    Open3.popen3(shell_command) do |_stdin, stdout, stderr, wait_thr|
-      pid = wait_thr.pid
-      Rails.logger.warn("Child process ID is #{pid}. You may have to kill this manually.")
+    @file_streamer.stream! do |log_line|
+      log_line = log_line.chomp.force_encoding(Encoding::UTF_8)
+      # Skip lines until we find one that looks valid (there's often cruft at the start of the output)
+      unless already_found_first_good_line_flag
+        next unless log_line =~ DB_DATE_FORMAT
 
-      while(log_line = stdout.gets&.chomp&.force_encoding(Encoding::UTF_8))
-        lines_read += 1
-        next unless already_found_first_good_line_flag || log_line =~ DB_DATE_FORMAT
-
-        # Start processing only once we find a valid line because there's often cruft at the start
-        unless already_found_first_good_line_flag
-          current_log_entry = log_line
-          already_found_first_good_line_flag = true
-          next
-        end
-
-        # Wait for the next datetime stamped row to decide we have the whole log entry assembled
-        # in the :current_log_entry variable, at which point we process.
-        if log_line =~ DB_DATE_FORMAT
-          yield(MacOsSystemLog.new(process_log_entry(current_log_entry)))
-          lines_yielded += 1
-
-          # Reset :current_log_entry and :lines_in_this_log_message_count
-          current_log_entry = log_line
-          lines_in_this_log_message_count = 1
-        else
-          current_log_entry += " #{log_line}"  # Replace newline with a space
-          lines_in_this_log_message_count += 1
-
-          # Start throwing warnings if the entry seems too big
-          if lines_in_this_log_message_count > MAX_LINES_FOR_ONE_LOG_MESSAGE
-            many_lines_warning = "Log entry spans #{lines_in_this_log_message_count} lines so far.\n\n"
-            many_lines_warning += "Entry: #{current_log_entry}\n\ncurrent line: #{log_line}"
-            Rails.logger.warn(many_lines_warning)
-          end
-        end
+        # We are storing the next line to be parsed in :current_log_entry until we can be sure
+        # we have read the entire entry, which can span many lines.
+        already_found_first_good_line_flag = true
+        current_log_entry = log_line
+        next
       end
 
-      if (error_line = stderr.gets&.chomp)
-        Rails.logger.error("STDERR from process: #{error_line}")
+      # Wait for the next datetime stamped row to decide we have the whole log entry assembled
+      # in the :current_log_entry variable, at which point we process.
+      if log_line =~ DB_DATE_FORMAT
+        yield(MacOsSystemLog.new(process_log_entry(current_log_entry)))
+
+        # Reset :current_log_entry and :lines_in_this_log_message_count
+        current_log_entry = log_line
+        lines_in_this_log_message_count = 1
+      else
+        current_log_entry += " #{log_line}"  # Replace newline with a space
+        lines_in_this_log_message_count += 1
+
+        # Start throwing warnings if the entry seems too big
+        if lines_in_this_log_message_count > MAX_LINES_FOR_ONE_LOG_MESSAGE
+          many_lines_warning = "Log entry spans #{lines_in_this_log_message_count} lines so far.\n\n"
+          many_lines_warning += "Entry: #{current_log_entry}\n\ncurrent line: #{log_line}"
+          Rails.logger.warn(many_lines_warning)
+        end
       end
     end
   end
 
+  # Processes a log entry into a a hash containing the properties of a MacOsSystemLog.
   def process_log_entry(log_entry)
     Rails.logger.debug("process_log_entry: #{log_entry}\n")
-    row_values = log_entry.strip.split(' ', FIELD_NAMES_IN_FILE.size).map(&:strip)
-    row = Hash[FIELD_NAMES_IN_FILE.zip(row_values)]
+    values = log_entry.strip.split(' ', FIELDS_TO_SPLIT.size).map(&:strip)
+    row = Hash[FIELDS_TO_SPLIT.zip(values)]
 
     # message and event type are unified in syslog but different fields in the JSON (and our DB)
-    row[:message_type] = row[:log_type] if LOGGING_LEVELS.include?(row[:log_type])
+    row[:message_type] = row[:log_type] if MacOsSystemLog::LOGGING_LEVELS.include?(row[:log_type])
     row[:event_type] = to_event_type(row[:log_type])
     row.delete(:log_type)
 
@@ -113,7 +115,7 @@ class SyslogStreamParser
     return row if process_description.blank?
 
     sender_subsystem_msg = case process_description
-      when /#{SENDER_PROCESS_REGEX}\s{1,5}#{SUBSYSTEM_REGEX}\s+(.*)/
+      when /#{SENDER_PROCESS_REGEX}\s{1,10}#{SUBSYSTEM_REGEX}\s+(.*)/
         [$1, $2, $3]
       when /^\s*#{SUBSYSTEM_REGEX}\s+(.*)/
         [nil, $1, $2]
@@ -132,7 +134,7 @@ class SyslogStreamParser
   end
 
   def to_event_type(log_type)
-    return 'logEvent' if LOGGING_LEVELS.include?(log_type)
+    return 'logEvent' if MacOsSystemLog::LOGGING_LEVELS.include?(log_type)
     return EVENT_TYPE_MAPPING[log_type.to_sym] if EVENT_TYPE_MAPPING.has_key?(log_type.to_sym)
 
     # Haven't actually seen these events in the syslog version of Apple's wilderness
