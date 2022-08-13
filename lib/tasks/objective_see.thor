@@ -5,6 +5,13 @@ module Objectivesee
     class_option :command_line_flags,
                   desc: 'Command line flags to pass to executable command line (-pretty is not allowed)',
                   default: '-skipApple'
+
+    no_commands do
+      def validate_and_announce(options)
+        raise InvocationError.new('-pretty is verboten') if options[:command_line_flags].include?('-pretty')
+        make_announcement
+      end
+    end
   end
 
   class FileMonitor < ObjectiveSeeCommand
@@ -13,7 +20,7 @@ module Objectivesee
             default: ProcessMonitorStreamParser::EXECUTABLE_PATH_DEFAULT,
             desc: 'Path to your FileMonitor executable'
     def stream
-      raise InvocationError.new('-pretty is verboten') if options[:command_line_flags].include?('-pretty')
+      validate_and_announce(options)
       StreamCoordinator.collect!(FileMonitorStreamParser.new(options), options.merge(destination_klass: FileEvent))
     end
   end
@@ -24,9 +31,8 @@ module Objectivesee
             default: ProcessMonitorStreamParser::EXECUTABLE_PATH_DEFAULT,
             desc: 'Path to your ProcessMonitor executable'
     def stream
-      raise InvocationError.new('-pretty is verboten') if options[:command_line_flags].include?('-pretty')
-      reader = ProcessMonitorStreamParser.new(options)
-      StreamCoordinator.collect!(reader, options.merge(destination_klass: ProcessEvent))
+      validate_and_announce(options)
+      StreamCoordinator.collect!(ProcessMonitorStreamParser.new(options), options.merge(destination_klass: ProcessEvent))
     end
   end
 end

@@ -22,6 +22,13 @@ class CollectorCommand < Thor
                 type: :boolean,
                 default: false
 
+  no_commands do
+    def make_announcement
+      say "\n🌀 Summoning log vortex...🌀\n", :cyan
+      say "      (CTRL-C to stop)\n\n"
+    end
+  end
+
   # Thor complains if this is not defined and there's an error
   def self.exit_on_failure?
     true
