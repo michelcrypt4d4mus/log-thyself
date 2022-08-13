@@ -33,11 +33,7 @@ Beyond that:
 
 It's not necessary but you can set things up so the MacOS log stream collection launches right when you power on your computer - before you even login - for maximum monitoring power. Apple's `launchd` will also relaunch the log collector should it crash if you set this up.
 
-There's a script to setup the launch daemon for you. It needs to be run with `sudo` privileges to install the launch daemon, so you will be prompted for your password.
-
-```sh
-sudo scripts/launchd/install_as_launch_daemon.sh
-```
+Install it with `sudo thor system:daemon:install`. (You will be prompted for your password; only the root user can install launch daemons).
 
 **NOTE:** If you want options other than the defaults, you'll have to edit [the launch script](scripts/start_log_stream_loader.sh).
 
