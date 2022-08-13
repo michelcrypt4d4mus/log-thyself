@@ -6,9 +6,12 @@ module System
   class Daemon < Thor
     include SharedMethods
 
+    EXAMPLE_PLIST = Dir[File.join(Rails.root, 'scripts/launchd/*.plist.example')].first
+    DEFAULT_DAEMON_NAME = File.basename(EXAMPLE_PLIST).delete_suffix('.plist.example')
+
     class_option :daemon_name,
-                  desc: 'Use your own, possibly stealthier, process name (default is configurable in .env)',
-                  default: ENV['DAEMON_NAME'] || 'cryptadamus.logloader'
+                  desc: 'Use your own possibly stealthier process name if you want (default is configurable in .env)',
+                  default: ENV['DAEMON_NAME'] || DEFAULT_DAEMON_NAME
 
     desc 'install', 'Install as a launchd daemon (requires sudo)'
     option :launcher_script,
@@ -19,7 +22,7 @@ module System
 
       daemon_name = options[:daemon_name]
       install_path = install_location(daemon_name)
-      plist = Plist.parse_xml(File.join(Rails.root, 'scripts/launchd/cryptadamus.logloader.plist.example'))
+      plist = Plist.parse_xml(File.join(Rails.root, "scripts/launchd/#{DEFAULT_DAEMON_NAME}.plist.example"))
       plist['Label'] = daemon_name
 
       plist['ProgramArguments'] = plist['ProgramArguments'].inject([]) do |args_list, arg|
@@ -44,7 +47,7 @@ module System
       execute_shell_command("launchctl bootstrap system #{install_location(options[:daemon_name])}")
     end
 
-    desc 'stop', "Stop the daemon. It may come back next time you reboot unless you :disable it"
+    desc 'stop', "Stop the daemon (it may return when you reboot unless you :disable or :uninstall it)"
     def stop
       execute_shell_command("launchctl bootout system/#{options[:daemon_name]}")
     end
