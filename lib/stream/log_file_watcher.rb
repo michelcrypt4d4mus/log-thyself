@@ -12,8 +12,9 @@ class LogFileWatcher
   end
 
   def self.load_and_stream_all_open_logfiles!
-    Rails.logger.level = Logger::INFO
+    #Rails.logger.level = Logger::INFO
     %w[logfiles logfile_lines].each { |table| ActiveRecord::Base.connection.execute("TRUNCATE TABLE #{table}") }
+    ActiveRecord::Base.logger = nil
 
     @streamer_threads = Logfile.open_logfiles.inject({}) do |memo, logfile|
       memo[logfile] = new(logfile).load_and_stream!
@@ -76,9 +77,10 @@ class LogFileWatcher
       begin
         Thread.current[:lines_written] = @info[:csv_lines]
 
-        ShellCommandStreamer.new(@logfile.shell_command_to_stream).stream! do |line, line_number|
+        ShellCommandStreamer.new(@logfile.shell_command_to_stream).stream!(spawn_stderr_reader: false) do |line, line_number|
           if line_number <= Thread.current[:lines_written]
             Rails.logger.info("Skipping #{line_number} for #{@logfile.basename} (will skip to #{Thread.current[:lines_written]}")
+            next
           end
 
           line = line.gsub("\u0000", '').force_encoding(Encoding::UTF_8)  # Null byte...

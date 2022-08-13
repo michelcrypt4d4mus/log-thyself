@@ -88,6 +88,7 @@ RSpec.describe Logfile, type: :model do
 
       it_behaves_like 'command', 'db.asl', "syslog -f \"db.asl\"", "tail -c +0 -F \"db.asl\" | syslog -f"
       it_behaves_like 'command', 'file.log', 'cat "file.log"', 'tail -c +0 -F "file.log"'
+      it_behaves_like 'command', 'db.gz', "syslog -f \"db.gz\"", "tail -c +0 -F \"db.asl\" | syslog -f"
     end
   end
 end

@@ -23,13 +23,15 @@ class ShellCommandStreamer
   end
 
   # Yields a 3-tuple: (line, lines_read_count, lines_yielded_count)
-  def stream!(&block)
+  def stream!(spawn_stderr_reader: true, &block)
+    stderr_thread = nil
+
     begin
       Open3.popen3(@shell_command) do |_stdin, stdout, stderr, thread|
         child_pid = thread.pid
         @child_process_string = "Child process '#{@shell_command}' (PID: #{child_pid})"
         Rails.logger.info("#{@child_process_string} started...")
-        start_stderr_reader_thread(stderr)
+        stderr_thread = start_stderr_reader_thread(stderr) if spawn_stderr_reader
 
         while(line = stdout.gets) do
           yield(line.chomp, (@lines_read_count = stdout.lineno), (@lines_yielded_count += 1))
@@ -38,6 +40,12 @@ class ShellCommandStreamer
     rescue Errno::EACCES => e
       Rails.logger.error("You don't have permission to read '#{@shell_command}' (maybe try with sudo)\n")
       raise
+    ensure
+      if stderr_thread
+        stderr_thread.kill
+        sleep 0.001 while stderr_thread.alive?
+        Rails.logger.debug("STDERR thread for '#{@shell_command}' killed successfully")
+      end
     end
   end
 

@@ -128,7 +128,7 @@ class Logfile < ApplicationRecord
     !closed?
   end
 
-  # Find the shell command that creates a stream
+  # Find the shell command that can read the file
   def shell_command_to_read(include_path: true)
     case File.extname(file_path)
     when BZIP2_EXTNAME
@@ -136,7 +136,9 @@ class Logfile < ApplicationRecord
     when GZIP_EXTNAME
       'gunzip -c'
     when ASL_EXTNAME
-      'syslog -f'
+      # syslog -f only prints the last few lins unless we do the tail pipe to STDIN
+      # Needs short circuit
+      return "#{TAIL_FROM_TOP} \"#{file_path}\" | syslog -f"
     when PKLG_EXTNAME
       if system('which tshark')
         'tshark -r'
@@ -153,9 +155,11 @@ class Logfile < ApplicationRecord
   def shell_command_to_stream
     cmd = shell_command_to_read(include_path: false)
 
-    case shell_command_to_read(include_path: false)
+    case cmd
     when 'cat'
       "#{TAIL_FROM_TOP_STREAMING} \"#{file_path}\""
+    when /syslog/
+      "#{TAIL_FROM_TOP_STREAMING} \"#{file_path}\" | syslog -f"
     when /tshark/
       raise 'tail -f causes issues with tshark, sadly'
     else
