@@ -34,7 +34,9 @@ end
 
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
-  config.use_transactional_fixtures = true
+
+  # Specify PRESERVE_TEST_DB=true if you want the test suite to leave data behind
+  config.use_transactional_fixtures = !!ENV['PRESERVE_TEST_DB'].blank?
 
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs

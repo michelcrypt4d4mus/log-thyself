@@ -1,5 +1,7 @@
 # Base class for collector commands
 
+require 'shared_methods'
+
 class CollectorCommand < Thor
   class_option :app_log_level,
                 desc: "This application's logging verbosity",

@@ -8,9 +8,10 @@ require 'open3'
 
 
 class JsonStreamParser < ::Oj::ScHandler
-  LOG_STREAM_SHELL_CMD = "log stream --source --style json"
-  LOG_SHOW = "log show --color none --style json"
   LOG_LEVELS = %w(default info debug)
+  LOG_OPTIONS = '--source --style json --color none'
+  LOG_STREAM_SHELL_CMD = "log stream #{LOG_OPTIONS}"
+  LOG_SHOW_SHELL_CMD = "log show #{LOG_OPTIONS}"
 
   def initialize(shell_command)
     @shell_command = shell_command
