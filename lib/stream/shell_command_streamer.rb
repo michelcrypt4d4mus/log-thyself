@@ -68,7 +68,7 @@ class ShellCommandStreamer
   end
 
   def log_stderr_output(line)
-    Rails.logger.error("#{@child_process_string} STDERR: #{line}")
+    Rails.logger.warn("#{@child_process_string} STDERR: #{line}")
   end
 end
 

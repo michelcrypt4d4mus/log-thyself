@@ -28,7 +28,7 @@ class Logfile < ApplicationRecord
   CLOSED_EXTNAMES = ZIPPED_EXTNAMES + DIAGNOSTIC_EXTNAMES + [PKLG_EXTNAME]
 
   # Shell commands
-  TAIL_FROM_TOP = 'tail -c 0'
+  TAIL_FROM_TOP = 'tail -c +0'
   TAIL_FROM_TOP_STREAMING = TAIL_FROM_TOP + ' -F'
 
   def self.logfile_paths_on_disk
@@ -64,13 +64,17 @@ class Logfile < ApplicationRecord
     ShellCommandStreamer.new(shell_command_to_read).stream! { |line, line_number| yield(line, line_number) }
   end
 
+  # Returns lines written count
   def write_contents_to_db!
     Rails.logger.info("Writing #{file_path} to DB")
+    lines_written = 0
     save!
 
     begin
       csv_string = CSV.generate(headers: LogfileLine.column_names - %w(id), write_headers: true, quote_char: '"') do |csv|
         stream_contents do |line, line_number|
+          line = line.gsub("\u0000", '').force_encoding(Encoding::UTF_8)
+          lines_written = line_number
           csv << LogfileLine.new(logfile_id: self.id, line_number: line_number, line: line).to_csv_hash(true)
         end
       end
@@ -81,6 +85,9 @@ class Logfile < ApplicationRecord
       Rails.logger.error("Malformed CSV while processing '#{file_path}'")
       Rails.logger.error(e.message)
     end
+
+    Rails.logger.info("Loaded #{logfile_lines.count} rows of #{file_path} via CSV")
+    lines_written
   end
 
   # Store all at once
