@@ -7,7 +7,7 @@
 # crashing the program.
 #
 # Test:
-# s = ShellCommandStreamer.new('tail -f log/development.log')
+# s = ShellCommandStreamer.new('tail -F log/development.log')
 # s.stream! { |line, linenumber| puts "#{linenumber}: #{line}" }
 
 require 'open3'
