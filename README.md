@@ -159,32 +159,32 @@ Run `man log` to read Apple's documentation of what is in the system logs ([here
 
 Your data will be in a database called `macos_log_collector_development`, in a table called `macos_system_logs`. It has _everything_ apple provides (or claims to provide), which is these columns:
 
-| Name  | Data Type |
-| ------------- | ------------- |
-| `log_timestamp` | _datetime_ |
-| `event_type` | _string_ |
+| Name  | Data Type | Comment |
+| ------------- | ------------- | --- |
+| `log_timestamp` | _datetime_ | |
+| `event_type` | _string_ | See Enums below |
 | `message_type` | _string_ |
-| `category` | _string_ |
+| `category` | _string_ | |
 | `event_message` | _string_ |
-| `process_name` | _string_ |
-| `sender_process_name` | _string_ |
-| `subsystem` | _string_ |
-| `process_id` | _string_ |
-| `thread_id` | _string_ |
-| `trace_id` | _decimal_ |, precision: 26, scale: 0
-| `source` | _string_ |
-| `activity_identifier` | _string_ |
-| `parent_activity_identifier` | _decimal_ |, precision: 26, scale: 0
-| `backtrace` | _json_ |
-| `process_image_path` | _string_ |
-| `sender_image_path` | _string_ |
-| `boot_uuid` | _string_ |
-| `process_image_uuid` | _string_ |
-| `sender_image_uuid` | _string_ |
-| `mach_timestamp` | _bigint_ |
-| `sender_program_counter` | _bigint_ |
-| `timezone_name` | _string_ |
-| `creator_activity_id` | _decimal_ |, precision: 26, scale: 0
+| `process_name` | _string_ | Process that generated the event |
+| `sender_process_name` | _string_ | Process that reported the event, often a library used by the actual proces |
+| `subsystem` | _string_ | e.g. `com.apple.authkit` |
+| `process_id` | _string_ | |
+| `thread_id` | _string_ | |
+| `trace_id` | _decimal_ | [Reverse engineering here, maybe](https://github.com/libyal/dtformats/blob/main/documentation/Apple%20Unified%20Logging%20and%20Activity%20Tracing%20formats.asciidoc#26-compressed-data) |
+| `source` | _string_ | Seems always empty |
+| `activity_identifier` | _string_ | ??? |
+| `parent_activity_identifier` | _decimal_ | ??? |
+| `backtrace` | _json_ | ??? |
+| `process_image_path` | _string_ | Full filesystem path to `process_name` |
+| `sender_image_path` | _string_ | Full filesystem path to `sender_process_name` |
+| `boot_uuid` | _string_ | Unique identifier of either your computer or your current login session? |
+| `process_image_uuid` | _string_ | UUID of process image |
+| `sender_image_uuid` | _string_ | UUID of sender image |
+| `mach_timestamp` | _bigint_ | ??? |
+| `sender_program_counter` | _bigint_ | ??? |
+| `timezone_name` | _string_ | ??? |
+| `creator_activity_id` | _decimal_ | ??? |
 
 
 
@@ -237,6 +237,6 @@ bundle exec rspec
 
 Test should pass before you open a pull request. New featuers should have tests... that pass.
 
-# Other Tools
-Eclectic Light
-[postgres_dba](https://github.com/NikolayS/postgres_dba)
+# Other Resources
+* Eclectic Light
+* [postgres_dba](https://github.com/NikolayS/postgres_dba)
