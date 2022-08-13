@@ -138,7 +138,7 @@ class Logfile < ApplicationRecord
     when ASL_EXTNAME
       # syslog -f only prints the last few lins unless we do the tail pipe to STDIN
       # Needs short circuit
-      return "#{TAIL_FROM_TOP} \"#{file_path}\" | syslog -f"
+      return "cat \"#{file_path}\" | syslog -f"
     when PKLG_EXTNAME
       if system('which tshark')
         'tshark -r'
