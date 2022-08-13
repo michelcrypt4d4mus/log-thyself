@@ -14,13 +14,10 @@ class ObjectiveSeeJsonStreamParser
     raise "You don't seem to have an executable at #{executable_path}" unless File.exist?(executable_path)
 
     @executable_path = executable_path
-    command_line_args = options[:command_line_args]
-    shell_command = "#{@executable_path} #{command_line_args}"
-
+    shell_command = "#{@executable_path} #{options[:command_line_args]}"
     @shell_command_streamer = ShellCommandStreamer.new(shell_command)
     @executable_basename = File.basename(@executable_path)
     @model_klass = options[:model_klass] || @executable_basename.sub('Monitor', 'Event').constantize
-    @debug = options[:debug]
 
     # Running totals
     @stats_printout_interval = options[:stats_printout_interval] || STATS_PRINTOUT_INTERVAL_DEFAULT
@@ -35,7 +32,7 @@ class ObjectiveSeeJsonStreamParser
   # TODO: should be separated from parsing the executable call because it could be a file
   def parse_stream!(&block)
     @shell_command_streamer.stream! do |json|
-      Rails.logger.info("JSON: #{json}")# if @debug
+      Rails.logger.debug("JSON: #{json}")
       next if json.empty?
       event = @model_klass.from_json(json)
       add_to_running_totals(event)

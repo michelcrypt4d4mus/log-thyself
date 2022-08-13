@@ -4,6 +4,7 @@
 
 load 'collector_command.thor'
 
+
 module Collect
   class Syslog < CollectorCommand
     desc 'stream', 'Collect logs from the syslog stream from now until you tell it to stop'
