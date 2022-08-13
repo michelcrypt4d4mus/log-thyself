@@ -17,9 +17,21 @@ RSpec.describe Logfile, type: :model do
     end
 
     it 'extracts asl' do
-      puts "ASL FILE: #{asl_file}"
       contents = described_class.new(file_path: asl_file).extract_contents
       expect(contents.length).to be > 100
+    end
+
+    context 'followed by loading' do
+      let(:fixture_dir) { File.join(Rails.root, File.dirname(file_fixture('multiline_syslog_text.log'))) }
+
+      it 'loads all the files' do
+        described_class.load_all_files_in_directory!(fixture_dir)
+        expect(described_class.count).to eq(4)
+        expect(LogfileLine.count).to eq(4067)
+        two_rows = ActiveRecord::Base.connection.select_all("SELECT * FROM #{LogfileLine.table_name} ORDER BY id LIMIT 2")
+        two_line_lengths = two_rows.map { |r| r['line'].length }
+        expect(two_line_lengths).to eq([745, 746])
+      end
     end
   end
 

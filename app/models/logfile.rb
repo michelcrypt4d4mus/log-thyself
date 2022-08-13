@@ -1,4 +1,6 @@
 # For old style log files, pre-unified logging
+require 'csv'
+
 
 class Logfile < ApplicationRecord
   has_many :logfile_lines
@@ -22,10 +24,12 @@ class Logfile < ApplicationRecord
   GZIP_EXTNAME = '.gz'
   BZIP2_EXTNAME = '.bz2'
   PKLG_EXTNAME = '.pklg'  # packet logger, readable by wireshark etc.
-  DIAGNOSTIC_EXTNAMES = %w(.diag .ips .core_analytics .shutdownStall .hang)
+  DIAGNOSTIC_EXTNAMES = %w[.core_analytics .diag .hang .ips .shutdownStall]
   ZIPPED_EXTNAMES = [GZIP_EXTNAME, BZIP2_EXTNAME]
+
   # pklg files aren't necessarily closed but it's annoying to parse them see https://superuser.com/questions/567831/follow-a-pcap-file-in-wireshark-like-tail-f
   CLOSED_EXTNAMES = ZIPPED_EXTNAMES + DIAGNOSTIC_EXTNAMES + [PKLG_EXTNAME]
+  ALL_EXTNAMES = CLOSED_EXTNAMES + %w[.info .log .out .python3 .txt]
 
   # Shell commands
   TAIL_FROM_TOP = 'tail -c +0'
@@ -54,6 +58,26 @@ class Logfile < ApplicationRecord
     closed_logfiles.each { |logfile| logfile.write_contents_to_db! }
   end
 
+  def self.load_all_files_in_directory!(dir, options = {})
+    raise "Directory '#{dir}' doesn't exist" unless Dir.exist?(dir)
+    include_subdirs = options[:include_subdirs].blank? ? true : options[:include_subdirs]
+
+    Dir[File.join(dir, (include_subdirs ? '**/*' : '*'))].each do |file_path|
+      next unless File.file?(file_path)
+      logfile = Logfile.where(file_path: file_path, file_created_at: File.ctime(file_path)).first_or_create!
+
+      begin
+        logfile.write_contents_to_db!
+      rescue StandardError => e
+        msg = "#{e.class.to_s} while processing #{file_path}, will write the error info instead to #{LogfileLine.table_name}. "
+        msg += "Error Message: #{e.message}"
+        puts msg
+        msg += "\nBacktrace:\n#{e.backtrace.join("\n")}"
+        Rails.logger.error(msg)
+      end
+    end
+  end
+
   # Debug/utility method
   def self.print_list_of_logfiles(logfiles)
     puts "\n" + logfiles.map(&:file_path).sort.join("\n")
@@ -66,7 +90,7 @@ class Logfile < ApplicationRecord
 
   # Returns lines written count
   def write_contents_to_db!
-    Rails.logger.info("Writing #{file_path} to DB")
+    Rails.logger.info("Loading '#{file_path}' to DB")
     lines_written = 0
     save!
 

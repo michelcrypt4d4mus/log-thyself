@@ -44,6 +44,7 @@ module PostgresCsvLoader
       copy_query = "COPY #{tmp_table_name} (#{csv_data.headers.join(',')}) FROM STDIN CSV"
 
       ActiveRecord::Base.connection.execute("
+        DROP TABLE IF EXISTS #{tmp_table_name};
         CREATE TEMP TABLE #{tmp_table_name} (LIKE #{table_name} INCLUDING DEFAULTS) ON COMMIT DROP
       ")
 
