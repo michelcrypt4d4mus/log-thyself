@@ -2,74 +2,10 @@
 # subcommand documentation that is incredibly unhelpful: https://github.com/rails/thor/wiki/Subcommands
 # "Collectthor" lol
 
+load 'collector_command.thor'
+
 module Collect
-  class CollectorCommandBase < Thor
-    class_option :app_log_level,
-      desc: "This application's logging verbosity",
-      default: 'INFO',
-      enum: Logger::Severity.constants.map(&:to_s).sort_by { |l| "Logger::#{l}".constantize },
-      banner: 'LEVEL'
-
-    class_option :batch_size,
-      default: CsvDbWriter::BATCH_SIZE_DEFAULT,
-      type: :numeric,
-      desc: "Rows to process between DB loads"
-
-    class_option :avoid_dupes,
-      desc: 'Attempt to avoid dupes by going a lot slower',
-      type: :boolean,
-      default: false
-
-    class_option :read_only,
-      desc: "Just read and process the streams, don't save to the database.",
-      type: :boolean,
-      default: false
-
-    # Thor complains if this is not defined and there's an error
-    def self.exit_on_failure?; end
-  end
-
-
-  class FileMonitor < CollectorCommandBase
-    desc 'stream', "Collect file events from Objective-See's FileMonitor (requires sudo!)"
-    option :executable_path,
-            default: ProcessMonitorStreamParser::EXECUTABLE_PATH_DEFAULT,
-            desc: 'Path to your FileMonitor executable'
-    option :command_line_flags,
-            desc: 'Command line flags to pass to executable command line (-pretty is not allowed)',
-            default: '-skipApple'
-    option :debug,
-            desc: 'Print all the events to logs',
-            type: :boolean,
-            default: false
-    def stream
-      raise InvocationError.new('-pretty is verboten') if options[:command_line_flags].include?('-pretty')
-      StreamCoordinator.collect!(FileMonitorStreamParser.new(options), options.merge(destination_klass: FileEvent))
-    end
-  end
-
-  class ProcessMonitor < CollectorCommandBase
-    desc 'stream', "Collect process events from Objective-See's ProcessMonitor (requires sudo!)"
-    option :executable_path,
-            default: ProcessMonitorStreamParser::EXECUTABLE_PATH_DEFAULT,
-            desc: 'Path to your FileMonitor executable'
-    option :command_line_flags,
-            desc: 'Command line flags to pass to executable command line (-pretty is not allowed)',
-            default: '-skipApple'
-    option :debug,
-            desc: 'Print all the events to logs',
-            type: :boolean,
-            default: false
-    def stream
-      raise InvocationError.new('-pretty is verboten') if options[:command_line_flags].include?('-pretty')
-      reader = ProcessMonitorStreamParser.new(options)
-      StreamCoordinator.collect!(reader, options.merge(destination_klass: ProcessEvent))
-    end
-  end
-
-
-
-  class Syslog < CollectorCommandBase
+  class Syslog < CollectorCommand
     desc 'stream', 'Collect logs from the syslog stream from now until you tell it to stop'
     option :level,
             desc: 'Level of logs to capture. debug is the most, info is the least.',
