@@ -101,16 +101,16 @@ thor system:daemon:status   # See what the launchd manager thinks abouut your da
 thor system:daemon:stop     # Stop the deamon. It may come back next time you reboot unless you :disable it
 ```
 
-Thor will show you the command line options for each command via `thor help COMMAND`.  e.g. `thor help collect:file_monitor:stream` yields something like
+Thor will show you the command line options for each command via `thor help COMMAND`.  e.g. `thor help objectivesee:process_monitor:stream` yields something like
 ```sh
+$ thor help objectivesee:process_monitor:stream
+
 Usage:
-  thor collect:file_monitor:stream
+  thor objectivesee:process_monitor:stream
 
 Options:
-  [--file-monitor-path=FILE_MONITOR_PATH]    # Path to your FileMonitor executable
-                                             # Default: /Applications/FileMonitor.app/Contents/MacOS/FileMonitor
-  [--file-monitor-flags=FILE_MONITOR_FLAGS]  # Flags to pass to FileMonitor command line (-pretty is not allowed)
-                                             # Default: -skipApple
+  [--executable-path=EXECUTABLE_PATH]        # Path to your ProcessMonitor executable
+                                             # Default: /Applications/ProcessMonitor.app/Contents/MacOS/ProcessMonitor
   [--app-log-level=LEVEL]                    # This application's logging verbosity
                                              # Default: INFO
                                              # Possible values: DEBUG, INFO, WARN, ERROR, FATAL, UNKNOWN
@@ -118,8 +118,11 @@ Options:
                                              # Default: 10000
   [--avoid-dupes], [--no-avoid-dupes]        # Attempt to avoid dupes by going a lot slower
   [--read-only], [--no-read-only]            # Just read and process the streams, don't save to the database.
+  [--command-line-flags=COMMAND_LINE_FLAGS]  # Flags to pass through to executable command line (-pretty is not allowed)
+                                             # Default: -skipApple
+  [--read-from-file=READ_FROM_FILE]          # Read from the specified file instead of streaming from the application
 
-Collect file events from Objective-See's File Monitor tool (requires sudo!)
+Collect process events from ProcessMonitor (requires sudo!)
 ```
 
 ### Configuration
