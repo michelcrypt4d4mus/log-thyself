@@ -61,8 +61,12 @@ module ObjectiveSeeEvent
         Rails.logger.warn("No signature or mismatched signer for process:\n\nROW: #{row}\n\nJSON #{pretty_json}")
       end
 
-      if row.has_key?(:arguments)
-        row[:arguments] = row[:arguments].blank? ? nil : row[:arguments].join(' ')
+      if row.has_key?(:process_arguments)
+        if row[:process_arguments].blank?
+          row[:process_arguments] = nil
+        else
+          row[:process_arguments] = row[:process_arguments].join(' ')
+        end
       end
 
       new(row)

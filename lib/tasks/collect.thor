@@ -43,7 +43,7 @@ module Collect
             type: :boolean,
             default: false
     def stream
-      raise InvocationError.new('-pretty is verboten') if options[:file_monitor_flags].include?('-pretty')
+      raise InvocationError.new('-pretty is verboten') if options[:command_line_flags].include?('-pretty')
       StreamCoordinator.collect!(FileMonitorStreamParser.new(options), options.merge(destination_klass: FileEvent))
     end
   end
@@ -62,7 +62,8 @@ module Collect
             default: false
     def stream
       raise InvocationError.new('-pretty is verboten') if options[:command_line_flags].include?('-pretty')
-      StreamCoordinator.collect!(ProcessMonitorStreamParser.new(options), options.merge(destination_klass: ProcessEvent))
+      reader = ProcessMonitorStreamParser.new(options)
+      StreamCoordinator.collect!(reader, options.merge(destination_klass: ProcessEvent))
     end
   end
 

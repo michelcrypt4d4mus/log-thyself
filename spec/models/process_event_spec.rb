@@ -56,8 +56,7 @@ RSpec.describe ProcessEvent, type: :model do
         event_type: "NOTIFY_EXEC",
         process_path: "/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/Metadata.framework/Versions/A/Support/mdworker_shared",
         process_name: "mdworker_shared",
-        process_arguments:
-        "[\"/System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Versions/A/Support/mdworker_shared\", \"-s\", \"mdworker\", \"-c\", \"MDSImporterWorker\", \"-m\", \"com.apple.mdworker.shared\"]",
+        process_arguments: '/System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Versions/A/Support/mdworker_shared -s mdworker -c MDSImporterWorker -m com.apple.mdworker.shared',
         uid: 89,
         pid: 41874,
         ppid: 1,

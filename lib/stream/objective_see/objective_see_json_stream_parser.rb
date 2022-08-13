@@ -1,4 +1,5 @@
 # Base class for Objective-See related streams
+require 'pp'
 
 class ObjectiveSeeJsonStreamParser
   STATS_PRINTOUT_INTERVAL_DEFAULT = 1000
@@ -36,7 +37,7 @@ class ObjectiveSeeJsonStreamParser
   # TODO: should be separated from parsing the executable call because it could be a file
   def parse_stream!(&block)
     @shell_command_streamer.stream! do |json|
-      Rails.logger.debug("JSON: #{json}") if @debug
+      Rails.logger.info("JSON: #{json}")# if @debug
       next if json.empty?
       event = @model_klass.from_json(json)
       add_to_running_totals(event)
@@ -50,7 +51,7 @@ class ObjectiveSeeJsonStreamParser
 
     if @shell_command_streamer.lines_read_count % @stats_printout_interval == 0
       puts "Read #{@shell_command_streamer.lines_read_count} so far..."
-      puts JSON.pretty_generate(@event_counts)
+      # pp @event_counts
     end
   end
 

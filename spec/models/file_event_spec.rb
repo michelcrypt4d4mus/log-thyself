@@ -16,8 +16,11 @@ RSpec.describe FileEvent, type: :model do
         ppid: 1250,
         rpid: 779,
         process_name: "FileMonitor",
+        process_arguments: nil,
         computed_signing_id: "com.objective-see.filemonitor",
         is_process_signed_as_reported: true,
+        signature_authorities: '["Developer ID Application: Objective-See, LLC (VBG97UB4TA)", "Developer ID Certification Authority", "Apple Root CA"]',
+        signature_signer: 'Developer ID',
         raw_event: JSON.parse(event)
       }).attributes
     )
