@@ -1,6 +1,7 @@
 # Base class for Objective-See related streams
 require 'pp'
 
+
 class ObjectiveSeeJsonStreamParser
   STATS_PRINTOUT_INTERVAL_DEFAULT = 1000
 
@@ -51,7 +52,7 @@ class ObjectiveSeeJsonStreamParser
 
     if @shell_command_streamer.lines_read_count % @stats_printout_interval == 0
       puts "Read #{@shell_command_streamer.lines_read_count} so far..."
-      # pp @event_counts
+      pp @event_counts
     end
   end
 
