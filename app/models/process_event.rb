@@ -1,3 +1,5 @@
+# Objective-See ProcessMonitor event stream
+
 class ProcessEvent < ApplicationRecord
   include ObjectiveSeeEvent
 

@@ -31,13 +31,17 @@ module Collect
 
 
   class FileMonitor < CollectorCommandBase
-    desc 'stream', "Collect file events from Objective-See's File Monitor tool (requires sudo!)"
-    option :file_monitor_path,
-            default: FileMonitorStreamParser::FILE_MONITOR_EXECUTABLE_DEFAULT_PATH,
+    desc 'stream', "Collect file events from Objective-See's FileMonitor (requires sudo!)"
+    option :executable_path,
+            default: ProcessMonitorStreamParser::EXECUTABLE_PATH_DEFAULT,
             desc: 'Path to your FileMonitor executable'
-    option :file_monitor_flags,
-            desc: 'Flags to pass to FileMonitor command line (-pretty is not allowed)',
+    option :command_line_flags,
+            desc: 'Command line flags to pass to executable command line (-pretty is not allowed)',
             default: '-skipApple'
+    option :debug,
+            desc: 'Print all the events to logs',
+            type: :boolean,
+            default: false
     def stream
       raise InvocationError.new('-pretty is verboten') if options[:file_monitor_flags].include?('-pretty')
       StreamCoordinator.collect!(FileMonitorStreamParser.new(options), options.merge(destination_klass: FileEvent))
@@ -45,7 +49,7 @@ module Collect
   end
 
   class ProcessMonitor < CollectorCommandBase
-    desc 'stream', "Collect file events from Objective-See's File Monitor tool (requires sudo!)"
+    desc 'stream', "Collect process events from Objective-See's ProcessMonitor (requires sudo!)"
     option :executable_path,
             default: ProcessMonitorStreamParser::EXECUTABLE_PATH_DEFAULT,
             desc: 'Path to your FileMonitor executable'
