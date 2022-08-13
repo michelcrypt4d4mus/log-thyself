@@ -104,6 +104,7 @@ class Logfile < ApplicationRecord
   # zipped files are consider closed, as are .asl files that match a date other than today's
   def closed?
     return true if CLOSED_EXTNAMES.include?(extname)
+    return true if ['alf.log', 'daily.out'].include?(basename) # Never anything in here / only once a day
     return true if extname =~ /^\.\d$/ && basename =~ (/log\.\d$/)
     return true if basename.start_with?('aslmanager')
     return true if file_path =~ /Homebrew\/.*post_install/

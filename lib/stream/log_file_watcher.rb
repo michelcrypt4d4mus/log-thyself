@@ -15,7 +15,17 @@ class LogFileWatcher
       memo[logfile] = Thread.new do
         ShellCommandStreamer.new(logfile.shell_command_to_stream).stream! do |line, line_number|
           line = line.gsub("\u0000", '').force_encoding(Encoding::UTF_8)  # Null byte...
-          LogfileLine.where(logfile_id: logfile.id, line_number: line_number, line: line).first_or_create!
+
+          begin
+            LogfileLine.where(logfile_id: logfile.id, line_number: line_number, line: line).first_or_create!
+          rescue ActiveRecord::ConnectionTimeoutError => e
+            Rails.logger.info("Connection timeout; sleeping and retrying")
+            sleep 1
+            retry
+          rescue IOError => e
+            Rails.logger.error "IOError in thread for '#{logfile.file_path}': #{e.message}"
+            raise e
+          end
         end
       end
 
@@ -29,7 +39,7 @@ class LogFileWatcher
       tty_table_header = ['logfile path', 'alive?', 'max line number']
 
       tty_table_data = @streamer_threads.inject([]) do |table, (logfile, thread)|
-        table << [logfile.basename, thread.alive?, logfile.logfile_lines.size]
+        table << [logfile.file_path.strip, thread.alive?, logfile.logfile_lines.size]
       end
 
       tty_table_data.sort_by!(&:to_s)
