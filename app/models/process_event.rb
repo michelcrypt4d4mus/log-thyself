@@ -5,7 +5,7 @@ class ProcessEvent < ApplicationRecord
 
   JSON_PATHS = build_json_paths(PROCESS_PATH).merge(
     process_path: PROCESS_PATH + '.path',
-    exit_code: PROCESS_PATH + '.exit_code'
+    exit_code: PROCESS_PATH + ".'exit code'"
   )
 
   def self.json_paths

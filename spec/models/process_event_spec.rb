@@ -5,6 +5,7 @@ PROCESS_EVENT_JSON=<<-JSON
   "event": "ES_EVENT_TYPE_NOTIFY_EXEC",
   "timestamp": "2022-08-13 09:53:50 +0000",
   "process": {
+    "exit code": 0,
     "pid": 41874,
     "name": "mdworker_shared",
     "path": "/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/Metadata.framework/Versions/A/Support/mdworker_shared",
@@ -61,7 +62,7 @@ RSpec.describe ProcessEvent, type: :model do
         pid: 41874,
         ppid: 1,
         rpid: 41874,
-        exit_code: nil,
+        exit_code: 0,
         is_process_signed_as_reported: true,
         signature_signer: "Apple",
         signature_authorities: "[\"Software Signing\", \"Apple Code Signing Certification Authority\", \"Apple Root CA\"]",
