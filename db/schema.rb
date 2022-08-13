@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_12_064730) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_13_083906) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -34,6 +34,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_12_064730) do
     t.string "reported_signing_id", comment: "Only populated if it differs from the computed signature"
     t.json "raw_event"
     t.datetime "created_at", precision: nil, default: -> { "(now() AT TIME ZONE 'utc'::text)" }, null: false
+    t.string "signature_signer"
+    t.string "signature_authorities"
+    t.string "process_arguments"
+    t.index ["signature_signer"], name: "index_file_events_on_signature_signer"
   end
 
   create_table "logfile_lines", force: :cascade do |t|
@@ -92,6 +96,31 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_12_064730) do
     t.index ["sender_image_path"], name: "index_macos_system_logs_on_sender_image_path"
     t.index ["sender_process_name"], name: "index_macos_system_logs_on_sender_process_name"
     t.index ["subsystem"], name: "index_macos_system_logs_on_subsystem"
+  end
+
+  create_table "process_events", force: :cascade do |t|
+    t.datetime "event_timestamp", null: false
+    t.string "event_type", comment: "See https://developer.apple.com/documentation/endpointsecurity/event_types"
+    t.string "process_path", null: false
+    t.string "process_name", null: false
+    t.string "process_arguments"
+    t.integer "uid", limit: 2
+    t.integer "pid", null: false
+    t.integer "ppid"
+    t.integer "rpid", comment: "\"Real\" parent process ID"
+    t.integer "exit_code"
+    t.boolean "is_process_signed_as_reported"
+    t.string "signature_signer"
+    t.string "signature_authorities"
+    t.string "computed_signing_id"
+    t.string "reported_signing_id", comment: "Only populated if it differs from the computed signature"
+    t.json "raw_event"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_type"], name: "index_process_events_on_event_type"
+    t.index ["process_name", "event_type"], name: "index_process_events_on_process_name_and_event_type"
+    t.index ["signature_signer"], name: "index_process_events_on_signature_signer"
+    t.index ["uid"], name: "index_process_events_on_uid"
   end
 
   create_function :msg_type_char, sql_definition: <<-'SQL'
