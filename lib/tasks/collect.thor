@@ -54,7 +54,7 @@ module Collect
             default: '-skipApple'
     option :debug,
             desc: 'Print all the events to logs',
-            type: boolean,
+            type: :boolean,
             default: false
     def stream
       raise InvocationError.new('-pretty is verboten') if options[:command_line_flags].include?('-pretty')
