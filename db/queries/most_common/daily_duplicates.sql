@@ -3,7 +3,7 @@
 
 WITH daily_counts AS (
   SELECT
-    TO_CHAR(log_timestamp, 'YY-MM-DD HH24') AS "hour",
+    TO_CHAR(log_timestamp, 'YY-MM-DD') AS "hour",
     msg_type_char(message_type, event_type) AS "L",
     process_name,
     sender_process_name,
@@ -14,7 +14,6 @@ WITH daily_counts AS (
   FROM macos_system_logs
   GROUP BY 1,2,3,4,5,6,7
   ORDER BY 8 DESC
-  LIMIT 2500
 )
 
 -- Just to make it easier to display

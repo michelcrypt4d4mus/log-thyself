@@ -9,6 +9,6 @@ SELECT
   LEFT(event_message, 140),
   COUNT(*)
 FROM macos_system_logs
-WHERE "source" = '{"symbol"=>"", "line"=>0, "image"=>"powerd", "file"=>""}'
+WHERE process_name='mDNSResponder'
 GROUP BY 1,2,3,4,5,6
 ORDER BY 7 DESC;

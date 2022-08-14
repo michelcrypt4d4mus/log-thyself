@@ -11,7 +11,9 @@ WHERE process_name = 'runningboardd'
     'acquireAssertionWithDescriptor',
     'state notification',
     'invalidateAssertionWithIdentifier',
-    'state notification'
+    'state notification',
+    'limitationsForInstance',
+    'lookupHandleForPredicate'
   )
   AND id % 100 <> 1;
 
