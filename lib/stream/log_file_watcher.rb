@@ -75,6 +75,7 @@ class LogFileWatcher
   def spawn_thread_to_read_continuously
     Thread.new do
       begin
+
         Thread.current[:lines_written] = @info[:csv_lines]
 
         ShellCommandStreamer.new(@logfile.shell_command_to_stream).stream!(spawn_stderr_reader: false) do |line, line_number|
@@ -97,7 +98,7 @@ class LogFileWatcher
           end
         end
       rescue StandardError => e
-        Rails.logger.error "#{e.class} in thread for '#{@logfile.file_path}': #{e.message}"
+        Rails.logger.error "#{e.class} in thread for '#{@logfile.file_path}': #{e.message}\n#{e.backtrace.join("\n")}"
         raise e
       end
     end

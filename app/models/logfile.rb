@@ -92,11 +92,10 @@ class Logfile < ApplicationRecord
   # Returns lines written count.
   def write_contents_to_db!
     Rails.logger.info("Loading '#{file_path}' to DB")
-    lines_written = 0
     save!
 
     begin
-      CsvDbWriter.open(LogfileLine) do |db_writer|
+      lines_written = CsvDbWriter.open(LogfileLine) do |db_writer|
         stream_contents do |line, line_number|
           line = line.gsub("\u0000", '').force_encoding(Encoding::UTF_8)
           db_writer << LogfileLine.new(logfile_id: self.id, line_number: line_number, line: line)
@@ -116,7 +115,7 @@ class Logfile < ApplicationRecord
     lines_written
   end
 
-  # Store all at once
+  # Store the whole file, broken up into rows (literally)
   def store_contents!
     self.file_contents = extract_contents
     self.save!
@@ -163,8 +162,7 @@ class Logfile < ApplicationRecord
     when GZIP_EXTNAME
       'gunzip -c'
     when ASL_EXTNAME
-      # syslog -f only prints the last few lins unless we do the tail pipe to STDIN
-      # Needs short circuit
+      # syslog -f only prints the last few lins unless we do the 'cat' pipe to STDIN
       return "cat \"#{file_path}\" | syslog -f"
     when PKLG_EXTNAME
       if system('which tshark')

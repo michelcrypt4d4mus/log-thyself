@@ -8,7 +8,7 @@ class CsvDbWriter
   include StyledNotifications
   attr_reader :csv_writer, :rows_written, :rows_skipped
 
-  BATCH_SIZE_DEFAULT = 1_000
+  BATCH_SIZE_DEFAULT = 2_000
 
   # Options:
   #   - batch_size: Number of lines to process between loads
@@ -21,12 +21,14 @@ class CsvDbWriter
     @rows_written = @rows_skipped = 0
   end
 
-  # Block form of initialize
+  # Block form of initialize. Returns number of rows written.
   def self.open(model_klass, options = {}, &block)
     writer = new(model_klass, options)
     yield(writer)
+    writer.rows_written
   ensure
-    writer.close if writer.csv_writer
+    return unless writer.csv_writer
+    writer.close
   end
 
   # :record should be an instance of @model_klass
@@ -36,9 +38,8 @@ class CsvDbWriter
       return
     end
 
-    build_csv_writer unless @csv_writer
-    Rails.logger.debug("RECORD (#{record.class.to_s}) WRITTEN TO CsvWriter: #{record.attributes.pretty_inspect}\n\nCSV_HASH: #{record.to_csv_hash}\n\n")
-
+    Rails.logger.debug("RECORD (#{record.class.to_s}) WRITTEN TO CsvWriter: #{record.attributes.pretty_inspect}")
+    @csv_writer ||= build_csv_writer
     @csv_writer << record.to_csv_hash
     @rows_written += 1
     close_csv_and_copy_to_db if @rows_written % @batch_size == 0

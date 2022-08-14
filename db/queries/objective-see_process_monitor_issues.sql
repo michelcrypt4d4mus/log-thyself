@@ -1,3 +1,17 @@
+-- with "source"
+ select msg_type_char(message_type, event_type) AS "T",
+     log_timestamp,
+     process_name,
+     sender_process_name,
+     process_id,
+     thread_id,
+     "category",
+     subsystem,
+     event_message, backtrace,source FROM macos_system_logs where message_type NOT IN ('Debug', 'Info') AND   (sender_process_name ILIKE '%processmonitor%' OR process_name ILIKE '%processmonitor%' or subs
+ ystem ILIKE '%processmonitor%' or event_message ILIKE '%processmonitor') order by log_timestamp desc;
+
+
+
 COPY(
   SELECT
     msg_type_char(message_type, event_type) AS "T",
