@@ -2,6 +2,7 @@ require File.join(Rails.root, 'config', 'log_event_filters', 'filter_definitions
 
 class LogEventFilter
   FILTER_DEFINITIONS = FilterDefinitions::LOG_EVENT_FILTERS
+  BOOLEANS = [true, false]
 
   def self.build_filters!
     FilterDefinitions.validate!
@@ -20,8 +21,9 @@ class LogEventFilter
 
   def allow?(event)
     return true unless applicable?(event)
+    permitted = BOOLEANS.include?(@rule[:allowed?]) ? @rule[:allowed?] : @rule[:allowed?].call(event)
 
-    if @rule[:allowed?].call(event)
+    if permitted
       true
     else
       Rails.logger.debug("Event blocked by filter '#{@rule[:comment]}'")

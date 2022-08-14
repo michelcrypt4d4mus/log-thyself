@@ -27,7 +27,7 @@ class FilterDefinitions
         ],
         message_type: 'Debug'
       },
-      allowed?: ->(event) { false }
+      allowed?: false
     },
 
     {
@@ -37,8 +37,18 @@ class FilterDefinitions
         sender_process_name: 'MultitouchHID',
         message_type: 'Debug'
       },
-      allowed?: ->(event) { false }
-    }
+      allowed?: false
+    },
+
+    {
+      comment: "GPU policy lookup",
+      matchers: {
+        sender_process_name: 'CoreFoundation',
+        message_type: 'Debug',
+        event_message: /^found no value for key gpu-policies in CFPrefsPlistSource/
+      },
+      allowed?: false
+    },
   ]
 
   def self.validate!
@@ -47,7 +57,7 @@ class FilterDefinitions
 
       filter[:matchers].each do |col, val|
         raise "Invalid matcher: #{col} is not a column" unless MacOsSystemLog.column_names.include?(col.to_s)
-        raise "Invalid matcher for #{col}: #{val} is not a valid type " unless [Array, Numeric, String].include?(val.class)
+        raise "Invalid matcher for #{col}: #{val} is not a valid type " unless [Array, Numeric, String, Regexp].include?(val.class)
       end
 
       unless [Proc, TrueClass, FalseClass].include?(filter[:allowed?].class)
