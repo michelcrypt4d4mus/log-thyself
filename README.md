@@ -1,5 +1,7 @@
 # Computer, Log Thyself!
 
+![](doc/summoninglogvortex.png)
+
 ### What Does It Do?
 
 It backloads as well as real-time streams a whole bunch of MacOS log sources into a postgres database where they can be analyzed far more easily. Useful if you think you're being monitored/hacked/etc - but probably has other uses too. Currently supports:
