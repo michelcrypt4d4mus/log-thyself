@@ -7,13 +7,14 @@
 module PostgresCsvLoader
   extend ActiveSupport::Concern
 
-  CSV_OPTIONS = {
-    quote_char: '"',
-    write_headers: true
-  }
+  CSV_EXCLUDED_COLS = %w[id created_at updated_at]
 
-  included do
-    CSV_OPTIONS = CSV_OPTIONS.dup.merge(headers: column_names - %w[id])
+  included do |base|
+    base::CSV_OPTIONS = {
+      quote_char: '"',
+      write_headers: true,
+      headers: column_names - CSV_EXCLUDED_COLS
+    }
   end
 
   class_methods do
