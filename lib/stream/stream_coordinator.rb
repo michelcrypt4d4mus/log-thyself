@@ -10,7 +10,7 @@ class StreamCoordinator
     CsvDbWriter.open(options[:destination_klass], options) do |db_writer|
       stream_parser.parse_stream! do |record|
         allowed = ENABLE_FILTERS ? LogEventFilter.allow?(record) : true
-        db_writer.write(record) unless options[:read_only] || !allowed
+        db_writer << record unless options[:read_only] || !allowed
       end
     end
   end
