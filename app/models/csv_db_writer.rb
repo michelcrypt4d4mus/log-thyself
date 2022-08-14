@@ -6,7 +6,7 @@ require 'csv'
 
 class CsvDbWriter
   include StyledNotifications
-  attr_reader :csv_writer
+  attr_reader :csv_writer, :rows_written, :rows_skipped
 
   BATCH_SIZE_DEFAULT = 1_000
 
@@ -22,7 +22,7 @@ class CsvDbWriter
   end
 
   # Block form of initialize
-  def self.open(model_klass, options, &block)
+  def self.open(model_klass, options = {}, &block)
     writer = new(model_klass, options)
     yield(writer)
   ensure
@@ -37,6 +37,8 @@ class CsvDbWriter
     end
 
     build_csv_writer unless @csv_writer
+    Rails.logger.debug("RECORD (#{record.class.to_s}) WRITTEN TO CsvWriter: #{record.attributes.pretty_inspect}\n\nCSV_HASH: #{record.to_csv_hash}\n\n")
+
     @csv_writer << record.to_csv_hash
     @rows_written += 1
     close_csv_and_copy_to_db if @rows_written % @batch_size == 0

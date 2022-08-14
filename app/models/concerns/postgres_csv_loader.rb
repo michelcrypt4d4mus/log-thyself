@@ -59,6 +59,7 @@ module PostgresCsvLoader
     def load_csv_data!(csv_data)
       tmp_table_name = "tmp_#{table_name}"
       copy_query = "COPY #{tmp_table_name} (#{csv_data.headers.join(',')}) FROM STDIN CSV"
+      Rails.logger.debug("COPY query for #{self.class.to_s}:\n#{copy_query}")
 
       ActiveRecord::Base.connection.execute("
         DROP TABLE IF EXISTS #{tmp_table_name};

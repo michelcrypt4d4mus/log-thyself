@@ -88,23 +88,23 @@ class Logfile < ApplicationRecord
     ShellCommandStreamer.new(shell_command_to_read).stream! { |line, line_number| yield(line, line_number) }
   end
 
-  # Returns lines written count
+  # Writes entire file to log_lines table as separate lines.
+  # Returns lines written count.
   def write_contents_to_db!
     Rails.logger.info("Loading '#{file_path}' to DB")
     lines_written = 0
     save!
 
     begin
-      LogfileLine.load_rows_via_csv do |csv|
+      CsvDbWriter.open(LogfileLine) do |db_writer|
         stream_contents do |line, line_number|
           line = line.gsub("\u0000", '').force_encoding(Encoding::UTF_8)
-          csv << LogfileLine.new(logfile_id: self.id, line_number: line_number, line: line).to_csv_hash(true)
-          lines_written = line_number
+          db_writer << LogfileLine.new(logfile_id: self.id, line_number: line_number, line: line)
         end
       end
     rescue CSV::MalformedCSVError => e
-      Rails.logger.error("Malformed CSV while processing '#{file_path}'")
-      Rails.logger.error(e.message)
+      Rails.logger.error("Malformed CSV while processing '#{file_path}'\n#{e.message}")
+      raise e
     end
 
     if lines_written != (db_count = self.logfile_lines.count)
@@ -154,6 +154,7 @@ class Logfile < ApplicationRecord
     !closed?
   end
 
+  # TODO: this belongs on the streamer classes
   # Find the shell command that can read the file
   def shell_command_to_read(include_path: true)
     case File.extname(file_path)
