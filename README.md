@@ -163,7 +163,7 @@ Personally I focus on querying the data for words like "camera" and "microphone"
 
 Run `man log` to read Apple's documentation of what is in the system logs ([here](https://www.dssw.co.uk/reference/log.html) is a link to the log manual that may or may not be current).
 
-Your data will be in a database called `macos_log_collector_development`, in a table called `macos_system_logs`. It has _everything_ apple provides (or claims to provide), which is these columns:
+Your data will be in a database called `macos_log_collector_development`, in a table called `macos_system_logs`. It has _everything_ apple provides (or claims to provide). It also has a special index on the `event_message` which makes querying for strings blindingly fast in some cases, as long as those strings are longer than 3 characters (the longer the betters). The table has these columns:
 
 | Name  | Data Type | Comment |
 | ------------- | ------------- | --- |
