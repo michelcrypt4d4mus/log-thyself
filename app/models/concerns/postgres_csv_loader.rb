@@ -41,13 +41,6 @@ module PostgresCsvLoader
     def validate_data_and_prepare_db!(csv_data); end
     def transform_csv_data!(csv_data); end
 
-    # Yields a CSV object to the block, which yielder should fill with rows.
-    # TODO: get rid of this; the interface should be CsvDbWriter?
-    def load_rows_via_csv(&block)
-      csv_string = CSV.generate(**CSV_OPTIONS) { |csv| yield(csv) }
-      load_from_csv_string(csv_string)
-    end
-
     private
 
     def cols_to_update
