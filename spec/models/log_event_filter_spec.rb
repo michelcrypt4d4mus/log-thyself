@@ -19,7 +19,15 @@ RSpec.describe LogEventFilter do
   end
 
   context 'applicable events' do
-    it 'identifies them' do
+    let(:rule_factory) { { comment: '', allowed?: true} }  # TODO: use a real factory
+    let(:regex_filter) { described_class.new(rule_factory.merge(matchers: { process_name: /sleep/ })) }
+    let(:regex_event) { { process_name: 'sleep_is_the_cousin_of_death' } }
+
+    it 'identifies them with regexes' do
+      expect(regex_filter.applicable?(regex_event)).to be true
+    end
+
+    it 'identifies them with string matching' do
       expect(filter.applicable?(match)).to be_truthy
     end
 

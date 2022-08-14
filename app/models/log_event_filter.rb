@@ -31,14 +31,20 @@ class LogEventFilter
 
   # Check the properties match before applying the proc
   def applicable?(event)
-    @rule[:matchers].all? do |col_name, value|
+    @rule[:matchers].all? do |col_name, match_rule|
       return false unless event[col_name]
 
-      if value.is_a?(Array)
-        value.include?(event[col_name])
+      if match_rule.is_a?(Array)
+        match_rule.any? { |matcher| value_match?(matcher, event[col_name]) }
       else
-        value == event[col_name]
+        value_match?(match_rule, event[col_name])
       end
     end
+  end
+
+  private
+
+  def value_match?(matcher, value)
+    matcher.is_a?(Regexp) ? matcher.match?(value) : matcher == value
   end
 end
