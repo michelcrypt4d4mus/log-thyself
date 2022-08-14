@@ -6,7 +6,8 @@ SELECT
   SUM(CASE WHEN message_type ='Error' THEN 1 END) AS Errors,
   SUM(CASE WHEN message_type ='Fault' THEN 1 END) AS Faults,
   SUM(CASE WHEN message_type ='Info' THEN 1 END) AS Infos,
-  SUM(CASE WHEN message_type IS NULL THEN 1 END) AS events
+  SUM(CASE WHEN message_type IS NULL THEN 1 END) AS events,
+  COUNT(*) AS total
 FROM macos_system_logs
 GROUP BY 1
 ORDER BY 1 DESC;
@@ -20,7 +21,8 @@ SELECT
   SUM(CASE WHEN message_type ='Error' THEN 1 END) AS Errors,
   SUM(CASE WHEN message_type ='Fault' THEN 1 END) AS Faults,
   SUM(CASE WHEN message_type ='Info' THEN 1 END) AS Infos,
-  SUM(CASE WHEN message_type IS NULL THEN 1 END) AS events
+  SUM(CASE WHEN message_type IS NULL THEN 1 END) AS events,
+  COUNT(*) AS total
 FROM macos_system_logs
 GROUP BY 1
 ORDER BY 1 DESC;
