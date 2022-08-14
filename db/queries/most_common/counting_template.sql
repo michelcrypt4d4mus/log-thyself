@@ -9,6 +9,6 @@ SELECT
   LEFT(event_message, 140),
   COUNT(*)
 FROM macos_system_logs
-WHERE log_timestamp > NOW() - INTERVAL '12 HOURS'
+WHERE "source" = '{"symbol"=>"", "line"=>0, "image"=>"powerd", "file"=>""}'
 GROUP BY 1,2,3,4,5,6
 ORDER BY 7 DESC;

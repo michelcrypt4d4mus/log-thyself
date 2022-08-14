@@ -6,3 +6,7 @@ thor collect:old_log_system:stream &
 
 sudo thor objectivesee:file_monitor:stream &
 sudo thor objectivesee:process_monitor:stream &
+
+
+# Find all .pklg files
+

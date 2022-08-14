@@ -115,12 +115,6 @@ class Logfile < ApplicationRecord
     lines_written
   end
 
-  # Store the whole file, broken up into rows (literally)
-  def store_contents!
-    self.file_contents = extract_contents
-    self.save!
-  end
-
   def extract_contents
     ShellCommandStreamer.new(shell_command_to_read).read
   end

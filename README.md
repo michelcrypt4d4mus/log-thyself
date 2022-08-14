@@ -178,7 +178,7 @@ Your data will be in a database called `macos_log_collector_development`, in a t
 | `process_id` | _string_ | |
 | `thread_id` | _string_ | |
 | `trace_id` | _decimal_ | [Reverse engineering here, maybe](https://github.com/libyal/dtformats/blob/main/documentation/Apple%20Unified%20Logging%20and%20Activity%20Tracing%20formats.asciidoc#26-compressed-data) |
-| `source` | _string_ | This only comes out with the `--source` option (now on by default) |
+| `source` | _string_ | Which library (and even sometimes which line of code) is responsible for the event. Requires the `--source` option (now on by default) |
 | `activity_identifier` | _string_ | ??? |
 | `parent_activity_identifier` | _decimal_ | ??? |
 | `backtrace` | _json_ | ??? |
