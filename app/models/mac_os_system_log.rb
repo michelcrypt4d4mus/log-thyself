@@ -5,8 +5,10 @@ class MacOsSystemLog < ApplicationRecord
 
   # Not loaded into DB
   EXCLUDED_KEYS = %w(formatString)
-  JSON_COLUMN_NAME_SYMBOLS = column_names.map(&:to_sym) - %i(id created_at updated_at)
-  LOGGING_LEVELS = %w(Debug Default Error Fault Info).freeze
+  JSON_COLUMN_NAME_SYMBOLS = column_names.map(&:to_sym) - CSV_EXCLUDED_COLS
+
+  # Apple's log levels (where's 'warn'???)
+  MESSAGE_TYPES = %w[Debug Info Default Error Fault].freeze
 
   # For queries on uniquess (sort of)
   INDEX_SEARCH_COLS = %i(

@@ -9,7 +9,7 @@ SELECT
   LEFT(event_message, 140),
   COUNT(*)
 FROM macos_system_logs
-WHERE log_timestamp < '2022-08-04'
+WHERE log_timestamp > '2022-08-04'
 GROUP BY 1,2,3,4,5,6
 ORDER BY 7 DESC;
 

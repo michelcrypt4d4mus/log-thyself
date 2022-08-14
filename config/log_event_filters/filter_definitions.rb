@@ -2,6 +2,30 @@ class FilterDefinitions
   PRNG = Random.new(2385)
   FILTER_DEFINITION_KEYS = %i[allowed? comment matchers]
 
+  # Apple log levels
+  (DEBUG, INFO, DEFAULT, ERROR, FAULT) = MacOsSystemLog::MESSAGE_TYPES
+
+  # mds service low level
+  MDS_MSG_PREFIXES = [
+    "----",
+    "NEXTQUEUE",
+    "REORDER CHANGE",
+    "EVAL",
+    "handleXPCMessage",
+    "Returning zero storeID",
+    "REMOVE FROM HEAP",
+    "ADD",
+    "Leaving import restricted state",
+    "=====",
+    "Task <private> finished with status 0",
+    "fetchItems at qos",
+    "Truncating a list of bindings to",
+    "Importer recycle"
+  ]
+
+
+
+
   LOG_EVENT_FILTERS = [
     {
       comment: "This one plugin has spammed like 50GB of my hard drive. Improved by stopping coreaudiod but that's not a great long term solution",
@@ -25,7 +49,7 @@ class FilterDefinitions
           'kernel',
           'powerd',
         ],
-        message_type: 'Debug'
+        message_type: DEBUG
       },
       allowed?: false
     },
@@ -35,7 +59,7 @@ class FilterDefinitions
       matchers: {
         process_name: 'WindowServer',
         sender_process_name: 'MultitouchHID',
-        message_type: 'Debug'
+        message_type: DEBUG
       },
       allowed?: false
     },
@@ -44,12 +68,121 @@ class FilterDefinitions
       comment: "GPU policy lookup",
       matchers: {
         sender_process_name: 'CoreFoundation',
-        message_type: 'Debug',
+        message_type: DEBUG,
         event_message: /^found no value for key gpu-policies in CFPrefsPlistSource/
       },
       allowed?: false
     },
+
+    {
+      comment: "_CSCheckFix",
+      matchers: {
+        sender_process_name: 'CarbonCore',
+        category: 'checkfix',
+        message_type: DEBUG
+      },
+      allowed?: false
+    },
+
+    {
+      comment: 'com.apple.powerlog (power information logging system?)',
+      matchers: {
+        subsystem: 'com.apple.powerlog',
+        message_type: DEBUG
+      },
+      allowed?: false
+    },
+
+    {
+      comment: 'Low level display related debug events',
+      matchers: {
+        sender_process_name: 'IOHIDNXEventTranslatorSessionFilter',
+        message_type: DEBUG,
+        process_name: 'WindowServer'
+      },
+      allowed?: false
+    },
+
+    {
+      comment: 'Signpost reporting (apple tech to allow app developers to time operations in their apps)',
+      matchers: {
+        process_name: 'signpost_reporter',
+        message_type: [DEBUG, INFO]
+      },
+      allowed?: false
+    },
+
+    {
+      comment: 'VS Code (Electron) HIToolbox',
+      matchers: {
+        process_name: 'Electron',
+        message_type: DEBUG,
+        subsystem: 'com.apple.HIToolbox'
+      },
+      allowed?: false
+    },
+
+    {
+      comment: 'mds service spotlight low level',
+      matchers: {
+        process_name: 'mds',
+        message_type: DEBUG,
+        subsystem: 'com.apple.spotlightserver'
+      },
+      allowed?: false
+    },
+
+    {
+      comment: 'mds launch services binding category',
+      matchers: {
+        process_name: 'mds',
+        message_type: DEBUG,
+        category: 'binding'
+      },
+      allowed?: false
+    },
+
+    {
+      comment: 'Activity Monitor strings',
+      matchers: {
+        process_name: 'Activity Monitor',
+        message_type: DEBUG,
+        category: 'strings'
+      },
+      allowed?: false
+    },
+
+    {
+      comment: 'BlockBlock allows',
+      matchers: {
+        process_name: 'BlockBlock',
+        message_type: DEBUG,
+        event_message: /^BlockBlock\.app\(\d+\): (allow|new process event: 0)/
+      },
+      allowed?: false
+    },
+
+    {
+      comment: 'Little Snitch Agent gui stuff',
+      matchers: {
+        process_name: 'Little Snitch Agent',
+        message_type: DEBUG,
+        event_message: /^found no value for key (reduceTransparency|increaseContrast)/
+      },
+      allowed?: false
+    },
+
+    {
+      comment: 'Little Snitch Icon Update',
+      matchers: {
+        process_name: 'Little Snitch Network Monitor',
+        sender_process_name: 'IconServices',
+        message_type: DEBUG,
+      },
+      allowed?: false
+    },
   ]
+
 
   def self.validate!
     LOG_EVENT_FILTERS.each do |filter|

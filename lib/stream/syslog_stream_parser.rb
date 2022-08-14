@@ -88,7 +88,7 @@ class SyslogStreamParser
     row = Hash[FIELDS_TO_SPLIT.zip(values)]
 
     # message and event type are unified in syslog but different fields in the JSON (and our DB)
-    row[:message_type] = row[:log_type] if MacOsSystemLog::LOGGING_LEVELS.include?(row[:log_type])
+    row[:message_type] = row[:log_type] if MacOsSystemLog::MESSAGE_TYPES.include?(row[:log_type])
     row[:event_type] = to_event_type(row[:log_type])
     row.delete(:log_type)
 
@@ -134,7 +134,7 @@ class SyslogStreamParser
   end
 
   def to_event_type(log_type)
-    return 'logEvent' if MacOsSystemLog::LOGGING_LEVELS.include?(log_type)
+    return 'logEvent' if MacOsSystemLog::MESSAGE_TYPES.include?(log_type)
     return EVENT_TYPE_MAPPING[log_type.to_sym] if EVENT_TYPE_MAPPING.has_key?(log_type.to_sym)
 
     # Haven't actually seen these events in the syslog version of Apple's wilderness
