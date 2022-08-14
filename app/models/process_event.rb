@@ -2,6 +2,7 @@
 
 class ProcessEvent < ApplicationRecord
   include ObjectiveSeeEvent
+  include PostgresCsvLoader
 
   PROCESS_PATH = '$.process'
 
