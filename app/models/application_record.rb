@@ -6,7 +6,7 @@ class ApplicationRecord < ActiveRecord::Base
   CSV_EXCLUDED_COLS = [ID_COL] + RAILS_TIMESTAMP_COLS
 
   def self.csv_columns
-    column_names - CsvDbWriter::EXCLUDED_COLS
+    column_names - CSV_EXCLUDED_COLS
   end
 
   def self.columns_of_type(type)

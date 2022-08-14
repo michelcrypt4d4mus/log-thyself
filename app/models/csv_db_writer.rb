@@ -20,19 +20,18 @@ class CsvDbWriter
   def initialize(model_klass, options = {})
     Rails.logger.debug("CSV Writer options: #{options}")
     @model_klass = model_klass
-    @columns = model_klass.column_names - EXCLUDED_COLS
+    @columns = model_klass.csv_columns
     @batch_size = options[:batch_size] || BATCH_SIZE_DEFAULT
     @avoid_dupes = options[:avoid_dupes] || false
     @rows_written = 0
     @rows_skipped = 0
   end
 
-  def open(&block)
-    begin
-      yield(self)
-    ensure
-      close
-    end
+  # Block form of initialize
+  def self.open(model_klass, options, &block)
+    yield(writer = new(model_klass, options))
+  ensure
+    writer.close
   end
 
   def write(record)
