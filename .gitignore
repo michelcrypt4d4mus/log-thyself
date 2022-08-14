@@ -33,8 +33,9 @@ notes.txt
 /tmp/storage/*
 !/tmp/storage/
 !/tmp/storage/.keep
-
+/doc/summoning_log_vortex.jpg
 /public/assets
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
