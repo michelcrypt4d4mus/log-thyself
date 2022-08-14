@@ -95,22 +95,25 @@ class Logfile < ApplicationRecord
     save!
 
     begin
-      csv_string = CSV.generate(headers: LogfileLine.column_names - %w(id), write_headers: true, quote_char: '"') do |csv|
+      LogfileLine.load_rows_via_csv do |csv|
         stream_contents do |line, line_number|
           line = line.gsub("\u0000", '').force_encoding(Encoding::UTF_8)
+          Rails.logger.debug("LINE: #{line}")
           csv << LogfileLine.new(logfile_id: self.id, line_number: line_number, line: line).to_csv_hash(true)
           lines_written = line_number
         end
       end
-
-      #Rails.logger.debug("CSV STRING:\n#{csv_string}\n\n")
-      LogfileLine.load_from_csv_string(csv_string)
     rescue CSV::MalformedCSVError => e
       Rails.logger.error("Malformed CSV while processing '#{file_path}'")
       Rails.logger.error(e.message)
     end
 
-    Rails.logger.info("Loaded #{logfile_lines.count} rows of #{file_path} via CSV")
+    if lines_written != (db_count = self.logfile_lines.count)
+      Rails.logger.warn("ID #{id}. '#{file_path}' claims #{lines_written} but #{db_count} in DB!")
+    else
+      Rails.logger.info("Loaded #{lines_written} rows of #{file_path} via CSV")
+    end
+
     lines_written
   end
 

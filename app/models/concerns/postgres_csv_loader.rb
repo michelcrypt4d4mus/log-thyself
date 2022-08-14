@@ -7,6 +7,11 @@
 module PostgresCsvLoader
   extend ActiveSupport::Concern
 
+  CSV_OPTIONS = {
+    quote_char: '"',
+    write_headers: true
+  }
+
   class_methods do
     def load_from_csv_string(csv_string)
       csv_data = CSV.parse(csv_string, headers: true)
@@ -29,6 +34,16 @@ module PostgresCsvLoader
     # Abstract methods that are optional to implement
     def validate_data_and_prepare_db!(csv_data); end
     def transform_csv_data!(csv_data); end
+
+    # Yields a CSV object to the block, which yielder should fill with rows.
+    def load_rows_via_csv(&block)
+      csv_string = CSV.generate(**CSV_OPTIONS.merge(headers: column_names - %w[id])) do |csv|
+        debugger
+        yield(csv)
+      end
+
+      load_from_csv_string(csv_string)
+    end
 
     private
 
