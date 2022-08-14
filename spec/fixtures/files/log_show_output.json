@@ -1,121 +1,141 @@
 [{
-  "traceID" : 4015281924787666948,
-  "eventMessage" : "Using Metal Path",
+  "traceID" : 36840335418327556,
+  "eventMessage" : "looked up value <private>",
   "eventType" : "logEvent",
-  "source" : null,
-  "formatString" : "Using Metal Path",
+  "source" : {
+    "symbol" : "-[CFPrefsSearchListSource alreadylocked_copyValueForKey:]",
+    "line" : 0,
+    "image" : "CoreFoundation",
+    "file" : ""
+  },
+  "formatString" : "looked up value %{private}@ for key %{public}@ in %{public}@ via %{public}@",
   "activityIdentifier" : 0,
-  "subsystem" : "",
-  "category" : "",
-  "threadID" : 50885,
-  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "subsystem" : "com.apple.defaults",
+  "category" : "User Defaults",
+  "threadID" : 10824,
+  "senderImageUUID" : "1643F3D9-7049-37E4-B844-C0C0A42BDE3B",
   "backtrace" : {
     "frames" : [
       {
-        "imageOffset" : 25620,
-        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+        "imageOffset" : 221256,
+        "imageUUID" : "1643F3D9-7049-37E4-B844-C0C0A42BDE3B"
       }
     ]
   },
-  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
-  "processImagePath" : "\/System\/Applications\/Utilities\/Activity Monitor.app\/Contents\/MacOS\/Activity Monitor",
-  "timestamp" : "2022-08-06 18:41:36.635121-0400",
-  "senderImagePath" : "\/System\/Library\/PrivateFrameworks\/SafeEjectGPU.framework\/Versions\/A\/SafeEjectGPU",
-  "machTimestamp" : 656608130391,
-  "messageType" : "Default",
-  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
-  "processID" : 1256,
-  "senderProgramCounter" : 25620,
+  "bootUUID" : "",
+  "processImagePath" : "\/System\/Applications\/Utilities\/Terminal.app\/Contents\/MacOS\/Terminal",
+  "timestamp" : "2022-08-14 14:46:31.301941-0400",
+  "senderImagePath" : "\/System\/Library\/Frameworks\/CoreFoundation.framework\/Versions\/A\/CoreFoundation",
+  "machTimestamp" : 237993671441,
+  "messageType" : "Debug",
+  "processImageUUID" : "6DCD6318-A3E1-3FF8-ADAD-ED025AA59D28",
+  "processID" : 1960,
+  "senderProgramCounter" : 221256,
   "parentActivityIdentifier" : 0,
   "timezoneName" : ""
 },{
-  "traceID" : 981996469278212100,
-  "eventMessage" : "Created connection to com.apple.imagent.desktop.auth service: 0x600003f8e0",
+  "traceID" : 1503672378982916,
+  "eventMessage" : "Client 0x134e16740(pid 648) activity level is already at 0x1",
   "eventType" : "logEvent",
-  "source" : null,
-  "formatString" : "Created connection to %s service: %p",
+  "source" : {
+    "symbol" : "",
+    "line" : 0,
+    "image" : "powerd",
+    "file" : ""
+  },
+  "formatString" : "Client %p(pid %d) activity level is already at 0x%llx\n",
   "activityIdentifier" : 0,
-  "subsystem" : "com.apple.IDS",
-  "category" : "XPC",
-  "threadID" : 180274,
-  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "subsystem" : "powerd",
+  "category" : "systemLoad",
+  "threadID" : 223655,
+  "senderImageUUID" : "EF2918B7-1799-36CC-81BD-8E9736BB2A77",
   "backtrace" : {
     "frames" : [
       {
-        "imageOffset" : 9164,
-        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+        "imageOffset" : 182208,
+        "imageUUID" : "EF2918B7-1799-36CC-81BD-8E9736BB2A77"
       }
     ]
   },
-  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
-  "processImagePath" : "\/Applications\/Safari.app\/Contents\/MacOS\/Safari",
-  "timestamp" : "2022-08-06 18:41:37.034409-0400",
-  "senderImagePath" : "\/System\/Library\/PrivateFrameworks\/IMFoundation.framework\/Versions\/A\/IMFoundation",
-  "machTimestamp" : 656617713288,
-  "messageType" : "Default",
-  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
-  "processID" : 742,
-  "senderProgramCounter" : 9164,
+  "bootUUID" : "",
+  "processImagePath" : "\/System\/Library\/CoreServices\/powerd.bundle\/powerd",
+  "timestamp" : "2022-08-14 14:46:31.301865-0400",
+  "senderImagePath" : "\/System\/Library\/CoreServices\/powerd.bundle\/powerd",
+  "machTimestamp" : 237993669616,
+  "messageType" : "Debug",
+  "processImageUUID" : "EF2918B7-1799-36CC-81BD-8E9736BB2A77",
+  "processID" : 322,
+  "senderProgramCounter" : 182208,
   "parentActivityIdentifier" : 0,
   "timezoneName" : ""
 },{
-  "traceID" : 0,
-  "eventMessage" : "failed lookup: name = com.apple.imagent.desktop.auth, requestor = Safari[742], error = 3: No such process",
+  "traceID" : 36840335418327556,
+  "eventMessage" : "looked up value <private>",
   "eventType" : "logEvent",
-  "source" : null,
-  "formatString" : "",
+  "source" : {
+    "symbol" : "-[CFPrefsSearchListSource alreadylocked_copyValueForKey:]",
+    "line" : 0,
+    "image" : "CoreFoundation",
+    "file" : ""
+  },
+  "formatString" : "looked up value %{private}@ for key %{public}@ in %{public}@ via %{public}@",
   "activityIdentifier" : 0,
-  "subsystem" : "gui\/501 [100017]",
-  "category" : "",
-  "threadID" : 175429,
-  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "subsystem" : "com.apple.defaults",
+  "category" : "User Defaults",
+  "threadID" : 10824,
+  "senderImageUUID" : "1643F3D9-7049-37E4-B844-C0C0A42BDE3B",
   "backtrace" : {
     "frames" : [
       {
-        "imageOffset" : 194628,
-        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+        "imageOffset" : 221256,
+        "imageUUID" : "1643F3D9-7049-37E4-B844-C0C0A42BDE3B"
       }
     ]
   },
-  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
-  "processImagePath" : "\/sbin\/launchd",
-  "timestamp" : "2022-08-06 18:41:37.034484-0400",
-  "senderImagePath" : "\/sbin\/launchd",
-  "machTimestamp" : 656617715100,
-  "messageType" : "Default",
-  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
-  "processID" : 1,
-  "senderProgramCounter" : 194628,
+  "bootUUID" : "",
+  "processImagePath" : "\/System\/Applications\/Utilities\/Terminal.app\/Contents\/MacOS\/Terminal",
+  "timestamp" : "2022-08-14 14:46:31.302023-0400",
+  "senderImagePath" : "\/System\/Library\/Frameworks\/CoreFoundation.framework\/Versions\/A\/CoreFoundation",
+  "machTimestamp" : 237993673398,
+  "messageType" : "Debug",
+  "processImageUUID" : "6DCD6318-A3E1-3FF8-ADAD-ED025AA59D28",
+  "processID" : 1960,
+  "senderProgramCounter" : 221256,
   "parentActivityIdentifier" : 0,
   "timezoneName" : ""
 },{
-  "traceID" : 0,
-  "eventMessage" : "Last log repeated 65488 times",
+  "traceID" : 36840335418327556,
+  "eventMessage" : "looked up value <private>",
   "eventType" : "logEvent",
-  "source" : null,
-  "formatString" : "",
+  "source" : {
+    "symbol" : "-[CFPrefsSearchListSource alreadylocked_copyValueForKey:]",
+    "line" : 0,
+    "image" : "CoreFoundation",
+    "file" : ""
+  },
+  "formatString" : "looked up value %{private}@ for key %{public}@ in %{public}@ via %{public}@",
   "activityIdentifier" : 0,
-  "subsystem" : "",
-  "category" : "",
-  "threadID" : 175429,
-  "senderImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
+  "subsystem" : "com.apple.defaults",
+  "category" : "User Defaults",
+  "threadID" : 10824,
+  "senderImageUUID" : "1643F3D9-7049-37E4-B844-C0C0A42BDE3B",
   "backtrace" : {
     "frames" : [
       {
-        "imageOffset" : 228732,
-        "imageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111"
+        "imageOffset" : 221256,
+        "imageUUID" : "1643F3D9-7049-37E4-B844-C0C0A42BDE3B"
       }
     ]
   },
-  "bootUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
-  "processImagePath" : "\/sbin\/launchd",
-  "timestamp" : "2022-08-06 18:41:37.034507-0400",
-  "senderImagePath" : "\/sbin\/launchd",
-  "machTimestamp" : 656617715644,
-  "messageType" : "Default",
-  "processImageUUID" : "1ABCDEFG-ABCD-ABCD-ABCD-111111111111",
-  "processID" : 1,
-  "senderProgramCounter" : 228732,
+  "bootUUID" : "",
+  "processImagePath" : "\/System\/Applications\/Utilities\/Terminal.app\/Contents\/MacOS\/Terminal",
+  "timestamp" : "2022-08-14 14:46:31.302099-0400",
+  "senderImagePath" : "\/System\/Library\/Frameworks\/CoreFoundation.framework\/Versions\/A\/CoreFoundation",
+  "machTimestamp" : 237993675220,
+  "messageType" : "Debug",
+  "processImageUUID" : "6DCD6318-A3E1-3FF8-ADAD-ED025AA59D28",
+  "processID" : 1960,
+  "senderProgramCounter" : 221256,
   "parentActivityIdentifier" : 0,
   "timezoneName" : ""
 },{

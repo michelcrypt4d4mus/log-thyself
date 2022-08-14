@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_14_040244) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_14_072136) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -69,7 +69,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_14_040244) do
     t.integer "process_id"
     t.integer "thread_id"
     t.decimal "trace_id", precision: 26, comment: "Max observed value was 20 digits"
-    t.string "source"
+    t.json "source"
     t.string "activity_identifier"
     t.integer "parent_activity_identifier"
     t.json "backtrace"

@@ -27,7 +27,7 @@ RSpec.describe Logfile, type: :model do
       it 'loads all the files' do
         described_class.load_all_files_in_directory!(fixture_dir)
         expect(described_class.count).to eq(4)
-        expect(LogfileLine.count).to eq(4067)
+        expect(LogfileLine.count).to eq(4087)
         two_rows = ActiveRecord::Base.connection.select_all("SELECT * FROM #{LogfileLine.table_name} ORDER BY id LIMIT 2")
         two_line_lengths = two_rows.map { |r| r['line'].length }
         expect(two_line_lengths).to eq([745, 746])
