@@ -28,6 +28,11 @@ class CollectorCommand < CommonCommand
                 type: :boolean,
                 default: false
 
+  class_option :disable_filters,
+                desc: "Disable the filters",
+                type: :boolean,
+                default: false
+
   no_commands do
     def make_announcement
       say "\n🌀 Summoning log vortex...🌀\n", :cyan

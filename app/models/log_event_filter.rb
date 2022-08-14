@@ -1,43 +1,10 @@
-class LogEventFilter
-  PRNG = Random.new(2385)
+require File.join(Rails.root, 'config', 'log_event_filters', 'filter_definitions')
 
-  FILTER_DEFINITIONS = [
-    {
-      comment: "This one plugin has spammed like 50GB of my hard drive. Improved by stopping coreaudiod but that's not a great long term solution",
-      matchers: {
-        sender_process_name: 'BTAudioHALPlugin',
-        event_message: [
-          'XPC server error: Connection invalid',
-          'Invalidating all (0) audio devices',
-          'Starting BTAudioPlugin for <private>',
-          'Register audio plugin connection with bluetoothd'
-        ]
-      },
-      allowed?: Proc.new do |event|
-        rng = PRNG.rand(100)
-        #Rails.logger.debug("d100 roll: #{rng}")
-        rng == 1
-      end
-    },
-    {
-      comment: "Testing",
-      matchers: {
-        process_name: [
-          'dasd',
-          'kernel',
-          'powerd',
-          'corebrightnessd',
-        ]
-      },
-      allowed?: Proc.new do |event|
-        Rails.logger.info("Filtering an event #{event.attributes}")
-        false
-      end
-    }
-  ]
+class LogEventFilter
+  FILTER_DEFINITIONS = FilterDefinitions::LOG_EVENT_FILTERS
 
   def self.build_filters!
-    @filters = FILTER_DEFINITIONS.map { |f| new(f.except(:comment)) }
+    @filters = FILTER_DEFINITIONS.map { |fd| new(fd) }
     Rails.logger.info("Built #{@filters.size} filters")
   end
 
@@ -51,19 +18,19 @@ class LogEventFilter
   end
 
   def allow?(event)
-    if applicable?(event)
-      #Rails.logger.debug("Filter is applicable.")
-      @rule[:allowed?].call(event)
-    else
+    return true unless applicable?(event)
+
+    if @rule[:allowed?].call(event)
       true
+    else
+      Rails.logger.debug("Event blocked by filter '#{@rule[:comment]}'")
+      false
     end
   end
 
   # Check the properties match before applying the proc
   def applicable?(event)
-    matchers = @rule[:matchers]
-
-    matchers.all? do |col_name, value|
+    @rule[:matchers].all? do |col_name, value|
       return false unless event[col_name]
 
       if value.is_a?(Array)
