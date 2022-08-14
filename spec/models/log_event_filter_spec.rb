@@ -7,9 +7,10 @@ RSpec.describe LogEventFilter do
 
   let(:missing_col) { filter_rule[:matchers].except(:event_message) }
   let(:mismatched_data) { missing_col.merge(event_message: 'ny state of mind') }
+  let(:match) { missing_col.merge(event_message: col_matchers[:event_message].first) }
 
-  let(:match) do
-    missing_col.merge(event_message: col_matchers[:event_message].first )
+  it 'has valid filter definitions' do
+    expect { described_class.build_filters! }.not_to raise_error
   end
 
   it 'rejects mismatches' do

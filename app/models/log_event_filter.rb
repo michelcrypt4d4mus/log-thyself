@@ -4,6 +4,7 @@ class LogEventFilter
   FILTER_DEFINITIONS = FilterDefinitions::LOG_EVENT_FILTERS
 
   def self.build_filters!
+    FilterDefinitions.validate!
     @filters = FILTER_DEFINITIONS.map { |fd| new(fd) }
     Rails.logger.info("Built #{@filters.size} filters")
   end
