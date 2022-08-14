@@ -19,22 +19,23 @@ gem 'tty-table'  # Part of tty
 
 
 # Rails
+gem "bootsnap", require: false  # Reduces boot times through caching; required in config/boot.rb
 gem "importmap-rails"
+gem "jbuilder"  # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "puma", "~> 5.0" # Use the Puma web server [https://github.com/puma/puma]
 gem "rails", "~> 7.0"
 gem "sprockets-rails"
-gem "turbo-rails"  # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "stimulus-rails"  # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem "jbuilder"  # Build JSON APIs with ease [https://github.com/rails/jbuilder]
+gem "turbo-rails"  # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]  # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "bootsnap", require: false  # Reduces boot times through caching; required in config/boot.rb
+
 
 # Use Sass to process CSS
 # gem "sassc-rails"
 
 group :development, :test do
-  #gem 'byebug'
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem 'pry'
   gem 'rspec-rails', '~> 5.0.0'
 end
 

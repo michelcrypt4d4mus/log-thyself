@@ -1,6 +1,8 @@
 class MacOsSystemLog < ApplicationRecord
   self.table_name = 'macos_system_logs'
 
+  include PostgresCsvLoader
+
   # Not loaded into DB
   EXCLUDED_KEYS = %w(formatString)
   JSON_COLUMN_NAME_SYMBOLS = column_names.map(&:to_sym) - %i(id created_at updated_at)

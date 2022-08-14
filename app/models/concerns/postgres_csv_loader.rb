@@ -7,7 +7,18 @@
 module PostgresCsvLoader
   extend ActiveSupport::Concern
 
+  CSV_EXCLUDED_COLS = %w[id created_at updated_at]
+
+  included do |base|
+    base::CSV_OPTIONS = {
+      quote_char: '"',
+      write_headers: true,
+      headers: column_names - CSV_EXCLUDED_COLS
+    }
+  end
+
   class_methods do
+    # TODO: we are generating and then parsing again... presumably we could skip that middle step?
     def load_from_csv_string(csv_string)
       csv_data = CSV.parse(csv_string, headers: true)
       transform_csv_data!(csv_data)
@@ -30,18 +41,25 @@ module PostgresCsvLoader
     def validate_data_and_prepare_db!(csv_data); end
     def transform_csv_data!(csv_data); end
 
+    # Yields a CSV object to the block, which yielder should fill with rows.
+    # TODO: get rid of this; the interface should be CsvDbWriter?
+    def load_rows_via_csv(&block)
+      csv_string = CSV.generate(**CSV_OPTIONS) { |csv| yield(csv) }
+      load_from_csv_string(csv_string)
+    end
+
     private
 
     def cols_to_update
       cols = column_names - (defined?(self::UPSERT_KEYS) ? self::UPSERT_KEYS : Array.wrap(primary_key)) - %w[created_at]
-
       # Let the auto increment do its thing if the primary key is "id"
-      primary_key == 'id' ? cols - ['id'] : cols
+      primary_key == self::ID_COL ? cols - [self::ID_COL] : cols
     end
 
     def load_csv_data!(csv_data)
       tmp_table_name = "tmp_#{table_name}"
       copy_query = "COPY #{tmp_table_name} (#{csv_data.headers.join(',')}) FROM STDIN CSV"
+      Rails.logger.debug("COPY query for #{self.class.to_s}:\n#{copy_query}")
 
       ActiveRecord::Base.connection.execute("
         DROP TABLE IF EXISTS #{tmp_table_name};

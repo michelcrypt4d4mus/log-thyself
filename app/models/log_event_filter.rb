@@ -15,7 +15,7 @@ class LogEventFilter
       },
       allowed?: Proc.new do |event|
         rng = PRNG.rand(100)
-        Rails.logger.debug("d100 roll: #{rng}")
+        #Rails.logger.debug("d100 roll: #{rng}")
         rng == 1
       end
     },
@@ -52,7 +52,7 @@ class LogEventFilter
 
   def allow?(event)
     if applicable?(event)
-      Rails.logger.debug("Filter is applicable.")
+      #Rails.logger.debug("Filter is applicable.")
       @rule[:allowed?].call(event)
     else
       true

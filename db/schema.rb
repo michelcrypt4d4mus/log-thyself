@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_13_083906) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_14_040244) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -44,8 +44,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_13_083906) do
     t.integer "logfile_id", null: false
     t.integer "line_number", null: false
     t.string "line", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, default: -> { "(now() AT TIME ZONE 'utc'::text)" }, null: false
     t.index ["line"], name: "index_line_with_gin", opclass: :gin_trgm_ops, using: :gin
     t.index ["logfile_id", "line_number"], name: "index_logfile_lines_on_logfile_id_and_line_number", unique: true
   end

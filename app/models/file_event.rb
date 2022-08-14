@@ -3,6 +3,7 @@
 
 class FileEvent < ApplicationRecord
   include ObjectiveSeeEvent
+  include PostgresCsvLoader
 
   FILE_PATH = '$.file'
   PROCESS_PATH = FILE_PATH + '.process'
