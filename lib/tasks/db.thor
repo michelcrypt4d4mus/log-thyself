@@ -18,7 +18,7 @@ class Db < Thor
           default: ENV['DEFAULT_DB_DUMP_DIR'] || Rails.root.join('db', 'backups').to_s
   option :pg_dump_flags,
           default: '-Fc -Z9',
-          desc: 'Flags for pg_dump. Default is max compression.'
+          desc: 'Flags for pg_dump (default is max compression, postgres archive style)'
   option :file_suffix,
           desc: 'Optional filename suffix for descriptive comments etc.'
   def dump

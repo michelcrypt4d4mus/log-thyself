@@ -1,14 +1,13 @@
 module Collect
-  class OldLogSystem < Thor
+  class OldLogSystem < CommonCommand
     desc 'load', "Load old logging system files that will no longer be written to"
     option :continue,
             desc: 'Continue loading new lines from active logs once extant logs are loaded',
             type: :boolean,
             default: false
     def load
-      #Logfile.write_closed_logfile_contents_to_db!
+      Logfile.write_closed_logfile_contents_to_db!
       LogFileWatcher.load_and_stream_all_open_logfiles! if options[:continue]
-      #invoke(:stream, ['--include-subdirs'])
     end
 
     desc 'load_dir DIR', "Load all files in directory DIR. They don't even have to be log files - Will unzip and process many compressed formats as well as wireshark/bluetooth/tcpdump packet captures files."

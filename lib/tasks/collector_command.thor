@@ -2,13 +2,17 @@
 
 require 'shared_methods'
 
-class CollectorCommand < Thor
+# Options common to all tasks
+class CommonCommand < Thor
   class_option :app_log_level,
                 desc: "This application's logging verbosity",
                 enum: Logger::Severity.constants.map(&:to_s).sort_by { |l| "Logger::#{l}".constantize },
                 default: 'INFO',
                 banner: 'LEVEL'
+end
 
+# Options common to all collect: commands
+class CollectorCommand < CommonCommand
   class_option :batch_size,
                 desc: "Rows to process between DB loads",
                 type: :numeric,

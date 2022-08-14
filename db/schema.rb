@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_14_072136) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_14_193021) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -18,6 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_14_072136) do
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
   create_enum "event_type_enum", ["activityCreateEvent", "logEvent", "stateEvent", "timesyncEvent", "activityTransitionEvent", "signpostEvent", "traceEvent", "userActionEvent"]
+  create_enum "message_type", ["Debug", "Info", "Default", "Error", "Fault"]
   create_enum "message_type_enum", ["Debug", "Default", "Error", "Fault", "Info"]
 
   create_table "file_events", force: :cascade do |t|
@@ -60,7 +61,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_14_072136) do
   create_table "macos_system_logs", force: :cascade do |t|
     t.datetime "log_timestamp"
     t.enum "event_type", enum_type: "event_type_enum"
-    t.enum "message_type", enum_type: "message_type_enum"
+    t.enum "message_type", enum_type: "message_type"
     t.string "category"
     t.string "event_message"
     t.string "process_name"
@@ -122,8 +123,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_14_072136) do
     t.index ["uid"], name: "index_process_events_on_uid"
   end
 
+  create_function :random_int_between, sql_definition: <<-'SQL'
+      CREATE OR REPLACE FUNCTION public.random_int_between(low integer, high integer)
+       RETURNS integer
+       LANGUAGE sql
+       IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF COST 25
+      AS $function$
+        SELECT floor(random()* (high-low + 1) + low);
+      $function$
+  SQL
   create_function :msg_type_char, sql_definition: <<-'SQL'
-      CREATE OR REPLACE FUNCTION public.msg_type_char(message_type message_type_enum, event_type event_type_enum)
+      CREATE OR REPLACE FUNCTION public.msg_type_char(message_type message_type, event_type event_type_enum)
        RETURNS character
        LANGUAGE sql
        IMMUTABLE PARALLEL SAFE LEAKPROOF
@@ -160,15 +170,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_14_072136) do
             ELSE
               '?'
             END
-      $function$
-  SQL
-  create_function :random_int_between, sql_definition: <<-'SQL'
-      CREATE OR REPLACE FUNCTION public.random_int_between(low integer, high integer)
-       RETURNS integer
-       LANGUAGE sql
-       IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF COST 25
-      AS $function$
-        SELECT floor(random()* (high-low + 1) + low);
       $function$
   SQL
 

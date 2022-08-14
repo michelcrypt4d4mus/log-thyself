@@ -178,7 +178,7 @@ Your data will be in a database called `macos_log_collector_development`, in a t
 | `process_id` | _string_ | |
 | `thread_id` | _string_ | |
 | `trace_id` | _decimal_ | [Reverse engineering here, maybe](https://github.com/libyal/dtformats/blob/main/documentation/Apple%20Unified%20Logging%20and%20Activity%20Tracing%20formats.asciidoc#26-compressed-data) |
-| `source` | _string_ | Which library (and even sometimes which line of code) is responsible for the event. Requires the `--source` option (now on by default) |
+| `source` | _json_ | Which library (and even sometimes which line of code) is responsible for the event. Requires the `--source` option (now on by default) |
 | `activity_identifier` | _string_ | ??? |
 | `parent_activity_identifier` | _decimal_ | ??? |
 | `backtrace` | _json_ | ??? |
@@ -197,15 +197,18 @@ Your data will be in a database called `macos_log_collector_development`, in a t
 #### System Log Enums
 There are fundamentally two kinds of log messages - events and log messages (which are classified as a kind of event: a `logEvent`). There are two ENUMs to save space when storing the `event_type` and `message_type`. Apple has kind of gone their own way as far as logging levels (as they do with basically everything - though I'm still amazed they did it with _log levels_) so we're kind of on our own figuring out what's what.
 
+That said, assuming the order is `Debug`, `Info`, `Default`, `Error`, `Fault`[^2], then you can use greater than/less than comparators. e.g. `SELECT * FROM macos_system_logs WHERE message_type > 'Default'` would show you all the `Error` and `Fault` entriees.
+
+[^2]: What happened to `Warn`?
 
 | **event_types** | **message_types** |
 |------------|------------|
 | activityCreateEvent | Debug
-| activityTransitionEvent | Default |
-| logEvent | Info |
-| stateEvent | Warn |
-| signpostEvent | Error |
-| timesyncEvent | Fault |
+| activityTransitionEvent | Info |
+| logEvent | Default |
+| stateEvent | Error |
+| signpostEvent | Fault |
+| timesyncEvent |  |
 | traceEvent | |
 | userActionEvent | |
 
