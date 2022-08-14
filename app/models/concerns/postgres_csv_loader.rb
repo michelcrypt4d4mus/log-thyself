@@ -12,6 +12,10 @@ module PostgresCsvLoader
     write_headers: true
   }
 
+  included do
+    CSV_OPTIONS = CSV_OPTIONS.dup.merge(headers: column_names - %w[id])
+  end
+
   class_methods do
     def load_from_csv_string(csv_string)
       csv_data = CSV.parse(csv_string, headers: true)
@@ -37,11 +41,7 @@ module PostgresCsvLoader
 
     # Yields a CSV object to the block, which yielder should fill with rows.
     def load_rows_via_csv(&block)
-      csv_string = CSV.generate(**CSV_OPTIONS.merge(headers: column_names - %w[id])) do |csv|
-        debugger
-        yield(csv)
-      end
-
+      csv_string = CSV.generate(**CSV_OPTIONS) { |csv| yield(csv) }
       load_from_csv_string(csv_string)
     end
 
@@ -49,9 +49,8 @@ module PostgresCsvLoader
 
     def cols_to_update
       cols = column_names - (defined?(self::UPSERT_KEYS) ? self::UPSERT_KEYS : Array.wrap(primary_key)) - %w[created_at]
-
       # Let the auto increment do its thing if the primary key is "id"
-      primary_key == 'id' ? cols - ['id'] : cols
+      primary_key == self::ID_COL ? cols - [self::ID_COL] : cols
     end
 
     def load_csv_data!(csv_data)

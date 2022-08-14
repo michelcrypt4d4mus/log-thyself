@@ -98,7 +98,6 @@ class Logfile < ApplicationRecord
       LogfileLine.load_rows_via_csv do |csv|
         stream_contents do |line, line_number|
           line = line.gsub("\u0000", '').force_encoding(Encoding::UTF_8)
-          Rails.logger.debug("LINE: #{line}")
           csv << LogfileLine.new(logfile_id: self.id, line_number: line_number, line: line).to_csv_hash(true)
           lines_written = line_number
         end
