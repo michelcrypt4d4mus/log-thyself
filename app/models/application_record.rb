@@ -11,7 +11,7 @@ class ApplicationRecord < ActiveRecord::Base
 
   def self.columns_of_type(type)
     cols = columns_hash.select { |col, props| props.type == type }.keys
-    cols - CsvDbWriter::EXCLUDED_COLS
+    cols - CSV_EXCLUDED_COLS
   end
 
   # Attribute hash with keys of string type plus timestamps

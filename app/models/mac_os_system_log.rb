@@ -1,5 +1,6 @@
 class MacOsSystemLog < ApplicationRecord
   self.table_name = 'macos_system_logs'
+  include PostgresCsvLoader
 
   # Not loaded into DB
   EXCLUDED_KEYS = %w(formatString)

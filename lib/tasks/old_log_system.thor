@@ -12,7 +12,7 @@ module Collect
     desc 'load_dir DIR', "Load all files in directory DIR. They don't even have to be log files - Will unzip and process many compressed formats as well as wireshark/bluetooth/tcpdump packet captures files."
     option :include_subdirs,
             desc: 'Recursively include subdirectories',
-            type: boolean,
+            type: :boolean,
             default: true
     def load_dir(directory)
       Logfile.load_all_files_in_directory!(directory, options)
