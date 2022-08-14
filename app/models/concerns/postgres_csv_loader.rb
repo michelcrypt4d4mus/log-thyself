@@ -18,6 +18,7 @@ module PostgresCsvLoader
   end
 
   class_methods do
+    # TODO: we are generating and then parsing again... presumably we could skip that middle step?
     def load_from_csv_string(csv_string)
       csv_data = CSV.parse(csv_string, headers: true)
       transform_csv_data!(csv_data)
@@ -41,6 +42,7 @@ module PostgresCsvLoader
     def transform_csv_data!(csv_data); end
 
     # Yields a CSV object to the block, which yielder should fill with rows.
+    # TODO: get rid of this; the interface should be CsvDbWriter?
     def load_rows_via_csv(&block)
       csv_string = CSV.generate(**CSV_OPTIONS) { |csv| yield(csv) }
       load_from_csv_string(csv_string)

@@ -1,3 +1,5 @@
+# TODO: Almost all of this stuff should live on PostgresCsvLoader
+
 class ApplicationRecord < ActiveRecord::Base
   primary_abstract_class
 
@@ -18,7 +20,7 @@ class ApplicationRecord < ActiveRecord::Base
   def to_csv_hash(set_timestamps_to_now = false)
     row = attributes.except(*CSV_EXCLUDED_COLS)
 
-  # Preserve precision for timestamps, stringify json
+    # Preserve precision for timestamps, stringify json
     self.class.columns_of_type(:datetime).each { |col| row[col] = row[col].iso8601(6) }
     self.class.columns_of_type(:json).each { |col| row[col] = row[col].to_json }
 
