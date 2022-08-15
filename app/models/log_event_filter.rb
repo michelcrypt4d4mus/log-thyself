@@ -5,7 +5,7 @@ class LogEventFilter
   BOOLEANS = [true, false]
 
   class << self
-    attr_accessor :blocked_event_counts
+    attr_accessor :blocked_event_counts, :filters
   end
 
   def self.build_filters!
