@@ -24,13 +24,22 @@ class LogEventFilter
 
   def self.increment_blocked_event_counts(event)
     @blocked_event_counts[event[:process_name]] += 1
-    blocked_event_count = @blocked_event_counts.values.sum
-    return unless blocked_event_count % 5000 == 0
+    log_stats if @blocked_event_counts.values.sum % 5000 == 0
+  end
 
-    # Render a table to the log
+  # Render a table to the log plus allow/block rates etc
+  def self.log_stats
+    blocked_event_count = @blocked_event_counts.values.sum
     rows = @blocked_event_counts.to_a.sort_by { |row| row[1] }.reverse
     table = TTY::Table.new(header: %w[filtered_process count], rows: rows).render(:unicode, indent: 5)
-    Rails.logger.info("Allowed #{@allowed_event_count} / Blocked #{blocked_event_count} events. Blocked event counts:\n#{table}")
+    total_events = @allowed_event_count + blocked_event_count
+    allow_rate = (100 * @allowed_event_count.to_f / total_events).round(1)
+    block_rate = (100 * blocked_event_count.to_f / total_events).round(1)
+
+    msg = "Allowed #{@allowed_event_count} (#{allow_rate}%) / "
+    msg += "Blocked #{blocked_event_count} (#{block_rate}%) events. "
+    msg += "Blocked event counts:\n#{table}"
+    Rails.logger.info(msg)
   end
 
   def initialize(rule)
