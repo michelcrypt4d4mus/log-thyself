@@ -53,10 +53,10 @@ class ObjectiveSeeJsonStreamParser
   def add_to_running_totals(event)
     @model_klass::JSON_PATHS.keys.each { |k| @event_counts[k][event[k]] += 1 }
 
-    if @shell_command_streamer.lines_read_count % @stats_printout_interval == 0
-      puts "[#{@model_klass.to_s}] Read #{@shell_command_streamer.lines_read_count}..."
-      #pp @event_counts  TODO: some kind of better status
-    end
+    # if @shell_command_streamer.lines_read_count % @stats_printout_interval == 0
+    #   puts "[#{@model_klass.to_s}] Read #{@shell_command_streamer.lines_read_count}..."
+    #   pp @event_counts  TODO: some kind of better status
+    # end
   end
 
   def build_shell_command(options)

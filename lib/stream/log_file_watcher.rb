@@ -7,6 +7,8 @@ require 'pastel'
 require 'tty'
 
 class LogFileWatcher
+  POLL_INTERVAL_IN_SECONDS = 15
+
   class << self
     attr_accessor :streamer_threads
   end
@@ -40,13 +42,12 @@ class LogFileWatcher
         puts Pastel.new.underline("Status of log watcher threads") + Pastel.new.magenta.bold(" (new lines were read)")
         tty_table_data_old = tty_table_data
         table = TTY::Table.new(header: tty_table_header, rows: tty_table_data)
-        puts TTY::Table::Renderer::Unicode.new(table).render
-        puts "\n\n\n"
+        puts TTY::Table::Renderer::Unicode.new(table).render + "\n"
       else
         puts "No lines read..."
       end
 
-      sleep(10)
+      sleep(POLL_INTERVAL_IN_SECONDS)
     end
   end
 
