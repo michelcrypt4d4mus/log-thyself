@@ -62,6 +62,9 @@ TERMINAL_DEBUG_SPAM = %w[
   FocusFollowsMouse
   FocusFollowsMouseInBackground
   NSServicesStatus
+  ShowUnmatchedMenuBounds
+  cursorIsCustomized
+  MouseCopyPasteUsesClipboard
   NSWindow
   ShowTabBar
   ShowTabBarInFullScreen
@@ -151,16 +154,6 @@ class FilterDefinitions
         sender_process_name: 'IOKit',
         message_type: DEBUG,
         event_message: /^0x[0-9A-Fa-f]{9}: set property/
-      },
-      allowed?: false
-    },
-
-    {
-      comment: "GPU policy lookup",
-      matchers: {
-        sender_process_name: 'CoreFoundation',
-        message_type: DEBUG,
-        event_message: /^found no value for key gpu-policies in CFPrefsPlistSource/
       },
       allowed?: false
     },
@@ -323,16 +316,6 @@ class FilterDefinitions
       allowed?: false
     },
 
-
-    {
-      comment: 'reduceTransparency, increaseContrast',
-      matchers: {
-        message_type: DEBUG,
-        event_message: /^found no value for key (reduceTransparency|increaseContrast)/
-      },
-      allowed?: false
-    },
-
     {
       comment: 'thermalmonitord, kernel',
       matchers: {
@@ -409,9 +392,8 @@ class FilterDefinitions
     },
 
     {
-      comment: 'Little Snitch Icon Update',
+      comment: 'IconServices debug/info level',
       matchers: {
-        process_name: 'Little Snitch Network Monitor',
         sender_process_name: 'IconServices',
         message_type: INFO_OR_LESS,
       },
@@ -685,16 +667,6 @@ class FilterDefinitions
           /^(result: 0$|Successfully (promised|set) data \((new-entry|cache)\)|PromiseDataUsingBlock|Flushing \d+ pending entries synchronously for pboard|#cache-invalidation|BeginGeneration\('(com.apple.Terminal.selection|Apple CFPasteboard general)')/,
           /com\.apple\.pboard\.invalidate-cache$/
         ]
-      },
-      allowed?: false
-    },
-
-    {
-      comment: 'Terminal IconServices',
-      matchers: {
-        process_name: 'Terminal',
-        sender_process_name: 'IconServices',
-        message_type: INFO_OR_LESS,
       },
       allowed?: false
     },

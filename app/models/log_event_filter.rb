@@ -80,7 +80,7 @@ class LogEventFilter
       end
     end
 
-    Rails.logger.info("Blocked event counts:\n#{table_txt}")
+    Rails.logger.info("Filtered event counts:\n#{table_txt}")
   end
 
   def initialize(rule)

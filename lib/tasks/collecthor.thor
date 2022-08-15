@@ -2,10 +2,12 @@ class CollecTHOR < Thor
   include StyledNotifications
 
   # TODO collect:old_log_system:stream
-  # objectivesee:process_monitor:stream
   INVOCABLE_COLLECTORS = %w[
+    collect:old_log_system:load
+    collect:old_log_system:stream
     collect:syslog:stream
     objectivesee:file_monitor:stream
+    objectivesee:process_monitor:stream
   ]
 
   desc 'collect_all', '[EXPERIMENTAL] Collect all the things in forked processes'

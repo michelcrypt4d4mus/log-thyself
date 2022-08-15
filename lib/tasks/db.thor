@@ -25,7 +25,6 @@ class Db < Thor
     dir_to_dump_to = options['dir_to_dump_to']
     database = options[:database]
     pg_dump_flags = options[:pg_dump_flags]
-    puts "ARGV: #{ARGV}"
     filename = "#{database.delete_suffix("_#{Rails.env}")}_#{Time.now.strftime('%Y-%m-%dT%H%M%S%p')}"
     file_suffix = options[:file_suffix] || ask("Enter a descriptive suffix or hit enter if you don't want one:")
     filename += '_' + file_suffix unless file_suffix.blank?
