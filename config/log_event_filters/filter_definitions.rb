@@ -435,7 +435,7 @@ class FilterDefinitions
     },
 
     {
-      comment: 'launchservices basic communications',
+      comment: 'launchservices low level communications',
       matchers: {
         process_name: 'launchservicesd',
         category: 'cas',
@@ -445,7 +445,7 @@ class FilterDefinitions
           /^MESSAGE: reply={result={LSBundlePath="(#{LAUNCHD_COMMS_IGNORE_BUNDLE_PATHS.join('|')})/,
           /Need to lookup or create kLSDefaultSessionID for client\.$/,
           'assertionsDidInvalidate',
-          /^(SETFRONT|Moving App:|Returning session|static Boolean LSNotification|-- using cached connection|Acquiring assertion:)/
+          /^(SETFRONT|void LSNotification|Moving App:|Returning session|static Boolean LSNotification|-- using cached connection|Acquiring assertion:)/
         ]
       },
       allowed?: false
