@@ -1,9 +1,11 @@
 LAUNCHD_COMMS_IGNORE_BUNDLE_IDS = %w[
   at.obdev.littlesnitch.networkmonitor
   at.obdev.littlesnitch.agent
+  com.apple.appkit.xpc.openAndSavePanelService
   com.apple.dock.extra
   com.apple.Safari
   com.apple.UnmountAssistantAgent
+  com.apple.WebKit.WebContent
   com.microsoft.VSCode
 ].map { |id| Regexp.escape(id) }
 
@@ -39,12 +41,39 @@ MDS_MSG_PREFIXES = [
   "Importer recycle"
 ]
 
+TERMINAL_DEBUG_SPAM = %w[
+  WindowBorderMinBrightness
+  Command1Through9SwitchesTabs
+  AutoMarkPromptLines
+  ShowLineMarks
+  UseAppIBeamCursor
+  WindowBorderMaxSaturation
+  NewWindowSettingsBehavior
+  ShouldLimitRestoreScrollback
+  NewTabSettingsBehavior
+  NSWindow
+  NSWindow
+  TTWindowActivationDuration
+  AppleLanguages
+  AssignWindowShortcutsToTabbedWindows
+  FocusFollowsMouse
+  FocusFollowsMouseInBackground
+  NSServicesStatus
+  NSWindow
+  ShowTabBar
+  ShowTabBarInFullScreen
+  TTWindowDeactivationDuration
+  NewWindowWorkingDirectoryBehavior
+  NewTabWorkingDirectoryBehavior
+]
+
 class FilterDefinitions
   PRNG = Random.new(2385)
   FILTER_DEFINITION_KEYS = %i[allowed? comment matchers]
 
   # Apple log levels
   (DEBUG, INFO, DEFAULT, ERROR, FAULT) = MacOsSystemLog::MESSAGE_TYPES
+  INFO_OR_LESS = [INFO, DEBUG]
 
   LOG_EVENT_FILTERS = [
     {
@@ -153,7 +182,12 @@ class FilterDefinitions
       matchers: {
         process_name: 'Electron',
         message_type: DEBUG,
-        subsystem: 'com.apple.HIToolbox'
+        subsystem: %w[
+          com.apple.CFBundle
+          com.apple.CFPasteboard
+          com.apple.defaults
+          com.apple.HIToolbox
+        ]
       },
       allowed?: false
     },
@@ -213,7 +247,7 @@ class FilterDefinitions
       matchers: {
         process_name: 'Little Snitch Network Monitor',
         sender_process_name: 'IconServices',
-        message_type: DEBUG,
+        message_type: INFO_OR_LESS,
       },
       allowed?: false
     },
@@ -227,6 +261,62 @@ class FilterDefinitions
         event_message: [
           /^MESSAGE: reply={result={CFBundleIdentifier="(#{LAUNCHD_COMMS_IGNORE_BUNDLE_IDS.join('|')})"/,
           /^MESSAGE: reply={result={LSBundlePath="(#{LAUNCHD_COMMS_IGNORE_BUNDLE_PATHS.join('|')})/
+        ]
+      },
+      allowed?: false
+    },
+
+    {
+      comment: 'opendirectoryd pipeline',
+      matchers: {
+        process_name: 'opendirectoryd',
+        category: 'pipeline',
+        event_message: 'submitting request to internal pipeline',
+        message_type: DEBUG
+      },
+      allowed?: false
+    },
+
+    {
+      comment: 'opendirectoryd low level debug',
+      matchers: {
+        process_name: 'opendirectoryd',
+        category: 'object-lifetime',
+        message_type: DEBUG
+      },
+      allowed?: false
+    },
+
+    {
+      comment: 'All processes user defaults lookups',
+      matchers: {
+        category: 'User Defaults',
+        message_type: DEBUG,
+        event_message: /^found no value for key/
+      },
+      allowed?: false
+    },
+
+    {
+      comment: 'Terminal spam events',
+      matchers: {
+        process_name: 'Terminal',
+        category: 'User Defaults',
+        message_type: DEBUG,
+        event_message: /^looked up value [\w<>]+ for key (#{TERMINAL_DEBUG_SPAM.join('|')}) in/,
+      },
+      allowed?: false
+    },
+
+    {
+      comment: 'Terminal clipboard events',
+      matchers: {
+        process_name: 'Terminal',
+        subsystem: 'com.apple.CFPasteboard',
+        message_type: INFO_OR_LESS,
+        event_message: [
+          /^(result: 0$|Successfully (promised|set) data \((new-entry|cache)\)|PromiseDataUsingBlock|Flushing \d+ pending entries synchronously for pboard|#cache-invalidation|BeginGeneration\('(com.apple.Terminal.selection|Apple CFPasteboard general)')/,
+          /com\.apple\.pboard\.invalidate-cache$/
         ]
       },
       allowed?: false
