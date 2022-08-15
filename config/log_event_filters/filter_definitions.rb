@@ -557,9 +557,9 @@ class FilterDefinitions
       matchers: {
         category: 'User Defaults',
         message_type: DEBUG,
-        event_message: /^found no value for key/
+        event_message: /^(found no value for key|looked up value)/
       },
-      allowed?: false
+      allowed?: ->(event) { event[:process_name] == Terminal }  # Terminal has its own rows
     },
 
     {
