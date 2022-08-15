@@ -40,9 +40,9 @@ module Collect
     end
 
     # TODO: syslog format is also a way to reduce the log size...
-    desc 'from_file FILE', 'Read logs from FILE. Can handle non JSON log formats, see the help'
+    desc 'from_file FILE', "Read logs from FILE. Can handle non JSON 'log' output"
     option :syslog,
-            desc: "FILE is syslog format instead of JSON",
+            desc: "FILE is the default format that streams from 'log show' or log stream when you don't use any --style option",
             type: :boolean,
             default: false
     def from_file(file)

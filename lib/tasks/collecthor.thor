@@ -1,4 +1,4 @@
-class Collecthor < Thor
+class Callthecollecthor < Thor
   include StyledNotifications
 
   FUTURE_STREAMS = %w[
@@ -9,8 +9,8 @@ class Collecthor < Thor
 
   PAST_SCANS = [
     'collect:syslog:last 365d',
-    'collect:old_log_system:load',
-    'collect:old_log_system:stream',
+    'collect:consolelogs:load',
+    'collect:consolelogs:stream',
   ]
 
   desc 'everything', 'Collect all the things (future and past) in forked processes'
@@ -24,7 +24,7 @@ class Collecthor < Thor
     start_em_up(FUTURE_STREAMS)
   end
 
-  desc 'past', 'System logs from the past + Console/ASL logs, '
+  desc 'past', 'System logs from the pass, Console.app text, ASL logs, tcp/bluetooth capture files'
   def past
     start_em_up(PAST_SCANS)
   end
