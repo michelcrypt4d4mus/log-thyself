@@ -8,6 +8,8 @@ class LogEventFilter
     attr_accessor :blocked_event_counts, :filters
   end
 
+  attr_reader :rule
+
   def self.build_filters!
     FilterDefinitions.validate!
     @filters = FILTER_DEFINITIONS.map { |fd| new(fd) }

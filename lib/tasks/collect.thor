@@ -2,6 +2,7 @@
 # subcommand documentation that is incredibly unhelpful: https://github.com/rails/thor/wiki/Subcommands
 # "Collectthor" lol
 
+require 'pastel'
 load 'collector_command.thor'
 
 
@@ -58,8 +59,14 @@ module Collect
           StreamCoordinator.collect!(AppleJsonLogStreamParser.new(@shell_command), options.merge(destination_klass: MacOsSystemLog))
         rescue Interrupt
           say "Stopping..."
+        rescue => e
+          msg = Pastel.new.red.bold("ERROR: #{e.class.to_s}: #{e.message}")
+          puts msg
+          puts "(See logs for stack trace)"
+          Rails.logger.error("#{msg}\n#{e.backtrace.join("\n")}")
         end
       end
     end
   end
 end
+

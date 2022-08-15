@@ -590,7 +590,7 @@ class FilterDefinitions
         message_type: DEBUG,
         event_message: /^(found no value for key|looked up value)/
       },
-      allowed?: ->(event) { event[:process_name] == Terminal }  # Terminal has its own rows
+      allowed?: ->(event) { event[:process_name] == 'Terminal' }  # Terminal has its own rows
     },
 
     {
@@ -642,7 +642,27 @@ class FilterDefinitions
         ]
       },
       allowed?: false
+    },
+
+    {
+      comment: 'Terminal IconServices',
+      matchers: {
+        process_name: 'Terminal',
+        sender_process_name: 'IconServices',
+        message_type: INFO_OR_LESS,
+      },
+      allowed?: false
+    },
+
+    {
+      comment: 'debug strings',
+      matchers: {
+        category: 'strings',
+        message_type: DEBUG,
+      },
+      allowed?: false
     }
+
   ]
 
   def self.validate!
