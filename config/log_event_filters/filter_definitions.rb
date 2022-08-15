@@ -662,7 +662,6 @@ class FilterDefinitions
       },
       allowed?: false
     }
-
   ]
 
   def self.validate!

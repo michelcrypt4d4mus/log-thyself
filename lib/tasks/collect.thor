@@ -61,7 +61,7 @@ module Collect
           say "Stopping..."
         rescue => e
           msg = Pastel.new.red.bold("ERROR: #{e.class.to_s}: #{e.message}")
-          puts msg
+          puts "🚨 #{msg} "
           puts "(See logs for stack trace)"
           Rails.logger.error("#{msg}\n#{e.backtrace.join("\n")}")
         end
