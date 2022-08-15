@@ -40,6 +40,33 @@ class LogEventFilter
     @event_counts.inject(0) { |event_count, (_, counts)| event_count + counts[permitted ? :allowed : :blocked] }
   end
 
+  def initialize(rule)
+    @rule = rule
+  end
+
+  def allow?(event)
+    return true unless applicable?(event)
+    BOOLEANS.include?(@rule[:allowed?]) ? @rule[:allowed?] : @rule[:allowed?].call(event)
+    # msg = sprintf("%5s / %5s", applicable, (permitted.nil? ? pastel.dim('<nil>') : permitted))
+    # msg += sprintf("   %25s   %25s", pastel.red(event[:process_name]), pastel.blue(event[:sender_process_name]))
+    # msg += sprintf("  %8s   %90s", pastel.green(event[:message_type]), pastel.magenta(event[:event_message]))
+    # puts msg
+    # applicable ? permitted : true
+  end
+
+  # Check the properties match before applying the proc
+  def applicable?(event)
+    @rule[:matchers].all? do |col_name, match_rule|
+      return false unless event[col_name]
+
+      if match_rule.is_a?(Array)
+        match_rule.any? { |matcher| value_match?(matcher, event[col_name]) }
+      else
+        value_match?(match_rule, event[col_name])
+      end
+    end
+  end
+
   # Render a table to the log plus allow/block rates etc
   def self.log_stats
     allowed_total = sum_event_counts(true)
@@ -80,34 +107,9 @@ class LogEventFilter
       end
     end
 
+    # TODO: use the "say and log"
     Rails.logger.info("Filtered event counts:\n#{table_txt}")
-  end
-
-  def initialize(rule)
-    @rule = rule
-  end
-
-  def allow?(event)
-    return true unless applicable?(event)
-    BOOLEANS.include?(@rule[:allowed?]) ? @rule[:allowed?] : @rule[:allowed?].call(event)
-    # msg = sprintf("%5s / %5s", applicable, (permitted.nil? ? pastel.dim('<nil>') : permitted))
-    # msg += sprintf("   %25s   %25s", pastel.red(event[:process_name]), pastel.blue(event[:sender_process_name]))
-    # msg += sprintf("  %8s   %90s", pastel.green(event[:message_type]), pastel.magenta(event[:event_message]))
-    # puts msg
-    # applicable ? permitted : true
-  end
-
-  # Check the properties match before applying the proc
-  def applicable?(event)
-    @rule[:matchers].all? do |col_name, match_rule|
-      return false unless event[col_name]
-
-      if match_rule.is_a?(Array)
-        match_rule.any? { |matcher| value_match?(matcher, event[col_name]) }
-      else
-        value_match?(match_rule, event[col_name])
-      end
-    end
+    puts table_text if @total_events % (STATS_LOGGING_FREQUENCY * 2) == 0
   end
 
   private

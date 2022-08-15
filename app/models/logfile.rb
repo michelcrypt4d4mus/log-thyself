@@ -35,6 +35,9 @@ class Logfile < ApplicationRecord
   TAIL_FROM_TOP = 'tail -c +0'
   TAIL_FROM_TOP_STREAMING = TAIL_FROM_TOP + ' -F'
 
+  # Batch size to use for bulk loads
+  BULK_LOAD_BATCH_SIZE = 10_000
+
   def self.logfile_paths_on_disk
     LOG_DIRS.flat_map { |dir| Dir[File.join(dir, '**/*')] }.select { |f| File.file?(f) }
   end
@@ -97,7 +100,7 @@ class Logfile < ApplicationRecord
     save!
 
     begin
-      lines_written = CsvDbWriter.open(LogfileLine) do |db_writer|
+      lines_written = CsvDbWriter.open(LogfileLine, batch_size: BULK_LOAD_BATCH_SIZE) do |db_writer|
         stream_contents do |line, line_number|
           line = line.gsub("\u0000", '').force_encoding(Encoding::UTF_8)
           db_writer << LogfileLine.new(logfile_id: self.id, line_number: line_number, line: line)

@@ -56,7 +56,7 @@ class LogFileWatcher
 
   # Returns a hash with the thread that was spawned and the lines loaded by initial CSV
   def load_and_stream!
-    @info[:csv_lines] = @logfile.write_contents_to_db!
+    @info[:csv_lines] = @logfile.write_contents_to_db! || 0
     initial_lines_in_db = @logfile.logfile_lines.count
 
     if @info[:csv_lines] != initial_lines_in_db
