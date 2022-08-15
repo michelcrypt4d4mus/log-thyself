@@ -21,6 +21,7 @@ class LogFileWatcher
     pastel = Pastel.new
 
     while(true) do
+      # TODO: Use say_and
       tty_table_header = ['id', 'logfile path', 'alive?', 'CSV lines', 'Extra Lines']
 
       tty_table_data = @streamer_threads.inject([]) do |table, (logfile, hsh)|
@@ -36,15 +37,16 @@ class LogFileWatcher
       tty_table_data.sort_by! { |row| File.basename(row[1]) }
 
       if tty_table_data != tty_table_data_old
-        puts "**** STATUS CHANGE ****"
+        puts Pastel.new.underline("Status of log watcher threads") + Pastel.new.magenta.bold(" (new lines were read)")
+        tty_table_data_old = tty_table_data
+        table = TTY::Table.new(header: tty_table_header, rows: tty_table_data)
+        puts TTY::Table::Renderer::Unicode.new(table).render
+        puts "\n\n\n"
+      else
+        puts "No lines read..."
       end
 
-      tty_table_data_old = tty_table_data
-      table = TTY::Table.new(header: tty_table_header, rows: tty_table_data)
-
-      puts TTY::Table::Renderer::Unicode.new(table).render
-      puts "\n\n\n"
-      sleep(5)
+      sleep(10)
     end
   end
 

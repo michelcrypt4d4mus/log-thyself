@@ -5,7 +5,7 @@ class LogEventFilter
   include ActionView::Helpers::NumberHelper
 
   FILTER_DEFINITIONS = FilterDefinitions::LOG_EVENT_FILTERS
-  STATS_LOGGING_FREQUENCY = 25000
+  STATS_LOGGING_FREQUENCY = 10_000
   BOOLEANS = [true, false]
 
   class << self
@@ -109,7 +109,7 @@ class LogEventFilter
 
     # TODO: use the "say and log"
     Rails.logger.info("Filtered event counts:\n#{table_txt}")
-    puts table_text if @total_events % (STATS_LOGGING_FREQUENCY * 2) == 0
+    puts table_txt if @total_events % (STATS_LOGGING_FREQUENCY * 2) == 0
   end
 
   private
