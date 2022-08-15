@@ -123,7 +123,7 @@ class FilterDefinitions
       matchers: {
         process_name: 'WindowServer',
         event_message: /^Status bar is going to clip a never-clip item/,
-        message_type: DEBUG
+        message_type: ERROR
       },
       allowed?: false
     },
@@ -326,7 +326,13 @@ class FilterDefinitions
       comment: 'runningboardd state update',
       matchers: {
         process_name: 'runningboardd',
-        event_message: 'state update'
+        event_message: [
+          'acquireAssertionWithDescriptor',
+          'invalidateAssertionWithIdentifier',
+          'Processing events',
+          'state notification',
+          'state update',
+        ]
       },
       allowed?: false
     },

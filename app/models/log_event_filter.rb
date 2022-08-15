@@ -20,6 +20,16 @@ class LogEventFilter
     @filters.all? { |f| f.allow?(event) }
   end
 
+  def self.increment_blocked_event_counts(event)
+    @blocked_event_counts[event[:process_name]] += 1
+    return unless @blocked_event_counts.values.sum % 5000 == 0
+
+    # Render a table to the log
+    rows = @blocked_event_counts.to_a.sort_by { |row| row[1] }.reverse
+    table = TTY::Table.new(header: %w[filtered_process count], rows: rows).render(:unicode, indent: 5)
+    Rails.logger.info("Blocked event counts:\n#{table}")
+  end
+
   def initialize(rule)
     @rule = rule
   end
@@ -32,13 +42,7 @@ class LogEventFilter
       true
     else
       Rails.logger.debug("Event blocked by filter '#{@rule[:comment]}'")
-      self.class.blocked_event_counts[event[:process_name]] += 1
-
-      if self.class.blocked_event_counts.values.sum % 1000 == 0
-        msg = self.class.blocked_event_counts.to_a.sort_by { |row| row[1] }.reverse.map { |row| "#{row[0]}: #{row[1]}"}.join("\n")
-        Rails.logger.info("Blocked event counts:\n#{msg}")
-      end
-
+      self.class.increment_blocked_event_counts(event)
       false
     end
   end
