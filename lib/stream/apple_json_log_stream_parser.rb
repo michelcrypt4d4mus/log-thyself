@@ -10,7 +10,7 @@ class AppleJsonLogStreamParser < ::Oj::ScHandler
   LOG_LEVELS = %w(default info debug)
   LOG_OPTIONS = '--source --style json --color none'
   LOG_STREAM_SHELL_CMD = "log stream #{LOG_OPTIONS}"
-  LOG_SHOW_SHELL_CMD = "log show #{LOG_OPTIONS}"
+  LOG_SHOW_SHELL_CMD = "log show #{LOG_OPTIONS} --debug --info"
 
   def initialize(shell_command)
     @shell_command = shell_command

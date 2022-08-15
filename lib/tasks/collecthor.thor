@@ -1,38 +1,39 @@
-class CollectHOR < Thor
+class Collecthor < Thor
   include StyledNotifications
 
-  MOST_INVOCABLES = %w[
+  FUTURE_STREAMS = %w[
     collect:syslog:stream
     objectivesee:file_monitor:stream
     objectivesee:process_monitor:stream
   ]
 
-  # TODO collect:old_log_system:stream
-  INVOCABLE_COLLECTORS = MOST_INVOCABLES + %w[
-    collect:old_log_system:load
-    collect:old_log_system:stream
+  PAST_SCANS = [
+    'collect:syslog:last 365d',
+    'collect:old_log_system:load',
+    'collect:old_log_system:stream',
   ]
 
-  desc 'collect_all', '[EXPERIMENTAL] Collect all the things in forked processes'
-  def collect_all
-    start_em_up(INVOCABLE_COLLECTORS)
+  desc 'everything', 'Collect all the things (future and past) in forked processes'
+  def everything
+    start_em_up(PAST_SCANS)
+    start_em_up(FUTURE_STREAMS)
   end
 
-  desc 'collect_most', 'System Logs, FileMonitor, ProcessMonitor (requires sudo!)'
-  def collect_most
-    start_em_up(MOST_INVOCABLES)
+  desc 'future', 'System Logs, FileMonitor, ProcessMonitor from now (requires sudo!)'
+  def future
+    start_em_up(FUTURE_STREAMS)
+  end
+
+  desc 'past', 'System logs from the past + Console/ASL logs, '
+  def past
+    start_em_up(PAST_SCANS)
   end
 
   no_commands do
-    def start_em_up(invocables, args_to_pass: nil)
-      args_to_pass = ARGV.length > 1 ? ARGV[1..-1] : []
-
+    def start_em_up(invocables)
       invocables.each do |invocable|
-        puts "inv: #{invocable}"
-        puts "args: #{args_to_pass}"
-        args = ["thor #{invocable}"] + args_to_pass
         say_and_log("Invoking #{invocable}...", styles: [:cyan])
-        pid = Process.spawn(*args)
+        pid = Process.spawn("thor #{invocable}")
         say_and_log("#{invocable} now running with pid #{pid}, detaching...")
         Process.detach(pid)
       end
