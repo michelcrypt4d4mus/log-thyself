@@ -59,7 +59,7 @@ module Collect
           StreamCoordinator.collect!(AppleJsonLogStreamParser.new(@shell_command), options.merge(destination_klass: MacOsSystemLog))
         rescue Interrupt
           say "Stopping..."
-        rescue => e
+        rescue StandardError, NoMethodError => e
           msg = Pastel.new.red.bold("ERROR: #{e.class.to_s}: #{e.message}")
           puts "🚨 #{msg} "
           puts "(See logs for stack trace)"

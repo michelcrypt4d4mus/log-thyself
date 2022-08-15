@@ -509,7 +509,6 @@ class FilterDefinitions
           /Decrementing suppression state to/
 
         ],
-        message_type: DEFAULT_OR_LESS,
       },
       allowed?: false
     },
@@ -636,7 +635,7 @@ class FilterDefinitions
         message_type: DEBUG,
         event_message: /^(found no value for key|looked up value)/
       },
-      allowed?: ->(event) { event[:process_name] == 'Terminal' }  # Terminal has its own rows
+      allowed?: ->(event) { (event[:process_name] || '') == 'Terminal' }  # Terminal has its own rows
     },
 
     {

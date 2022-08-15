@@ -5,11 +5,11 @@ class LogEventFilter
   include ActionView::Helpers::NumberHelper
 
   FILTER_DEFINITIONS = FilterDefinitions::LOG_EVENT_FILTERS
-  STATS_LOGGING_FREQUENCY = 5000
+  STATS_LOGGING_FREQUENCY = 10000
   BOOLEANS = [true, false]
 
   class << self
-    attr_accessor :blocked_event_counts, :filters
+    attr_accessor :blocked_event_counts, :filters, :pastel
   end
 
   attr_reader :rule
@@ -20,6 +20,7 @@ class LogEventFilter
     Rails.logger.info("Built #{@filters.size} filters")
     @event_counts = h = Hash.new { |h, k| h[k] = { allowed: 0, blocked: 0 } }
     @total_events = 0
+    @pastel = Pastel.new
   end
 
   # All must allow an event for event to be recorded
@@ -41,7 +42,6 @@ class LogEventFilter
 
   # Render a table to the log plus allow/block rates etc
   def self.log_stats
-    Rails.logger.info("#{@event_counts.pretty_inspect}\n")
     allowed_total = sum_event_counts(true)
     blocked_total = sum_event_counts(false)
 
@@ -50,32 +50,33 @@ class LogEventFilter
 
     rows = sorted_processes.reverse.inject([]) do |memo, process|
       counts = %i[allowed blocked].map { |status| @event_counts[process][status] }
-      total_for_proc = counts.sum.to_f
+      total_for_proc = counts.sum
       percentages = counts.map { |c| "#{(100 * c.to_f / total_for_proc).round(1)}%" }
       memo << [process, total_for_proc] + counts + percentages
     end
 
-    table = TTY::Table.new(
-      header: %w[filtered_process total_events allowed blocked allow_pct block_pct ],
-      rows: rows
-    )
+    total_allow_pct = (100 * allowed_total.to_f / @total_events).round(1)
+    total_block_pct = (100 * blocked_total.to_f / @total_events).round(1)
 
-    pastel = Pastel.new
+    header = %w[filtered_process total_events allowed blocked allow_pct block_pct]
+    totals_row = [pastel.bold('TOTAL'), @total_events, allowed_total, blocked_total, total_allow_pct, total_block_pct]
+    buffer_row = Array.new(6) { |_| '' }
+    table = TTY::Table.new(header: header, rows: [totals_row, buffer_row] + rows)
     aligns = [:left] + Array.new(5) { |_| :right }
 
     table_txt = table.render(:unicode, indent: 5, padding: [0, 1], alignments: aligns) do |renderer|
       renderer.filter = ->(val, row_index, col_index) do
-        row_index % 2 == 1 ? pastel.inverse(val) : val
+        if row_index == 1
+          pastel.bold.bright_white(val)
+        elsif row_index % 2 == 1
+          pastel.black.on_white(val)
+        else
+          pastel.white.on_black(val)
+        end
       end
     end
 
-    allow_rate = (100 * allowed_total.to_f / @total_events).round(1)
-    block_rate = (100 * blocked_total.to_f / @total_events).round(1)
-
-    msg = "Allowed #{allowed_total} (#{allow_rate}%) / "
-    msg += "Blocked #{blocked_total} (#{block_rate}%) events. "
-    msg += "Blocked event counts:\n#{table_txt}"
-    Rails.logger.info(msg)
+    Rails.logger.info("Blocked event counts:\n#{table_txt}")
   end
 
   def initialize(rule)
@@ -85,6 +86,11 @@ class LogEventFilter
   def allow?(event)
     return true unless applicable?(event)
     BOOLEANS.include?(@rule[:allowed?]) ? @rule[:allowed?] : @rule[:allowed?].call(event)
+    # msg = sprintf("%5s / %5s", applicable, (permitted.nil? ? pastel.dim('<nil>') : permitted))
+    # msg += sprintf("   %25s   %25s", pastel.red(event[:process_name]), pastel.blue(event[:sender_process_name]))
+    # msg += sprintf("  %8s   %90s", pastel.green(event[:message_type]), pastel.magenta(event[:event_message]))
+    # puts msg
+    # applicable ? permitted : true
   end
 
   # Check the properties match before applying the proc
@@ -104,5 +110,9 @@ class LogEventFilter
 
   def value_match?(matcher, value)
     matcher.is_a?(Regexp) ? matcher.match?(value) : matcher == value
+  end
+
+  def pastel
+    self.class.pastel
   end
 end
