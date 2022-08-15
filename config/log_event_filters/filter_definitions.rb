@@ -318,6 +318,22 @@ class FilterDefinitions
     },
 
     {
+      comment: 'securityd',
+      matchers: {
+        process_name: 'securityd',
+        message_type: DEBUG,
+        event_message: [
+          /^Empty (start|end) date$/,
+          'request return: 0',
+          'end request',
+          /^(---|===) BlockCryptor/,
+          /^begin request: \d+, \d+$/
+        ]
+      },
+      allowed?: false
+    },
+
+    {
       comment: 'Little Snitch Icon Update',
       matchers: {
         process_name: 'Little Snitch Network Monitor',
