@@ -1,30 +1,50 @@
+LAUNCHD_COMMS_IGNORE_BUNDLE_IDS = %w[
+  at.obdev.littlesnitch.networkmonitor
+  at.obdev.littlesnitch.agent
+  com.apple.dock.extra
+  com.apple.Safari
+  com.apple.UnmountAssistantAgent
+  com.microsoft.VSCode
+].map { |id| Regexp.escape(id) }
+
+LAUNCHD_COMMS_IGNORE_BUNDLE_PATHS_HEREDOC = <<-PATH
+/Applications/Safari.app
+/System/Library/Frameworks/WebKit.framework/Versions/A/XPCServices/com.apple.WebKit.WebContent.xpc
+/System/Library/Frameworks/AppKit.framework/Versions/C/XPCServices/com.apple.appkit.xpc.openAndSavePanelService.xpc
+/System/Library/CoreServices/Dock.app/Contents/XPCServices/com.apple.dock.extra.xpc
+/Applications/Little Snitch.app/Contents/Components/Little Snitch Network Monitor.app
+/Applications/Little Snitch.app/Contents/Components/Little Snitch Agent.app
+/Applications/Visual Studio Code.app
+/System/Library/CoreServices/Finder.app
+/System/Library/CoreServices/loginwindow.app
+PATH
+
+LAUNCHD_COMMS_IGNORE_BUNDLE_PATHS = LAUNCHD_COMMS_IGNORE_BUNDLE_PATHS_HEREDOC.split("\n").map { |path| Regexp.escape(path.strip) }
+
+# mds service low level
+MDS_MSG_PREFIXES = [
+  "----",
+  "NEXTQUEUE",
+  "REORDER CHANGE",
+  "EVAL",
+  "handleXPCMessage",
+  "Returning zero storeID",
+  "REMOVE FROM HEAP",
+  "ADD",
+  "Leaving import restricted state",
+  "=====",
+  "Task <private> finished with status 0",
+  "fetchItems at qos",
+  "Truncating a list of bindings to",
+  "Importer recycle"
+]
+
 class FilterDefinitions
   PRNG = Random.new(2385)
   FILTER_DEFINITION_KEYS = %i[allowed? comment matchers]
 
   # Apple log levels
   (DEBUG, INFO, DEFAULT, ERROR, FAULT) = MacOsSystemLog::MESSAGE_TYPES
-
-  # mds service low level
-  MDS_MSG_PREFIXES = [
-    "----",
-    "NEXTQUEUE",
-    "REORDER CHANGE",
-    "EVAL",
-    "handleXPCMessage",
-    "Returning zero storeID",
-    "REMOVE FROM HEAP",
-    "ADD",
-    "Leaving import restricted state",
-    "=====",
-    "Task <private> finished with status 0",
-    "fetchItems at qos",
-    "Truncating a list of bindings to",
-    "Importer recycle"
-  ]
-
-
-
 
   LOG_EVENT_FILTERS = [
     {
@@ -197,7 +217,22 @@ class FilterDefinitions
       },
       allowed?: false
     },
+
+    {
+      comment: 'launchservices basic communications',
+      matchers: {
+        process_name: 'launchservicesd',
+        category: 'cas',
+        message_type: DEBUG,
+        event_message: [
+          /^MESSAGE: reply={result={CFBundleIdentifier="(#{LAUNCHD_COMMS_IGNORE_BUNDLE_IDS.join('|')})"/,
+          /^MESSAGE: reply={result={LSBundlePath="(#{LAUNCHD_COMMS_IGNORE_BUNDLE_PATHS.join('|')})/
+        ]
+      },
+      allowed?: false
+    }
   ]
+
 
 
   def self.validate!
