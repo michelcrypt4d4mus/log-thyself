@@ -119,6 +119,16 @@ class FilterDefinitions
     },
 
     {
+      comment: "WindowServer Status bar is going to clip a never-clip item",
+      matchers: {
+        process_name: 'WindowServer',
+        event_message: /^Status bar is going to clip a never-clip item/,
+        message_type: DEBUG
+      },
+      allowed?: false
+    },
+
+    {
       comment: "Multitouch / Universal control / SkyLight to WindowServer",
       matchers: {
         process_name: 'WindowServer',
@@ -223,6 +233,15 @@ class FilterDefinitions
     },
 
     {
+      comment: 'Activity Monitor SafeEjectGPU',
+      matchers: {
+        process_name: 'Activity Monitor',
+        sender_process_name: 'SafeEjectGPU',
+      },
+      allowed?: false
+    },
+
+    {
       comment: 'BlockBlock allows',
       matchers: {
         process_name: 'BlockBlock',
@@ -233,11 +252,62 @@ class FilterDefinitions
     },
 
     {
-      comment: 'Little Snitch Agent gui stuff',
+      comment: 'SymptomEvaluator cannot handle ethernet',
       matchers: {
-        process_name: 'Little Snitch Agent',
+        process_name: 'symptomsd',
+        event_message: "Don't have a tracker for WiredEthernet interface type"
+      },
+      allowed?: false
+    },
+
+    {
+      comment: 'reduceTransparency, increaseContrast',
+      matchers: {
         message_type: DEBUG,
         event_message: /^found no value for key (reduceTransparency|increaseContrast)/
+      },
+      allowed?: false
+    },
+
+    {
+      comment: 'thermalmonitord, kernel',
+      matchers: {
+        process_name: %w[
+          kernel
+          thermalmonitord
+        ],
+        message_type: INFO_OR_LESS,
+        event_message: [
+          /^iterated \d+ channels with \d+ iterations/,  # thermalmonitord
+          # Kernel
+          /^ApplePPMPolicyCPMS::setDetailedThermalPowerBudget:setDetailedThermalPowerBudget/,
+          /^(postMessageInternal:isPipeOpened|cfil_acquire_sockbuf|memorystatus: set assertion priority|apfs_snap_vnop_create)/,
+        ]
+      },
+      allowed?: false
+    },
+
+    # PAH = "press and hold"
+    {
+      comment: 'reduceTransparency, increaseContrast',
+      matchers: {
+        process_name: 'PAH_Extension',
+        event_message: [
+          'Get bundle identifier',
+          'Get window level',
+          /^(-windowLevel produced \d+|sessionFinished)/,
+          /^(De)*activate ?Server/i
+        ]
+      },
+      allowed?: false
+    },
+
+    {
+      comment: 'FreeUniqueRecord from Security dbsession',
+      matchers: {
+        message_type: DEBUG,
+        category: 'dbsession',
+        event_message: /^FreeUniqueRecord: [0-9A-Za-f]+$/
       },
       allowed?: false
     },
@@ -248,6 +318,15 @@ class FilterDefinitions
         process_name: 'Little Snitch Network Monitor',
         sender_process_name: 'IconServices',
         message_type: INFO_OR_LESS,
+      },
+      allowed?: false
+    },
+
+    {
+      comment: 'runningboardd state update',
+      matchers: {
+        process_name: 'runningboardd',
+        event_message: 'state update'
       },
       allowed?: false
     },
