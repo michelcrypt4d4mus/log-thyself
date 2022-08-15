@@ -472,7 +472,20 @@ class FilterDefinitions
         message_type: INFO_OR_LESS,
         event_message: [
           /^Dropping [\w.><]+ as it isn't used in any transform/,
-          /^com\.apple\.power\.battery/
+          /^com\.apple\.power\.battery/,
+          /^(Enter|Exit)ing exit handler\.$/
+        ]
+      },
+      allowed?: false
+    },
+
+    {
+      comment: 'Biome metrics',
+      matchers: {
+        subsystem: 'com.apple.Biome',
+        message_type: INFO_OR_LESS,
+        event_message: [
+          /^(Metric not in use: |Frame store |BMComputeSourceServerConnection send event|Logging CoreAnalytics donation |)/,
         ]
       },
       allowed?: false
