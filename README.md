@@ -71,13 +71,20 @@ The Quickstart shows you how to capture `info` level logs in a stream going forw
 ```sh
 collect
 -------
-thor collect:old_log_system:load      # Load all extant old logging system files
-thor collect:old_log_system:stream    # Stream logs from the new filesystem (mostly the ones seen in Console.app)
-thor collect:syslog:custom ARGUMENTS  # ARGUMENTS will be passed to the 'log' command directly (with great 💪 comes great responsibility)
-thor collect:syslog:from_file FILE    # Read logs from FILE
-thor collect:syslog:last INTERVAL     # Capture from INTERVAL before now using 'log show'. Example INTERVALs: 5d, 2m, 30s
-thor collect:syslog:start DATETIME    # Collect logs since a given DATETIME in the past using 'log show'
-thor collect:syslog:stream            # Collect logs from the syslog stream from now until you tell it to stop
+thor collect:consolelogs:load          # Load old logging system files that will no longer be written to
+thor collect:consolelogs:load_dir DIR  # Load all files in directory DIR. They don't even have to be log files - Will unzip and process many compressed formats as well as wi...
+thor collect:consolelogs:stream        # Stream logs from the new filesystem (mostly the ones seen in Console.app)
+thor collect:syslog:custom ARGUMENTS   # ARGUMENTS will be passed to the 'log' command directly (with great 💪 comes great responsibility)
+thor collect:syslog:from_file FILE     # Read logs from FILE. Can handle non JSON log formats, see the help.
+thor collect:syslog:last INTERVAL      # Capture from INTERVAL before now. Example INTERVALs: 5d (5 days), 2m (2 minutes), 30s (30 seconds)
+thor collect:syslog:start DATETIME     # Collect logs since a given DATETIME in the past using 'log show'
+thor collect:syslog:stream             # Collect logs from the syslog stream from now until you tell it to stop
+
+collecthor
+----------
+thor collecthor:everything  # Collect all the things (future and past) in forked processes
+thor collecthor:future      # System Logs, FileMonitor, ProcessMonitor from now (requires sudo!)
+thor collecthor:past        # System logs from the past + Console/ASL logs,
 
 db
 --
@@ -90,11 +97,13 @@ thor objectivesee:process_monitor:stream  # Collect process events from ProcessM
 
 system
 ------
-thor system:daemon:disable  # Disable the deamon permanently
-thor system:daemon:install  # Install as a launchd daemon (requires sudo)
-thor system:daemon:start    # Start the daemon
-thor system:daemon:status   # See what the launchd manager thinks abouut your daemon
-thor system:daemon:stop     # Stop the deamon. It may come back next time you reboot unless you :disable it
+thor system:daemon:disable    # Disable the daemon permanently
+thor system:daemon:enable     # Enable the daemon
+thor system:daemon:install    # Install as a launchd daemon (requires sudo)
+thor system:daemon:start      # Start the daemon
+thor system:daemon:status     # See what the launchd manager thinks abouut your daemon
+thor system:daemon:stop       # Stop the daemon (it may return when you reboot unless you :disable or :uninstall it)
+thor system:daemon:uninstall  # Uninstall the daemon (:enable will be run to purge it it even from the dissabled list)
 ```
 
 ------

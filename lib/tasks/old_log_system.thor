@@ -1,6 +1,8 @@
+# TODO: rename file
+
 module Collect
-  class OldLogSystem < CommonCommand
-    desc 'load', "Load old logging system files that will no longer be written to"
+  class Consolelogs < CommonCommand
+    desc 'load', "Load old/deprecated logging system files (the ones you see in Console.app) from their customary locations"
     option :continue,
             desc: 'Continue loading new lines from active logs once extant logs are loaded',
             type: :boolean,
@@ -10,7 +12,7 @@ module Collect
       LogFileWatcher.load_and_stream_all_open_logfiles! if options[:continue]
     end
 
-    desc 'load_dir DIR', "Load all files in directory DIR. They don't even have to be log files - Will unzip and process many compressed formats as well as wireshark/bluetooth/tcpdump packet captures files."
+    desc 'load_dir DIR', "Load all files in directory DIR. They don't even have to be log files. Will unzip and process many compressed formats as well as wireshark/bluetooth/tcpdump packet captures files."
     option :include_subdirs,
             desc: 'Recursively include subdirectories',
             type: :boolean,

@@ -40,7 +40,7 @@ module Collect
     end
 
     # TODO: syslog format is also a way to reduce the log size...
-    desc 'from_file FILE', 'Read logs from FILE. Can handle non JSON log formats, see the help.'
+    desc 'from_file FILE', 'Read logs from FILE. Can handle non JSON log formats, see the help'
     option :syslog,
             desc: "FILE is syslog format instead of JSON",
             type: :boolean,
