@@ -11,6 +11,10 @@ module Objectivesee
                   type: :string,
                   desc: 'Read from the specified file instead of streaming from the application'
 
+    class_option :batch_size,
+                  desc: "Rows between DB loads. With -skipApple it can take a while to fill a large buffer (far longer than the main system logs)",
+                  default: 250
+
     no_commands do
       def validate_and_announce(options)
         raise InvocationError.new('-pretty is verboten') if options[:command_line_flags].include?('-pretty')
