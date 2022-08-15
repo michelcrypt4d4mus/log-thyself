@@ -25,11 +25,14 @@ class CollectHOR < Thor
 
   no_commands do
     def start_em_up(invocables, args_to_pass: nil)
-      args_to_pass = ARGV.length > 1 ? ARGV[1..-1] : nil
+      args_to_pass = ARGV.length > 1 ? ARGV[1..-1] : []
 
       invocables.each do |invocable|
+        puts "inv: #{invocable}"
+        puts "args: #{args_to_pass}"
+        args = ["thor #{invocable}"] + args_to_pass
         say_and_log("Invoking #{invocable}...", styles: [:cyan])
-        pid = Process.spawn("thor #{invocable}", *args_to_pass)
+        pid = Process.spawn(*args)
         say_and_log("#{invocable} now running with pid #{pid}, detaching...")
         Process.detach(pid)
       end
