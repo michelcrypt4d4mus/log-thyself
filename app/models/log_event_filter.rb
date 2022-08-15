@@ -4,7 +4,6 @@ require 'pp'
 class LogEventFilter
   include ActionView::Helpers::NumberHelper
 
-  FILTER_DEFINITIONS = FilterDefinitions::LOG_EVENT_FILTERS
   STATS_LOGGING_FREQUENCY = 5_000
   BOOLEANS = [true, false]
 
@@ -16,7 +15,7 @@ class LogEventFilter
 
   def self.build_filters!
     FilterDefinitions.validate!
-    @filters = FILTER_DEFINITIONS.map { |fd| new(fd) }
+    @filters = FilterDefinitions::LOG_EVENT_FILTERS.map { |fd| new(fd) }
     Rails.logger.info("Built #{@filters.size} filters")
     @event_counts = h = Hash.new { |h, k| h[k] = { allowed: 0, blocked: 0 } }
     @total_events = 0
@@ -46,12 +45,14 @@ class LogEventFilter
 
   def allow?(event)
     return true unless applicable?(event)
-    BOOLEANS.include?(@rule[:allowed?]) ? @rule[:allowed?] : @rule[:allowed?].call(event)
-    # msg = sprintf("%5s / %5s", applicable, (permitted.nil? ? pastel.dim('<nil>') : permitted))
-    # msg += sprintf("   %25s   %25s", pastel.red(event[:process_name]), pastel.blue(event[:sender_process_name]))
-    # msg += sprintf("  %8s   %90s", pastel.green(event[:message_type]), pastel.magenta(event[:event_message]))
-    # puts msg
-    # applicable ? permitted : true
+
+    # If :allowed? is a boolean use it directly.
+    # If it's a Proc call it and use the return value.
+    if BOOLEANS.include?(@rule[:allowed?])
+      @rule[:allowed?]
+    else
+      @rule[:allowed?].call(event)
+    end
   end
 
   # Check the properties match before applying the proc
@@ -106,8 +107,9 @@ class LogEventFilter
     end
 
     # TODO: use the "say and log"
+
     Rails.logger.info("Filtered event counts:\n#{table_txt}")
-    puts table_txt if @total_events % (STATS_LOGGING_FREQUENCY * 2) == 0
+    puts table_txt if @total_events % STATS_LOGGING_FREQUENCY == 0 && !Rails.env.test?
   end
 
   private

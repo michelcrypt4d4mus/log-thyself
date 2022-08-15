@@ -1,13 +1,15 @@
 RSpec.describe LogEventFilter do
   let(:tries) { 10_000 }
 
-  let(:filter_rule) { described_class::FILTER_DEFINITIONS.first }
+  let(:filter_rule) { FilterDefinitions::LOG_EVENT_FILTERS.first }
   let(:col_matchers) { filter_rule[:matchers]}
   let(:filter) { described_class.new(filter_rule) }
 
   let(:missing_col) { filter_rule[:matchers].except(:event_message) }
   let(:mismatched_data) { missing_col.merge(event_message: 'ny state of mind') }
   let(:match) { missing_col.merge(event_message: col_matchers[:event_message].first) }
+
+
 
   it 'has valid filter definitions' do
     expect { described_class.build_filters! }.not_to raise_error
