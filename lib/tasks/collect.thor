@@ -8,6 +8,8 @@ load 'collector_command.thor'
 
 module Collect
   class Syslog < CollectorCommand
+    include StyledNotifications
+
     desc 'stream', 'Collect logs from the syslog stream from now until you tell it to stop'
     option :level,
             desc: 'Level of logs to capture. debug is the most, info is the least.',
@@ -16,7 +18,15 @@ module Collect
     def stream
       @shell_command = AppleJsonLogStreamParser::LOG_STREAM_SHELL_CMD
       @shell_command += " --level #{options[:level]}"
+      begin
+
       launch_macos_log_parser(options)
+    rescue StandardError, NoMethodError => e
+      msg = "🚨 ERROR: #{e.class.to_s}: #{e.message}"
+      say_and_log(msg, styles: [:red, :bold])
+      say_and_log("(See logs for stack trace)")
+      Rails.logger.error("#{msg}\n#{e.backtrace.join("\n")}")
+    end
     end
 
     desc 'last INTERVAL', "Capture from INTERVAL before now. Example INTERVALs: 5d (5 days), 2m (2 minutes), 30s (30 seconds)"
@@ -60,9 +70,9 @@ module Collect
         rescue Interrupt
           say "Stopping..."
         rescue StandardError, NoMethodError => e
-          msg = Pastel.new.red.bold("ERROR: #{e.class.to_s}: #{e.message}")
-          puts "🚨 #{msg} "
-          puts "(See logs for stack trace)"
+          msg = "🚨 ERROR: #{e.class.to_s}: #{e.message}"
+          say_and_log(msg, styles: [:red, :bold])
+          say_and_log("(See logs for stack trace)")
           Rails.logger.error("#{msg}\n#{e.backtrace.join("\n")}")
         end
       end

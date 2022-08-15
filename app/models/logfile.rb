@@ -85,7 +85,9 @@ class Logfile < ApplicationRecord
 
   # Stream a file line by line
   def stream_contents(&block)
-    ShellCommandStreamer.new(shell_command_to_read).stream! { |line, line_number| yield(line, line_number) }
+    ShellCommandStreamer.new(shell_command_to_read).stream! do |line, line_number|
+      yield(line, line_number)
+    end
   end
 
   # Writes entire file to log_lines table as separate lines.

@@ -222,8 +222,8 @@ I have learned that a lot of the columns Apple provides are actually pretty usel
 
 | Name  | Data Type | Comment |
 | ------------- | ------------- | --- |
+| `L` | _char_ | Collapses the two enums to one character. [See here for details](db/functions/msg_type_char_v02.sql) |
 | `log_timestamp` | _datetime_ | |
-| `T` | _char_ | Collapses the two enums to one character. [See here for details](db/functions/msg_type_char_v02.sql) |
 | `process_name` | _string_ | Process that generated the event |
 | `sender_process_name` | _string_ | Process that reported the event, often a library used by the actual proces |
 | `category` | _string_ | e.g. `WindowServer` |

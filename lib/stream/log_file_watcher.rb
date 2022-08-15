@@ -79,12 +79,12 @@ class LogFileWatcher
         Thread.current[:lines_written] = @info[:csv_lines]
 
         ShellCommandStreamer.new(@logfile.shell_command_to_stream).stream!(spawn_stderr_reader: false) do |line, line_number|
+          line = line.gsub("\u0000", '').force_encoding(Encoding::UTF_8)  # Null byte...
+
           if line_number <= Thread.current[:lines_written]
             Rails.logger.info("Skipping #{line_number} for #{@logfile.basename} (will skip to #{Thread.current[:lines_written]}")
             next
           end
-
-          line = line.gsub("\u0000", '').force_encoding(Encoding::UTF_8)  # Null byte...
 
           begin
             LogfileLine.where(logfile_id: @logfile.id, line_number: line_number, line: line).first_or_create!

@@ -5,9 +5,11 @@
 # The default behavior is to use temp tables and the COPY command when loading data.
 
 module PostgresCsvLoader
+  extend StyledNotifications
   extend ActiveSupport::Concern
 
   CSV_EXCLUDED_COLS = %w[id created_at updated_at]
+  IGNORE_ERRORS_ON_FILES_OF_LENGTH_LESS_THAN = 100 ## characters
 
   included do |base|
     base::CSV_OPTIONS = {
@@ -20,7 +22,21 @@ module PostgresCsvLoader
   class_methods do
     # TODO: we are generating and then parsing again... presumably we could skip that middle step?
     def load_from_csv_string(csv_string)
-      csv_data = CSV.parse(csv_string, headers: true)
+      begin
+        csv_data = CSV.parse(csv_string, headers: true)
+      rescue CSV::MalformedCSVError => e
+        Rails.logger.error("Error parsing CSV of length #{csv_string.length}")
+
+        if csv_string.length < IGNORE_ERRORS_ON_FILES_OF_LENGTH_LESS_THAN
+          msg = "#{e.class.to_s}: #{e.message} but file is short so moving on."
+          say_and_log(msg, styles: [:yellow])
+          return
+        else
+          Rails.logger.error("#{e.class.to_s}: #{e.message}")
+          raise
+        end
+      end
+
       transform_csv_data!(csv_data)
 
       ActiveRecord::Base.transaction do

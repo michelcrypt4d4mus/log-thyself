@@ -1,4 +1,5 @@
 class LogfileLine < ApplicationRecord
+  extend StyledNotifications
   include PostgresCsvLoader
 
   belongs_to :logfile
