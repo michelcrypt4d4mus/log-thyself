@@ -466,6 +466,19 @@ class FilterDefinitions
     },
 
     {
+      comment: 'CoreAnalytics',
+      matchers: {
+        sender_process_name: 'CoreAnalytics',
+        message_type: INFO_OR_LESS,
+        event_message: [
+          /^Dropping [\w.><]+ as it isn't used in any transform/,
+          /^com\.apple\.power\.battery/
+        ]
+      },
+      allowed?: false
+    },
+
+    {
       comment: 'Terminal spam events',
       matchers: {
         process_name: 'Terminal',
