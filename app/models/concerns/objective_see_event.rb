@@ -46,10 +46,15 @@ module ObjectiveSeeEvent
     end
 
     def from_json(json)
-      row = json_paths.inject({ raw_event: JSON.parse(json) }) do |row, (col_name, jsonpath)|
-        # TODO: reparsing for every column is stupid; just use dig()
-        row[col_name] = JsonPath.on(json, jsonpath)[0]
-        row
+      begin
+        row = json_paths.inject({ raw_event: JSON.parse(json) }) do |row, (col_name, jsonpath)|
+          # TODO: reparsing for every column is stupid; just use dig()
+          row[col_name] = JsonPath.on(json, jsonpath)[0]
+          row
+        end
+      rescue MultiJson::ParseError => e
+        Rails.logger.error("#{e.class.to_s} while parsing. Message: #{e.message}. Attempting to continue.\nBroken JSON: #{json}")
+        return nil
       end
 
       row[:event_type].delete_prefix!(ES_EVENT_TYPE_PREFIX)

@@ -13,6 +13,7 @@ class CollecTHOR < Thor
   desc 'collect_all', '[EXPERIMENTAL] Collect all the things in forked processes'
   def collect_all
     args_to_pass = ARGV.length > 1 ? ARGV[1..-1] : nil
+    raise "collect from /var/db etc as well"
 
     INVOCABLE_COLLECTORS.each do |invocable|
       say_and_log("Invoking #{invocable}...", styles: [:cyan])
