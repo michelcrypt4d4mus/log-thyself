@@ -55,11 +55,27 @@ class FilterDefinitions
     },
 
     {
-      comment: "Multitouch input to WindowServer",
+      comment: "Multitouch / Universal control / SkyLight to WindowServer",
       matchers: {
         process_name: 'WindowServer',
-        sender_process_name: 'MultitouchHID',
+        sender_process_name: [
+          'ColourSensorFilterPlugin',
+          'MultitouchHID',
+          'SkyLight',
+          'UniversalControlServiceFilter',
+        ],
         message_type: DEBUG
+      },
+      allowed?: false
+    },
+
+    {
+      comment: "Multitouch / Universal control / SkyLight to WindowServer",
+      matchers: {
+        process_name: 'WindowServer',
+        sender_process_name: 'IOKit',
+        message_type: DEBUG,
+        event_message: /^0x[0-9A-Fa-f]{9}: set property/
       },
       allowed?: false
     },
