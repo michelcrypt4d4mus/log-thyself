@@ -459,6 +459,20 @@ class FilterDefinitions
       allowed?: false
     },
 
+
+    {
+      # Keep the new session debug events!
+      comment: 'boringSSL',
+      matchers: {
+        sender_process_name: 'libboringssl.dylib',
+        message_type: INFO_OR_LESS,
+        event_message: [
+          /^(nw_protocol_boringssl_read_byt|boringssl_bio_destroy|boring_ssl_context_log_message)/
+        ]
+      },
+      allowed?: false
+    },
+
     {
       comment: 'libnetworkextension.dylib debug events',
       matchers: {
@@ -490,7 +504,12 @@ class FilterDefinitions
           'state notification',
           'state update',
           'end request',
-        ]
+          /^Fire delay: /,
+          /^(BEGIN|END) suppressing state updates/,
+          /Decrementing suppression state to/
+
+        ],
+        message_type: DEFAULT_OR_LESS,
       },
       allowed?: false
     },
@@ -536,6 +555,24 @@ class FilterDefinitions
     },
 
     {
+      comment: 'LaunchServices low level communications',
+      matchers: {
+        sender_process_name: 'LaunchServices',
+        category: 'cas',
+        message_type: INFO_OR_LESS,
+        event_message: [
+          /^(applicationInformationSeed|Invoking selector|Truncating a list of binding|Creating binding evaluator)/,
+          /^key="(LSExpectedFrontApplicationASNKey|UIPresentationMode|LSFrontReservationExists|LSPermittedFrontASNs|CFDictionaryRef|No weak binding found)"/,
+          /^\d+ bindings found$/,
+          /^Destroying binding evaluator 0x[0-9A-Fa-f]+$/,
+          /^(LS\/CAS: Changed front application|CopyFrontApplication|Getting plist hint for data)/,
+
+        ]
+      },
+      allowed?: false
+    },
+
+    {
       comment: 'opendirectoryd pipeline',
       matchers: {
         process_name: 'opendirectoryd',
@@ -551,10 +588,19 @@ class FilterDefinitions
       matchers: {
         process_name: 'tccd',
         event_message: [
-          /^0x[0-9A-Fa-f]+ validating slot -\d+$/,
-          /^Destroying binding evaluator 0x[0-9A-Fa-f]+$/,
           /^(64-bit linkedit is valid|SecTrustEvaluateIfNecessary)$/,
           /^Skipping [-\w\s]+ due to options/
+        ],
+      },
+      allowed?: false
+    },
+
+    {
+      comment: 'Security',
+      matchers: {
+        sender_process_name: 'Security',
+        event_message: [
+          /^0x[0-9A-Fa-f]+ validating slot -\d+$/,
         ],
       },
       allowed?: false
