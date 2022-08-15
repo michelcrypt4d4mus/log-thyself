@@ -18,8 +18,6 @@ module Collect
     def stream
       @shell_command = AppleJsonLogStreamParser::LOG_STREAM_SHELL_CMD
       @shell_command += " --level #{options[:level]}"
-      begin
-
       launch_macos_log_parser(options)
     rescue StandardError, NoMethodError => e
       msg = "🚨 ERROR: #{e.class.to_s}: #{e.message}"
@@ -27,7 +25,7 @@ module Collect
       say_and_log("(See logs for stack trace)")
       Rails.logger.error("#{msg}\n#{e.backtrace.join("\n")}")
     end
-    end
+
 
     desc 'last INTERVAL', "Capture from INTERVAL before now. Example INTERVALs: 5d (5 days), 2m (2 minutes), 30s (30 seconds)"
     def last(interval)
