@@ -344,6 +344,16 @@ class FilterDefinitions
     },
 
     {
+      comment: 'at.obdev.littlesnitch.networkextension',
+      matchers: {
+        process_name: 'at.obdev.littlesnitch.networkextension',
+        message_type: DEBUG,
+        event_message: /^(Socket Stats Report|Channel Stats Report|Fetching appInfo from cache for pid)/
+      },
+      allowed?: false
+    },
+
+    {
       comment: 'runningboardd state update',
       matchers: {
         process_name: 'runningboardd',
@@ -375,7 +385,8 @@ class FilterDefinitions
         event_message: [
           /Ignoring (GPU|jetsam|suspend|role|CPU) ((update|limits|changes) )?because this process is not (GPU|memory-|lifecycle|role|CPU limit) ?managed$/,
           /^Ignoring insignificant state update/,
-          /Applying updated state$/
+          /Applying updated state$/,
+          'timer'
         ]
       },
       allowed?: false
