@@ -190,7 +190,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_15_062356) do
               ),
               '\d{3}-\d{3}-\d{3,}', '[redacted ID]', 'ig'
             ),
-            'pid[=: ]\d+', '[redacted PID', 'ig'
+            'pid[=: ]{0,2}\d+', '[redacted PID]', 'ig'
           )
 
       $function$

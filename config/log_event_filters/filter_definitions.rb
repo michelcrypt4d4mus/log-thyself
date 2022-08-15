@@ -195,6 +195,25 @@ class FilterDefinitions
     },
 
     {
+      comment: 'com.apple.WebKit.WebContent etc',
+      matchers: {
+        sender_process_name: [
+          'CoreServicesStore',
+          'JavaScriptCore',
+          'ExtensionFoundation',
+          'WebCore',
+        ],
+        message_type: INFO_OR_LESS,
+        event_message: [
+          /^(Current memory footprint|Enumerator returnin|New length of store is|Attempting to lengthen store)/,
+          /^(backforward_cache_page_count|document_count|page_count|javascript_gc_heap)/
+        ]
+      },
+      allowed?: false
+    },
+
+
+    {
       comment: 'Signpost reporting (apple tech to allow app developers to time operations in their apps)',
       matchers: {
         process_name: 'signpost_reporter',
@@ -223,7 +242,7 @@ class FilterDefinitions
       matchers: {
         process_name: [
           'mds',
-          'mds_stores'
+          'mds_stores',
         ],
         message_type: DEBUG,
         subsystem: /com\.apple\.spotlight(server|index)/
@@ -271,12 +290,24 @@ class FilterDefinitions
     },
 
     {
+      comment: 'distnoted unregister token',
+      matchers: {
+        process_name: 'distnoted',
+        event_message: [
+          event_message: /^unregister token: /,
+        ],
+        message_type: DEFAULT
+      },
+      allowed?: false
+    },
+
+    {
       comment: 'SymptomEvaluator cannot handle ethernet',
       matchers: {
         process_name: 'symptomsd',
         event_message: [
           "Don't have a tracker for WiredEthernet interface type",
-          /^(processExtendedUpdate|Dynamic lookup for|found LU hint|Conn createSnapshot)/,
+          /^(processExtendedUpdate|Dynamic lookup for|found LU hint|Conn createSnapshot|Flow report)/,
           /__SCNetworkReachabilityGetFlagsFromPath/,
         ]
       },

@@ -15,7 +15,7 @@ AS $$
         ),
         '\d{3}-\d{3}-\d{3,}', '[redacted ID]', 'ig'
       ),
-      'pid[=: ]\d+', '[redacted PID', 'ig'
+      'pid[=: ]{0,2}\d+', '[redacted PID]', 'ig'
     )
 
 $$
