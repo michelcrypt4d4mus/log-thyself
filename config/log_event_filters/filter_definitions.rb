@@ -193,7 +193,7 @@ class FilterDefinitions
       comment: 'VS Code (Electron) HIToolbox',
       matchers: {
         process_name: 'Electron',
-        message_type: DEBUG,
+        message_type: INFO_OR_LESS,
         subsystem: %w[
           com.apple.CFBundle
           com.apple.CFPasteboard
@@ -373,8 +373,8 @@ class FilterDefinitions
         message_type: DEBUG,
         event_message: [
           /^0x[0-9A-Fa-f]+ Data(GetFromUniqueId|First|AbortQuery)/,
-          /^(Returning should log|Stats Report|No threshold for cfnetwor|===|\[filter [A-F0-9{8}])/,
-          /^(SIGN |Stats toggle|  filling \d+ attributes for type|NET \| Request|Domain cfnetwork rate|After reading settings|found a referenced key)/,
+          /^(Returning should log|Stats Report|No threshold for cfnetwor|===)/,
+          /^(Stats toggle|  filling \d+ attributes for type|NET \| Request|Domain cfnetwork rate|After reading settings|found a referenced key)/,
           'SecTrustReportNetworkingAnalytics',
           'Activity for state dumps',
           'CSPDL FreeKey',
@@ -383,6 +383,17 @@ class FilterDefinitions
       allowed?: false
     },
 
+    {
+      comment: 'libnetworkextension.dylib SIGN debug events',
+      matchers: {
+        sender_process_name: 'libnetworkextension.dylib',
+        message_type: DEBUG,
+        event_message: [
+          /^(SIGN \w+: |\[filter [A-F0-9]{8}|FILTER |Stats toggle|NEHelperTrackerGetDisposition)/
+        ]
+      },
+      allowed?: false
+    },
 
     {
       comment: 'runningboardd state update',
@@ -432,7 +443,9 @@ class FilterDefinitions
         event_message: [
           /^MESSAGE: reply={result={CFBundleIdentifier="(#{LAUNCHD_COMMS_IGNORE_BUNDLE_IDS.join('|')})"/,
           /^MESSAGE: reply={result={LSBundlePath="(#{LAUNCHD_COMMS_IGNORE_BUNDLE_PATHS.join('|')})/,
-          /Need to lookup or create kLSDefaultSessionID for client\.$/
+          /Need to lookup or create kLSDefaultSessionID for client\.$/,
+          'assertionsDidInvalidate',
+          /^(SETFRONT|Moving App:|Returning session|static Boolean LSNotification|-- using cached connection|Acquiring assertion:)/
         ]
       },
       allowed?: false
