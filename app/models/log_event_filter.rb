@@ -5,7 +5,7 @@ class LogEventFilter
   include ActionView::Helpers::NumberHelper
 
   FILTER_DEFINITIONS = FilterDefinitions::LOG_EVENT_FILTERS
-  STATS_LOGGING_FREQUENCY = 10_000
+  STATS_LOGGING_FREQUENCY = 5_000
   BOOLEANS = [true, false]
 
   class << self
@@ -85,24 +85,22 @@ class LogEventFilter
     total_allow_pct = (100 * allowed_total.to_f / @total_events).round(1).to_s + '%'
     total_block_pct = (100 * blocked_total.to_f / @total_events).round(1).to_s + '%'
 
-    header = %w[process_name events allowed blocked allow_pct block_pct]
-    totals_row = [pastel.bold('TOTAL'), @total_events, allowed_total, blocked_total, total_allow_pct, total_block_pct]
+    header = %w[process_name events allowed blocked allow_pct block_pct].map(&:upcase)
+    totals_row = [pastel.bold('Total Event Count'), @total_events, allowed_total, blocked_total, total_allow_pct, total_block_pct]
     buffer_row = Array.new(6) { |_| '' }
     table = TTY::Table.new(header: header, rows: [buffer_row, totals_row, buffer_row] + rows)
     aligns = [:left] + Array.new(5) { |_| :right }
 
     table_txt = table.render(:unicode, indent: 5, padding: [0, 1], alignments: aligns) do |renderer|
       renderer.filter = ->(val, row_index, col_index) do
-        if row_index == 1
-          pastel.bold.bright_white(val)
-        elsif row_index < 2
-          val
-        elsif row_index == 2
-          pastel.bright_white.on_black(val)
-        elsif row_index % 2 == 0
+        if row_index == 0
+          pastel.bright_white(val)
+        elsif row_index <= 3
+          pastel.white.inverse(val)
+        elsif row_index % 2 == 1
           pastel.black.on_white(val)
         else
-          pastel.white.on_black(val)
+          pastel.white(val)
         end
       end
     end
