@@ -332,6 +332,27 @@ class FilterDefinitions
     },
 
     {
+      comment: 'runningboardd assertions',
+      matchers: {
+        process_name: 'runningboardd',
+        category: 'assertion'
+      },
+      allowed?: false
+    },
+
+    {
+      comment: 'runningboardd spam',
+      matchers: {
+        process_name: 'runningboardd',
+        event_message: [
+          /Ignoring (GPU|jetsam|suspend|role|CPU) ((update|limits|changes) )?because this process is not (GPU|memory-|lifecycle|role|CPU limit) ?managed$/,
+          /^Ignoring insignificant state update/
+        ]
+      },
+      allowed?: false
+    },
+
+    {
       comment: 'launchservices basic communications',
       matchers: {
         process_name: 'launchservicesd',
