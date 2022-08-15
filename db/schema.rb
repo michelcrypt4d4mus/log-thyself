@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_14_193021) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_15_062356) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -170,6 +170,26 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_14_193021) do
             ELSE
               '?'
             END
+      $function$
+  SQL
+  create_function :redact_ids, sql_definition: <<-'SQL'
+      CREATE OR REPLACE FUNCTION public.redact_ids(a_string character varying)
+       RETURNS character varying
+       LANGUAGE sql
+       IMMUTABLE PARALLEL SAFE LEAKPROOF
+      AS $function$
+        SELECT
+          REGEXP_REPLACE(
+            REGEXP_REPLACE(
+              REGEXP_REPLACE(
+                REGEXP_REPLACE($1, '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}', '[redacted UUID]'),
+                '0x[0-9A-Fa-f]+|[0-9A-Fa-f]{6,}', '[redacted hex]'
+              ),
+              'Hostname#[0-9a-f]+:\d+', '[redacted host]'
+            ),
+            '\d{3}-\d{3}-\D{4}', '[redacted ID]'
+          )
+
       $function$
   SQL
 

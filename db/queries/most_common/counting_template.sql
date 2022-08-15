@@ -7,7 +7,7 @@ SELECT
    RIGHT(sender_process_name, 30) AS sender,
    LEFT("category", 25) AS "category",
    RIGHT(subsystem, 40) AS subsystem,
-   LEFT(REGEXP_REPLACE(event_message, '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}', '[Redacted UUID]'), 140)
+   LEFT(redact_ids(event_message)) AS event_message
  FROM macos_system_logs
  WHERE log_timestamp > '2022-08-10' and process_name='ProtonVPN'
   GROUP BY 2,3,4,5,6,7

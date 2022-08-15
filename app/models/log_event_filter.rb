@@ -53,7 +53,7 @@ class LogEventFilter
     if permitted
       true
     else
-      Rails.logger.debug("Event blocked by filter '#{@rule[:comment]}'")
+      #Rails.logger.debug("Event blocked by filter '#{@rule[:comment]}'")
       self.class.increment_blocked_event_counts(event)
       false
     end

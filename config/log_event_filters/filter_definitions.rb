@@ -39,7 +39,9 @@ MDS_MSG_PREFIXES = [
   "Task <private> finished with status 0",
   "fetchItems at qos",
   "Truncating a list of bindings to",
-  "Importer recycle"
+  "Importer recycle",
+  # mds_stores
+  'Dummy for oid'
 ]
 
 TERMINAL_DEBUG_SPAM = %w[
@@ -101,6 +103,18 @@ class FilterDefinitions
           'powerd',
         ],
         message_type: DEBUG
+      },
+      allowed?: false
+    },
+
+    {
+      comment: "corebrightnessd",
+      matchers: {
+        process_name: 'corebrightnessd',
+        message_type: [DEFAULT, INFO],
+        event_message: [
+          /^ramps (clocked|updated)/
+        ]
       },
       allowed?: false
     },
@@ -207,9 +221,12 @@ class FilterDefinitions
     {
       comment: 'mds service spotlight low level',
       matchers: {
-        process_name: 'mds',
+        process_name: [
+          'mds',
+          'mds_stores'
+        ],
         message_type: DEBUG,
-        subsystem: 'com.apple.spotlightserver'
+        subsystem: /com\.apple\.spotlight(server|index)/
       },
       allowed?: false
     },
@@ -257,10 +274,24 @@ class FilterDefinitions
       comment: 'SymptomEvaluator cannot handle ethernet',
       matchers: {
         process_name: 'symptomsd',
-        event_message: "Don't have a tracker for WiredEthernet interface type"
+        event_message: [
+          "Don't have a tracker for WiredEthernet interface type",
+          /^(processExtendedUpdate|Dynamic lookup for|found LU hint|Conn createSnapshot)/,
+          /__SCNetworkReachabilityGetFlagsFromPath/,
+        ]
       },
       allowed?: false
     },
+
+    {
+      comment: 'Malware Bytes',
+      matchers: {
+        process_name: 'RTProtectionDaemon',
+        message_type: 'Debug'
+      },
+      allowed?: false
+    },
+
 
     {
       comment: 'reduceTransparency, increaseContrast',
@@ -334,6 +365,19 @@ class FilterDefinitions
     },
 
     {
+      comment: 'locationd',
+      matchers: {
+        process_name: 'locationd',
+        message_type: DEBUG,
+        event_message: [
+          'Ping timer fired, resetting watchdog',
+          /^{"msg":"/  # sqlite?
+        ]
+      },
+      allowed?: false
+    },
+
+    {
       comment: 'Little Snitch Icon Update',
       matchers: {
         process_name: 'Little Snitch Network Monitor',
@@ -350,6 +394,7 @@ class FilterDefinitions
         message_type: DEFAULT_OR_LESS,
         event_message: [
           /^(com.apple.dasd.default: Current Load=|Current load for group|Attempting to suspend|Evaluating \d+ activities based on triggers)/,
+          /^(Uncached value for|Duet: ClientContext objectForContextualKeyPath)/
         ]
       },
       allowed?: false
@@ -373,8 +418,8 @@ class FilterDefinitions
         message_type: DEBUG,
         event_message: [
           /^0x[0-9A-Fa-f]+ Data(GetFromUniqueId|First|AbortQuery)/,
-          /^(Returning should log|Stats Report|No threshold for cfnetwor|===)/,
-          /^(Stats toggle|  filling \d+ attributes for type|NET \| Request|Domain cfnetwork rate|After reading settings|found a referenced key)/,
+          /^(Stats Report|===)/,
+          /^(Stats toggle|  filling \d+ attributes for type|NET \| Request|After reading settings|found a referenced key)/,
           'SecTrustReportNetworkingAnalytics',
           'Activity for state dumps',
           'CSPDL FreeKey',
@@ -384,12 +429,20 @@ class FilterDefinitions
     },
 
     {
-      comment: 'libnetworkextension.dylib SIGN debug events',
+      comment: 'libnetworkextension.dylib debug events',
       matchers: {
-        sender_process_name: 'libnetworkextension.dylib',
-        message_type: DEBUG,
+        sender_process_name: [
+          'libnetworkextension.dylib',
+          'libnetwork.dylib'
+        ],
+        message_type: INFO_OR_LESS,
         event_message: [
-          /^(SIGN \w+: |\[filter [A-F0-9]{8}|FILTER |Stats toggle|NEHelperTrackerGetDisposition)/
+          # libnetworkextension
+          /^(SIGN \w+: |\[filter [A-F0-9]{8}|FILTER |Stats toggle|NEHelperTrackerGetDisposition)/,
+          # libnetwork
+          /^(After settings override|Final domain cfnetwork)/,
+          /^(Returning should log|Not checking if we should log for|No threshold for cfnetwor|Domain cfnetwork rate)/,
+          /^(nw|sa)_\w+/,  # lots of low level calls
         ]
       },
       allowed?: false
