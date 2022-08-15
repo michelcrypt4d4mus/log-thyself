@@ -344,6 +344,19 @@ class FilterDefinitions
     },
 
     {
+      comment: 'dasd',
+      matchers: {
+        process_name: 'dasd',
+        message_type: DEFAULT_OR_LESS,
+        event_message: [
+          /^(com.apple.dasd.default: Current Load=|Current load for group|Attempting to suspend|Evaluating \d+ activities based on triggers)/,
+        ]
+      },
+      allowed?: false
+    },
+
+
+    {
       comment: 'at.obdev.littlesnitch.networkextension',
       matchers: {
         process_name: 'at.obdev.littlesnitch.networkextension',
@@ -352,6 +365,24 @@ class FilterDefinitions
       },
       allowed?: false
     },
+
+    {
+      comment: 'ProtonVPN low level',
+      matchers: {
+        process_name: 'ProtonVPN',
+        message_type: DEBUG,
+        event_message: [
+          /^0x[0-9A-Fa-f]+ Data(GetFromUniqueId|First|AbortQuery)/,
+          /^(Returning should log|Stats Report|No threshold for cfnetwor|===|\[filter [A-F0-9{8}])/,
+          /^(SIGN |Stats toggle|  filling \d+ attributes for type|NET \| Request|Domain cfnetwork rate|After reading settings|found a referenced key)/,
+          'SecTrustReportNetworkingAnalytics',
+          'Activity for state dumps',
+          'CSPDL FreeKey',
+        ]
+      },
+      allowed?: false
+    },
+
 
     {
       comment: 'runningboardd state update',
