@@ -13,7 +13,8 @@ module Objectivesee
 
     class_option :batch_size,
                   desc: "Rows between DB loads. With -skipApple it can take a while to fill a large buffer (far longer than the main system logs)",
-                  default: 250
+                  default: 250,
+                  type: :numeric
 
     no_commands do
       def validate_and_announce(options)
