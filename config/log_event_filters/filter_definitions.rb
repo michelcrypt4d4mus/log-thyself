@@ -3,6 +3,7 @@ LAUNCHD_COMMS_IGNORE_BUNDLE_IDS = %w[
   at.obdev.littlesnitch.agent
   com.apple.appkit.xpc.openAndSavePanelService
   com.apple.dock.extra
+  com.apple.finder
   com.apple.Safari
   com.apple.UnmountAssistantAgent
   com.apple.WebKit.WebContent
@@ -74,6 +75,7 @@ class FilterDefinitions
   # Apple log levels
   (DEBUG, INFO, DEFAULT, ERROR, FAULT) = MacOsSystemLog::MESSAGE_TYPES
   INFO_OR_LESS = [INFO, DEBUG]
+  DEFAULT_OR_LESS = [DEFAULT] + INFO_OR_LESS
 
   LOG_EVENT_FILTERS = [
     {
@@ -276,7 +278,7 @@ class FilterDefinitions
           kernel
           thermalmonitord
         ],
-        message_type: INFO_OR_LESS,
+        message_type: DEFAULT_OR_LESS,
         event_message: [
           /^iterated \d+ channels with \d+ iterations/,  # thermalmonitord
           # Kernel
@@ -307,7 +309,10 @@ class FilterDefinitions
       matchers: {
         message_type: DEBUG,
         category: 'dbsession',
-        event_message: /^FreeUniqueRecord: [0-9A-Za-f]+$/
+        event_message: [
+          /^FreeUniqueRecord: [0-9A-Za-f]+$/,
+          /^DataGetNext\([0-9a-z]+\)/
+        ]
       },
       allowed?: false
     },
@@ -332,6 +337,7 @@ class FilterDefinitions
           'Processing events',
           'state notification',
           'state update',
+          'end request',
         ]
       },
       allowed?: false
@@ -352,7 +358,8 @@ class FilterDefinitions
         process_name: 'runningboardd',
         event_message: [
           /Ignoring (GPU|jetsam|suspend|role|CPU) ((update|limits|changes) )?because this process is not (GPU|memory-|lifecycle|role|CPU limit) ?managed$/,
-          /^Ignoring insignificant state update/
+          /^Ignoring insignificant state update/,
+          /Applying updated state$/
         ]
       },
       allowed?: false
@@ -363,10 +370,11 @@ class FilterDefinitions
       matchers: {
         process_name: 'launchservicesd',
         category: 'cas',
-        message_type: DEBUG,
+        message_type: INFO_OR_LESS,
         event_message: [
           /^MESSAGE: reply={result={CFBundleIdentifier="(#{LAUNCHD_COMMS_IGNORE_BUNDLE_IDS.join('|')})"/,
-          /^MESSAGE: reply={result={LSBundlePath="(#{LAUNCHD_COMMS_IGNORE_BUNDLE_PATHS.join('|')})/
+          /^MESSAGE: reply={result={LSBundlePath="(#{LAUNCHD_COMMS_IGNORE_BUNDLE_PATHS.join('|')})/,
+          /Need to lookup or create kLSDefaultSessionID for client\.$/
         ]
       },
       allowed?: false
@@ -379,6 +387,33 @@ class FilterDefinitions
         category: 'pipeline',
         event_message: 'submitting request to internal pipeline',
         message_type: DEBUG
+      },
+      allowed?: false
+    },
+
+    {
+      comment: 'tccd',
+      matchers: {
+        process_name: 'tccd',
+        event_message: [
+          /^0x[0-9A-Fa-f]+ validating slot -\d+$/,
+          /^Destroying binding evaluator 0x[0-9A-Fa-f]+$/,
+          /^(64-bit linkedit is valid|SecTrustEvaluateIfNecessary)$/,
+          /^Skipping [-\w\s]+ due to options/
+        ],
+      },
+      allowed?: false
+    },
+
+    {
+      comment: 'staticCode low level messages',
+      matchers: {
+        category: 'staticCode',
+        event_message: [
+          /^0x[0-9A-Fa-f]+ (creating new CEQueryContext|loaded) DER blob with length \d+$/,
+          /^0x[0-9A-Fa-f]+ (loaded InfoDict|xml size)/,
+          /^SecStaticCode network (allowed|default): NO$/,
+        ],
       },
       allowed?: false
     },

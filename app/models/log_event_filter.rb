@@ -13,21 +13,24 @@ class LogEventFilter
     @filters = FILTER_DEFINITIONS.map { |fd| new(fd) }
     Rails.logger.info("Built #{@filters.size} filters")
     @blocked_event_counts = Hash.new(0)
+    @allowed_event_count = 0
   end
 
   # All must allow an event for event to be recorded
   def self.allow?(event)
+    @allowed_event_count += 1
     @filters.all? { |f| f.allow?(event) }
   end
 
   def self.increment_blocked_event_counts(event)
     @blocked_event_counts[event[:process_name]] += 1
-    return unless @blocked_event_counts.values.sum % 5000 == 0
+    blocked_event_count = @blocked_event_counts.values.sum
+    return unless blocked_event_count % 5000 == 0
 
     # Render a table to the log
     rows = @blocked_event_counts.to_a.sort_by { |row| row[1] }.reverse
     table = TTY::Table.new(header: %w[filtered_process count], rows: rows).render(:unicode, indent: 5)
-    Rails.logger.info("Blocked event counts:\n#{table}")
+    Rails.logger.info("Allowed #{@allowed_event_count} / Blocked #{blocked_event_count} events. Blocked event counts:\n#{table}")
   end
 
   def initialize(rule)
