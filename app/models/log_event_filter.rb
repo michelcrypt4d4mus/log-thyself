@@ -4,10 +4,15 @@ class LogEventFilter
   FILTER_DEFINITIONS = FilterDefinitions::LOG_EVENT_FILTERS
   BOOLEANS = [true, false]
 
+  class << self
+    attr_accessor :blocked_event_counts
+  end
+
   def self.build_filters!
     FilterDefinitions.validate!
     @filters = FILTER_DEFINITIONS.map { |fd| new(fd) }
     Rails.logger.info("Built #{@filters.size} filters")
+    @blocked_event_counts = Hash.new(0)
   end
 
   # All must allow an event for event to be recorded
@@ -27,6 +32,13 @@ class LogEventFilter
       true
     else
       Rails.logger.debug("Event blocked by filter '#{@rule[:comment]}'")
+      self.class.blocked_event_counts[event[:process_name]] += 1
+
+      if self.class.blocked_event_counts.values.sum % 1000 == 0
+        msg = self.class.blocked_event_counts.to_a.sort_by { |row| row[1] }.reverse.map { |row| "#{row[0]}: #{row[1]}"}.join("\n")
+        Rails.logger.info("Blocked event counts:\n#{msg}")
+      end
+
       false
     end
   end

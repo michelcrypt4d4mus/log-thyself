@@ -233,8 +233,6 @@ class FilterDefinitions
     }
   ]
 
-
-
   def self.validate!
     LOG_EVENT_FILTERS.each do |filter|
       raise "Invalid filter:\n#{filter.pretty_inspect}" unless filter.keys.sort == FILTER_DEFINITION_KEYS
