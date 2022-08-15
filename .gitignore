@@ -13,6 +13,7 @@ notes.txt
 
 # Ignore bundler config.
 /.bundle
+/vendor/*
 
 # Ignore actual database.yml in case it has passwords etc.
 /config/database.yml
