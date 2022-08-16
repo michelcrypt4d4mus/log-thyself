@@ -27,7 +27,7 @@ module Objectivesee
   class FileMonitor < ObjectiveSeeCommand
     desc 'stream', "Collect file events from FileMonitor (requires sudo!)"
     option :executable_path,
-            default: ProcessMonitorStreamParser::EXECUTABLE_PATH_DEFAULT,
+            default: FileMonitorStreamParser::EXECUTABLE_PATH_DEFAULT,
             desc: 'Path to your FileMonitor executable'
     def stream
       validate_and_announce(options)
