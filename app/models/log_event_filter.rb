@@ -8,7 +8,7 @@ class LogEventFilter
   STATUSES = %i[allowed blocked]
 
   STATS_INDENT = 15
-  DEFAULT_FILTER_STATS_LOGGING_FREQUENCY = 2_500
+  DEFAULT_FILTER_STATS_LOGGING_FREQUENCY = 20_000
   STATS_TABLE_HEADER = %w[process_name events allowed blocked allow_pct block_pct].map(&:upcase)
 
   class << self
