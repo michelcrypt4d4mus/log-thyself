@@ -4,7 +4,7 @@ class StreamCoordinator
     Rails.logger.level = "Logger::#{options[:app_log_level]}".constantize
     Rails.logger.info("#{self.name} options: #{options}")
 
-    LogEventFilter.build_filters! unless ENV['RUNNING_FILTER_BENCHMARKS']
+    LogEventFilter.build_filters!(options) unless ENV['RUNNING_FILTER_BENCHMARKS']
     disable_filters = !!options[:disable_filters]
     Rails.logger.warn("Filters #{disable_filters ? 'disabled' : 'enabled'}")
     rows_read = 0

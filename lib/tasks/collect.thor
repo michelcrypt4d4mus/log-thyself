@@ -26,7 +26,6 @@ module Collect
       Rails.logger.error("#{msg}\n#{e.backtrace.join("\n")}")
     end
 
-
     desc 'last INTERVAL', "Capture from INTERVAL before now. Example INTERVALs: 5d (5 days), 2m (2 minutes), 30s (30 seconds)"
     def last(interval)
       @shell_command = "#{AppleJsonLogStreamParser::LOG_SHOW_SHELL_CMD} --last #{interval}"
