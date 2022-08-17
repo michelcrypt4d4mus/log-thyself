@@ -73,7 +73,7 @@ collect
 -------
 thor collect:consolelogs:load          # Load old logging system files that will no longer be written to
 thor collect:consolelogs:load_dir DIR  # Load all files in directory DIR. They don't even have to be log files - Will unzip and process many compressed formats as well as wi...
-thor collect:consolelogs:stream        # Stream logs from the new filesystem (mostly the ones seen in Console.app)
+thor collect:consolelogs:stream        # Stream old system logs from the filesystem (mostly the ones seen in Console.app)
 thor collect:syslog:custom ARGUMENTS   # ARGUMENTS will be passed to the 'log' command directly (with great 💪 comes great responsibility)
 thor collect:syslog:from_file FILE     # Read logs from FILE. Can handle non JSON log formats, see the help.
 thor collect:syslog:last INTERVAL      # Capture from INTERVAL before now. Example INTERVALs: 5d (5 days), 2m (2 minutes), 30s (30 seconds)

@@ -1,6 +1,7 @@
 require File.join(Rails.root, 'config', 'log_event_filters', 'filter_definitions')
 require 'pp'
 
+
 class LogEventFilter
   include ActionView::Helpers::NumberHelper
 

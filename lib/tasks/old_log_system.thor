@@ -21,7 +21,7 @@ module Collect
       Logfile.load_all_files_in_directory!(directory, options)
     end
 
-    desc 'stream', "Stream logs from the new filesystem (mostly the ones seen in Console.app)"
+    desc 'stream', "Stream old logs from the filesystem (mostly the ones seen in Console.app)"
     def stream
       LogFileWatcher.load_and_stream_all_open_logfiles!
     end
