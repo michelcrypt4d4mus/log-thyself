@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_15_121442) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_17_050309) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -200,9 +200,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_15_121442) do
   create_view "simplified_system_logs", sql_definition: <<-SQL
       SELECT msg_type_char(macos_system_logs.message_type, macos_system_logs.event_type) AS "L",
       macos_system_logs.log_timestamp,
-      macos_system_logs.process_name,
-      macos_system_logs.process_id,
-      macos_system_logs.sender_process_name,
+      macos_system_logs.process_name AS process,
+      macos_system_logs.process_id AS pid,
+      macos_system_logs.sender_process_name AS sender,
       macos_system_logs.category,
       macos_system_logs.subsystem,
       macos_system_logs.event_message

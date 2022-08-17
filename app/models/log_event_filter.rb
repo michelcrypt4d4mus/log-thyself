@@ -9,7 +9,7 @@ class LogEventFilter
 
   # Constants for formatting the log output.
   STATS_INDENT = 15
-  DEFAULT_FILTER_STATS_LOGGING_FREQUENCY = 20_000
+  DEFAULT_FILTER_STATS_LOGGING_FREQUENCY = 50_000
   STATS_TABLE_HEADER = %w[process_name events allowed blocked allow_pct block_pct].map(&:upcase)
 
   class << self

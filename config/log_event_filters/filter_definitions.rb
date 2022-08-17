@@ -688,6 +688,14 @@ class FilterDefinitions
       allowed?: false
     },
 
+    {
+      comment: "com.apple.Safari.SearchHelper",
+      matchers: {
+        process_name: 'Safari',
+        category: 'ThemeColor'
+      },
+      allowed?: false
+    },
   ]
 
   def self.validate!
