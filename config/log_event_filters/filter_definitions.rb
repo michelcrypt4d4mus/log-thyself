@@ -547,7 +547,6 @@ class FilterDefinitions
           /^\d+ bindings found$/,
           /^Destroying binding evaluator 0x[0-9A-Fa-f]+$/,
           /^(LS\/CAS: Changed front application|CopyFrontApplication|Getting plist hint for data)/,
-
         ]
       },
       allowed?: false
@@ -624,11 +623,11 @@ class FilterDefinitions
       comment: 'CoreAnalytics',
       matchers: {
         sender_process_name: 'CoreAnalytics',
-        message_type: INFO_OR_LESS,
+        message_type: DEFAULT_OR_LESS,
         event_message: [
           /^Dropping [\w.><]+ as it isn't used in any transform/,
           /^com\.apple\.power\.battery/,
-          /^(Enter|Exit)ing exit handler\.$/
+          /^(Enter|Exit)ing exit handler\.$/,
         ]
       },
       allowed?: false
@@ -672,13 +671,23 @@ class FilterDefinitions
     },
 
     {
-      comment: 'debug strings',
+      comment: "debug 'strings' category (looks like a bunch of printf formatting arguments)",
       matchers: {
         category: 'strings',
         message_type: DEBUG,
       },
       allowed?: false
-    }
+    },
+
+    {
+      comment: "com.apple.Safari.SearchHelper",
+      matchers: {
+        process_name: 'com.apple.Safari.SearchHelper',
+        message_type: INFO_OR_LESS,
+      },
+      allowed?: false
+    },
+
   ]
 
   def self.validate!

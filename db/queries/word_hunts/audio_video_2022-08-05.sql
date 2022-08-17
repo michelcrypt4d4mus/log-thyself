@@ -10,7 +10,7 @@ SELECT
   source
 FROM macos_system_logs
 WHERE log_timestamp >= '2022-08-05T00:25:06.819Z'
-  AND (process_name || COALESCE(sender_process_name, '') || COALESCE(category, '') || COALESCE(subsystem, '') || COALESCE(event_message, '')) ~* '(av|audio|video|record|mic|conference|viceroy|call|remote)'
+  AND (COALESCE(process_name, '') || COALESCE(sender_process_name, '') || COALESCE(category, '') || COALESCE(subsystem, '') || COALESCE(event_message, '')) ~* '(av|audio|video|record|mic|conference|viceroy|call|remote)'
   AND COALESCE(event_message, '') !~* 'VSCode'
 ORDER BY log_timestamp ASC
 LIMIT 1000
