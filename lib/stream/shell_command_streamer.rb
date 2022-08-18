@@ -34,8 +34,9 @@ class ShellCommandStreamer
         stderr_thread = start_stderr_reader_thread(stderr) if spawn_stderr_reader
 
         while(line = stdout.gets) do
+          line.chomp!
           Rails.logger.debug("Stream line #{stdout.lineno}: #{line}")
-          yield(line.chomp, (@lines_read_count = stdout.lineno), (@lines_yielded_count += 1))
+          yield(line, (@lines_read_count = stdout.lineno), (@lines_yielded_count += 1))
         end
       end
     rescue Errno::EACCES => e

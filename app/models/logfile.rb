@@ -24,16 +24,19 @@ class Logfile < ApplicationRecord
   GZIP_EXTNAME = '.gz'
   BZIP2_EXTNAME = '.bz2'
   PKLG_EXTNAME = '.pklg'  # packet logger, readable by wireshark etc.
+  SYSLOG_SPECIAL_EXTNAME = '.the_system_logs'
   DIAGNOSTIC_EXTNAMES = %w[.core_analytics .diag .hang .ips .shutdownStall]
   ZIPPED_EXTNAMES = [GZIP_EXTNAME, BZIP2_EXTNAME]
 
   # pklg files aren't necessarily closed but it's annoying to parse them see https://superuser.com/questions/567831/follow-a-pcap-file-in-wireshark-like-tail-f
-  CLOSED_EXTNAMES = ZIPPED_EXTNAMES + DIAGNOSTIC_EXTNAMES + [PKLG_EXTNAME]
+  # ASL files aren't necessarily closed but better to read them directly from syslog -w
+  CLOSED_EXTNAMES = ZIPPED_EXTNAMES + DIAGNOSTIC_EXTNAMES + [PKLG_EXTNAME, ASL_EXTNAME]
   ALL_EXTNAMES = CLOSED_EXTNAMES + %w[.info .log .out .python3 .txt]
 
   # Shell commands
   TAIL_FROM_TOP = 'tail -c +0'
   TAIL_FROM_TOP_STREAMING = TAIL_FROM_TOP + ' -F'
+  SYSLOG_READ_CMD = 'syslog -F raw -T utc.6'
 
   # Batch size to use for bulk loads
   BULK_LOAD_BATCH_SIZE = 10_000
@@ -49,7 +52,7 @@ class Logfile < ApplicationRecord
   end
 
   def self.open_logfiles
-    logfiles_on_disk.select(&:open?)
+    logfiles_on_disk.select(&:open?) + [synthetic_syslog_file]
   end
 
   def self.closed_logfiles
@@ -86,6 +89,14 @@ class Logfile < ApplicationRecord
     puts "\n" + logfiles.map(&:file_path).sort.join("\n")
   end
 
+  # Magical syslog watcher
+  def self.synthetic_syslog_file
+    new(
+      file_path: "syslog_#{Time.now.utc.strftime('%Y-%m-%dT%H%M%S%p')}#{SYSLOG_SPECIAL_EXTNAME}",
+      file_created_at: Time.now.utc
+    )
+  end
+
   # Stream a file line by line
   def stream_contents(&block)
     ShellCommandStreamer.new(shell_command_to_read).stream! do |line, line_number|
@@ -96,6 +107,7 @@ class Logfile < ApplicationRecord
   # Writes entire file to log_lines table as separate lines.
   # Returns lines written count.
   def write_contents_to_db!
+    return 0 if extname == SYSLOG_SPECIAL_EXTNAME
     Rails.logger.info("Loading '#{file_path}' to DB")
     save!
 
@@ -162,7 +174,7 @@ class Logfile < ApplicationRecord
       'gunzip -c'
     when ASL_EXTNAME
       # syslog -f only prints the last few lins unless we do the 'cat' pipe to STDIN
-      return "cat \"#{file_path}\" | syslog -f"
+      return "cat \"#{file_path}\" | #{SYSLOG_READ_CMD} -f"
     when PKLG_EXTNAME
       if system('which tshark')
         'tshark -r'
@@ -171,6 +183,8 @@ class Logfile < ApplicationRecord
         Rails.logger.warn(msg)
         "echo -e \"#{msg}\""
       end
+    when SYSLOG_SPECIAL_EXTNAME
+      return "#{SYSLOG_READ_CMD} -B"  # -B is 'from last boot'
     else
       'cat'
     end + (include_path ? " \"#{file_path}\"" : '')
@@ -183,7 +197,11 @@ class Logfile < ApplicationRecord
     when 'cat'
       "#{TAIL_FROM_TOP_STREAMING} \"#{file_path}\""
     when /syslog/
-      "#{TAIL_FROM_TOP_STREAMING} \"#{file_path}\" | syslog -f"
+      if extname == SYSLOG_SPECIAL_EXTNAME
+        "#{SYSLOG_READ_CMD} -w all"
+      else
+        "#{TAIL_FROM_TOP_STREAMING} \"#{file_path}\" | #{SYSLOG_READ_CMD}"
+      end
     when /tshark/
       raise 'tail -f causes issues with tshark, sadly'
     else

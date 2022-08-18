@@ -16,7 +16,11 @@ class LogFileWatcher
   end
 
   def self.load_and_stream_all_open_logfiles!
-    @streamer_threads = Logfile.open_logfiles.inject({}) do |memo, logfile|
+    load_and_stream_logfiles!(Logfile.open_logfiles)
+  end
+
+  def self.load_and_stream_logfiles!(logfiles)
+    @streamer_threads = logfiles.inject({}) do |memo, logfile|
       memo[logfile] = new(logfile).load_and_stream!
       memo
     end
@@ -87,16 +91,11 @@ class LogFileWatcher
   def spawn_thread_to_read_continuously
     Thread.new do
       begin
-
         Thread.current[:lines_written] = @info[:csv_lines]
 
-        ShellCommandStreamer.new(@logfile.shell_command_to_stream).stream!(spawn_stderr_reader: false) do |line, line_number|
+        ShellCommandStreamer.new(@logfile.shell_command_to_stream).stream! do |line, line_number|
           line = line.gsub("\u0000", '').force_encoding(Encoding::UTF_8)  # Null byte...
-
-          if line_number <= Thread.current[:lines_written]
-            Rails.logger.debug("Skipping #{line_number} for #{@logfile.basename} (will skip to #{Thread.current[:lines_written]}")
-            next
-          end
+          next if line_number <= Thread.current[:lines_written]
 
           begin
             LogfileLine.where(logfile_id: @logfile.id, line_number: line_number, line: line).first_or_create!
@@ -109,6 +108,8 @@ class LogFileWatcher
             raise e
           end
         end
+
+        Rails.logger.warn("STOPPED STREAMING!")
       rescue StandardError => e
         Rails.logger.error "#{e.class} in thread for '#{@logfile.file_path}': #{e.message}\n#{e.backtrace.join("\n")}"
         raise e

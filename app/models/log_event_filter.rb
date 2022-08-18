@@ -14,6 +14,8 @@ class LogEventFilter
   TOTAL_EVENT_COUNT = 'Total Event Count'
   DEFAULT_FILTER_STATS_LOGGING_FREQUENCY = 50_000
   STATS_TABLE_HEADER = %w[process_name events allowed blocked allow_pct block_pct].map(&:upcase)
+  TABLE_ALIGNMENTS = [:left] + Array.new(5) { |_| :right }
+  BUFFER_ROW = Array.new(6) { |_| '' }
 
   class << self
     attr_accessor :blocked_event_counts, :event_counts, :filters, :pastel
@@ -113,24 +115,19 @@ class LogEventFilter
     # TODO use rails number_to_pct styler
     sorted_processes = @event_counts.keys.sort_by { |process| @event_counts[process].values.sum }
 
-    table_rows = sorted_processes.reverse.inject([]) do |rows, process|
+    # Style the table with a blank line above and below the total event counts row
+    table_rows = [BUFFER_ROW, totals_row, BUFFER_ROW] + sorted_processes.reverse.inject([]) do |rows, process|
       counts = STATUSES.map { |status| @event_counts[process][status] }
       total_for_proc = counts.sum
       percentages = counts.map { |c| "#{(100 * c.to_f / total_for_proc).round(1)}%" }
       rows << [process, total_for_proc] + counts + percentages
     end
 
-    # Style the table with a blank line above and below the total event counts row
-    buffer_row = Array.new(6) { |_| '' }
-    table_rows = [buffer_row, totals_row, buffer_row] + table_rows
     table = TTY::Table.new(header: STATS_TABLE_HEADER, rows: table_rows)
     table.orientation = :horizontal
-    aligns = [:left] + Array.new(5) { |_| :right }
 
-    table_txt = table.render(:unicode, padding: [0, 1], alignments: aligns, **table_render_options) do |renderer|
+    table_txt = table.render(:unicode, padding: [0, 1], alignments: TABLE_ALIGNMENTS, **table_render_options) do |renderer|
       renderer.filter = ->(val, row_index, col_index) do
-        next val if Rails.env.production?  # Rendering seems weird in production, prolly because headless
-
         if row_index == 0
           pastel.bright_white(val)
         elsif row_index <= 3
