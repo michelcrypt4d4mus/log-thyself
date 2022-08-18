@@ -10,6 +10,7 @@ class LogEventFilter
 
   # Constants for formatting the log output.
   STATS_INDENT = 15
+  TOTAL_EVENT_COUNT = 'Total Event Count'
   DEFAULT_FILTER_STATS_LOGGING_FREQUENCY = 50_000
   STATS_TABLE_HEADER = %w[process_name events allowed blocked allow_pct block_pct].map(&:upcase)
 
@@ -98,7 +99,7 @@ class LogEventFilter
     end
 
     totals_row = [
-      pastel.bold('Total Event Count'),
+      Rails.env.production? ? TOTAL_EVENT_COUNT : pastel.bold(TOTAL_EVENT_COUNT),
       total_events,
       totals[:allowed][:count],
       totals[:blocked][:count],
@@ -123,9 +124,12 @@ class LogEventFilter
     table_rows = [buffer_row, totals_row, buffer_row] + table_rows
     table = TTY::Table.new(header: STATS_TABLE_HEADER, rows: table_rows)
     aligns = [:left] + Array.new(5) { |_| :right }
+    render_style = Rails.env.production? ? :ascii : :unicode
 
-    table_txt = table.render(:unicode, padding: [0, 1], alignments: aligns) do |renderer|
+    table_txt = table.render(render_style, padding: [0, 1], alignments: aligns) do |renderer|
       renderer.filter = ->(val, row_index, col_index) do
+        next val if Rails.env.production?  # Rendering seems weird in production, prolly because headless
+
         if row_index == 0
           pastel.bright_white(val)
         elsif row_index <= 3
