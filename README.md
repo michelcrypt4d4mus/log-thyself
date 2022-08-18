@@ -46,9 +46,6 @@ Copy paste this stuff into the terminal:
 
 ```sh
 sudo thor system:daemon:uninstall
-# Drop the database
-psql << 'DROP DATABASE macos_log_collector_development'
-psql << 'DROP DATABASE macos_log_collector_test'
 psql << 'DROP DATABASE macos_log_collector'
 ```
 
