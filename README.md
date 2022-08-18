@@ -70,44 +70,6 @@ Type `thor list` to see a list of available commands. You should see something l
 
 [^1]: I've never seen a project used by so many people (everyone who uses rails uses it, even if they don't know it) with such a combination of broken features and atrocious - nay, profanely misleading - documentation. It's a good library in some ways but given the issues with figuring out how to use it it's like they want you to not use it.
 
-```sh
-collect
--------
-thor collect:consolelogs:load          # Load old logging system files that will no longer be written to
-thor collect:consolelogs:load_dir DIR  # Load all files in directory DIR. They don't even have to be log files - Will unzip and process many compressed formats as well as wi...
-thor collect:consolelogs:stream        # Stream old system logs from the filesystem (mostly the ones seen in Console.app)
-thor collect:syslog:custom ARGUMENTS   # ARGUMENTS will be passed to the 'log' command directly (with great 💪 comes great responsibility)
-thor collect:syslog:from_file FILE     # Read logs from FILE. Can handle non JSON log formats, see the help.
-thor collect:syslog:last INTERVAL      # Capture from INTERVAL before now. Example INTERVALs: 5d (5 days), 2m (2 minutes), 30s (30 seconds)
-thor collect:syslog:start DATETIME     # Collect logs since a given DATETIME in the past using 'log show'
-thor collect:syslog:stream             # Collect logs from the syslog stream from now until you tell it to stop
-
-collecthor
-----------
-thor collecthor:everything  # Collect all the things (future and past) in forked processes
-thor collecthor:future      # System Logs, FileMonitor, ProcessMonitor from now (requires sudo!)
-thor collecthor:past        # System logs from the past + Console/ASL logs,
-
-db
---
-thor db:dump  # Write the database to a compressed archive via pg_dump.
-
-objectivesee
-------------
-thor objectivesee:file_monitor:stream     # Collect file events from FileMonitor (requires sudo!)
-thor objectivesee:process_monitor:stream  # Collect process events from ProcessMonitor (requires sudo!)
-
-system
-------
-thor system:daemon:disable    # Disable the daemon permanently
-thor system:daemon:enable     # Enable the daemon
-thor system:daemon:install    # Install as a launchd daemon (requires sudo)
-thor system:daemon:start      # Start the daemon
-thor system:daemon:status     # See what the launchd manager thinks abouut your daemon
-thor system:daemon:stop       # Stop the daemon (it may return when you reboot unless you :disable or :uninstall it)
-thor system:daemon:uninstall  # Uninstall the daemon (:enable will be run to purge it it even from the dissabled list)
-```
-
 ------
 
 Thor will show you the command line options for each command via `thor help COMMAND`.  e.g. `thor help objectivesee:process_monitor:stream` yields something like
