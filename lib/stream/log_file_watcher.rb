@@ -36,7 +36,7 @@ class LogFileWatcher
 
   def self.log_state
     # TODO: Use say_and
-    tty_table_header = ['id', 'logfile path', 'alive?', 'CSV lines', 'Extra Lines']
+    tty_table_header = ['ID', 'logfile path', 'alive?', 'Initial Load Lines', 'Lines Since Load']
 
     tty_table_data = @streamer_threads.inject([]) do |table, (logfile, hsh)|
       table << [

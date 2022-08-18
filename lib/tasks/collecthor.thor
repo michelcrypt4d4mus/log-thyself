@@ -21,7 +21,6 @@ class Callthecollecthor < Thor
   PAST_SCANS = [
     'collect:syslog:last 365d',
     'collect:consolelogs:load',
-    'collect:consolelogs:stream',
   ]
 
   desc 'everything', 'Collect all the things (future and past) in forked processes'
