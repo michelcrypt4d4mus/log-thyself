@@ -249,7 +249,7 @@ I have learned that a lot of the columns Apple provides are actually pretty usel
 
 The table is called `file_events`. Everything is not extracted but the original JSON data structure is stored in the database where [you can directly query it](https://www.postgresql.org/docs/12/functions-json.html) if you are familiar with the dark art of querying JSON paths via SQL queries.  See [Apple's Endpoint Security Framework documentation](https://developer.apple.com/documentation/endpointsecurity) for more info on what the data is.
 
-
+-------
 
 # Development/Contributions
 Contributions are welcome. Stuff I'm working on includes filtering, pre-unified MacOS syslogging, and a couple other things.
@@ -272,11 +272,12 @@ bundle exec rspec
 Test should pass before you open a pull request. New featuers should have tests... that pass.
 
 
+-------
 
-# Other Resources
+## Other Resources
 * Eclectic Light
 * [postgres_dba](https://github.com/NikolayS/postgres_dba)
 
-# features?
+## features?
 1. dump discarded events to disk
-2. fully productionize
+
