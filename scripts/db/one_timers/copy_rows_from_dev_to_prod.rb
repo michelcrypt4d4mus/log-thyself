@@ -1,4 +1,4 @@
-require 'FileUtils'
+require 'fileutils'
 
 ROW_COUNT = 6_077_551
 BATCH_SIZE = 500_000
