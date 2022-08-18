@@ -54,6 +54,7 @@ psql << 'DROP DATABASE macos_log_collector'
 
 Then delete the project folder. Uninstalling `ruby`, `homebrew`, `postgres` etc. is beyond the scope of this readme but you can figure it out.
 
+-------
 
 # Usage
 `**QUICKSTART**`
