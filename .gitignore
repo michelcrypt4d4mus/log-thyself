@@ -39,5 +39,6 @@ notes.txt
 /public/assets
 
 # Ignore master key for decrypting credentials and more.
-/config/master.key
+# We don't care about encrypting web requests; this app has no web interface.
+# /config/master.key
 

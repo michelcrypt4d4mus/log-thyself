@@ -12,8 +12,7 @@ rbenv install `cat .ruby-version`
 # Setup the app
 cp config/database.yml.example config/database.yml
 bundle install
-bundle exec rake db:create
-bundle exec rake db:migrate
+RAILS_ENV=production bundle exec rake db:create
+RAILS_ENV=production bundle exec rake db:migrate
 
-echo "If you would like to set this up to run at startup via launchd, run this next:"
-echo -e "\n     sudo scripts/launchd/install_as_launch_daemon.sh\n"
+echo "Run 'thor list' to see available commands."

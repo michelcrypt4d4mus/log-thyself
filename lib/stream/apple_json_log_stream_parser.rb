@@ -1,16 +1,21 @@
 # Use Oj gem to parse the log stream (just an array of hashes) in JSON format.
 # TODO: Use separate thread to read STDERR?
 
+require 'dotenv'
 require 'io/wait'
 require 'oj'
 require 'open3'
 
+Dotenv.load(File.join(Rails.root, '.env'))
+
 
 class AppleJsonLogStreamParser < ::Oj::ScHandler
+  # Options for log command
   LOG_LEVELS = %w(default info debug)
   LOG_OPTIONS = '--source --style json --color none'
-  LOG_STREAM_SHELL_CMD = "log stream #{LOG_OPTIONS}"
-  LOG_SHOW_SHELL_CMD = "log show #{LOG_OPTIONS} --debug --info"
+  LOG_EXECUTABLE_PATH = ENV['LOG_EXECUTABLE_PATH'] || 'log'
+  LOG_STREAM_SHELL_CMD = "#{LOG_EXECUTABLE_PATH} stream #{LOG_OPTIONS}"
+  LOG_SHOW_SHELL_CMD = "#{LOG_EXECUTABLE_PATH} show #{LOG_OPTIONS} --debug --info"
 
   def initialize(shell_command)
     @shell_command = shell_command

@@ -24,7 +24,7 @@ class CollectorCommand < CommonCommand
                 default: false
 
   class_option :read_only,
-                desc: "Just read and process the streams, don't save to the database.",
+                desc: "Just read and process the streams, don't save to the database",
                 type: :boolean,
                 default: false
 
@@ -34,7 +34,7 @@ class CollectorCommand < CommonCommand
                 default: false
 
   class_option :filter_stats_logging_frequency,
-                desc: "How often (in terms of event count) should the summary tables be printed to the logs/STDOUT (nil means never)",
+                desc: "How often should the summary tables be printed (0 means never)",
                 type: :numeric,
                 default: LogEventFilter::DEFAULT_FILTER_STATS_LOGGING_FREQUENCY
 

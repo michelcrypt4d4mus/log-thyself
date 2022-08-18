@@ -1,6 +1,11 @@
 class Callthecollecthor < Thor
   include StyledNotifications
 
+  class_option :launch_as_zombies,
+                desc: "Start as zombified background process(es) (will require 'kill PID' to stop)",
+                type: :boolean,
+                default: false
+
   FUTURE_STREAMS = %w[
     collect:syslog:stream
     objectivesee:file_monitor:stream
@@ -31,14 +36,19 @@ class Callthecollecthor < Thor
 
   no_commands do
     def start_em_up(invocables)
-      invocables.each do |invocable|
+      pids = invocables.map do |invocable|
         say_and_log("Invoking #{invocable}...", styles: [:cyan])
-        pid = Process.spawn("thor #{invocable}")
-        say_and_log("#{invocable} now running with pid #{pid}, detaching...")
-        Process.detach(pid)
+        Process.spawn("thor #{invocable}")
       end
 
-      say_and_log("Detached, jumping into the ocean...", styles: [:cyan])
+      if options[:launch_as_zombies]
+        pids.each { |pid| Process.detach(pid) }
+        say_and_log("Successfully zombified (run 'kill #{pids.join (' ')}' to stop)", styles: [:green])
+        say_and_log("Detached, jumping into the ocean...", styles: [:cyan])
+      else
+        pids.each { |pid| Process.wait(pid) }
+        say_and_log("Waiting for child processes (#{pids.join(', ')})")
+      end
     end
   end
 end

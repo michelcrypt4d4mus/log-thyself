@@ -1,4 +1,5 @@
 require 'etc'
+require 'pastel'
 require 'shared_methods'
 
 
@@ -16,29 +17,37 @@ module System
     desc 'install', 'Install as a launchd daemon (requires sudo)'
     option :launcher_script,
             desc: 'Script to use as the entry point',
-            default: File.join(Rails.root, 'scripts/start_log_stream_loader.sh')
+            default: File.join(Rails.root, 'scripts/launch.sh')
     def install
-      raise "You don't have root privileges. Maybe try again with sudo." if Process.uid != 0
+      raise InvocationError.new("You don't have root privileges (maybe try again with sudo).") if Process.uid != 0
 
       daemon_name = options[:daemon_name]
       install_path = install_location(daemon_name)
-      plist = Plist.parse_xml(File.join(Rails.root, "scripts/launchd/#{DEFAULT_DAEMON_NAME}.plist.example"))
+      plist = Plist.parse_xml(EXAMPLE_PLIST)
       plist['Label'] = daemon_name
 
       plist['ProgramArguments'] = plist['ProgramArguments'].inject([]) do |args_list, arg|
-        next (args_list << Etc.getlogin) if arg == 'REPLACE_WITH_USERNAME'
-        next (args_list << options[:launcher_script]) if arg == 'REPLACE_THIS_WITH_PATH_TO_LAUNCH_SCRIPT'
+        arg.gsub!('REPLACE_WITH_USERNAME', Etc.getlogin)
+        arg.gsub!('REPLACE_THIS_WITH_PATH_TO_LAUNCH_SCRIPT', options[:launcher_script])
         args_list << arg
       end
 
-      config_message = 'Configuration'
-      say "\n#{config_message}\n#{'‾' * config_message.length}"
+      plist['EnvironmentVariables'] = plist['EnvironmentVariables'].inject({}) do |env_vars, (k, v)|
+        env_vars[k] = v.gsub('REPLACE_WITH_USERNAME', Etc.getlogin)
+        env_vars
+      end
+
+      pastel = Pastel.new
+      say(pastel.underline("\nLaunch Daemon Configuration\n"))
       say "#{plist.to_plist}\n", :green
 
-      say("Daemons begin as root. This one will sudo down a notch to your account to actually run the log collector.")
-      say("This is necessary because root doesn't have all the prerequisites set up but also good because it means the code is not executing with root privileges.\n")
-      say_key_value("Destination", install_path)
-      yes?('Install?') ? true : exit
+      say(pastel.underline("\nWhat's Happening Here"))
+      say("macOS uses .plist files to configure launch daemons (and a bunch of other")
+      say("stuff). The configuration shown above will be the contents of the installed .plist.")
+      say("It tells macOS to run the launcher (.#{options[:launcher_script].delete_prefix(Rails.root.to_s)}) when the system boots.")
+      say(pastel.red.bold("\nNOTE: ") + "This will *only* launch the system log collector. Objective-See monitors\nmust be launched by hand.")
+      say_key_value("\n#{pastel.underline('Installation Location')}", install_path)
+      yes?("\nInstall?") ? true : exit
       plist.save_plist(install_path)
       say "Wrote configuration. Launching..."
       invoke :start
@@ -74,6 +83,10 @@ module System
       invoke :stop
       invoke :enable
       execute_shell_command("rm #{install_location(options[:daemon_name])}")
+    end
+
+    def self.exit_on_failure?
+      true
     end
 
     no_commands do

@@ -39,7 +39,7 @@ It's not necessary but you can set things up so the MacOS log stream collection 
 
 Install it with `sudo thor system:daemon:install`. (You will be prompted for your password; only the root user can install launch daemons).
 
-**NOTE:** If you want options other than the defaults, you'll have to edit [the launch script](scripts/start_log_stream_loader.sh).
+**NOTE:** If you want options other than the defaults, you'll have to edit [the launch script](scripts/launch.sh).
 
 ### Uninstallation
 Copy paste this stuff into the terminal:
@@ -49,6 +49,7 @@ sudo thor system:daemon:uninstall
 # Drop the database
 psql << 'DROP DATABASE macos_log_collector_development'
 psql << 'DROP DATABASE macos_log_collector_test'
+psql << 'DROP DATABASE macos_log_collector'
 ```
 
 Then delete the project folder. Uninstalling `ruby`, `homebrew`, `postgres` etc. is beyond the scope of this readme but you can figure it out.
@@ -175,7 +176,9 @@ Personally I focus on querying the data for words like "camera" and "microphone"
 
 Run `man log` to read Apple's documentation of what is in the system logs ([here](https://www.dssw.co.uk/reference/log.html) is a link to the log manual that may or may not be current).
 
-Your data will be in a database called `macos_log_collector_development`, in a table called `macos_system_logs`. It has _everything_ apple provides (or claims to provide). It also has a special index on the `event_message` which makes querying for strings blindingly fast in some cases, as long as those strings are longer than 3 characters (the longer the betters). The table has these columns:
+> NOTE: You can get some profiles that de-privatize (remove the `<private>` string and replace it with something more meaningful from apple [here](https://developer.apple.com/bug-reporting/profiles-and-logs/?platform=macos). Deprivatizing all of them is harder, but you can read [this](https://developer.apple.com/forums/thread/676706).
+
+Your data will be in a database called `macos_log_collector`, in a table called `macos_system_logs`. It has _everything_ apple provides (or claims to provide). It also has a special index on the `event_message` which makes querying for strings blindingly fast in some cases, as long as those strings are longer than 3 characters (the longer the betters). The table has these columns:
 
 | Name  | Data Type | Comment |
 | ------------- | ------------- | --- |

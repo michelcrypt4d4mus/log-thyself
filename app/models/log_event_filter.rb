@@ -39,7 +39,10 @@ class LogEventFilter
 
   def self.increment_event_counts(event, status)
     @event_counts[event[:process_name]][status] += 1
-    log_stats if total_events % @filter_stats_logging_frequency == 0
+
+    if (@filter_stats_logging_frequency > 0) && (total_events % @filter_stats_logging_frequency == 0)
+      log_stats
+    end
   end
 
   # If status is nil then just get the overall total

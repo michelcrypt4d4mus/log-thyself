@@ -14,7 +14,7 @@ module Collect
     option :level,
             desc: 'Level of logs to capture. debug is the most, info is the least.',
             enum: AppleJsonLogStreamParser::LOG_LEVELS,
-            default: 'info'
+            default: 'debug'
     def stream
       @shell_command = AppleJsonLogStreamParser::LOG_STREAM_SHELL_CMD
       @shell_command += " --level #{options[:level]}"
@@ -63,7 +63,8 @@ module Collect
         make_announcement
 
         begin
-          StreamCoordinator.collect!(AppleJsonLogStreamParser.new(@shell_command), options.merge(destination_klass: MacOsSystemLog))
+          streamer = AppleJsonLogStreamParser.new(@shell_command)
+          StreamCoordinator.collect!(streamer, options.merge(destination_klass: MacOsSystemLog))
         rescue Interrupt
           say "Stopping..."
         rescue StandardError, NoMethodError => e

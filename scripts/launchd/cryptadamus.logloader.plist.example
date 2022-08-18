@@ -8,12 +8,13 @@
         <true/>
         <key>KeepAlive</key>
         <true/>
+        <key>EnvironmentVariables</key>
+        <dict>
+            <key>PATH</key>
+            <string>/Users/REPLACE_WITH_USERNAME/.rbenv/shims:/opt/homebrew/bin:/usr/bin:/bin:/Applications/Wireshark.app/Contents/MacOS</string>
+        </dict>
         <key>ProgramArguments</key>
         <array>
-            <string>sudo</string>
-            <string>-u</string>
-            <string>REPLACE_WITH_USERNAME</string>
-            <string>-i</string>
             <string>REPLACE_THIS_WITH_PATH_TO_LAUNCH_SCRIPT</string>
         </array>
     </dict>
