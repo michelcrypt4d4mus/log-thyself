@@ -25,7 +25,7 @@ unless Rails.env.production?
 
   msg = WARNING_BANNER + pastel.bold.bright_red.inverse(" WARNING: You are not running in the proper environment to connect to the database. ")
   puts msg + ' ' + WARNING_BANNER + "\n\n"
-  msg = pastel.bright_red("You have two options:\n")
+  msg = pastel.bright_red("This won't affect installation or running as a daemon, but to run manually you have two options:\n")
   msg += pastel.bright_red("     1. prepend RAILS_ENV=production to your commands. Example: ")
   msg += pastel.cyan("RAILS_ENV=production thor collect:syslog:stream\n")
   msg += pastel.bright_red("     2. permanently set RAILS_ENV by running this in Terminal: ")

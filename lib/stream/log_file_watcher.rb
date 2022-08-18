@@ -7,6 +7,8 @@ require 'pastel'
 require 'tty'
 
 class LogFileWatcher
+  extend TableLogger
+
   POLL_INTERVAL_IN_SECONDS = 15
 
   class << self
@@ -24,7 +26,7 @@ class LogFileWatcher
 
     while(true) do
       sleep(POLL_INTERVAL_IN_SECONDS)
-      log_state unless Rails.env.production?
+      log_state
     end
   end
 
@@ -45,10 +47,14 @@ class LogFileWatcher
     tty_table_data.sort_by! { |row| File.basename(row[1]) }
 
     if tty_table_data != @tty_table_data_old
-      puts Pastel.new.underline("Status of log watcher threads") + Pastel.new.magenta.bold(" (new lines were read)")
-      @tty_table_data_old = tty_table_data
       table = TTY::Table.new(header: tty_table_header, rows: tty_table_data)
-      puts TTY::Table::Renderer::Unicode.new(table).render + "\n"
+      table.orientation = :horizontal
+      @tty_table_data_old = tty_table_data
+
+      msg = "\n" + Pastel.new.underline("Status of log watcher threads") + Pastel.new.magenta.bold(" (new lines were read)")
+      msg += "\n#{table.render(:unicode, **table_render_options)}\n"
+      puts msg
+      Rails.logger.info(msg)
     else
       puts "No lines read..."
     end
@@ -88,7 +94,7 @@ class LogFileWatcher
           line = line.gsub("\u0000", '').force_encoding(Encoding::UTF_8)  # Null byte...
 
           if line_number <= Thread.current[:lines_written]
-            Rails.logger.info("Skipping #{line_number} for #{@logfile.basename} (will skip to #{Thread.current[:lines_written]}")
+            Rails.logger.debug("Skipping #{line_number} for #{@logfile.basename} (will skip to #{Thread.current[:lines_written]}")
             next
           end
 

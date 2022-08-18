@@ -4,6 +4,7 @@ require 'pp'
 
 class LogEventFilter
   include ActionView::Helpers::NumberHelper
+  extend TableLogger
 
   BOOLEANS = [true, false]
   STATUSES = %i[allowed blocked]
@@ -99,7 +100,7 @@ class LogEventFilter
     end
 
     totals_row = [
-      Rails.env.production? ? TOTAL_EVENT_COUNT : pastel.bold(TOTAL_EVENT_COUNT),
+      pastel.bold(TOTAL_EVENT_COUNT),
       total_events,
       totals[:allowed][:count],
       totals[:blocked][:count],
@@ -123,10 +124,10 @@ class LogEventFilter
     buffer_row = Array.new(6) { |_| '' }
     table_rows = [buffer_row, totals_row, buffer_row] + table_rows
     table = TTY::Table.new(header: STATS_TABLE_HEADER, rows: table_rows)
+    table.orientation = :horizontal
     aligns = [:left] + Array.new(5) { |_| :right }
-    render_style = Rails.env.production? ? :ascii : :unicode
 
-    table_txt = table.render(render_style, padding: [0, 1], alignments: aligns) do |renderer|
+    table_txt = table.render(:unicode, padding: [0, 1], alignments: aligns, **table_render_options) do |renderer|
       renderer.filter = ->(val, row_index, col_index) do
         next val if Rails.env.production?  # Rendering seems weird in production, prolly because headless
 
@@ -144,9 +145,10 @@ class LogEventFilter
 
     # TODO: use the "say and log"
     msg = "\n\n" + (' ' * STATS_INDENT)
-    msg += pastel.underline("Allowed / Blocked Event Counts By Process\n") + table_txt
-    Rails.logger.info(msg)
+    msg += pastel.underline("Allowed / Blocked Event Counts By Process\n")
+    msg += table_txt + "\n\n"
     puts msg
+    Rails.logger.info(msg)
   end
 
   def value_match?(matcher, value)

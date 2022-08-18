@@ -37,6 +37,10 @@ module System
         env_vars
       end
 
+      %w[StandardOutPath StandardErrorPath].each do |stream|
+        plist[stream] = plist[stream].sub('REPLACE_THIS_WITH_PATH_TO_LOGS', File.join(Rails.root, 'log'))
+      end
+
       pastel = Pastel.new
       say(pastel.underline("\nLaunch Daemon Configuration\n"))
       say "#{plist.to_plist}\n", :green

@@ -14,5 +14,6 @@ cp config/database.yml.example config/database.yml
 bundle install
 RAILS_ENV=production bundle exec rake db:create
 RAILS_ENV=production bundle exec rake db:migrate
+touch log/production.log
 
 echo "Run 'thor list' to see available commands."

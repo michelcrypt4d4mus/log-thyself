@@ -4,7 +4,7 @@ module Collect
   class Consolelogs < CommonCommand
     desc 'load', "Load old/deprecated logging system files (the ones you see in Console.app) from their customary locations"
     option :continue,
-            desc: 'Continue loading new lines from active logs once extant logs are loaded',
+            desc: 'Continue loading new lines from active logs',
             type: :boolean,
             default: false
     def load

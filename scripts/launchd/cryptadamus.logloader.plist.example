@@ -17,5 +17,9 @@
         <array>
             <string>REPLACE_THIS_WITH_PATH_TO_LAUNCH_SCRIPT</string>
         </array>
+        <key>StandardOutPath</key>
+        <string>REPLACE_THIS_WITH_PATH_TO_LOGS/daemon_stdout.log</string>
+        <key>StandardErrorPath</key>
+        <string>REPLACE_THIS_WITH_PATH_TO_LOGS/daemon_stderr.log</string>
     </dict>
 </plist>
