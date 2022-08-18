@@ -16,7 +16,7 @@ class ObjectiveSeeJsonStreamParser
   #   read_from_file: read from the specified file path instead of a stream
   #   stats_printout_interval: How many events will pass between stats printouts
   def initialize(executable_path, options = {})
-    Rails.logger.debug("#{self.class.to_s} instantiated with options: #{options}")
+    Rails.logger.info("#{self.class.to_s} instantiated with options: #{options}")
     @executable_path = executable_path || EXECUTABLE_PATH_DEFAULT
     @executable_basename = File.basename(@executable_path)
     @model_klass = @executable_basename.sub('Monitor', 'Event').constantize

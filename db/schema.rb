@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_17_050309) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_18_185936) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -38,7 +38,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_17_050309) do
     t.string "signature_signer"
     t.string "signature_authorities"
     t.string "process_arguments"
+    t.index ["computed_signing_id"], name: "index_file_events_on_computed_signing_id"
+    t.index ["event_timestamp"], name: "index_file_events_on_event_timestamp"
+    t.index ["file"], name: "index_file_events_on_file"
+    t.index ["pid"], name: "index_file_events_on_pid"
+    t.index ["ppid"], name: "index_file_events_on_ppid"
+    t.index ["process_name", "event_timestamp"], name: "index_file_events_on_process_name_and_event_timestamp"
+    t.index ["rpid"], name: "index_file_events_on_rpid"
     t.index ["signature_signer"], name: "index_file_events_on_signature_signer"
+    t.index ["uid"], name: "index_file_events_on_uid"
   end
 
   create_table "logfile_lines", force: :cascade do |t|
