@@ -62,7 +62,11 @@ thor collect:syslog:stream
 
 ### Other Kinds Of Usage
 
-The Quickstart shows you how to capture system logs in a stream going forward from "now" but the application can also capture logs from the past (if OS X hasn't purged them yet), read logs from files, and a bunch of other stuff. The interface is built in Thor (which I mildly regret[^1], but not enough to change it), the same thing as Ruby on Rails's generators. Type `thor list` and you should see something like this:
+The Quickstart shows you how to capture system logs in a stream going forward from "now" but the application can also capture logs from the past (if OS X hasn't purged them yet), read logs from files, and a bunch of other stuff. The interface is built in Thor (which I mildly regret[^1], but not enough to change it), the same thing as Ruby on Rails's generators.
+
+Type `thor list` to see a list of available commands. You should see something like this:
+
+![](doc/thor_list.png)
 
 [^1]: I've never seen a project used by so many people (everyone who uses rails uses it, even if they don't know it) with such a combination of broken features and atrocious - nay, profanely misleading - documentation. It's a good library in some ways but given the issues with figuring out how to use it it's like they want you to not use it.
 
@@ -133,6 +137,8 @@ Collect process events from ProcessMonitor (requires sudo!)
 
 ### Configuration
 #### Event Filtering
+![](doc/event_filtering.png)
+
 [Filter definitions are here](config/log_event_filters/filter_definitions.rb); they can be edited as you like. The default is to all most thing. Because the filters are ruby code you can write rules that block events matching any set of properties or allow some random percentage of certain kinds of event through or use whatever rules you want - sky's the limit.
 
 Other than that it's mostly configured from the command line but you can set some custom configuration options if you make your own `.env` file.  Start by copying the examples: `cp .env.example .env`.
