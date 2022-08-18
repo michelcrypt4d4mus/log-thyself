@@ -696,6 +696,25 @@ class FilterDefinitions
       },
       allowed?: false
     },
+
+    {
+      comment: 'keyboard backlight management',
+      matchers: {
+        subsystem: /^com.apple.CoreBrightness.KeyboardBacklight/,
+        message_type: INFO_OR_LESS
+      },
+      allowed?: false
+    },
+
+    {
+      comment: 'keyboard backlight management default level',
+      matchers: {
+        subsystem: /^com.apple.CoreBrightness.KeyboardBacklight/,
+        message_type: DEFAULT,
+        event_message: /^(applyPWM|enable:\d+|levelPercentage \d+)/
+      },
+      allowed?: false
+    }
   ]
 
   def self.validate!

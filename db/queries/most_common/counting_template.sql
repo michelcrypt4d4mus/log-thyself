@@ -51,7 +51,7 @@ FROM macos_system_logs
      || COALESCE(category, '')
      || COALESCE(subsystem, '')
      || COALESCE(event_message, '')
-    ) ~* 'bluetooth|btle'
+    ) ~* 'keyboard'
 GROUP BY 2,3,4,5,6,7
 ORDER BY 1 DESC
 
