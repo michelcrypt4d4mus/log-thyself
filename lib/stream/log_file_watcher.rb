@@ -19,35 +19,38 @@ class LogFileWatcher
       memo
     end
 
-    tty_table_data_old = []
+    @tty_table_data_old = []
     pastel = Pastel.new
 
     while(true) do
-      # TODO: Use say_and
-      tty_table_header = ['id', 'logfile path', 'alive?', 'CSV lines', 'Extra Lines']
-
-      tty_table_data = @streamer_threads.inject([]) do |table, (logfile, hsh)|
-        table << [
-          logfile.id,
-          logfile.file_path.strip,
-          hsh[:thread].alive? ? 'alive' : 'DEAD',
-          hsh[:csv_lines] || 0,
-          logfile.logfile_lines.size - (hsh[:csv_lines] || 0)
-        ]
-      end
-
-      tty_table_data.sort_by! { |row| File.basename(row[1]) }
-
-      if tty_table_data != tty_table_data_old
-        puts Pastel.new.underline("Status of log watcher threads") + Pastel.new.magenta.bold(" (new lines were read)")
-        tty_table_data_old = tty_table_data
-        table = TTY::Table.new(header: tty_table_header, rows: tty_table_data)
-        puts TTY::Table::Renderer::Unicode.new(table).render + "\n"
-      else
-        puts "No lines read..."
-      end
-
       sleep(POLL_INTERVAL_IN_SECONDS)
+      log_state unless Rails.env.production?
+    end
+  end
+
+  def self.log_state
+    # TODO: Use say_and
+    tty_table_header = ['id', 'logfile path', 'alive?', 'CSV lines', 'Extra Lines']
+
+    tty_table_data = @streamer_threads.inject([]) do |table, (logfile, hsh)|
+      table << [
+        logfile.id,
+        logfile.file_path.strip,
+        hsh[:thread].alive? ? 'alive' : 'DEAD',
+        hsh[:csv_lines] || 0,
+        logfile.logfile_lines.size - (hsh[:csv_lines] || 0)
+      ]
+    end
+
+    tty_table_data.sort_by! { |row| File.basename(row[1]) }
+
+    if tty_table_data != @tty_table_data_old
+      puts Pastel.new.underline("Status of log watcher threads") + Pastel.new.magenta.bold(" (new lines were read)")
+      @tty_table_data_old = tty_table_data
+      table = TTY::Table.new(header: tty_table_header, rows: tty_table_data)
+      puts TTY::Table::Renderer::Unicode.new(table).render + "\n"
+    else
+      puts "No lines read..."
     end
   end
 

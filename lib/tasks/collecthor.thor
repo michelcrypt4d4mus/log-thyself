@@ -6,8 +6,14 @@ class Callthecollecthor < Thor
                 type: :boolean,
                 default: false
 
-  FUTURE_STREAMS = %w[
+  # These can be safely launched by the daemon process, unlike the Objective-See apps
+  # See: https://developer.apple.com/documentation/xcode/signing-a-daemon-with-a-restricted-entitlement
+  DAEMON_STREAMS = %w[
+    collect:consolelogs:stream
     collect:syslog:stream
+  ]
+
+  FUTURE_STREAMS = DAEMON_STREAMS + %w[
     objectivesee:file_monitor:stream
     objectivesee:process_monitor:stream
   ]
@@ -32,6 +38,11 @@ class Callthecollecthor < Thor
   desc 'past', 'System logs from the pass, Console.app text, ASL logs, tcp/bluetooth capture files'
   def past
     start_em_up(PAST_SCANS)
+  end
+
+  desc 'daemon', 'System logs, both old and new (but not Objective-See monitors)'
+  def daemon
+    start_em_up(DAEMON_STREAMS)
   end
 
   no_commands do

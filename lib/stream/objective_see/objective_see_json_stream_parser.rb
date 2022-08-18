@@ -73,6 +73,6 @@ class ObjectiveSeeJsonStreamParser
       puts "         You are running #{executable_version}"
     end
 
-    "#{@executable_path} #{options[:command_line_args]}"
+    "#{@executable_path} #{options[:command_line_flags]}"
   end
 end
