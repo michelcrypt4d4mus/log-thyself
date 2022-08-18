@@ -101,7 +101,7 @@ Collect process events from ProcessMonitor (requires sudo!)
 #### Event Filtering
 ![](doc/event_filtering.png)
 
-[Filter definitions are here](config/log_event_filters/filter_definitions.rb); they can be edited as you like. The default is to all most thing. Because the filters are ruby code you can write rules that block events matching any set of properties or allow some random percentage of certain kinds of event through or use whatever rules you want - sky's the limit.
+Filter definitions are [here](config/log_event_filters/filter_definitions.rb); they can be edited as you like. The default is to allow everything but the most useless events in stream. Because the filters are ruby code you can write rules that block events matching any set of properties or allow some random percentage of certain kinds of event through or use whatever rules you want - sky's the limit.
 
 Other than that it's mostly configured from the command line but you can set some custom configuration options if you make your own `.env` file.  Start by copying the examples: `cp .env.example .env`.
 
