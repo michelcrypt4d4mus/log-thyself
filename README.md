@@ -57,9 +57,8 @@ Then delete the project folder. Uninstalling `ruby`, `homebrew`, `postgres` etc.
 -------
 
 # Usage
-`**QUICKSTART**`
+`**QUICKSTART**` This should start streaming macOS system logs to the database.
 
-This should start streaming macOS system logs to the database.
 ```sh
 thor collect:syslog:stream
 ```
@@ -153,9 +152,7 @@ RAILS_LOG_TO_STDOUT thor collect:syslog:stream
 -------
 
 # Analyzing The Data
-`**QUICKSTART (sort of)**`
-
-Query the database with SQL. There's some [useful queries](db/queries) in the repo you can look at/imitate.
+`**QUICKSTART (sort of)**` Query the database with SQL. There's some [useful queries](db/queries) in the repo you can look at/imitate.
 
 If you don't know how to write SQL queries the best thing to do would be to point a tool like Chartio at the database, which will give you some kind of GUI / charting situation. You could also use `thor db:dump` to dump out the data to a CSV and load it in even something like Excel (on the small end) or AWS Athena (on the high end).
 
