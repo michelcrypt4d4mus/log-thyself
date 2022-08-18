@@ -10,9 +10,11 @@
 # Processed 79738 in 10.535s (7568.911 rows per second)
 
 require 'benchmark'
+#require 'profile'
 
 ENV['RUNNING_FILTER_BENCHMARKS'] = 'true'
 LogEventFilter.build_filters!
+puts "oof"
 
 class FilterBenchmarker
   JSON_LOGS = File.join(Rails.root, 'log/benchmarking/benchmarking.json')

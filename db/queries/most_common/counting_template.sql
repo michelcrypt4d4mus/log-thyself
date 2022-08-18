@@ -9,7 +9,7 @@ SELECT
   RIGHT(subsystem, 35) AS subsystem,
   LEFT(redact_ids(event_message), 300) AS event_message
 FROM macos_system_logs
-WHERE event_message ~ '<private>'
+WHERE log_timestamp > '2022-08-18T14:00:00'
 GROUP BY 2,3,4,5,6,7
 ORDER BY 1 DESC
 
@@ -51,7 +51,7 @@ FROM macos_system_logs
      || COALESCE(category, '')
      || COALESCE(subsystem, '')
      || COALESCE(event_message, '')
-    ) ~* 'Clink'
+    ) ~* 'bluetooth|btle'
 GROUP BY 2,3,4,5,6,7
 ORDER BY 1 DESC
 
