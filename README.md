@@ -57,7 +57,7 @@ Then delete the project folder. Uninstalling `ruby`, `homebrew`, `postgres` etc.
 -------
 
 # Usage
-`QUICKSTART`: This should start streaming macOS system logs to the database.
+**QUICKSTART:** This should start streaming macOS system logs to the database.
 
 ```sh
 thor collect:syslog:stream
