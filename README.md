@@ -103,7 +103,7 @@ Collect process events from ProcessMonitor (requires sudo!)
 
 Filter definitions are [here](config/log_event_filters/filter_definitions.rb); they can be edited as you like. The default is to allow everything but the most useless events in stream. Because the filters are ruby code you can write rules that block events matching any set of properties or allow some random percentage of certain kinds of event through or use whatever rules you want - sky's the limit.
 
-Other than that it's mostly configured from the command line but you can set some custom configuration options if you make your own `.env` file.  Start by copying the examples: `cp .env.example .env`.
+Other than that it's mostly configured from the command line but you can set some custom configuration options if you make your own `.env` file.  Start by copying [the examples](.env.example) to a file called `.env`. Something like `cp .env.example .env` will do the trick.
 
 #### Application Logging
 **This section is not about the system logs this app is capturing.** Those are written to the database. This is about the logs this application generates. _This application's_ logs are by default written to the `log/` directory in the project's root dir.  If things aren'y working, look there and maybe you'll be able to figure out what's wrong.
