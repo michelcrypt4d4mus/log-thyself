@@ -5,10 +5,12 @@
 # The default behavior is to use temp tables and the COPY command when loading data.
 
 module PostgresCsvLoader
-  extend StyledNotifications
   extend ActiveSupport::Concern
+  extend StyledNotifications
 
-  CSV_EXCLUDED_COLS = %w[id created_at updated_at]
+  ID_COL = 'id'
+  RAILS_TIMESTAMP_COLS = %w[created_at updated_at].freeze
+  CSV_EXCLUDED_COLS = [ID_COL] + RAILS_TIMESTAMP_COLS
 
   included do |base|
     base::CSV_OPTIONS = {
@@ -41,6 +43,15 @@ module PostgresCsvLoader
     # Abstract methods that are optional to implement
     def validate_data_and_prepare_db!(csv_data); end
     def transform_csv_data!(csv_data); end
+
+    def columns_of_type(type)
+      cols = columns_hash.select { |col, props| props.type == type }.keys
+      cols - CSV_EXCLUDED_COLS
+    end
+
+    def csv_columns
+      column_names - CSV_EXCLUDED_COLS
+    end
 
     private
 
@@ -76,5 +87,16 @@ module PostgresCsvLoader
             (#{cols_to_update.map { |c| "EXCLUDED.#{c}" }.join(',')});
       ")
     end
+  end
+
+  # Attribute hash with keys of string type plus timestamps
+  def to_csv_hash
+    row = attributes.except(*CSV_EXCLUDED_COLS)
+
+    # Preserve precision for timestamps, stringify json
+    self.class.columns_of_type(:datetime).each { |col| row[col] = row[col].iso8601(6) }
+    self.class.columns_of_type(:json).each { |col| row[col] = row[col].to_json }
+
+    row
   end
 end

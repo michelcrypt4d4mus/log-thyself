@@ -1,20 +1,15 @@
-# Call with a block; it will yield() non blannk lines read from the STDOUT of the
-# :shell_command execution.
+# Spawns a shell process and reads the output, calling yield() on each line
 #
 # STDERR output will be read/drained with a separate thread and printed directly to
 # the application logs at ERROR level. The assumption is you want to focus on STDOUT
 # and the only real reason to read STDERR is to prevent the buffer from filling up and
 # crashing the program.
-#
-# Test:
-# s = ShellCommandStreamer.new('tail -F log/development.log')
-# s.stream! { |line, linenumber| puts "#{linenumber}: #{line}" }
 
 require 'open3'
 
 
 class ShellCommandStreamer
-  attr_accessor :lines_yielded_count, :lines_read_count
+  attr_accessor :lines_read_count
 
   def initialize(shell_command)
     @shell_command = shell_command
