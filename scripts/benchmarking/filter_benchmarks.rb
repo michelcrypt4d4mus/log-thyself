@@ -14,7 +14,7 @@ require 'benchmark'
 
 ENV['RUNNING_FILTER_BENCHMARKS'] = 'true'
 LogEventFilter.build_filters!
-puts "oof"
+
 
 class FilterBenchmarker
   JSON_LOGS = File.join(Rails.root, 'log/benchmarking/benchmarking.json')

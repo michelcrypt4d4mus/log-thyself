@@ -5,7 +5,7 @@ RSpec.describe SyslogStreamParser do
     end
 
     it 'parses a row' do
-      result_hash = described_class.new(nil).process_log_entry(line)
+      result_hash = described_class.new('consolelogs.log').process_log_entry(line)
 
       expect(result_hash).to eq({
         log_timestamp: '2022-07-23 05:36:41.952880+0000',

@@ -1,7 +1,7 @@
 -- Note that anyone can put com.apple as the prefix for their process name,
 -- so this really doesn't mean much.
 SELECT
-  "T",
+  "L",
   process_name,
   sender_process_name,
   category,

@@ -2,6 +2,7 @@
 -- Requires ~300 columns of display space
 SELECT
   COUNT(*) AS "count",
+  DATE_TRUNC('second', MAX(log_timestamp)) AS most_recent,
   msg_type_char(message_type, event_type)  AS "L",
   RIGHT(process_name, 22) AS process_name,
   RIGHT(sender_process_name, 22) AS sender,
@@ -9,7 +10,8 @@ SELECT
   RIGHT(subsystem, 35) AS subsystem,
   LEFT(redact_ids(event_message), 300) AS event_message
 FROM macos_system_logs
-WHERE log_timestamp > '2022-08-18T14:00:00'
+WHERE process_name = 'Activity Monitor' AND message_type ='Info'
+  --AND log_timestamp > '2022-08-18T14:00:00'
 GROUP BY 2,3,4,5,6,7
 ORDER BY 1 DESC
 

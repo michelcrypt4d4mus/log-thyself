@@ -60,7 +60,7 @@ class LogFileWatcher
       msg += "\n#{table.render(:unicode, **table_render_options)}\n"
       say_and_log(msg)
     else
-      puts "No lines read..."
+      say_and_log("No lines read...")
     end
   end
 
@@ -93,7 +93,7 @@ class LogFileWatcher
       begin
         Thread.current[:lines_written] = @info[:csv_lines]
 
-        ShellCommandStreamer.new(@logfile.shell_command_to_stream).stream! do |line, line_number|
+        FileStreamer.new(@logfile.file_path, live_stream: true).stream! do |line, line_number|
           line = line.gsub("\u0000", '').force_encoding(Encoding::UTF_8)  # Null byte...
           next if line_number <= Thread.current[:lines_written]
 
@@ -103,7 +103,7 @@ class LogFileWatcher
             Rails.logger.warn("Connection timeout; sleeping and retrying")
             sleep 3
             retry
-          rescue ActiveRecord::RecordNotUnique => e
+          rescue StandardError => e
             Rails.logger.error("#{e.class} while loading logfile #{@logfile.file_path} (id: #{@logfile.id}\nlineno. #{line_number}: #{line}")
             raise e
           end

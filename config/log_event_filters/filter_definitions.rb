@@ -273,6 +273,17 @@ class FilterDefinitions
     },
 
     {
+      comment: 'Activity Monitor not so useful',
+      matchers: {
+        process_name: 'Activity Monitor',
+        event_message: [
+          /^ISImage reported a placeholder/
+        ]
+      },
+      allowed?: false
+    },
+
+    {
       comment: 'BlockBlock allows',
       matchers: {
         process_name: 'BlockBlock',
@@ -539,7 +550,10 @@ class FilterDefinitions
       comment: 'LaunchServices low level communications',
       matchers: {
         sender_process_name: 'LaunchServices',
-        category: 'cas',
+        category: %w[
+          binding
+          cas
+        ],
         message_type: INFO_OR_LESS,
         event_message: [
           /^(applicationInformationSeed|Invoking selector|Truncating a list of binding|Creating binding evaluator)/,
@@ -547,6 +561,7 @@ class FilterDefinitions
           /^\d+ bindings found$/,
           /^Destroying binding evaluator 0x[0-9A-Fa-f]+$/,
           /^(LS\/CAS: Changed front application|CopyFrontApplication|Getting plist hint for data)/,
+          /^\+\+\+ /
         ]
       },
       allowed?: false
@@ -714,7 +729,17 @@ class FilterDefinitions
         event_message: /^(applyPWM|enable:\d+|levelPercentage \d+)/
       },
       allowed?: false
-    }
+    },
+
+    {
+      comment: 'Zoom Rosetta related',  # https://developer.apple.com/forums/thread/701855
+      matchers: {
+        process_name: 'zoom.us',
+        message_type: ERROR,
+        event_message: /CurrentVBLDelta/
+      },
+      allowed?: false
+    },
   ]
 
   def self.validate!

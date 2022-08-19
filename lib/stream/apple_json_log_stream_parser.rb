@@ -1,5 +1,4 @@
 # Use Oj gem to parse the log stream (just an array of hashes) in JSON format.
-# TODO: Use separate thread to read STDERR?
 
 require 'dotenv'
 require 'io/wait'
@@ -10,6 +9,8 @@ Dotenv.load(File.join(Rails.root, '.env'))
 
 
 class AppleJsonLogStreamParser < ::Oj::ScHandler
+  include StyledNotifications
+
   # Options for log command
   LOG_LEVELS = %w(default info debug)
   LOG_OPTIONS = '--source --style json --color none'
@@ -46,9 +47,7 @@ class AppleJsonLogStreamParser < ::Oj::ScHandler
         end
       end
     ensure
-      msg = "Killing child process with PID #{pid} and loading final batch of messages..."
-      Rails.logger.warn(msg)
-      puts msg
+      say_and_log("Killing child process with PID #{pid} and loading final batch of messages...")
     end
   end
 

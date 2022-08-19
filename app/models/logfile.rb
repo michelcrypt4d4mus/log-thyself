@@ -3,6 +3,8 @@ require 'csv'
 
 
 class Logfile < ApplicationRecord
+  include StyledNotifications
+
   has_many :logfile_lines
 
   after_initialize do |logfile|
@@ -33,17 +35,12 @@ class Logfile < ApplicationRecord
   CLOSED_EXTNAMES = ZIPPED_EXTNAMES + DIAGNOSTIC_EXTNAMES + [PKLG_EXTNAME, ASL_EXTNAME]
   ALL_EXTNAMES = CLOSED_EXTNAMES + %w[.info .log .out .python3 .txt]
 
-  # Shell commands
-  TAIL_FROM_TOP = 'tail -c +0'
-  TAIL_FROM_TOP_STREAMING = TAIL_FROM_TOP + ' -F'
-  SYSLOG_READ_CMD = 'syslog -F raw -T utc.6'
-
   # Batch size to use for bulk loads
   BULK_LOAD_BATCH_SIZE = 10_000
   IGNORE_ERRORS_ON_FILES_OF_LENGTH_LESS_THAN = 100 ## characters
 
   def self.logfile_paths_on_disk
-    LOG_DIRS.flat_map { |dir| Dir[File.join(dir, '**/*')] }.select { |f| File.file?(f) }
+    LOG_DIRS.flat_map { |dir| Dir[File.join(dir, '**/*')] }.select { |f| File.file?(f) && File.basename(f) != 'StoreData' }
   end
 
   def self.logfiles_on_disk
@@ -76,11 +73,8 @@ class Logfile < ApplicationRecord
       begin
         logfile.write_contents_to_db!
       rescue StandardError => e
-        msg = "#{e.class.to_s} while processing #{file_path}, will write the error info instead to #{LogfileLine.table_name}. "
-        msg += "Error Message: #{e.message}"
-        puts msg
-        msg += "\nBacktrace:\n#{e.backtrace.join("\n")}"
-        Rails.logger.error(msg)
+        say_and_log("#{e.class} processing #{file_path}: #{e.message}. Writing error to #{LogfileLine.table_name}. ", log_level: :error)
+        Rails.logger.error("#{e.class} Backtrace:\n#{e.backtrace.join("\n")}")
       end
     end
   end
@@ -100,7 +94,7 @@ class Logfile < ApplicationRecord
 
   # Stream a file line by line
   def stream_contents(&block)
-    ShellCommandStreamer.new(shell_command_to_read).stream! do |line, line_number|
+    FileStreamer.new(file_path).stream! do |line, line_number|
       yield(line, line_number)
     end
   end
@@ -119,10 +113,11 @@ class Logfile < ApplicationRecord
           db_writer << LogfileLine.new(logfile_id: self.id, line_number: line_number, line: line)
         end
       end
-    rescue CSV::MalformedCSVError => e
+    rescue CSV::MalformedCSVError, ActiveRecord::StatementInvalid, PG::CharacterNotInRepertoire => e
+      raise e unless e.is_a?(CSV::MalformedCSVError) || e.cause.is_a?(PG::CharacterNotInRepertoire)
       (line_count, word_count, byte_count, _) = `wc #{file_path}`.split
       Rails.logger.error("#{e.class.to_s} loading '#{file_path}' to DB.")
-      raise e if byte_count > IGNORE_ERRORS_ON_FILES_OF_LENGTH_LESS_THAN
+      raise e if byte_count.to_i > IGNORE_ERRORS_ON_FILES_OF_LENGTH_LESS_THAN
 
       msg = "#{e.class.to_s}: #{e.message} but file is short (#{line_count} lines / #{byte_count} bytes) so moving on..."
       say_and_log(msg, log_level: :warn, styles: [:yellow])
@@ -139,7 +134,7 @@ class Logfile < ApplicationRecord
   end
 
   def extract_contents
-    ShellCommandStreamer.new(shell_command_to_read).read
+    FileStreamer.new(file_path).read
   end
 
   def extname
@@ -168,52 +163,6 @@ class Logfile < ApplicationRecord
 
   def open?
     !closed?
-  end
-
-  # TODO: this belongs on the streamer classes
-  # Find the shell command that can read the file
-  def shell_command_to_read(include_path: true)
-    case File.extname(file_path)
-    when BZIP2_EXTNAME
-      'bzcat'
-    when GZIP_EXTNAME
-      'gunzip -c'
-    when ASL_EXTNAME
-      # syslog -f only prints the last few lins unless we do the 'cat' pipe to STDIN
-      return "cat \"#{file_path}\" | #{SYSLOG_READ_CMD} -f"
-    when PKLG_EXTNAME
-      if system('which tshark')
-        'tshark -r'
-      else
-        msg = 'tshark could not be found to parse the file. install it if you want the bluetooth .pklg files parsed.'
-        Rails.logger.warn(msg)
-        "echo -e \"#{msg}\""
-      end
-    when SYSLOG_SPECIAL_EXTNAME
-      return "#{SYSLOG_READ_CMD} -B"  # -B is 'from last boot'
-    else
-      'cat'
-    end + (include_path ? " \"#{file_path}\"" : '')
-  end
-
-  def shell_command_to_stream
-    cmd = shell_command_to_read(include_path: false)
-
-    case cmd
-    when 'cat'
-      "#{TAIL_FROM_TOP_STREAMING} \"#{file_path}\""
-    when /syslog/
-      if extname == SYSLOG_SPECIAL_EXTNAME
-        "#{SYSLOG_READ_CMD} -w all"
-      else
-        Rails.logger.warn('syslog -w FILE does not stream from a file even though docs say it should')
-        nil
-      end
-    when /tshark/
-      raise 'tail -f causes issues with tshark, sadly'
-    else
-      "#{TAIL_FROM_TOP_STREAMING} \"#{file_path}\" | #{cmd}"
-    end
   end
 
   def number_of_logfile_lines
