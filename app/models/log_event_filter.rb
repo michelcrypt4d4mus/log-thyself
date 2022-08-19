@@ -4,6 +4,7 @@ require File.join(Rails.root, 'config', 'log_event_filters', 'filter_definitions
 
 class LogEventFilter
   include ActionView::Helpers::NumberHelper
+  extend StyledNotifications
   extend TableLogger
 
   BOOLEANS = [true, false]
@@ -140,12 +141,10 @@ class LogEventFilter
       end
     end
 
-    # TODO: use the "say and log"
     msg = "\n\n" + (' ' * STATS_TITLE_INDENT)
     msg += pastel.underline("Allowed / Blocked Event Counts By Process\n")
     msg += table_txt + "\n\n"
-    puts msg
-    Rails.logger.info(msg)
+    say_and_log(msg)
   end
 
   def value_match?(matcher, value)

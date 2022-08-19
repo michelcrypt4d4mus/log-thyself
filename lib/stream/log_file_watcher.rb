@@ -8,6 +8,7 @@ require 'tty-table'
 
 
 class LogFileWatcher
+  extend StyledNotifications
   extend TableLogger
 
   POLL_INTERVAL_IN_SECONDS = 15
@@ -36,7 +37,6 @@ class LogFileWatcher
   end
 
   def self.log_state
-    # TODO: Use say_and
     tty_table_header = ['ID', 'logfile path', 'alive?', 'Initial Load Lines', 'Lines Since Load']
 
     tty_table_data = @streamer_threads.inject([]) do |table, (logfile, hsh)|
@@ -58,8 +58,7 @@ class LogFileWatcher
 
       msg = "\n" + Pastel.new.underline("Status of log watcher threads") + Pastel.new.magenta.bold(" (new lines were read)")
       msg += "\n#{table.render(:unicode, **table_render_options)}\n"
-      puts msg
-      Rails.logger.info(msg)
+      say_and_log(msg)
     else
       puts "No lines read..."
     end
