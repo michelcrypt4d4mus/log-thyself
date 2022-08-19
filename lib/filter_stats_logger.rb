@@ -7,7 +7,7 @@ class FilterStatsLogger
   include TableLogger
 
   STATUS_LABELS = LogEventFilter::STATUSES.values
-  DEFAULT_FILTER_STATS_LOGGING_FREQUENCY = ENV['DEFAULT_FILTER_STATS_LOGGING_FREQUENCY']&.to_i || 50_000
+  DEFAULT_FILTER_STATS_LOGGING_FREQUENCY = ENV['DEFAULT_FILTER_STATS_LOGGING_FREQUENCY'].presence&.to_i || 50_000
   STATS_TABLE_HEADER = %w[process_name events allowed blocked allow_pct block_pct].map(&:upcase)
   TABLE_ALIGNMENTS = [:left] + Array.new(5) { |_| :right }
   BUFFER_ROW = Array.new(6) { |_| '' }

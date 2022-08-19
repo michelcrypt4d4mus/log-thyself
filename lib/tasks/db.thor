@@ -15,7 +15,7 @@ class Db < Thor
           default: ActiveRecord::Base.connection.current_database
   option :dir_to_dump_to,
           desc: 'Destination directory (default is configurable in .env)',
-          default: ENV['DEFAULT_DB_DUMP_DIR'] || Rails.root.join('db', 'backups').to_s
+          default: ENV['DEFAULT_DB_DUMP_DIR'].presence || Rails.root.join('db', 'backups').to_s
   option :pg_dump_flags,
           default: '-Fc -Z9',
           desc: 'Flags for pg_dump (default is max compression, postgres archive style)'

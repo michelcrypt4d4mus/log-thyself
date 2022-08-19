@@ -12,7 +12,7 @@ module System
 
     class_option :daemon_name,
                   desc: 'Use your own possibly stealthier process name if you want (default is configurable in .env)',
-                  default: ENV['DAEMON_NAME'] || DEFAULT_DAEMON_NAME
+                  default: ENV['DAEMON_NAME'].presence || DEFAULT_DAEMON_NAME
 
     desc 'install', 'Install as a launchd daemon (requires sudo)'
     option :launcher_script,
