@@ -106,7 +106,7 @@ class Logfile < ApplicationRecord
   end
 
   # Writes entire file to log_lines table as separate lines.
-  # Returns lines written count.
+  # Returns lines written count. Suppresses CSV parser errors for small files.
   def write_contents_to_db!
     save!
     Rails.logger.info("Loading '#{file_path}' to DB")
@@ -120,7 +120,6 @@ class Logfile < ApplicationRecord
         end
       end
     rescue CSV::MalformedCSVError => e
-      # Ignore CSV errors for small files
       (line_count, word_count, byte_count, _) = `wc #{file_path}`.split
       Rails.logger.error("#{e.class.to_s} loading '#{file_path}' to DB.")
       raise e if byte_count > IGNORE_ERRORS_ON_FILES_OF_LENGTH_LESS_THAN

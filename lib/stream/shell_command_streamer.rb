@@ -18,11 +18,13 @@ class ShellCommandStreamer
 
   def initialize(shell_command)
     @shell_command = shell_command
-    @lines_yielded_count = @lines_read_count = 0
+    @lines_read_count = 0
     Rails.logger.info(self.class.to_s + ": shell command is '#{@shell_command}'")
   end
 
-  # Yields a 3-tuple: (line, lines_read_count, lines_yielded_count)
+  # Yields a tuple: (line, lines_read_count)
+  # Yielded lines have the trailing newline removed.
+  # spawn_stderr_reader causes a thread to be spawned to read from STDERR and log (as errors) to Rails log
   def stream!(spawn_stderr_reader: true, &block)
     stderr_thread = nil
 
@@ -30,13 +32,14 @@ class ShellCommandStreamer
       Open3.popen3(@shell_command) do |_stdin, stdout, stderr, thread|
         child_pid = thread.pid
         @child_process_string = "Child process '#{@shell_command}' (PID: #{child_pid})"
-        Rails.logger.info("#{@child_process_string} started...")
         stderr_thread = start_stderr_reader_thread(stderr) if spawn_stderr_reader
+        Rails.logger.info("#{@child_process_string} started...")
 
         while(line = stdout.gets) do
           line.chomp!
-          Rails.logger.debug("Stream line #{stdout.lineno}: #{line}")
-          yield(line, (@lines_read_count = stdout.lineno), (@lines_yielded_count += 1))
+          @lines_read_count = stdout.lineno
+          Rails.logger.debug("Stream line #{@lines_read_count}: #{line}")
+          yield(line, @lines_read_count)
         end
       end
     rescue Errno::EACCES => e
@@ -54,7 +57,7 @@ class ShellCommandStreamer
   # Slurps the whole stream
   def read
     contents = ''
-    stream! { |line| contents += line }
+    stream! { |line| contents += line + "\n" }
     contents
   end
 
