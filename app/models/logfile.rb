@@ -40,6 +40,7 @@ class Logfile < ApplicationRecord
 
   # Batch size to use for bulk loads
   BULK_LOAD_BATCH_SIZE = 10_000
+  IGNORE_ERRORS_ON_FILES_OF_LENGTH_LESS_THAN = 100 ## characters
 
   def self.logfile_paths_on_disk
     LOG_DIRS.flat_map { |dir| Dir[File.join(dir, '**/*')] }.select { |f| File.file?(f) }
@@ -89,7 +90,7 @@ class Logfile < ApplicationRecord
     puts "\n" + logfiles.map(&:file_path).sort.join("\n")
   end
 
-  # Magical syslog watcher
+  # Syslog is not really a file, but we make a Logfile that looks like it is.
   def self.synthetic_syslog_file
     new(
       file_path: "syslog_#{Time.now.utc.strftime('%Y-%m-%dT%H%M%S%p')}#{SYSLOG_SPECIAL_EXTNAME}",
@@ -107,9 +108,9 @@ class Logfile < ApplicationRecord
   # Writes entire file to log_lines table as separate lines.
   # Returns lines written count.
   def write_contents_to_db!
-    return 0 if extname == SYSLOG_SPECIAL_EXTNAME
-    Rails.logger.info("Loading '#{file_path}' to DB")
     save!
+    Rails.logger.info("Loading '#{file_path}' to DB")
+    return 0 if extname == SYSLOG_SPECIAL_EXTNAME
 
     begin
       lines_written = CsvDbWriter.open(LogfileLine, batch_size: BULK_LOAD_BATCH_SIZE) do |db_writer|
@@ -119,12 +120,18 @@ class Logfile < ApplicationRecord
         end
       end
     rescue CSV::MalformedCSVError => e
-      Rails.logger.error("Malformed CSV while processing '#{file_path}'\n#{e.message}")
-      raise e
+      # Ignore CSV errors for small files
+      (line_count, word_count, byte_count, _) = `wc #{file_path}`.split
+      Rails.logger.error("#{e.class.to_s} loading '#{file_path}' to DB.")
+      raise e if byte_count > IGNORE_ERRORS_ON_FILES_OF_LENGTH_LESS_THAN
+
+      msg = "#{e.class.to_s}: #{e.message} but file is short (#{line_count} lines / #{byte_count} bytes) so moving on..."
+      say_and_log(msg, log_level: :warn, styles: [:yellow])
+      lines_written = number_of_logfile_lines
     end
 
-    if lines_written != (db_count = self.logfile_lines.count)
-      Rails.logger.warn("ID #{id}. '#{file_path}' claims #{lines_written} but #{db_count} in DB!")
+    if lines_written != number_of_logfile_lines
+      Rails.logger.warn("ID #{id}. '#{file_path}' claims #{lines_written} but #{number_of_logfile_lines} in DB!")
     else
       Rails.logger.info("Loaded #{lines_written} rows of #{file_path} via CSV")
     end
@@ -200,7 +207,7 @@ class Logfile < ApplicationRecord
       if extname == SYSLOG_SPECIAL_EXTNAME
         "#{SYSLOG_READ_CMD} -w all"
       else
-        Rails.logger.error('syslog -w 10 -f FILE does not stream even though docs say it should')
+        Rails.logger.warn('syslog -w FILE does not stream from a file even though docs say it should')
         nil
       end
     when /tshark/
@@ -208,6 +215,10 @@ class Logfile < ApplicationRecord
     else
       "#{TAIL_FROM_TOP_STREAMING} \"#{file_path}\" | #{cmd}"
     end
+  end
+
+  def number_of_logfile_lines
+    self.logfile_lines.count
   end
 
   def print_to_terminal

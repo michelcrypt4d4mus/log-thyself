@@ -1,5 +1,5 @@
 # Classes using this module may implement the validate_data_and_prepare_db!(), transform_csv_data!(), and
-# load_csv_data! methods as needed, as well as overloading the csv_converters() and header_converters() methods
+# load_csv_data! methods as needed as well as overload the csv_converters() and header_converters() methods
 # which will be passed to Ruby's built in CSV.parse().
 #
 # The default behavior is to use temp tables and the COPY command when loading data.
@@ -9,7 +9,6 @@ module PostgresCsvLoader
   extend ActiveSupport::Concern
 
   CSV_EXCLUDED_COLS = %w[id created_at updated_at]
-  IGNORE_ERRORS_ON_FILES_OF_LENGTH_LESS_THAN = 100 ## characters
 
   included do |base|
     base::CSV_OPTIONS = {
@@ -22,21 +21,7 @@ module PostgresCsvLoader
   class_methods do
     # TODO: we are generating and then parsing again... presumably we could skip that middle step?
     def load_from_csv_string(csv_string)
-      begin
-        csv_data = CSV.parse(csv_string, headers: true)
-      rescue CSV::MalformedCSVError => e
-        Rails.logger.error("Error parsing CSV of length #{csv_string.length}")
-
-        if csv_string.length < IGNORE_ERRORS_ON_FILES_OF_LENGTH_LESS_THAN
-          msg = "#{e.class.to_s}: #{e.message} but file is short so moving on."
-          say_and_log(msg, styles: [:yellow])
-          return
-        else
-          Rails.logger.error("#{e.class.to_s}: #{e.message}")
-          raise
-        end
-      end
-
+      csv_data = CSV.parse(csv_string, headers: true)
       transform_csv_data!(csv_data)
 
       ActiveRecord::Base.transaction do

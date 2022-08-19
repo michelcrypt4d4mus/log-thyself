@@ -4,7 +4,8 @@
 #   -50000000 should guarantee us the whole file.
 
 require 'pastel'
-require 'tty'
+require 'tty-table'
+
 
 class LogFileWatcher
   extend TableLogger
