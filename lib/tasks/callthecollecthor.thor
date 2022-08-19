@@ -13,15 +13,17 @@ class Callthecollecthor < Thor
     collect:syslog:stream
   ]
 
-  FUTURE_STREAMS = DAEMON_STREAMS + %w[
+  OBJECTIVE_SEE_STREAMS = %w[
     objectivesee:file_monitor:stream
     objectivesee:process_monitor:stream
   ]
 
-  PAST_SCANS = [
-    'collect:syslog:last 365d',
-    'collect:consolelogs:load',
+  PAST_SCANS = %w[
+    collect:syslog:last 365d
+    collect:consolelogs:load
   ]
+
+  FUTURE_STREAMS = DAEMON_STREAMS + OBJECTIVE_SEE_STREAMS
 
   desc 'everything', 'Collect all the things (future and past) in forked processes'
   def everything
@@ -42,6 +44,11 @@ class Callthecollecthor < Thor
   desc 'daemon', 'System logs, both old and new (but not Objective-See monitors)'
   def daemon
     start_em_up(DAEMON_STREAMS)
+  end
+
+  desc 'objectivesee', 'Launch the Objective-See monitors (requires sudo)'
+  def objectivesee
+    start_em_up(OBJECTIVE_SEE_STREAMS)
   end
 
   no_commands do

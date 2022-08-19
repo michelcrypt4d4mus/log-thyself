@@ -8,7 +8,7 @@ require File.expand_path("../config/environment", __FILE__)
 require "thor"
 
 THOR_TASKS_PATH = File.join(Rails.root, 'lib', 'tasks')
-LOAD_ORDER = %w(syslogs db)
+LOAD_ORDER = %w(syslogs db callthecollecthor)
 WARNING_BANNER = '🚨 '
 
 puts "\n"
