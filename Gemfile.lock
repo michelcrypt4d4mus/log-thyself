@@ -103,9 +103,6 @@ GEM
       activesupport (>= 5.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
-    importmap-rails (1.1.5)
-      actionpack (>= 6.0.0)
-      railties (>= 6.0.0)
     io-console (0.5.11)
     irb (1.4.1)
       reline (>= 0.3.0)
@@ -154,8 +151,6 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
     public_suffix (4.0.7)
-    puma (5.6.4)
-      nio4r (~> 2.0)
     racc (1.6.0)
     rack (2.2.4)
     rack-test (2.0.2)
@@ -229,39 +224,8 @@ GEM
     strscan (3.0.4)
     thor (1.2.1)
     timeout (0.3.0)
-    tty (0.5.0)
-      equatable (~> 0.5.0)
-      pastel (~> 0.6.0)
-      tty-color (~> 0.3.0)
-      tty-command (~> 0.1.0)
-      tty-cursor (~> 0.3.0)
-      tty-pager (~> 0.4.0)
-      tty-platform (~> 0.1.0)
-      tty-progressbar (~> 0.9.0)
-      tty-prompt (~> 0.6.0)
-      tty-screen (~> 0.5.0)
-      tty-spinner (~> 0.2.0)
-      tty-table (~> 0.5.0)
-      tty-which (~> 0.1.0)
     tty-color (0.3.0)
-    tty-command (0.1.0)
-      pastel (~> 0.6.0)
-    tty-cursor (0.3.0)
-    tty-pager (0.4.0)
-      tty-screen (~> 0.5.0)
-      tty-which (~> 0.1.0)
-      verse (~> 0.4.0)
-    tty-platform (0.1.0)
-    tty-progressbar (0.9.0)
-      tty-screen (~> 0.5.0)
-    tty-prompt (0.6.0)
-      necromancer (~> 0.3.0)
-      pastel (~> 0.6.0)
-      tty-cursor (~> 0.3.0)
-      tty-platform (~> 0.1.0)
-      wisper (~> 1.6.1)
     tty-screen (0.5.1)
-    tty-spinner (0.2.0)
     tty-table (0.5.0)
       equatable (~> 0.5.0)
       necromancer (~> 0.3.0)
@@ -269,11 +233,6 @@ GEM
       tty-screen (~> 0.5.0)
       unicode_utils (~> 1.4.0)
       verse (~> 0.4.0)
-    tty-which (0.1.0)
-    turbo-rails (1.1.1)
-      actionpack (>= 6.0.0)
-      activejob (>= 6.0.0)
-      railties (>= 6.0.0)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
     unicode_utils (1.4.0)
@@ -292,7 +251,6 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    wisper (1.6.1)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.6.0)
@@ -306,7 +264,6 @@ DEPENDENCIES
   debug
   dotenv-rails
   fx
-  importmap-rails
   jbuilder
   jsonpath
   oj
@@ -314,7 +271,6 @@ DEPENDENCIES
   pg
   plist
   pry
-  puma (~> 5.0)
   rails (~> 7.0)
   rspec-rails (~> 5.0.0)
   scenic
@@ -322,9 +278,7 @@ DEPENDENCIES
   sprockets-rails
   stimulus-rails
   thor
-  tty
   tty-table
-  turbo-rails
   tzinfo-data
   web-console
   webdrivers

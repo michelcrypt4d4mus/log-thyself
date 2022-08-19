@@ -16,4 +16,6 @@ RAILS_ENV=production bundle exec rake db:create
 RAILS_ENV=production bundle exec rake db:migrate
 touch log/production.log
 
+echo 'You will need to install the Objective-C ProcessMonitor and FileMonitor to use those tools. You can find them here:'
+echo: "https://objective-see.org/products/utilities.html\n\n"
 echo "Run 'thor list' to see available commands."
