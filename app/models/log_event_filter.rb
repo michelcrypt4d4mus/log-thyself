@@ -10,7 +10,7 @@ class LogEventFilter
   STATUSES = %i[allowed blocked]
 
   # Constants for formatting the log output.
-  STATS_INDENT = 15
+  STATS_TITLE_INDENT = 15
   TOTAL_EVENT_COUNT = 'Total Event Count'
   DEFAULT_FILTER_STATS_LOGGING_FREQUENCY = 50_000
   STATS_TABLE_HEADER = %w[process_name events allowed blocked allow_pct block_pct].map(&:upcase)
@@ -141,7 +141,7 @@ class LogEventFilter
     end
 
     # TODO: use the "say and log"
-    msg = "\n\n" + (' ' * STATS_INDENT)
+    msg = "\n\n" + (' ' * STATS_TITLE_INDENT)
     msg += pastel.underline("Allowed / Blocked Event Counts By Process\n")
     msg += table_txt + "\n\n"
     puts msg
