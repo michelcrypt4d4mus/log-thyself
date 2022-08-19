@@ -1,6 +1,7 @@
 colsizes = MacOsSystemLog.column_names.map do |c|
   "ROUND(SUM(pg_column_size(#{c})) / #{1.megabyte}) AS #{c} "
 end
+
 puts "SELECT\n  " + colsizes.join(",\n  ") + "\nFROM macos_system_logs"
 
 # macos_system_logs

@@ -37,7 +37,6 @@ class FilterStatsLogger
     end
   end
 
-
   # Render a table to the log plus allow/block rates etc
   def log_stats
     # Compute totals row

@@ -7,7 +7,6 @@ require File.join(Rails.root, 'config', 'log_event_filters', 'filter_definitions
 
 class LogEventFilter < Struct.new(:rule)
   STATUSES = { true => :allowed, false => :blocked }
-  BOOLEANS = STATUSES.keys
 
   class << self
     attr_accessor :filters, :filter_stats_logger
@@ -32,7 +31,7 @@ class LogEventFilter < Struct.new(:rule)
 
     # If :allowed? is a boolean use it directly to determine status
     # If it's a Proc call it and use the return value.
-    if BOOLEANS.include?(rule[:allowed?])
+    if STATUSES.keys.include?(rule[:allowed?])
       rule[:allowed?]
     else
       rule[:allowed?].call(event)

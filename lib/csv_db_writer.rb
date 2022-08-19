@@ -1,5 +1,5 @@
 # Writes ActiveRecord objects to the DB via CSV then COPY command (for speed)
-# TODO: Move to lib/
+# Basically acts as a buffer for rows headed to classes extending PostgresCsvLoader
 
 require 'csv'
 

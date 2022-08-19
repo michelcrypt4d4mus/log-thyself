@@ -1,14 +1,14 @@
 class MacOsSystemLog < ApplicationRecord
-  self.table_name = 'macos_system_logs'
-
+  self.table_name = 'macos_system_logs'  # Must come before include PostgresCsvLoader
   include PostgresCsvLoader
 
-  # Not loaded into DB
-  EXCLUDED_KEYS = %w(formatString)
+  # Keys to use to extract values for the columns in the DB
   JSON_COLUMN_NAME_SYMBOLS = column_names.map(&:to_sym) - CSV_EXCLUDED_COLS
 
   # Apple's log levels (where's 'warn'???)
   MESSAGE_TYPES = %w[Debug Info Default Error Fault].freeze
+  # Values at EXCLUDED_KEYS locations in the JSON are not loaded into DB
+  EXCLUDED_KEYS = %w(formatString)
 
   # For queries on uniquess (sort of)
   INDEX_SEARCH_COLS = %i(
@@ -51,15 +51,5 @@ class MacOsSystemLog < ApplicationRecord
     end
 
     new(row_hash)
-  end
-
-  # Not definitive...
-  def probably_exists_in_db?
-    search_hash = INDEX_SEARCH_COLS.inject({}) do |memo, col|
-      memo[col] = self[col].blank? ? nil : self[col]
-      memo
-    end
-
-    self.class.where(search_hash).exists?
   end
 end
