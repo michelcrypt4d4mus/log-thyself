@@ -9,24 +9,23 @@ gem 'dotenv-rails', groups: [:development, :test]
 gem 'fx'
 gem 'jsonpath'
 gem 'oj'
-gem "pastel"  # Part of tty we actually use
+gem "pastel"
 gem 'pg'
 gem 'plist'
 gem 'scenic'
 gem 'thor'
-gem 'tty'
-gem 'tty-table'  # Part of tty
+gem 'tty-table'
 
 
 # Rails
 gem "bootsnap", require: false  # Reduces boot times through caching; required in config/boot.rb
-gem "importmap-rails"
+#gem "importmap-rails"
 gem "jbuilder"  # Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem "puma", "~> 5.0" # Use the Puma web server [https://github.com/puma/puma]
+#gem "puma", "~> 5.0" # Use the Puma web server [https://github.com/puma/puma]
 gem "rails", "~> 7.0"
 gem "sprockets-rails"
 gem "stimulus-rails"  # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem "turbo-rails"  # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
+#gem "turbo-rails"  # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]  # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 
 

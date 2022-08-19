@@ -200,7 +200,8 @@ class Logfile < ApplicationRecord
       if extname == SYSLOG_SPECIAL_EXTNAME
         "#{SYSLOG_READ_CMD} -w all"
       else
-        "#{TAIL_FROM_TOP_STREAMING} \"#{file_path}\" | #{SYSLOG_READ_CMD}"
+        Rails.logger.error('syslog -w 10 -f FILE does not stream even though docs say it should')
+        nil
       end
     when /tshark/
       raise 'tail -f causes issues with tshark, sadly'

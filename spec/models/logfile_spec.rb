@@ -38,7 +38,6 @@ RSpec.describe Logfile, type: :model do
   context 'file type handling' do
     let(:var_log) { described_class::VAR_LOG }
     let(:asl_dir) { File.join(var_log, 'asl') }
-    let(:asl_open) { File.join(asl_dir, "#{Date.today.strftime('%Y.%m.%d')}.G80.asl") }
     let(:asl_closed) { File.join(asl_dir, '2022.08.09.G80.asl') }
     let(:asl_manager_closed) { File.join(asl_dir, 'Logs/aslmanager.20220810T034511-04') }
     let(:wifi_open) { File.join(var_log, 'wifi.log') }
@@ -62,7 +61,6 @@ RSpec.describe Logfile, type: :model do
 
       let(:open_logs) do
         [
-          asl_open,
           wifi_open,
           system_open,
         ]
@@ -98,7 +96,7 @@ RSpec.describe Logfile, type: :model do
         end
       end
 
-      it_behaves_like 'command', 'db.asl', 'cat "db.asl" | syslog -f', 'tail -c +0 -F "db.asl" | syslog -f'
+      it_behaves_like 'command', 'db.asl', 'cat "db.asl" | syslog -F raw -T utc.6 -f', nil
       it_behaves_like 'command', 'file.log', 'cat "file.log"', 'tail -c +0 -F "file.log"'
       it_behaves_like 'command', 'db.gz', 'gunzip -c "db.gz"', 'tail -c +0 -F "db.gz" | gunzip -c'
     end
