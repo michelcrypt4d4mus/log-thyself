@@ -740,15 +740,29 @@ class FilterDefinitions
       },
       allowed?: false
     },
+
+    {
+      comment: 'Postgres and ProcessMonitor',  # https://developer.apple.com/forums/thread/701855
+      matchers: {
+        process_name: %w[
+          postgres
+          ProcessMonitor
+        ],
+        is_process_signed_as_reported: true,
+      },
+      allowed?: false
+    },
   ]
 
   def self.validate!
+    all_columns = MacOsSystemLog.column_names + FileEvent.column_names + ProcessEvent.column_names
+
     LOG_EVENT_FILTERS.each do |filter|
       raise "Invalid filter:\n#{filter.pretty_inspect}" unless filter.keys.sort == FILTER_DEFINITION_KEYS
 
       filter[:matchers].each do |col, val|
-        raise "Invalid matcher: #{col} is not a column" unless MacOsSystemLog.column_names.include?(col.to_s)
-        raise "Invalid matcher for #{col}: #{val} is not a valid type " unless [Array, Numeric, String, Regexp].include?(val.class)
+        raise "Invalid matcher: #{col} is not a column" unless all_columns.include?(col.to_s)
+        raise "Invalid matcher for #{col}: #{val} is not a valid type " unless [Array, Numeric, String, Regexp, TrueClass].include?(val.class)
       end
 
       unless [Proc, TrueClass, FalseClass].include?(filter[:allowed?].class)
