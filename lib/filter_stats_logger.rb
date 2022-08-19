@@ -6,16 +6,12 @@ class FilterStatsLogger
   include StyledNotifications
   include TableLogger
 
-  # allowed vs. blocked
   STATUS_LABELS = LogEventFilter::STATUSES.values
-
-  # Constants related to formatting the output
-  STATS_TITLE_INDENT = 15
-  TOTAL_EVENT_COUNT = 'Total Event Count'
-  DEFAULT_FILTER_STATS_LOGGING_FREQUENCY = 50_000
+  DEFAULT_FILTER_STATS_LOGGING_FREQUENCY = ENV['DEFAULT_FILTER_STATS_LOGGING_FREQUENCY']&.to_i || 50_000
   STATS_TABLE_HEADER = %w[process_name events allowed blocked allow_pct block_pct].map(&:upcase)
   TABLE_ALIGNMENTS = [:left] + Array.new(5) { |_| :right }
   BUFFER_ROW = Array.new(6) { |_| '' }
+  STATS_TITLE_INDENT = 15
 
   attr_accessor :event_counts
 
@@ -55,7 +51,7 @@ class FilterStatsLogger
     end
 
     totals_row = [
-      pastel.bold(TOTAL_EVENT_COUNT),
+      @pastel.bold('Total Event Count'),
       total_events,
       totals[:allowed][:count],
       totals[:blocked][:count],
@@ -82,19 +78,19 @@ class FilterStatsLogger
     table_txt = table.render(:unicode, padding: [0, 1], alignments: TABLE_ALIGNMENTS, **table_render_options) do |renderer|
       renderer.filter = ->(val, row_index, col_index) do
         if row_index == 0
-          pastel.bright_white(val)
+          @pastel.bright_white(val)
         elsif row_index <= 3
-          pastel.white.inverse(val)
+          @pastel.white.inverse(val)
         elsif row_index % 2 == 1
-          pastel.black.on_white(val)
+          @pastel.black.on_white(val)
         else
-          pastel.white(val)
+          @pastel.white(val)
         end
       end
     end
 
     msg = "\n\n" + (' ' * STATS_TITLE_INDENT)
-    msg += pastel.underline("Allowed / Blocked Event Counts By Process\n")
+    msg += @pastel.underline("Allowed / Blocked Event Counts By Process\n")
     msg += table_txt + "\n\n"
     say_and_log(msg)
   end

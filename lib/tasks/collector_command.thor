@@ -36,7 +36,7 @@ class CollectorCommand < CommonCommand
   class_option :filter_stats_logging_frequency,
                 desc: "How often should the summary tables be printed (0 means never)",
                 type: :numeric,
-                default: LogEventFilter::DEFAULT_FILTER_STATS_LOGGING_FREQUENCY
+                default: FilterStatsLogger::DEFAULT_FILTER_STATS_LOGGING_FREQUENCY
 
   no_commands do
     def make_announcement
