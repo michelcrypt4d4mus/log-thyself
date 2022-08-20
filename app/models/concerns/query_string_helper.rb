@@ -15,6 +15,10 @@ module QueryStringHelper
     array.map { |element| "#{quote_char}#{element}#{quote_char}" }.join(join_string)
   end
 
+  def clean_and_encode(text)
+    text.gsub("\u0000", '').force_encoding(Encoding::UTF_8)
+  end
+
   def generate_enum_count_pivot_query(group_by, enum)
     selects = enum.map { |enum_string| condition_count_statement(enum_string) }
     unknown_criterion = "event_type NOT IN (#{FileEvent.single_quoted_join(types)})"

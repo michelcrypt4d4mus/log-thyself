@@ -81,7 +81,7 @@ module PostgresCsvLoader
 
       ActiveRecord::Base.connection.raw_connection.copy_data(copy_query) do
         csv_data.each do |line|
-          ActiveRecord::Base.connection.raw_connection.put_copy_data(line.to_s)
+          ActiveRecord::Base.connection.raw_connection.put_copy_data(clean_and_encode(line.to_s))
         end
       end
 
