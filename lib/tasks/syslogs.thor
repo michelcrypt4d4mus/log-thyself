@@ -10,6 +10,11 @@ module Collect
   class Syslog < CollectorCommand
     include StyledNotifications
 
+    class_option :batch_size,
+                  desc: "Rows to process between DB loads",
+                  type: :numeric,
+                  default: CsvDbWriter::BATCH_SIZE_DEFAULT
+
     desc 'stream', 'Collect logs from the syslog stream from now until you tell it to stop'
     option :level,
             desc: 'Level of logs to capture. debug is the most, info is the least.',
@@ -61,7 +66,6 @@ module Collect
     no_commands do
       def launch_macos_log_parser(options)
         make_announcement
-
         begin
           streamer = AppleJsonLogStreamParser.new(@shell_command)
           StreamCoordinator.stream_to_db!(streamer, MacOsSystemLog, options)

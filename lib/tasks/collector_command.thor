@@ -13,11 +13,6 @@ end
 
 # Options common to all collect: commands
 class CollectorCommand < CommonCommand
-  class_option :batch_size,
-                desc: "Rows to process between DB loads",
-                type: :numeric,
-                default: CsvDbWriter::BATCH_SIZE_DEFAULT
-
   class_option :avoid_dupes,
                 desc: '[WIP, not 100% functional] Attempt to avoid dupes by going a lot slower',
                 type: :boolean,

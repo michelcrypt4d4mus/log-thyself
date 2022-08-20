@@ -1,5 +1,11 @@
 module Collect
   class Consolelogs < CommonCommand
+    # TODO refactor this and the batch_size for syslogs together
+    class_option :batch_size,
+                  desc: "Rows to process between DB loads",
+                  type: :numeric,
+                  default: CsvDbWriter::BATCH_SIZE_DEFAULT
+
     desc 'load', "Load old/deprecated logging system files (the ones you see in Console.app) from their customary locations"
     option :continue,
             desc: 'Continue loading new lines from active logs',
