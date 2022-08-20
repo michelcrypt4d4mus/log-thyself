@@ -20,9 +20,11 @@ class FilterStatsLogger
     @event_counts = Hash.new { |hsh, process| hsh[process] = { allowed: 0, blocked: 0 } }
     @filter_stats_logging_frequency = options[:filter_stats_logging_frequency] || DEFAULT_FILTER_STATS_LOGGING_FREQUENCY
     @pastel = Pastel.new
+    @total_event_count = 0
   end
 
   def increment_event_counts(event, status)
+    @total_event_count += 1
     @event_counts[event[:process_name]][status] += 1
 
     if (@filter_stats_logging_frequency > 0) && (total_events % @filter_stats_logging_frequency == 0)
@@ -32,6 +34,8 @@ class FilterStatsLogger
 
   # If status is nil then just get the overall total
   def total_events(status = nil)
+    return @total_event_count if status.nil?
+
     @event_counts.inject(0) do |total, (_process, counts)|
       total + (status.nil? ? counts.values.sum : counts[status])
     end
