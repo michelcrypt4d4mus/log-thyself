@@ -81,14 +81,14 @@ module PostgresCsvLoader
 
       ActiveRecord::Base.connection.raw_connection.copy_data(copy_query) do
         csv_data.each do |line|
-          ActiveRecord::Base.connection.raw_connection.put_copy_data(clean_and_encode(line.to_s))
+          ActiveRecord::Base.connection.raw_connection.put_copy_data(QueryStringHelper.clean_and_encode(line.to_s))
         end
       end
 
       ActiveRecord::Base.connection.execute("
         INSERT INTO #{table_name}
-            (#{double_quoted_join(csv_data.headers)})
-          SELECT #{double_quoted_join(csv_data.headers)}
+            (#{QueryStringHelper.double_quoted_join(csv_data.headers)})
+          SELECT #{QueryStringHelper.double_quoted_join(csv_data.headers)}
           FROM #{tmp_table_name}
           ON CONFLICT (#{(defined?(self::UPSERT_KEYS) ? self::UPSERT_KEYS : [primary_key]).join(',')})
           DO UPDATE SET

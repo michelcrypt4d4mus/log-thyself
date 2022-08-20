@@ -17,6 +17,7 @@
 
 module ObjectiveSeeEvent
   extend ActiveSupport::Concern
+  include QueryStringHelper
 
   ES_EVENT_TYPE_PREFIX = 'ES_EVENT_TYPE_'
 
