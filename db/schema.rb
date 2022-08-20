@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_20_030108) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_20_071433) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -21,7 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_20_030108) do
   create_enum "message_type", ["Debug", "Info", "Default", "Error", "Fault"]
   create_enum "message_type_enum", ["Debug", "Default", "Error", "Fault", "Info"]
 
-  create_table "file_events", force: :cascade do |t|
+  create_table "file_events", id: :bigint, default: nil, force: :cascade do |t|
     t.datetime "event_timestamp"
     t.string "event_type", comment: "See https://developer.apple.com/documentation/endpointsecurity/event_types"
     t.string "file"
@@ -50,7 +50,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_20_030108) do
     t.index ["uid"], name: "index_file_events_on_uid"
   end
 
-  create_table "logfile_lines", force: :cascade do |t|
+  create_table "logfile_lines", id: :bigint, default: nil, force: :cascade do |t|
     t.integer "logfile_id", null: false
     t.integer "line_number", null: false
     t.string "line", null: false
@@ -59,7 +59,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_20_030108) do
     t.index ["logfile_id", "line_number"], name: "index_logfile_lines_on_logfile_id_and_line_number", unique: true
   end
 
-  create_table "logfiles", force: :cascade do |t|
+  create_table "logfiles", id: :bigint, default: nil, force: :cascade do |t|
     t.string "file_path", null: false
     t.datetime "file_created_at", null: false
     t.datetime "created_at", null: false
@@ -67,7 +67,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_20_030108) do
     t.index ["file_path", "file_created_at"], name: "index_logfiles_on_file_path_and_file_created_at", unique: true
   end
 
-  create_table "macos_system_logs", force: :cascade do |t|
+  create_table "macos_system_logs", id: :bigint, default: nil, force: :cascade do |t|
     t.datetime "log_timestamp"
     t.enum "event_type", enum_type: "event_type_enum"
     t.enum "message_type", enum_type: "message_type"
@@ -107,7 +107,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_20_030108) do
     t.index ["subsystem"], name: "index_macos_system_logs_on_subsystem"
   end
 
-  create_table "process_events", force: :cascade do |t|
+  create_table "process_events", id: :bigint, default: nil, force: :cascade do |t|
     t.datetime "event_timestamp", null: false
     t.string "event_type", comment: "See https://developer.apple.com/documentation/endpointsecurity/event_types"
     t.string "process_path", null: false
