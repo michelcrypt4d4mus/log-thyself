@@ -14,7 +14,7 @@ class FilterSet
   # All the filters must allow an event for it to be recorded / considered "allowed"
   def allow?(event)
     is_permitted = @filters.all? { |f| f.allow?(event) }
-    @filter_stats_logger.increment_event_counts(event, STATUSES.fetch(is_permitted))
+    @filter_stats_logger.increment_event_counts(event, LogEventFilter::STATUSES.fetch(is_permitted))
     is_permitted
   end
 end

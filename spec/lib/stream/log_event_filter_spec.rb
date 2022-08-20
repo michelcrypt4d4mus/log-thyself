@@ -1,10 +1,7 @@
 RSpec.describe LogEventFilter do
   include_context 'log events'
 
-  let(:tries) { 10_000 }
-
   let(:filter_rule) { FilterDefinitions::FILTER_DEFINITIONS.first }
-  let(:col_matchers) { filter_rule[:matchers]}
   let(:filter) { described_class.new(filter_rule) }
 
   it 'rejects mismatches' do

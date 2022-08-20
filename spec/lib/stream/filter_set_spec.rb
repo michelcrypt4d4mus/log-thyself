@@ -12,13 +12,13 @@ RSpec.describe FilterSet do
     it_behaves_like 'valid', FilterDefinitions
   end
 
-  # context 'with all the filters' do
-  #   let(:filter_set) { described_class.new(FilterDefinitions::FILTER_DEFINITIONS) }
+  context 'with all the filters' do
+    let(:filter_set) { described_class.new(FilterDefinitions::FILTER_DEFINITIONS) }
 
-  #   it 'rejects the right pct of the time' do
-  #     acceptances = (0..tries).to_a.select { |_| filter_set.allow?(match) }
-  #     expect(acceptances.size > 90).to be_truthy
-  #     expect(acceptances.size < 110).to be_truthy
-  #   end
-  # end
+    it 'rejects the right pct of the time' do
+      acceptances = (0..tries).to_a.select { |_| filter_set.allow?(filtered_event) }
+      expect(acceptances.size > 90).to be_truthy
+      expect(acceptances.size < 110).to be_truthy
+    end
+  end
 end
