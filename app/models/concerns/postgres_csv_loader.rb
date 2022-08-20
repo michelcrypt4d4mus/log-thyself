@@ -17,9 +17,6 @@ module PostgresCsvLoader
   CSV_EXCLUDED_COLS = [ID_COL] + RAILS_TIMESTAMP_COLS
 
   included do |base|
-    puts "included for #{base}"
-
-
     base::CSV_OPTIONS = {
       quote_char: '"',
       write_headers: true,

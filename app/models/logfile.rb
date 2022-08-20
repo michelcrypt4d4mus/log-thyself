@@ -3,7 +3,8 @@ require 'csv'
 
 
 class Logfile < ApplicationRecord
-  include StyledNotifications
+  extend StyledNotifications
+  include QueryStringHelper
 
   has_many :logfile_lines
 
@@ -120,7 +121,7 @@ class Logfile < ApplicationRecord
       raise e if byte_count.to_i > IGNORE_ERRORS_ON_FILES_OF_LENGTH_LESS_THAN
 
       msg = "#{e.class.to_s}: #{e.message} but file is short (#{line_count} lines / #{byte_count} bytes) so moving on..."
-      say_and_log(msg, log_level: :warn, styles: [:yellow])
+      self.class.say_and_log(msg, log_level: :warn, styles: [:yellow])
       lines_written = number_of_logfile_lines
     end
 

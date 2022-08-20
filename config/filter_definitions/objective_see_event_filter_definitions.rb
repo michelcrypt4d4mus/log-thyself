@@ -50,15 +50,51 @@ class ObjectiveSeeEventFilterDefinitions < FilterDefinitions
       },
       allowed?: false
     },
+
+    {
+      comment: 'git libraries',
+      matchers: {
+        process_name: 'git',
+        event_type: OPEN_AND_CLOSE,
+        file: %w[
+          /opt/homebrew/Cellar/pcre2/10.40/lib/libpcre2-8.0.dylib
+          /opt/homebrew/Cellar/gettext/0.21/lib/libintl.8.dylib
+          /Users/syblius/.gitconfig
+          /Users/syblius/workspace/
+          /opt/homebrew/.git
+        ].map { |path| /^#{Regexp.escape(path)}/ },
+      },
+      allowed?: false
+    },
+
+    {
+      comment: 'little snitch / VS code reads',
+      matchers: {
+        process_name: [
+          'Little Snitch Software Update',
+          'Code Helper (Renderer)',
+          'rg',
+          'Code',
+          /^(Code|Code Helper|Code Helper \(Renderer\)|rg)$/
+        ],
+        event_type: OPEN_AND_CLOSE,
+      },
+      allowed?: false
+    },
+
+  # Force logging of anything not meeting signing requirements
+  # TDODO: Lookup known UUID before launch for stuff like ruby?
+
   ]
 
   PROCESS_EVENT_FILTERS = []
   FILTER_DEFINITIONS = PROCESS_EVENT_FILTERS + FILE_EVENT_FILTERS
 
-  # Force logging of anything not meeting signing requirements
-  # TDODO: Lookup known UUID before launch for stuff like ruby?
-  FILTER_DEFINITIONS.each do |filter|
-    filter[:matchers][:is_process_signed_as_reported] = true
+  # default to blacklist, force logging of anything not meeting signing requirements
+  # TODO: Lookup known UUID before launch for stuff like ruby?
+  FILTER_DEFINITIONS.each do |filter_def|
+    filter_def[:matchers][:allowed?] = false unless filter_def[:matchers].has_key?(:allowed?)
+    filter_def[:matchers][:is_process_signed_as_reported] = true
   end
 
   def self.validate!
