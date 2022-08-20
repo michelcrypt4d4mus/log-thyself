@@ -93,7 +93,7 @@ class ObjectiveSeeEventFilterDefinitions < FilterDefinitions
   # default to blacklist, force logging of anything not meeting signing requirements
   # TODO: Lookup known UUID before launch for stuff like ruby?
   FILTER_DEFINITIONS.each do |filter_def|
-    filter_def[:matchers][:allowed?] = false unless filter_def[:matchers].has_key?(:allowed?)
+    filter_def[:allowed?] = false unless filter_def.has_key?(:allowed?)
     filter_def[:matchers][:is_process_signed_as_reported] = true
   end
 

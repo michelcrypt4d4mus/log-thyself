@@ -1,6 +1,7 @@
 class MacOsSystemLog < ApplicationRecord
   self.table_name = 'macos_system_logs'  # Must come before include PostgresCsvLoader
   include PostgresCsvLoader
+  extend QueryStringHelper
 
   # Keys to use to extract values for the columns in the DB
   JSON_COLUMN_NAME_SYMBOLS = column_names.map(&:to_sym) - CSV_EXCLUDED_COLS

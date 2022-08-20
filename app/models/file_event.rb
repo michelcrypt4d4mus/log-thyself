@@ -5,8 +5,14 @@ class FileEvent < ApplicationRecord
   include ObjectiveSeeEvent
   include PostgresCsvLoader
 
-  EVENT_TYPES = %w[
-    
+  EVENT_TYPES = ProcessEvent::EVENT_TYPES + %w[
+     NOTIFY_CLOSE
+     NOTIFY_CREATE
+     NOTIFY_LINK
+     NOTIFY_OPEN
+     NOTIFY_RENAME
+     NOTIFY_UNLINK
+     NOTIFY_WRITE
   ]
 
   PREFERRED_BATCH_SIZE = 500
