@@ -5,6 +5,9 @@ class FileEvent < ApplicationRecord
   include ObjectiveSeeEvent
   include PostgresCsvLoader
 
+  PREFERRED_BATCH_SIZE = 500
+
+  # JSON
   FILE_PATH = '$.file'
   PROCESS_PATH = FILE_PATH + '.process'
   JSON_PATHS = build_json_paths(PROCESS_PATH).merge(file: FILE_PATH + '.destination')

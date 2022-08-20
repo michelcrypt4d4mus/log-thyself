@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_18_185936) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_20_030108) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -40,6 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_18_185936) do
     t.string "process_arguments"
     t.index ["computed_signing_id"], name: "index_file_events_on_computed_signing_id"
     t.index ["event_timestamp"], name: "index_file_events_on_event_timestamp"
+    t.index ["event_type", "process_name"], name: "index_file_events_on_event_type_and_process_name"
     t.index ["file"], name: "index_file_events_on_file"
     t.index ["pid"], name: "index_file_events_on_pid"
     t.index ["ppid"], name: "index_file_events_on_ppid"

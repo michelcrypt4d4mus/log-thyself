@@ -1,6 +1,9 @@
-# Classes using this module may implement the validate_data_and_prepare_db!(), transform_csv_data!(), and
-# load_csv_data! methods as needed as well as overload the csv_converters() and header_converters() methods
-# which will be passed to Ruby's built in CSV.parse().
+# Classes using this module may:
+#    - implement validate_data_and_prepare_db!()
+#    - implement transform_csv_data!()
+#    - define PREFERRED_BATCH_SIZE
+#    - define csv_converters() and header_converters() which will be passed to CSV.parse
+#    - overload load_csv_data!()
 #
 # The default behavior is to use temp tables and the COPY command when loading data.
 
@@ -51,6 +54,10 @@ module PostgresCsvLoader
 
     def csv_columns
       column_names - CSV_EXCLUDED_COLS
+    end
+
+    def preferred_batch_size
+      defined?(self::PREFERRED_BATCH_SIZE) ? self::PREFERRED_BATCH_SIZE : CsvDbWriter::BATCH_SIZE_DEFAULT
     end
 
     private

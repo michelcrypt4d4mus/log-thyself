@@ -1,6 +1,6 @@
 -- Event counts by hour
 SELECT
-  TO_CHAR(log_timestamp, 'YYYY-MM-DD HH24') AS "hour",
+  TO_CHAR(log_timestamp, 'YYYY-MM-DD FMHHAM') AS "hour",
   COALESCE(SUM(CASE WHEN message_type ='Debug' THEN 1 END), 0) AS Debugs,
   COALESCE(SUM(CASE WHEN message_type ='Default' THEN 1 END), 0) AS Defaults,
   COALESCE(SUM(CASE WHEN message_type ='Error' THEN 1 END), 0) AS Errors,
@@ -11,6 +11,7 @@ SELECT
 FROM macos_system_logs
 GROUP BY 1
 ORDER BY 1 DESC;
+
 
 
 -- By Day

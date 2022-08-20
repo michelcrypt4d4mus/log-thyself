@@ -8,7 +8,8 @@ class CsvDbWriter
   include StyledNotifications
   attr_reader :csv_writer, :rows_written, :rows_skipped
 
-  BATCH_SIZE_DEFAULT = 2_000
+  # Classes implementing PostgresCsvLoader can override this as the default
+  BATCH_SIZE_DEFAULT = 5_000
 
   # Options:
   #   - batch_size: Number of lines to process between loads
@@ -28,7 +29,17 @@ class CsvDbWriter
     writer.rows_written
   ensure
     return unless writer.csv_writer
-    writer.close
+
+    begin
+      writer.close
+    rescue StandardError => e
+      if @csv_stringio&.string.present?
+        puts "Error #{e.class} (#{e.message}) while finalizing save; dumping to STDOUT..."
+        puts @csv_stringio.string
+      end
+
+      raise e
+    end
   end
 
   # :record should be an instance of @model_klass
