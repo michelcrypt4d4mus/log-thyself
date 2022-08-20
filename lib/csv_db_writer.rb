@@ -73,13 +73,15 @@ class CsvDbWriter
 
   # just a little preparatory cleaning etc. to get something CSV friendly
   def build_csv_row(attributes)
-    row = attributes.except(*PostgresCsvLoader::CSV_EXCLUDED_COLS)
+    row = attributes.stringify_keys.except(*PostgresCsvLoader::CSV_EXCLUDED_COLS)
 
     # Preserve precision for timestamps, stringify json
-    @model_klass.columns_of_type(:datetime).each { |col| row[col] = row[col].iso8601(6) }
-    @model_klass.columns_of_type(:json).each { |col| row[col] = row[col].to_json }
+    @model_klass.columns_of_type(:datetime).each do |col|
+      row[col] = row[col].iso8601(6) if row[col].is_a?(DateTime)
+    end
 
-    row.stringify_keys
+    @model_klass.columns_of_type(:json).each { |col| row[col] = row[col].to_json }
+    row
   end
 
   def build_csv_writer
