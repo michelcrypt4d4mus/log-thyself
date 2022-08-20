@@ -242,4 +242,5 @@ Test should pass before you open a pull request. New featuers should have tests.
 
 ## features?
 1. dump discarded events to disk
+2. extract process paths from file/process events
 

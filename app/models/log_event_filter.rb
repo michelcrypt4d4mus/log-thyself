@@ -3,28 +3,11 @@
 
 require 'tty-table'
 require File.join(Rails.root, 'config', 'log_event_filters', 'filter_definitions')
+require File.join(Rails.root, 'config', 'log_event_filters', 'objective_see_event_filter_definitions')
 
 
 class LogEventFilter < Struct.new(:rule)
   STATUSES = { true => :allowed, false => :blocked }
-
-  class << self
-    attr_accessor :filters, :filter_stats_logger
-  end
-
-  def self.build_filters!(options = {})
-    FilterDefinitions.validate!
-    @filters = FilterDefinitions::LOG_EVENT_FILTERS.map { |fd| new(fd) }
-    Rails.logger.info("Built #{@filters.size} filters")
-    @filter_stats_logger = FilterStatsLogger.new(options)
-  end
-
-  # All the filters must allow an event for it to be recorded / considered "allowed"
-  def self.allow?(event)
-    is_permitted = @filters.all? { |f| f.allow?(event) }
-    @filter_stats_logger.increment_event_counts(event, STATUSES.fetch(is_permitted))
-    is_permitted
-  end
 
   def allow?(event)
     return true unless applicable?(event)

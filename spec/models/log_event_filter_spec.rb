@@ -1,7 +1,7 @@
 RSpec.describe LogEventFilter do
   let(:tries) { 10_000 }
 
-  let(:filter_rule) { FilterDefinitions::LOG_EVENT_FILTERS.first }
+  let(:filter_rule) { FilterDefinitions::FILTER_DEFINITIONS.first }
   let(:col_matchers) { filter_rule[:matchers]}
   let(:filter) { described_class.new(filter_rule) }
 
