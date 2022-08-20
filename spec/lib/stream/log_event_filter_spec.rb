@@ -9,10 +9,6 @@ RSpec.describe LogEventFilter do
   let(:mismatched_data) { missing_col.merge(event_message: 'ny state of mind') }
   let(:match) { missing_col.merge(event_message: col_matchers[:event_message].first) }
 
-  it 'has valid filter definitions' do
-    expect { described_class.build_filters! }.not_to raise_error
-  end
-
   it 'rejects mismatches' do
     expect(filter.applicable?(missing_col)).to be_falsy
     expect(filter.applicable?(mismatched_data)).to be_falsy
@@ -33,16 +29,6 @@ RSpec.describe LogEventFilter do
 
     it 'rejects the right pct of the time' do
       acceptances = (0..tries).to_a.select { |_| filter.allow?(match) }
-      expect(acceptances.size > 90).to be_truthy
-      expect(acceptances.size < 110).to be_truthy
-    end
-  end
-
-  context 'with all the filters' do
-    before { described_class.build_filters! }
-
-    it 'rejects the right pct of the time' do
-      acceptances = (0..tries).to_a.select { |_| LogEventFilter.allow?(match) }
       expect(acceptances.size > 90).to be_truthy
       expect(acceptances.size < 110).to be_truthy
     end
