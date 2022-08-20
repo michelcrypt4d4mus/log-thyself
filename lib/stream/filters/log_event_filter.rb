@@ -2,8 +2,8 @@
 # The class itself handles coordination of the set of all filter instances.
 
 require 'tty-table'
-require File.join(Rails.root, 'config', 'log_event_filters', 'filter_definitions')
-require File.join(Rails.root, 'config', 'log_event_filters', 'objective_see_event_filter_definitions')
+# require File.join(Rails.root, 'config', 'log_event_filters', 'filter_definitions')
+# require File.join(Rails.root, 'config', 'log_event_filters', 'objective_see_event_filter_definitions')
 
 
 class LogEventFilter < Struct.new(:rule)

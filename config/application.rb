@@ -15,5 +15,7 @@ module MacosLogCollector
     Dir[File.join(Rails.root, 'lib', '**/')].each do |dir|
       config.eager_load_paths << dir   # without the to_s() irb crashes :(
     end
+
+    config.eager_load_paths << File.join(Rails.root, 'config', 'filter_definitions')
   end
 end
