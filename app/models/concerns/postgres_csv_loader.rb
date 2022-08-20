@@ -10,13 +10,15 @@
 module PostgresCsvLoader
   extend ActiveSupport::Concern
   extend StyledNotifications
+  include QueryStringHelper
 
   ID_COL = 'id'
   RAILS_TIMESTAMP_COLS = %w[created_at updated_at].freeze
   CSV_EXCLUDED_COLS = [ID_COL] + RAILS_TIMESTAMP_COLS
 
   included do |base|
-    extend QueryStringHelper
+    puts "included for #{base}"
+
 
     base::CSV_OPTIONS = {
       quote_char: '"',

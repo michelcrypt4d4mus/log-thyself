@@ -1,9 +1,10 @@
 # Subclass of ShellCommandStreamer. Turns various kinds of files into line by line streams
 
+
 class FileStreamer < ShellCommandStreamer
   include StyledNotifications
 
-  # Shell commands
+  # Shell commands. tail -F handles log rotations with grace.
   TAIL_FROM_TOP = 'tail -c +0'
   TAIL_FROM_TOP_STREAMING = TAIL_FROM_TOP + ' -F'
   SYSLOG_READ_CMD = 'syslog -F raw -T utc.6'

@@ -1,7 +1,4 @@
-# Watches logs from the old file system
-# Re: tail args
-#   -F handles log rotations with grace.
-#   -50000000 should guarantee us the whole file.
+# Watches logs from the old file system by managing a pool of threads
 
 require 'pastel'
 require 'tty-table'

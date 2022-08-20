@@ -5,6 +5,10 @@ class FileEvent < ApplicationRecord
   include ObjectiveSeeEvent
   include PostgresCsvLoader
 
+  EVENT_TYPES = %w[
+    
+  ]
+
   PREFERRED_BATCH_SIZE = 500
 
   # JSON
