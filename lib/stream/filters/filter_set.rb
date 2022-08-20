@@ -1,3 +1,5 @@
+# Coordinates a bunch of filters
+
 class FilterSet
   class << self
     attr_accessor :filters, :filter_stats_logger

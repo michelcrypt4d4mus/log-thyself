@@ -49,7 +49,7 @@ module Collect
       cmd = File.extname(file) == '.gz' ? 'gunzip -c' : 'cat'
       @shell_command = "#{cmd} \"#{file}\""
       stream_parser_klass = options[:syslog] ? SyslogStreamParser : AppleJsonLogStreamParser
-      StreamCoordinator.collect!(stream_parser_klass.new(@shell_command), options.merge(destination_klass: MacOsSystemLog))
+      StreamCoordinator.stream_to_db!(stream_parser_klass.new(@shell_command), MacOsSystemLog, options)
     end
 
     desc 'custom ARGUMENTS', "ARGUMENTS will be passed to the 'log' command directly (with great 💪 comes great responsibility)"
@@ -64,7 +64,7 @@ module Collect
 
         begin
           streamer = AppleJsonLogStreamParser.new(@shell_command)
-          StreamCoordinator.collect!(streamer, options.merge(destination_klass: MacOsSystemLog))
+          StreamCoordinator.stream_to_db!(streamer, MacOsSystemLog, options)
         rescue Interrupt
           say "Stopping..."
         rescue StandardError, NoMethodError => e

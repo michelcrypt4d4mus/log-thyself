@@ -1,5 +1,5 @@
 class StreamCoordinator
-  def self.collect!(stream_parser, destination_klass)
+  def self.stream_to_db!(stream_parser, destination_klass, options)
     Rails.logger.level = "Logger::#{options[:app_log_level]}".constantize
     Rails.logger.info("#{self.name} options: #{options.pretty_inspect}")
 
@@ -14,7 +14,7 @@ class StreamCoordinator
       end
 
     filter_definitions = filters_klass ? filters_klass::FILTER_DEFINITIONS : []
-    LogEventFilter.build_filters!(filter_definitions, options) # unless ENV['RUNNING_FILTER_BENCHMARKS']
+    filter_set = FilterSet.new(filter_definitions, options) # unless ENV['RUNNING_FILTER_BENCHMARKS']
     disable_filters = !!options[:disable_filters]
     rows_read = 0
 

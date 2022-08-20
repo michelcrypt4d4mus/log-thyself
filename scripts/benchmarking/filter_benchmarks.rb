@@ -30,7 +30,7 @@ class FilterBenchmarker
     rows_read = 0
 
     execution_time = Benchmark.measure {
-      rows_read = StreamCoordinator.collect!(AppleJsonLogStreamParser.new(SHELL_COMMAND), OPTIONS)
+      rows_read = StreamCoordinator.stream_to_db!(AppleJsonLogStreamParser.new(SHELL_COMMAND), OPTIONS)
     }
 
     rows_per_second = rows_read / execution_time.real

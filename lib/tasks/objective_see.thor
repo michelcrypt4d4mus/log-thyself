@@ -31,7 +31,7 @@ module Objectivesee
             desc: 'Path to your FileMonitor executable'
     def stream
       validate_and_announce(options)
-      StreamCoordinator.collect!(FileMonitorStreamParser.new(options), options.merge(destination_klass: FileEvent))
+      StreamCoordinator.stream_to_db!(FileMonitorStreamParser.new(options), FileEvent, options)
     end
   end
 
@@ -42,7 +42,7 @@ module Objectivesee
             desc: 'Path to your ProcessMonitor executable'
     def stream
       validate_and_announce(options)
-      StreamCoordinator.collect!(ProcessMonitorStreamParser.new(options), options.merge(destination_klass: ProcessEvent))
+      StreamCoordinator.stream_to_db!(ProcessMonitorStreamParser.new(options), ProcessEvent, options)
     end
   end
 end
