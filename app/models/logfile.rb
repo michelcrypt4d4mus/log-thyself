@@ -74,8 +74,12 @@ class Logfile < ApplicationRecord
       begin
         logfile.write_contents_to_db!
       rescue StandardError => e
-        say_and_log("#{e.class} processing #{file_path}: #{e.message}. Writing error to #{LogfileLine.table_name}. ", log_level: :error)
-        Rails.logger.error("#{e.class} Backtrace:\n#{e.backtrace.join("\n")}")
+        msg = "#{e.class} in #{file_path}: #{e.message}. Writing error to #{LogfileLine.table_name}."
+        logfile_line = LogfileLine.where(logfile_id: logfile.id, line_number: 1).first_or_initialize!
+        say_and_log(msg, log_level: :error)
+        logfile_line.line = msg
+        logfile_line.save!
+        raise e
       end
     end
   end
@@ -111,11 +115,12 @@ class Logfile < ApplicationRecord
       lines_written = CsvDbWriter.open(LogfileLine, batch_size: BULK_LOAD_BATCH_SIZE) do |db_writer|
         stream_contents do |line, line_number|
           line = line.gsub("\u0000", '').force_encoding(Encoding::UTF_8)
-          db_writer << LogfileLine.new(logfile_id: self.id, line_number: line_number, line: line)
+          db_writer << { logfile_id: self.id, line_number: line_number, line: line }
         end
       end
     rescue CSV::MalformedCSVError, ActiveRecord::StatementInvalid, PG::CharacterNotInRepertoire => e
       raise e unless e.is_a?(CSV::MalformedCSVError) || e.cause.is_a?(PG::CharacterNotInRepertoire)
+
       (line_count, word_count, byte_count, _) = `wc #{file_path}`.split
       Rails.logger.error("#{e.class.to_s} loading '#{file_path}' to DB.")
       raise e if byte_count.to_i > IGNORE_ERRORS_ON_FILES_OF_LENGTH_LESS_THAN

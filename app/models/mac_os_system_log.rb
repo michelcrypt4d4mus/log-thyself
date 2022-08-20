@@ -29,7 +29,7 @@ class MacOsSystemLog < ApplicationRecord
   }
 
   # Construct an instance of MacOsSystemLog from JSON
-  def self.from_json(log_json)
+  def self.extract_attributes_from_json(log_json)
     row_hash = log_json.inject({}) do |row, (k, v)|
       next row if EXCLUDED_KEYS.include?(k)
       v = v.strip.tr("\r\n\t", ' ').gsub(/\s+/, ' ') if v&.is_a?(String)  # Collapse whitespace
@@ -51,6 +51,10 @@ class MacOsSystemLog < ApplicationRecord
       Rails.logger.error("Key #{k} in data but no col. Row:\n#{row_hash.pretty_inspect}")
     end
 
-    new(row_hash)
+    row_hash
+  end
+
+  def new_from_json(json)
+    new(extract_attributes_from_json(json))
   end
 end

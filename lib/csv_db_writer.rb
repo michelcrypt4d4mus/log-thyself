@@ -6,7 +6,7 @@ require 'csv'
 
 class CsvDbWriter
   include StyledNotifications
-  attr_reader :csv_writer, :rows_written, :rows_skipped
+  attr_reader :csv_stringio, :csv_writer, :rows_written, :rows_skipped
 
   # Classes implementing PostgresCsvLoader can override this as the default
   BATCH_SIZE_DEFAULT = 5_000
@@ -49,9 +49,9 @@ class CsvDbWriter
       return
     end
 
-    Rails.logger.debug("RECORD (#{record.class.to_s}) WRITTEN TO CsvWriter: #{record.attributes.pretty_inspect}")
+    Rails.logger.debug("RECORD (#{record.class.to_s}) WRITTEN TO CsvWriter: #{record.pretty_inspect}")
     @csv_writer ||= build_csv_writer
-    @csv_writer << record.to_csv_hash
+    @csv_writer << build_csv_row(record)
     @rows_written += 1
     close_csv_and_copy_to_db if @rows_written % @batch_size == 0
   end
@@ -70,6 +70,17 @@ class CsvDbWriter
   alias :close :close_csv_and_copy_to_db
 
   private
+
+  # just a little preparatory cleaning etc. to get something CSV friendly
+  def build_csv_row(attributes)
+    row = attributes.except(*PostgresCsvLoader::CSV_EXCLUDED_COLS)
+
+    # Preserve precision for timestamps, stringify json
+    @model_klass.columns_of_type(:datetime).each { |col| row[col] = row[col].iso8601(6) }
+    @model_klass.columns_of_type(:json).each { |col| row[col] = row[col].to_json }
+
+    row.stringify_keys
+  end
 
   def build_csv_writer
     @csv_stringio = StringIO.new

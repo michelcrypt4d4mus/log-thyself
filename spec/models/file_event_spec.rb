@@ -4,7 +4,7 @@ RSpec.describe FileEvent, type: :model do
   let(:event) { file_fixture('file_monitor_event.json').read }
 
   it 'parses correctly' do
-    row = described_class.from_json(event)
+    row = described_class.new_from_json(event)
 
     expect(row.attributes).to eq(
       described_class.new({

@@ -41,7 +41,6 @@ RSpec.describe FilterStatsLogger do
 
     it 'sums correctly' do
       stats_logger.event_counts = event_counts
-      expect(stats_logger.total_events).to eq(1000)
       expect(stats_logger.total_events(:blocked)).to eq(368)
       expect(stats_logger.total_events(:allowed)).to eq(632)
     end

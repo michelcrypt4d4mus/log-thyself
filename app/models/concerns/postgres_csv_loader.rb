@@ -97,15 +97,4 @@ module PostgresCsvLoader
       ")
     end
   end
-
-  # Attribute hash with keys of string type plus timestamps
-  def to_csv_hash
-    row = attributes.except(*CSV_EXCLUDED_COLS)
-
-    # Preserve precision for timestamps, stringify json
-    self.class.columns_of_type(:datetime).each { |col| row[col] = row[col].iso8601(6) }
-    self.class.columns_of_type(:json).each { |col| row[col] = row[col].to_json }
-
-    row
-  end
 end

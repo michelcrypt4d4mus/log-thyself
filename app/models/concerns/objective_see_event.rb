@@ -46,7 +46,7 @@ module ObjectiveSeeEvent
       json_paths
     end
 
-    def from_json(json)
+    def extract_attributes_from_json(json)
       begin
         row = json_paths.inject({ raw_event: JSON.parse(json) }) do |row, (col_name, jsonpath)|
           # TODO: reparsing for every column is stupid; just use dig()
@@ -75,7 +75,11 @@ module ObjectiveSeeEvent
         end
       end
 
-      new(row)
+      row
+    end
+
+    def new_from_json(json)
+      new(extract_attributes_from_json(json))
     end
 
     # To be overloaded by subclasses - usually just SHARED_JSON_PATHS with a few other fields.

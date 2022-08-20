@@ -31,7 +31,7 @@ class ObjectiveSeeJsonStreamParser
     @shell_command_streamer.stream! do |json|
       Rails.logger.debug("JSON: #{json}")
       next if json.empty?
-      event = @model_klass.from_json(json)
+      event = @model_klass.extract_attributes_from_json(json)
       next if event.nil?
       add_to_running_totals(event)
       yield(event)

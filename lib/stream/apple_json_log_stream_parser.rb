@@ -38,7 +38,7 @@ class AppleJsonLogStreamParser < ::Oj::ScHandler
         end
 
         json_parse.each do |log_json|
-          yield(MacOsSystemLog.from_json(log_json))
+          yield(MacOsSystemLog.extract_attributes_from_json(log_json))
 
           if stderr.ready?
             error_line = stderr.gets&.chomp

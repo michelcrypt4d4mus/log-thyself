@@ -213,6 +213,20 @@ COMMENT ON COLUMN public.file_events.reported_signing_id IS 'Only populated if i
 
 
 --
+-- Name: file_events_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.file_events ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.file_events_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
 -- Name: logfile_lines; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -226,6 +240,20 @@ CREATE TABLE public.logfile_lines (
 
 
 --
+-- Name: logfile_lines_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.logfile_lines ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.logfile_lines_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
 -- Name: logfiles; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -235,6 +263,20 @@ CREATE TABLE public.logfiles (
     file_created_at timestamp(6) without time zone NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: logfiles_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.logfiles ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.logfiles_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
 );
 
 
@@ -287,6 +329,20 @@ COMMENT ON COLUMN public.macos_system_logs.creator_activity_id IS 'Max observed 
 
 
 --
+-- Name: macos_system_logs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.macos_system_logs ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.macos_system_logs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
 -- Name: process_events; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -331,6 +387,20 @@ COMMENT ON COLUMN public.process_events.rpid IS '"Real" parent process ID';
 --
 
 COMMENT ON COLUMN public.process_events.reported_signing_id IS 'Only populated if it differs from the computed signature';
+
+
+--
+-- Name: process_events_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.process_events ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.process_events_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
 
 
 --

@@ -48,7 +48,7 @@ JSON
 
 RSpec.describe ProcessEvent, type: :model do
   it 'creates records with the right properties' do
-    row = described_class.from_json(PROCESS_EVENT_JSON)
+    row = described_class.new_from_json(PROCESS_EVENT_JSON)
 
     expect(row.attributes).to eq(
       described_class.new({
