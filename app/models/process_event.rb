@@ -4,7 +4,7 @@ class ProcessEvent < ApplicationRecord
   include ObjectiveSeeEvent
   include PostgresCsvLoader
 
-  PREFERRED_BATCH_SIZE = 100
+  PREFERRED_BATCH_SIZE = 25
   PROCESS_PATH = '$.process'
 
   EVENT_TYPES = %w[

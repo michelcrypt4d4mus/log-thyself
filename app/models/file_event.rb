@@ -15,7 +15,7 @@ class FileEvent < ApplicationRecord
      NOTIFY_WRITE
   ]
 
-  PREFERRED_BATCH_SIZE = 500
+  PREFERRED_BATCH_SIZE = 5000
 
   # JSON
   FILE_PATH = '$.file'
