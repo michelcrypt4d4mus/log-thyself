@@ -13,6 +13,7 @@ class StreamCoordinator
         nil
       end
 
+    filters_klass&.validate!
     filter_definitions = filters_klass ? filters_klass::FILTER_DEFINITIONS : []
     Rails.logger.info("Using #{filters_klass} to filter #{destination_klass} (#{filter_definitions.size} filters)")
     filter_set = FilterSet.new(filter_definitions, options) # unless ENV['RUNNING_FILTER_BENCHMARKS']

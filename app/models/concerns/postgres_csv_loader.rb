@@ -16,6 +16,8 @@ module PostgresCsvLoader
   CSV_EXCLUDED_COLS = [ID_COL] + RAILS_TIMESTAMP_COLS
 
   included do |base|
+    extend QueryStringHelper
+
     base::CSV_OPTIONS = {
       quote_char: '"',
       write_headers: true,
@@ -75,7 +77,7 @@ module PostgresCsvLoader
 
       ActiveRecord::Base.connection.execute("
         DROP TABLE IF EXISTS #{tmp_table_name};
-        CREATE TEMP TABLE #{tmp_table_name} (LIKE #{table_name} INCLUDING DEFAULTS) ON COMMIT DROP
+        CREATE TEMP TABLE #{tmp_table_name} (LIKE #{table_name} INCLUDING DEFAULTS INCLUDING IDENTITY) ON COMMIT DROP
       ")
 
       ActiveRecord::Base.connection.raw_connection.copy_data(copy_query) do
@@ -86,7 +88,8 @@ module PostgresCsvLoader
 
       ActiveRecord::Base.connection.execute("
         INSERT INTO #{table_name}
-          SELECT *
+            (#{double_quoted_join(csv_data.headers)})
+          SELECT #{double_quoted_join(csv_data.headers)}
           FROM #{tmp_table_name}
           ON CONFLICT (#{(defined?(self::UPSERT_KEYS) ? self::UPSERT_KEYS : [primary_key]).join(',')})
           DO UPDATE SET
